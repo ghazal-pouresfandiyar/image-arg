@@ -1,0 +1,15 @@
+pipeline:
+  - name: "Prepare Data"
+    script: "dataset/datset-preparation/prepare-data.py"
+
+  - name: "Remove Tags & Expand Dialogs"
+    script: "dataset/datset-preparation/remove-tag.py"
+
+  - name: "Dialog Sentiment"
+    script: "src/features/dialog-sentiment.py"
+
+  - name: "Emotion Detection"
+    script: "src/features/emotion-detection.py"
+
+  - name: "Part of Speech & SVO"
+    script: "src/features/part-of-speech.py"
