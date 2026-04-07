@@ -1,6 +1,6 @@
 # Climate Annotation UI
 
-Run the annotation tool from this folder with:
+Run the annotation tool from climate folder with:
 
 ```bash
 python3 src/annotate_UI.py
