@@ -1,42 +1,26 @@
-# Climate Annotation UI
+# Image-Arg
 
-Run the annotation tool from climate folder with:
+The annotation UI in `src/annotate_UI.py` uses only the Python standard library, so no `requirements.txt` is needed for this project.
 
-```bash
-python3 src/annotate_UI.py
-```
 
-The app opens a local browser page. It shows one image at a time, with editable annotation fields in the right sidebar. Saving writes changes back to `src/dataset/annotated.csv`.
+## Run the UI
 
-# Visual Annotation Tool
-
-This folder contains a simple local annotation interface for reviewing climate images by id and editing annotation text.
-
-## File
-
-- `annotate_UI.py`
-
-## What It Does
-
-- Loads rows from `dataset/annotated.csv`
-- Matches each row by `id` to images in `dataset/images_for_annotation/` (for example `0.jpg`, `1.jpg`)
-- Shows one image at a time
-- Displays editable fields in a white right sidebar
-- Supports `Previous`, `Save`, and `Next`
-- Saves edits back to the same CSV file
-- Creates a backup file on first save: `annotated.csv.bak`
-
-## Run
-
-From the `climate` directory:
+From the repository root, run:
 
 ```bash
 python3 src/annotate_UI.py
 ```
 
-Then open the local URL printed in the terminal (usually `http://127.0.0.1:8000/`).
+The script starts a local web server, opens the browser automatically, and shows one image at a time with editable fields in the right panel.
 
-## Notes
+## What to edit
 
-- The UI only uses Python standard library modules.
-- Stop the server with `Ctrl+C` in the terminal.
+The annotation table includes fields such as `animals`, `consequences`, `climateaction`, `type`, `setting`, `first_argument`, `second_argument`, and `more`.
+
+Please just edit the last 3 fields.
+
+If you think the other fields should be edited or something is wrong with the image or the argument, write a note in `more` section.
+
+## Saving
+
+Use the buttons in the UI to move between items and save your changes. When you save for the first time, the app creates a backup file next to the CSV.
