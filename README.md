@@ -2,6 +2,34 @@
 
 The annotation UI in `src/annotate_UI.py` uses only the Python standard library, so no `requirements.txt` is needed for this project.
 
+For multimodal feature generation in `src/CLIP_embeddings.py`, install dependencies from `requirements.txt`.
+
+## Multimodal feature setup
+
+Install dependencies:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+Generate image and metadata features:
+
+```bash
+python3 src/CLIP_embeddings.py
+```
+
+What this script does:
+
+- Uses pretrained CLIP `openai/clip-vit-base-patch32` (ViT-B/32)
+- Extracts one image embedding per row from `dataset/images_for_annotation/`
+- Builds one-hot metadata features from `animals`, `consequences`, `climateaction`, `type`, and `setting`
+- Saves image features to `dataset/features/clip_image_embeddings.npy`
+- Saves metadata features to `dataset/features/metadata_onehot.npy`
+- Saves concatenated multimodal features to `dataset/features/multimodal_features.npy`
+- Saves aligned row index to `dataset/features/feature_index.csv`
+- Saves feature config to `dataset/features/feature_config.json`
+- Drops rows when the image file is missing or unreadable
+
 
 ## Run the UI
 
