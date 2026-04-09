@@ -167,24 +167,6 @@ class AnnotationStore:
 				self.fieldnames, self.rows, self.encoding = read_csv_with_fallback(csv_path)
 				self.image_lookup = build_image_lookup(images_dir)
 				self.facts_data = read_facts_json(FACTS_JSON_PATH)
-				if "facts" not in self.fieldnames:
-						self.fieldnames.append("facts")
-						for row in self.rows:
-								row.setdefault("facts", "")
-				else:
-						for row in self.rows:
-								row.setdefault("facts", "")
-
-				for row in self.rows:
-						row_id = normalize_value(row.get("id")).strip()
-						if not normalize_value(row.get("facts")).strip():
-								image_facts = self.facts_data.get("images", {}).get(row_id, [])
-								if image_facts:
-										row["facts"] = serialize_list_field(image_facts)
-				for row in self.rows:
-						if parse_list_field(row.get("facts")):
-								self.sync_facts_for_row(row)
-				write_facts_json(FACTS_JSON_PATH, self.facts_data)
 				self.lock = threading.Lock()
 				self.rows_with_images = [row for row in self.rows if self.has_image(row)]
 				self.editable_fields = [
@@ -196,14 +178,17 @@ class AnnotationStore:
 				row_id = normalize_value(row.get("id")).strip()
 				return row_id in self.image_lookup
 
-		def visible_rows(self):
-				return self.rows_with_images or self.rows
+		def visible_rows(self, empty_premises_only=False):
+				rows = self.rows_with_images or self.rows
+				if not empty_premises_only:
+						return rows
+				return [row for row in rows if not parse_list_field(row.get("premises"))]
 
-		def row_count(self):
-				return len(self.visible_rows())
+		def row_count(self, empty_premises_only=False):
+				return len(self.visible_rows(empty_premises_only=empty_premises_only))
 
-		def get_row(self, index):
-				rows = self.visible_rows()
+		def get_row(self, index, empty_premises_only=False):
+				rows = self.visible_rows(empty_premises_only=empty_premises_only)
 				if not rows:
 						return None
 				index = max(0, min(index, len(rows) - 1))
@@ -213,20 +198,34 @@ class AnnotationStore:
 				row_id = normalize_value(row.get("id")).strip()
 				return self.image_lookup.get(row_id)
 
-		def sync_facts_for_row(self, row):
+		def get_facts_value(self, row):
 				row_id = normalize_value(row.get("id")).strip()
-				facts_items = parse_list_field(row.get("facts"))
+				facts_items = self.facts_data.get("images", {}).get(row_id, [])
+				return serialize_list_field(facts_items)
+
+		def sync_facts_for_row(self, row, facts_items):
+				row_id = normalize_value(row.get("id")).strip()
 				self.facts_data.setdefault("global", [])
 				self.facts_data.setdefault("images", {})
 				self.facts_data["images"][row_id] = facts_items
 
-		def update_row(self, index, form_data):
-				rows = self.visible_rows()
+		def update_row(self, index, form_data, empty_premises_only=False):
+				rows = self.visible_rows(empty_premises_only=empty_premises_only)
 				if not rows:
 						return None
 
 				index = max(0, min(index, len(rows) - 1))
 				target_row = rows[index]
+				facts_items = None
+
+				if "facts" in form_data:
+						try:
+								parsed_items = json.loads(form_data["facts"])
+						except json.JSONDecodeError:
+								parsed_items = [form_data["facts"]]
+						if not isinstance(parsed_items, list):
+								parsed_items = [parsed_items]
+						facts_items = [normalize_value(item).strip() for item in parsed_items if normalize_value(item).strip()]
 
 				for field in self.editable_fields:
 						if field in form_data:
@@ -242,9 +241,10 @@ class AnnotationStore:
 									target_row[field] = form_data[field].strip() if field in TEXTAREA_FIELDS else form_data[field]
 
 				with self.lock:
+						if facts_items is not None:
+								self.sync_facts_for_row(target_row, facts_items)
+								write_facts_json(FACTS_JSON_PATH, self.facts_data)
 						write_csv(self.csv_path, self.fieldnames, self.rows)
-						self.sync_facts_for_row(target_row)
-						write_facts_json(FACTS_JSON_PATH, self.facts_data)
 
 				return index
 
@@ -260,6 +260,9 @@ def render_input(field, value):
 				items = parse_list_field(value)
 				if not items:
 						items = [""]
+				note_html = ""
+				if field == "facts":
+						note_html = '<div class="facts-note">If you have already added a fact to knowledge, you don’t have to add it again; you can use it.</div>'
 
 				rows_html = []
 				for item in items:
@@ -275,6 +278,7 @@ def render_input(field, value):
 				return f"""
 					<label class="field list-field" data-list-field="{html.escape(field)}">
 						<span>{field_name}</span>
+						{note_html}
 						<div class="list-editor">
 							<div class="sentence-list" data-list-items>
 								{''.join(rows_html)}
@@ -311,9 +315,9 @@ def render_input(field, value):
 		"""
 
 
-def render_page(index, message=""):
-		row = STORE.get_row(index)
-		total = STORE.row_count()
+def render_page(index, message="", empty_premises_only=False):
+		row = STORE.get_row(index, empty_premises_only=empty_premises_only)
+		total = STORE.row_count(empty_premises_only=empty_premises_only)
 
 		if row is None:
 				return """
@@ -332,15 +336,29 @@ def render_page(index, message=""):
 		image_path = STORE.get_image_path(row)
 		current_id = normalize_value(row.get("id"))
 		position = index + 1
+		url_value = normalize_value(row.get("url")).strip()
 		message_html = f'<div class="message">{html.escape(message)}</div>' if message else ""
-		metadata_html = "<p class='record-meta'>" + "<br>".join(
-				html.escape(f"{field} : {normalize_value(row.get(field))}")
+		filter_checked = "checked" if empty_premises_only else ""
+		metadata_lines = [f"id : {current_id}"] + [
+				f"{field} : {normalize_value(row.get(field))}"
 				for field in METADATA_FIELDS
-		) + "</p>"
+		]
+		metadata_html = "<p class='record-meta'>" + "<br>".join(html.escape(line) for line in metadata_lines) + "</p>"
+		if url_value:
+				image_url_html = (
+						'<p class="image-link-note">if the image is not clear use this link: '
+						f'<a href="{html.escape(url_value)}" target="_blank" rel="noopener noreferrer">{html.escape(url_value)}</a>'
+						"</p>"
+				)
+		else:
+				image_url_html = '<p class="image-link-note">if the image is not clear use this link: -</p>'
 
 		fields_html = []
 		for field in DISPLAY_ORDER:
-				fields_html.append(render_input(field, row.get(field)))
+				if field == "facts":
+						fields_html.append(render_input(field, STORE.get_facts_value(row)))
+				else:
+						fields_html.append(render_input(field, row.get(field)))
 
 		for field in STORE.editable_fields:
 				if field not in DISPLAY_ORDER:
@@ -388,6 +406,27 @@ def render_page(index, message=""):
 						background: #eef2f7;
 					}}
 					.topbar strong {{ font-size: 15px; }}
+					.topbar-right {{ display: flex; align-items: center; gap: 10px; }}
+					.topbar form {{ margin: 0; }}
+					.jump-form {{ display: flex; align-items: center; gap: 6px; }}
+					.jump-form input {{
+						width: 84px;
+						border: 1px solid var(--border);
+						border-radius: 8px;
+						padding: 6px 8px;
+						font: inherit;
+					}}
+					.jump-form button {{
+						border: 0;
+						border-radius: 8px;
+						padding: 6px 10px;
+						font: inherit;
+						cursor: pointer;
+						background: #334155;
+						color: #fff;
+					}}
+					.filter-form {{ display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }}
+					.filter-form input {{ margin: 0; }}
 					.wrap {{
 						display: flex;
 						min-height: calc(100vh - 58px);
@@ -420,6 +459,24 @@ def render_page(index, message=""):
 						max-height: 78vh;
 						object-fit: contain;
 						background: #fff;
+					}}
+					.image-link-note {{
+						width: 100%;
+						max-width: 1100px;
+						margin: 0;
+						font-size: 13px;
+						line-height: 1.4;
+						color: var(--muted);
+						word-break: break-word;
+					}}
+					.facts-note {{
+						font-size: 12px;
+						color: var(--muted);
+						line-height: 1.35;
+					}}
+					.image-link-note a {{
+						color: var(--accent);
+						text-decoration: underline;
 					}}
 					.sidebar {{
 						width: 420px;
@@ -504,17 +561,32 @@ def render_page(index, message=""):
 			<body>
 				<div class="topbar">
 					<strong>Image Annotation UI</strong>
-					<div>Row {position} of {total}</div>
+					<div class="topbar-right">
+						<div>Row {position} of {total}</div>
+						<form class="filter-form" method="get" action="/">
+							<input type="hidden" name="index" value="{index}">
+							<input type="checkbox" name="empty_premises_only" value="1" {filter_checked}>
+							<span>Empty premises only</span>
+							<button type="submit">Apply</button>
+						</form>
+						<form class="jump-form" method="get" action="/">
+							<input type="hidden" name="empty_premises_only" value="{1 if empty_premises_only else 0}">
+							<input type="text" name="jump_row" placeholder="Row (e.g. 7)" aria-label="Jump to row">
+							<button type="submit">Go</button>
+						</form>
+					</div>
 				</div>
 				<div class="wrap">
 					<div class="viewer">
 						{message_html}
 						<div class="canvas">{image_html}</div>
+						{image_url_html}
 					</div>
 					<aside class="sidebar">
 						{metadata_html}
 						<form method="post" action="/save?index={index}">
 							<input type="hidden" name="index" value="{index}">
+							<input type="hidden" name="empty_premises_only" value="{1 if empty_premises_only else 0}">
 							{''.join(fields_html)}
 							<div class="buttons">
 								<button type="submit" name="action" value="prev" class="secondary" {prev_disabled}>Previous</button>
@@ -621,9 +693,32 @@ class AnnotationHandler(BaseHTTPRequestHandler):
 						return
 
 				params = parse_qs(parsed.query)
-				index = self.parse_index(params.get("index", ["0"])[0])
 				message = params.get("message", [""])[0]
-				page = render_page(index, message)
+				jump_row = params.get("jump_row", [""])[0].strip()
+				empty_premises_only = params.get("empty_premises_only", ["0"])[0] == "1"
+
+				if jump_row:
+						try:
+								# Row numbers in the UI are 1-based for users.
+								requested_row = int(jump_row)
+						except ValueError:
+								index = self.parse_index(params.get("index", ["0"])[0])
+								message = f"Invalid row number: {jump_row}."
+						else:
+								total = STORE.row_count(empty_premises_only=empty_premises_only)
+								if total == 0:
+										index = 0
+										message = "No rows available."
+								elif requested_row < 1 or requested_row > total:
+										index = self.parse_index(params.get("index", ["0"])[0])
+										message = f"Row must be between 1 and {total}."
+								else:
+										index = requested_row - 1
+										message = f"Jumped to row {requested_row}."
+				else:
+						index = self.parse_index(params.get("index", ["0"])[0])
+
+				page = render_page(index, message, empty_premises_only=empty_premises_only)
 				self.send_html(page)
 
 		def do_POST(self):
@@ -637,23 +732,33 @@ class AnnotationHandler(BaseHTTPRequestHandler):
 				form = parse_qs(payload, keep_blank_values=True)
 				index = self.parse_index(form.get("index", ["0"])[0])
 				action = form.get("action", ["save"])[0]
+				empty_premises_only = form.get("empty_premises_only", ["0"])[0] == "1"
 
-				row_index = STORE.update_row(index, {key: values[0] for key, values in form.items()})
+				row_index = STORE.update_row(
+						index,
+						{key: values[0] for key, values in form.items()},
+						empty_premises_only=empty_premises_only,
+				)
 				if row_index is None:
 						self.redirect("/?message=" + quote("No rows available."))
 						return
 
-				total = STORE.row_count()
+				total = STORE.row_count(empty_premises_only=empty_premises_only)
+				current_row = STORE.get_row(row_index, empty_premises_only=False)
+				row_left_filter = empty_premises_only and current_row is not None and parse_list_field(current_row.get("premises"))
+				status_message = "Saved."
+				if row_left_filter:
+						status_message = "Saved. This row no longer matches the empty premises filter."
 				if action == "prev":
 						target = max(0, row_index - 1)
-						self.redirect(f"/?index={target}&message=" + quote("Saved."))
+						self.redirect(f"/?index={target}&empty_premises_only={1 if empty_premises_only else 0}&message=" + quote(status_message))
 						return
 				if action == "next":
 						target = min(total - 1, row_index + 1)
-						self.redirect(f"/?index={target}&message=" + quote("Saved."))
+						self.redirect(f"/?index={target}&empty_premises_only={1 if empty_premises_only else 0}&message=" + quote(status_message))
 						return
 
-				self.redirect(f"/?index={row_index}&message=" + quote("Saved."))
+				self.redirect(f"/?index={row_index}&empty_premises_only={1 if empty_premises_only else 0}&message=" + quote(status_message))
 
 		def parse_index(self, raw_value):
 				try:
