@@ -1,26 +1,62 @@
 # Image-Arg
 
-The annotation UI in `src/annotate_UI.py` uses only the Python standard library, so no `requirements.txt` is needed for this project.
+This app helps you review and edit image annotations one image at a time.
 
+## What you will see
 
-## Run the UI
+For each image, the right panel shows the annotation fields that you can edit.
 
-From the repository root, run:
+Some fields are read-only and shown as plain text:
+
+- `animals`
+- `consequences`
+- `climateaction`
+- `type`
+- `setting`
+
+The text below those fields is also shown in the sidebar so you can quickly check the current values.
+
+## How to run
+
+From the project root, start the app with:
 
 ```bash
 python3 src/annotate_UI.py
 ```
 
-The script starts a local web server, opens the browser automatically, and shows one image at a time with editable fields in the right panel.
+A browser window will open automatically.
 
-## What to edit
+## How to edit
 
-The annotation table includes fields such as `animals`, `consequences`, `climateaction`, `type`, `setting`, `first_argument`, `second_argument`, and `more`.
+The app lets you edit these fields:
 
-Please just edit the last 3 fields.
+- `premises`
+- `facts`
+- `conclusions`
+- `notes`
 
-If you think the other fields should be edited or something is wrong with the image or the argument, write a note in `more` section.
+`premises`, `facts`, and `conclusions` are lists of separate sentences.
 
-## Saving
+- Use **Add sentence** to add a new sentence.
+- Use **Delete** to remove a sentence.
+- Press **Enter** in a sentence box to add another sentence.
 
-Use the buttons in the UI to move between items and save your changes. When you save for the first time, the app creates a backup file next to the CSV.
+`notes` is a normal text field.
+
+## Saving changes
+
+Use the **Save**, **Previous**, and **Next** buttons to move through the images and store your changes.
+
+When you save:
+
+- the CSV file is updated in `dataset/annotated.csv`
+- `facts` is also written to `dataset/facts.json` for each image
+- trailing spaces and extra line breaks are removed before text is stored
+
+The app keeps a backup copy of the CSV the first time you save.
+
+## Files used by the app
+
+- `dataset/annotated.csv`
+- `dataset/facts.json`
+- `dataset/images_for_annotation/`
