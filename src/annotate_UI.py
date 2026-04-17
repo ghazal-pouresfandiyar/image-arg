@@ -12,7 +12,7 @@ import csv
 import html
 import json
 import os
-import shutil
+
 import threading
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -27,7 +27,6 @@ DATASET_DIR = PROJECT_DIR / "dataset"
 CSV_PATH = DATASET_DIR / "annotated.csv"
 IMAGES_DIR = DATASET_DIR / "images_for_annotation"
 FACTS_JSON_PATH = DATASET_DIR / "facts.json"
-BACKUP_PATH = CSV_PATH.parent / (CSV_PATH.name + ".bak")
 IMAGE_EXT = ".jpg"
 HOST = "127.0.0.1"
 PORT = 8000
@@ -69,9 +68,6 @@ def read_csv_with_fallback(path: Path):
 
 
 def write_csv(path: Path, fieldnames: List[str], rows: List[Dict[str, str]]):
-		if path.exists() and not BACKUP_PATH.exists():
-				shutil.copy2(path, BACKUP_PATH)
-
 		with path.open("w", newline="", encoding="utf-8") as handle:
 				writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
 				writer.writeheader()
