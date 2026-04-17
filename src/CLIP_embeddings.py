@@ -20,7 +20,7 @@ from transformers import CLIPModel, CLIPProcessor
 
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-DATASET_PATH = ROOT_DIR / "dataset" / "final.csv"
+DATASET_PATH = ROOT_DIR / "dataset" / "annotated.csv"
 IMAGES_DIR = ROOT_DIR / "dataset" / "images_for_annotation"
 FEATURES_DIR = ROOT_DIR / "dataset" / "features"
 MODEL_NAME = "openai/clip-vit-base-patch32"

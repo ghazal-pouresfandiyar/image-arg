@@ -1,109 +1,59 @@
 id,human_generated_argument,animals,consequences,climateaction,type,setting
-0,"Without climate action, many creatures might be extinct or lose their diversity.",Fish,Biodiversity loss,No climate action,Collage,"Ocean, coastal"
-1,Taking no action is the reason for the seas or lakes being dry and the death of many fish.,Fish,Drought,No climate action,Photo,Desert
-2,Climate change could cut the world economy.,No animals,Economic consequences,No climate action,Posters/Event invitations,Industrial
-5,Wildfire can cause air pollution even in residential areas.,No animals,Wildfires,No climate action,Photo,Residential/commercial
-8,Drought can harm the lives of humans and their domestic animals.,Farm animals,Drought,No climate action,Photo,Desert
-9,Polar bears are losing their habitats due to ice melting.,Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
-10,"Polar bears are going to be more malnourished because they don't have enough food and also their food contains household waste.
-",Polar bear,Biodiversity loss,Other,Illustration,"Arctic, Antarctic"
-11,"Polar bears are losing their habitats due to ice melting.
-",Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
-12,"Melting ice can cause extinction in animals like polar bears.
-",Polar bear,Biodiversity loss,No climate action,Illustration,"Arctic, Antarctic"
-13,"Global warming causes many diversities such as polar bears to die.
-",Polar bear,Rising temperature,No climate action,Illustration,"Arctic, Antarctic"
-14,"Polar bears are losing their habitats due to ice melting.
-",Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
-15,"Many climate actions are needed to save fish from losing their homes.
-",Fish,Biodiversity loss,Other,Photo,"Ocean, coastal"
-16,"Global warming is a serious threat for the economy.
-",No animals,Economic consequences,No climate action,Posters/Event invitations,"Arctic, Antarctic"
-21,"The remaining creatures will be eliminated because of drought.
-",No animals,Drought,No climate action,Photo,Desert
-23,"Melting ice is hurting polar bears and their population.
-",Polar bear,Biodiversity loss,No climate action,Data Visualization,"Arctic, Antarctic"
-24,"Global warming increases the temperature even in residential places that people might suffer from.
-",No animals,Rising temperature,Other,Photo,Residential/commercial
-25,"Melting ice causes a rise in sea level. So residential areas would be affected.
-",No animals,Sea level rise,No climate action,Photo,Residential/commercial
-28,"Many animals are suffering from drought and they will lose their lives.
-",Land mammal,Drought,No climate action,Photo,Desert
-29,Many cities in the world are polluted because of the wildfires that happen in the forest.,No animals,Wildfires,No climate action,Photo,Residential/commercial
-30,"Floods can ruin residential areas and cause people to leave their homes and immigrate.
-",No animals,Floods,No climate action,Photo,"Ocean, coastal"
-31,"When the ice melts, the sea level will increase and the residential areas and cities might sink.",No animals,Sea level rise,No climate action,Collage,"Ocean, coastal"
-32,"Many rivers are dry, so the city will not be beautiful.
-",No animals,Drought,No climate action,Photo,Industrial
-34,"By sea level rise, even tall buildings might be sunk.
-",No animals,Sea level rise,No climate action,Photo,Residential/commercial
-36,"Sea level rise and people might lose their habitats.
-",No animals,Sea level rise,No climate action,Photo,"Ocean, coastal"
-39,Human rights of being alive are in danger because of climate change and wildfires.,No animals,Human rights,No climate action,Posters/Event invitations,"Forest, jungle"
-40,"Human rights of being alive are in danger because of climate change and drought.
-",No animals,Human rights,Politics,Posters/Event invitations,Desert
-41,"Climate change can be a reason for migration and trafficking. So people ask for justice even in climate.
-",No animals,Human rights,Protests,Posters/Event invitations,Residential/commercial
-43,"People who decided to live near the river and water, their life is becoming harder; even for having drinking water, they have to carry it manually from other places.
-",No animals,Drought,No climate action,Photo,Desert
-45,"Removing trees can cause a huge increase in temperature.
-",No animals,Rising temperature,Other,Collage,Residential/commercial
-48,"Floods can cause people to lose their habitats and lives.
-",No animals,Floods,Other,Photo,Residential/commercial
-49,"Floods can cause many car accidents, people might lose their assets and lives.
-",No animals,Floods,Other,Photo,Residential/commercial
-51,"People might sink in floods and lose themselves or their loved ones' lives.
-",No animals,Floods,No climate action,Photo,"Ocean, coastal"
-52,"Wildfires might grow a lot and even firefighters can't stop the flames.
-",No animals,Wildfires,Other,Photo,"Forest, jungle"
-54,"Because of a heatwave, people should protect themselves by drinking more water, using shields for heat, and keeping their homes cool.
-",No animals,Rising temperature,No climate action,Infographic,Desert
-55,"Many jungles are damaged by wildfires.
-",No animals,Wildfires,No climate action,Photo,"Forest, jungle"
-58,"Floods can cause many car accidents, people might lose their assets and lives.
-",No animals,Floods,No climate action,Photo,Residential/commercial
-64,"People are struggling to find water and life in dried areas because of the drought.
-",No animals,Drought,Other,Photo,Desert
-65,"People are in danger because of climate change now, not in the future, now.",No animals,Sea level rise,No climate action,Screenshot,"Ocean, coastal"
-66,"The disproportionate impact and racial history tied to climate change.
-",No animals,Human rights,No climate action,Screenshot,"Arctic, Antarctic"
-67,"People must use masks because of air pollution.
-",No animals,Wildfires,Other,Photo,Residential/commercial
-68,"Floods can ruin many infrastructures.
-",No animals,Floods,No climate action,Photo,Industrial
-69,"The Earth is becoming warmer and warmer even in the poles.
-",No animals,Rising temperature,No climate action,Data Visualization,Outer space
-70,"Fire can be expanded in the jungles and even reach the cities and residential areas.
-",No animals,Wildfires,Other,Photo,"Forest, jungle"
-71,"Children in dried areas are suffering from limitation of water.
-",No animals,Human rights,No climate action,Photo,Desert
-72,"Wildfires cause air polluted with smoke with CO2.
-",No animals,Wildfires,No climate action,Photo,"Forest, jungle"
-73,"Wildfires can cause many creatures to lose their lives, even animals that are not rare in an area might disappear.
-",Land mammal,Wildfires,Other,Screenshot,"Forest, jungle"
-75,"Floods can cause harm to people's assets. And they pay a lot.
-",No animals,Floods,No climate action,Photo,Residential/commercial
-76,"Many animals in floods might lose their lives, so for saving them people have to carry them to another safe place.
-",Land mammal,Floods,No climate action,Photo,"Ocean, coastal"
-77,"Floods can cause many car accidents, people might lose their assets and lives.
-",No animals,Floods,No climate action,Photo,Residential/commercial
-78,"Death toll grows as fires spread dangerous air to millions.
-",No animals,Wildfires,No climate action,Screenshot,"Forest, jungle"
-79,"Global warming will be ended by melting ice.
-",No animals,Melting Ice,Other,Collage,"Arctic, Antarctic"
-80,"Climate issues are related to loss of biodiversity, so solving it can be a solution for biodiversity as well.
-",Land mammal,Biodiversity loss,No climate action,Posters/Event invitations,"Forest, jungle"
-81,"Actions must be taken since changes like ice melting are happening fast and there is no time to discuss or negotiate.
-",No animals,Melting Ice,Other,Posters/Event invitations,"Arctic, Antarctic"
-84,"Due to melting ice and sea level rise, urban parts are in danger of being sunk.
-",No animals,Sea level rise,Other,Photo,Residential/commercial
-85,"Floods can ruin cities.
-",No animals,Floods,No climate action,Photo,"Ocean, coastal"
-86,"Animals like polar bears are in danger of being extinct or sick because of their climate changes.
-",Polar bear,Biodiversity loss,No climate action,Photo,"Arctic, Antarctic"
-89,"Human activities can cause air pollution and loss of biodiversity like insects.
-",Insects,Biodiversity loss,No climate action,Illustration,Residential/commercial
-90,"Climate change is making the seas rise.
-",No animals,Sea level rise,No climate action,Screenshot,"Ocean, coastal"
-91,"Many people lose their habitats and they have to immigrate because of sea level rise or floods.
-",No animals,Human rights,No climate action,Photo,"Ocean, coastal"
+0,,Fish,Biodiversity loss,No climate action,Collage,"Ocean, coastal"
+1,,Fish,Drought,No climate action,Photo,Desert
+9,,Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
+2,,No animals,Economic consequences,No climate action,Posters/Event invitations,Industrial
+5,,No animals,Wildfires,No climate action,Photo,Residential/commercial
+8,,Farm animals,Drought,No climate action,Photo,Desert
+10,,Polar bear,Biodiversity loss,Other,Illustration,"Arctic, Antarctic"
+11,,Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
+12,,Polar bear,Biodiversity loss,No climate action,Illustration,"Arctic, Antarctic"
+13,,Polar bear,Rising temperature,No climate action,Illustration,"Arctic, Antarctic"
+14,,Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
+16,,No animals,Economic consequences,No climate action,Posters/Event invitations,"Arctic, Antarctic"
+21,,No animals,Drought,No climate action,Photo,Desert
+23,,Polar bear,Biodiversity loss,No climate action,Data Visualization,"Arctic, Antarctic"
+24,,No animals,Rising temperature,Other,Photo,Residential/commercial
+25,,No animals,Sea level rise,No climate action,Photo,Residential/commercial
+28,,Land mammal,Drought,No climate action,Photo,Desert
+29,,No animals,Wildfires,No climate action,Photo,Residential/commercial
+30,,No animals,Floods,No climate action,Photo,"Ocean, coastal"
+31,,No animals,Sea level rise,No climate action,Collage,"Ocean, coastal"
+32,,No animals,Drought,No climate action,Photo,Industrial
+34,,No animals,Sea level rise,No climate action,Photo,Residential/commercial
+36,,No animals,Sea level rise,No climate action,Photo,"Ocean, coastal"
+39,,No animals,Human rights,No climate action,Posters/Event invitations,"Forest, jungle"
+40,,No animals,Human rights,Politics,Posters/Event invitations,Desert
+41,,No animals,Human rights,Protests,Posters/Event invitations,Residential/commercial
+43,,No animals,Drought,No climate action,Photo,Desert
+45,,No animals,Rising temperature,Other,Collage,Residential/commercial
+48,,No animals,Floods,Other,Photo,Residential/commercial
+49,,No animals,Floods,Other,Photo,Residential/commercial
+51,,No animals,Floods,No climate action,Photo,"Ocean, coastal"
+52,,No animals,Wildfires,Other,Photo,"Forest, jungle"
+54,,No animals,Rising temperature,No climate action,Infographic,Desert
+55,,No animals,Wildfires,No climate action,Photo,"Forest, jungle"
+58,,No animals,Floods,No climate action,Photo,Residential/commercial
+64,,No animals,Drought,Other,Photo,Desert
+65,,No animals,Sea level rise,No climate action,Screenshot,"Ocean, coastal"
+66,,No animals,Human rights,No climate action,Screenshot,"Arctic, Antarctic"
+67,,No animals,Wildfires,Other,Photo,Residential/commercial
+68,,No animals,Floods,No climate action,Photo,Industrial
+69,,No animals,Rising temperature,No climate action,Data Visualization,Outer space
+70,,No animals,Wildfires,Other,Photo,"Forest, jungle"
+71,,No animals,Human rights,No climate action,Photo,Desert
+72,,No animals,Wildfires,No climate action,Photo,"Forest, jungle"
+73,,Land mammal,Wildfires,Other,Screenshot,"Forest, jungle"
+75,,No animals,Floods,No climate action,Photo,Residential/commercial
+76,,Land mammal,Floods,No climate action,Photo,"Ocean, coastal"
+77,,No animals,Floods,No climate action,Photo,Residential/commercial
+78,,No animals,Wildfires,No climate action,Screenshot,"Forest, jungle"
+79,,No animals,Melting Ice,Other,Collage,"Arctic, Antarctic"
+80,,Land mammal,Biodiversity loss,No climate action,Posters/Event invitations,"Forest, jungle"
+81,,No animals,Melting Ice,Other,Posters/Event invitations,"Arctic, Antarctic"
+84,,No animals,Sea level rise,Other,Photo,Residential/commercial
+85,,No animals,Floods,No climate action,Photo,"Ocean, coastal"
+86,,Polar bear,Biodiversity loss,No climate action,Photo,"Arctic, Antarctic"
+89,,Insects,Biodiversity loss,No climate action,Illustration,Residential/commercial
+90,,No animals,Sea level rise,No climate action,Screenshot,"Ocean, coastal"
+91,,No animals,Human rights,No climate action,Photo,"Ocean, coastal"
