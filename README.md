@@ -1,54 +1,64 @@
 # Image-Arg
 
-The annotation UI in `src/annotate_UI.py` uses only the Python standard library, so no `requirements.txt` is needed for this project.
+This app helps you review and edit image annotations one image at a time.
 
-For multimodal feature generation in `src/CLIP_embeddings.py`, install dependencies from `requirements.txt`.
+## What you will see
 
-## Multimodal feature setup
+For each image, the right panel shows the annotation fields you can edit. The image URL is shown under the picture in case the image preview is hard to read.
 
-Install dependencies:
+Some fields are shown as plain text and cannot be edited:
 
-```bash
-python3 -m pip install -r requirements.txt
-```
+- `animals`
+- `consequences`
+- `climateaction`
+- `type`
+- `setting`
 
-Generate image and metadata features:
+The main metadata for the current row is shown in a short text block above the editable fields.
 
-```bash
-python3 src/CLIP_embeddings.py
-```
+## How to run
 
-What this script does:
-
-- Uses pretrained CLIP `openai/clip-vit-base-patch32` (ViT-B/32)
-- Extracts one image embedding per row from `dataset/images_for_annotation/`
-- Builds one-hot metadata features from `animals`, `consequences`, `climateaction`, `type`, and `setting`
-- Saves image features to `dataset/features/clip_image_embeddings.npy`
-- Saves metadata features to `dataset/features/metadata_onehot.npy`
-- Saves concatenated multimodal features to `dataset/features/multimodal_features.npy`
-- Saves aligned row index to `dataset/features/feature_index.csv`
-- Saves feature config to `dataset/features/feature_config.json`
-- Drops rows when the image file is missing or unreadable
-
-
-## Run the UI
-
-From the repository root, run:
+From the project root, start the app with:
 
 ```bash
 python3 src/annotate_UI.py
 ```
 
-The script starts a local web server, opens the browser automatically, and shows one image at a time with editable fields in the right panel.
+A browser window will open automatically.
 
-## What to edit
+## Moving around
 
-The annotation table includes fields such as `animals`, `consequences`, `climateaction`, `type`, `setting`, `first_argument`, `second_argument`, and `more`.
+Use the row jump box at the top to go straight to a specific row number, such as row 7.
 
-Please just edit the last 3 fields.
+You can also turn on the `Empty premises only` filter to show only rows where `premises` has not been filled in yet.
 
-If you think the other fields should be edited or something is wrong with the image or the argument, write a note in `more` section.
+## How to edit
 
-## Saving
+The app lets you edit these fields:
 
-Use the buttons in the UI to move between items and save your changes. When you save for the first time, the app creates a backup file next to the CSV.
+- `premises`
+- `facts`
+- `conclusions`
+- `notes`
+
+`premises`, `facts`, and `conclusions` are lists of separate sentences.
+
+- Use **Add sentence** to add a new sentence.
+- Use **Delete** to remove a sentence.
+- Press **Enter** in a sentence box to add another sentence.
+
+`notes` is a normal text field.
+
+If a fact has already been added to the knowledge file, you can leave the `facts` field as it is.
+
+## Saving changes
+
+Use the **Save**, **Previous**, and **Next** buttons to move through the images and store your changes.
+
+When you save:
+
+- the CSV file is updated in `dataset/annotated.csv`
+- `facts` is written to `dataset/facts.json`
+- trailing spaces and extra line breaks are removed before text is stored
+
+The app keeps a backup copy of the CSV the first time you save.
