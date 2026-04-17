@@ -3,3 +3,7 @@ numpy
 torch
 transformers
 Pillow
+ultralytics
+opencv-python
+timm
+sentence-transformers

@@ -1,0 +1,7 @@
+{
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_dim": 384,
+  "num_facts": 60,
+  "retrieval_top_k": 5,
+  "strategy": "retrieval-augmented: premises \u2192 cost_sim \u2192 facts"
+}

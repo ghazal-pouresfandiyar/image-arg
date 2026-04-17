@@ -1,0 +1,1928 @@
+[
+  {
+    "id": "0",
+    "premises": [
+      "The Gran Barrera reef in 2009 was full of colorful corals and maritime life.",
+      "The Gran Barrera reef in 2019 is devoid of life with dead corals and hardly any maritime life."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "The Gran Barrera reef in 2009 was full of colorful corals and maritime life.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The Gran Barrera reef in 2019 is devoid of life with dead corals and hardly any maritime life.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "1",
+    "premises": [
+      "Dead fish on soil have dry skin."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "Dead fish on soil have dry skin.",
+        "grounded": false,
+        "matched_keywords": [
+          "fish"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "premises": [
+      "Two polar bears are on a small piece of ice in the middle of the sea."
+    ],
+    "detected_objects": [
+      "bear"
+    ],
+    "object_counts": {
+      "bear": 2
+    },
+    "premise_groundings": [
+      {
+        "premise": "Two polar bears are on a small piece of ice in the middle of the sea.",
+        "grounded": true,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "premises": [
+      "Climate change could cost the world economy $23 trillion by 2050.",
+      "There are some construction cranes next to the river.",
+      "Poor countries would be hit hardest by economic losses, and few would escape."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "Climate change could cost the world economy $23 trillion by 2050.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "There are some construction cranes next to the river.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Poor countries would be hit hardest by economic losses, and few would escape.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "premises": [
+      "Wildfires emit smoke and pollutants.",
+      "The air flows from wild to residential areas."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "Wildfires emit smoke and pollutants.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The air flows from wild to residential areas.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "premises": [
+      "Two trees and a woman with a donkey are visible in the middle of a desert.",
+      "Due to the wind or storm, the woman\u2019s dress and scarf cover her body and face."
+    ],
+    "detected_objects": [
+      "person",
+      "horse"
+    ],
+    "object_counts": {
+      "person": 1,
+      "horse": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "Two trees and a woman with a donkey are visible in the middle of a desert.",
+        "grounded": true,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [
+          "horse"
+        ],
+        "object_counts": {
+          "horse": 1
+        }
+      },
+      {
+        "premise": "Due to the wind or storm, the woman\u2019s dress and scarf cover her body and face.",
+        "grounded": false,
+        "matched_keywords": [
+          "car"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "premises": [
+      "Polar bears have daily sarrows.",
+      "There isn't enough food for polar bears.",
+      "Polar bears' food includes human household waste.",
+      "Polar bears are thin.",
+      "There are some polar bears who are malnourished.",
+      "There are a lot of human waste on the beach."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "Polar bears have daily sarrows.",
+        "grounded": false,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "There isn't enough food for polar bears.",
+        "grounded": false,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Polar bears' food includes human household waste.",
+        "grounded": false,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Polar bears are thin.",
+        "grounded": false,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "There are some polar bears who are malnourished.",
+        "grounded": false,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "There are a lot of human waste on the beach.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "11",
+    "premises": [
+      "A polar bear stand on a seperate piece of ice in the middle of sea.",
+      "There are no other ice mountains or pieces of ice around."
+    ],
+    "detected_objects": [
+      "bear"
+    ],
+    "object_counts": {
+      "bear": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A polar bear stand on a seperate piece of ice in the middle of sea.",
+        "grounded": true,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        }
+      },
+      {
+        "premise": "There are no other ice mountains or pieces of ice around.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "12",
+    "premises": [
+      "A piece of ice is surrounded by water.",
+      "A polar bear stands on a piece of ice separated from the other pieces of ice."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "A piece of ice is surrounded by water.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A polar bear stands on a piece of ice separated from the other pieces of ice.",
+        "grounded": false,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "13",
+    "premises": [
+      "The temperature is high for a polar bear.",
+      "A polar bear is dissatisfied with the temperature."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "The temperature is high for a polar bear.",
+        "grounded": false,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A polar bear is dissatisfied with the temperature.",
+        "grounded": false,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "14",
+    "premises": [
+      "A polar bear is stuck on a piece of ice.",
+      "The polar bear is alone surrounded by many pieces of ice."
+    ],
+    "detected_objects": [
+      "bear"
+    ],
+    "object_counts": {
+      "bear": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A polar bear is stuck on a piece of ice.",
+        "grounded": true,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        }
+      },
+      {
+        "premise": "The polar bear is alone surrounded by many pieces of ice.",
+        "grounded": true,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "16",
+    "premises": [
+      "There is a mountain of ice surrounded by water."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "There is a mountain of ice surrounded by water.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "21",
+    "premises": [
+      "There are only two trees in a large, dry area."
+    ],
+    "detected_objects": [
+      "broccoli"
+    ],
+    "object_counts": {
+      "broccoli": 2
+    },
+    "premise_groundings": [
+      {
+        "premise": "There are only two trees in a large, dry area.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "23",
+    "premises": [
+      "The global population of polar bears is estimated between 22\u201331k by the IUCN.",
+      "The IUCN status of the polar bear is vulnerable.",
+      "Population of polar bear is increasing around Kane Basin and McClintock Channel."
+    ],
+    "detected_objects": [
+      "bear"
+    ],
+    "object_counts": {
+      "bear": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "The global population of polar bears is estimated between 22\u201331k by the IUCN.",
+        "grounded": true,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        }
+      },
+      {
+        "premise": "The IUCN status of the polar bear is vulnerable.",
+        "grounded": true,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        }
+      },
+      {
+        "premise": "Population of polar bear is increasing around Kane Basin and McClintock Channel.",
+        "grounded": true,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "24",
+    "premises": [
+      "The temperature is about 42 degrees Celsius.",
+      "A man seems to be angry."
+    ],
+    "detected_objects": [
+      "person"
+    ],
+    "object_counts": {
+      "person": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "The temperature is about 42 degrees Celsius.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A man seems to be angry.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "25",
+    "premises": [
+      "Santa stands in the middle of the water, surrounded by residential buildings.",
+      "The street is full of water and looks like a river."
+    ],
+    "detected_objects": [
+      "person",
+      "clock"
+    ],
+    "object_counts": {
+      "person": 3,
+      "clock": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "Santa stands in the middle of the water, surrounded by residential buildings.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The street is full of water and looks like a river.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "28",
+    "premises": [
+      "There are a lot of dead animal bodies in a desert."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "There are a lot of dead animal bodies in a desert.",
+        "grounded": false,
+        "matched_keywords": [
+          "animal"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "29",
+    "premises": [
+      "There are many buildings near the sea.",
+      "The sky is orange and blurry."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "There are many buildings near the sea.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The sky is orange and blurry.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "30",
+    "premises": [
+      "Many people are getting on a boat.",
+      "Half of a building is submerged in the water."
+    ],
+    "detected_objects": [
+      "boat",
+      "person"
+    ],
+    "object_counts": {
+      "person": 14,
+      "boat": 2
+    },
+    "premise_groundings": [
+      {
+        "premise": "Many people are getting on a boat.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Half of a building is submerged in the water.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "31",
+    "premises": [
+      "Santa Cruz Main Beach was a normal beach in summer 2019.",
+      "The sea level increases 2.4ft in Santa Cruz Main Beach after an ectreme storm."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "Santa Cruz Main Beach was a normal beach in summer 2019.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The sea level increases 2.4ft in Santa Cruz Main Beach after an ectreme storm.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "32",
+    "premises": [
+      "There is a car tire in a dried river.",
+      "The river under the bridge is completely dry."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "There is a car tire in a dried river.",
+        "grounded": false,
+        "matched_keywords": [
+          "car"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The river under the bridge is completely dry.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "34",
+    "premises": [
+      "There are many skyscrapers in the middle of the sea."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "There are many skyscrapers in the middle of the sea.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "36",
+    "premises": [
+      "Multi-story residential buildings are located very close to the water's edge",
+      "People are standing on eroded and damaged coastal infrastructure",
+      "The water level appears high with turbulent waves reaching near the buildings"
+    ],
+    "detected_objects": [
+      "person"
+    ],
+    "object_counts": {
+      "person": 5
+    },
+    "premise_groundings": [
+      {
+        "premise": "Multi-story residential buildings are located very close to the water's edge",
+        "grounded": false,
+        "matched_keywords": [
+          "cat"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "People are standing on eroded and damaged coastal infrastructure",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The water level appears high with turbulent waves reaching near the buildings",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "39",
+    "premises": [
+      "There is a report about climate change as a human rights issue in the 2021 Annual Report to Parliament.",
+      "A tree in a forest is burning."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "There is a report about climate change as a human rights issue in the 2021 Annual Report to Parliament.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A tree in a forest is burning.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "40",
+    "premises": [
+      "A woman is bending down to collect water from the ground with her hands.",
+      "There is some water on previously very dry land."
+    ],
+    "detected_objects": [
+      "bird"
+    ],
+    "object_counts": {
+      "bird": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A woman is bending down to collect water from the ground with her hands.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "There is some water on previously very dry land.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "41",
+    "premises": [
+      "Some people are protesting for climate justice.",
+      "There are links between ckimate change, migration and trafficking."
+    ],
+    "detected_objects": [
+      "person"
+    ],
+    "object_counts": {
+      "person": 4
+    },
+    "premise_groundings": [
+      {
+        "premise": "Some people are protesting for climate justice.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "There are links between ckimate change, migration and trafficking.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "43",
+    "premises": [
+      "A woman is carrying a container through a dry field.",
+      "The dry field is cracked."
+    ],
+    "detected_objects": [
+      "person"
+    ],
+    "object_counts": {
+      "person": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A woman is carrying a container through a dry field.",
+        "grounded": false,
+        "matched_keywords": [
+          "car"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The dry field is cracked.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "45",
+    "premises": [
+      "The left picture shows a tree-filled street with a temperature of 33.7 degrees Celsius.",
+      "The right picture shows an adjacent block of the same street without any trees, with many buildings and a temperature of 48.7 degrees Celsius.",
+      "The trees on the right street were removed in the 1960s to make room for more vehicle lanes."
+    ],
+    "detected_objects": [
+      "car",
+      "person",
+      "cell phone"
+    ],
+    "object_counts": {
+      "person": 2,
+      "car": 8,
+      "cell phone": 2
+    },
+    "premise_groundings": [
+      {
+        "premise": "The left picture shows a tree-filled street with a temperature of 33.7 degrees Celsius.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The right picture shows an adjacent block of the same street without any trees, with many buildings and a temperature of 48.7 degrees Celsius.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The trees on the right street were removed in the 1960s to make room for more vehicle lanes.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "48",
+    "premises": [
+      "Many trees are partially submerged in floodwater.",
+      "Five people are in a boat in the middle of brown water."
+    ],
+    "detected_objects": [
+      "boat",
+      "person"
+    ],
+    "object_counts": {
+      "person": 4,
+      "boat": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "Many trees are partially submerged in floodwater.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Five people are in a boat in the middle of brown water.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "49",
+    "premises": [
+      "The road under the bridge is flooded with deep water covering the roadway.",
+      "Several cars are partially submerged in the floodwater.",
+      "An emergency vehicle with flashing lights is responding to the flooded area.",
+      "Traffic continues to move on the bridge above the flooded underpass."
+    ],
+    "detected_objects": [
+      "fire hydrant",
+      "car",
+      "person",
+      "truck"
+    ],
+    "object_counts": {
+      "car": 3,
+      "person": 2,
+      "truck": 2,
+      "fire hydrant": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "The road under the bridge is flooded with deep water covering the roadway.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Several cars are partially submerged in the floodwater.",
+        "grounded": true,
+        "matched_keywords": [
+          "car"
+        ],
+        "matched_objects": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 3
+        }
+      },
+      {
+        "premise": "An emergency vehicle with flashing lights is responding to the flooded area.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Traffic continues to move on the bridge above the flooded underpass.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "51",
+    "premises": [
+      "There is a statue of someone who is in the water, with their hands raised, asking for help."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "There is a statue of someone who is in the water, with their hands raised, asking for help.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "52",
+    "premises": [
+      "A firefighter is watching the fire."
+    ],
+    "detected_objects": [
+      "car",
+      "person"
+    ],
+    "object_counts": {
+      "person": 1,
+      "car": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A firefighter is watching the fire.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "54",
+    "premises": [
+      "During the 2021 heat wave, people were advised to take precautions such as protecting themselves from diseases like heatstroke, dehydration, kidney disease, and respiratory illness by drinking more water, staying out of the heat, staying hydrated, and keeping their homes cool."
+    ],
+    "detected_objects": [
+      "bottle",
+      "umbrella"
+    ],
+    "object_counts": {
+      "umbrella": 1,
+      "bottle": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "During the 2021 heat wave, people were advised to take precautions such as protecting themselves from diseases like heatstroke, dehydration, kidney disease, and respiratory illness by drinking more water, staying out of the heat, staying hydrated, and keeping their homes cool.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "55",
+    "premises": [
+      "There is a jungle with an orange, blurry sky."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "There is a jungle with an orange, blurry sky.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "58",
+    "premises": [
+      "There are many cars sunk in a river or a street filled with water.",
+      "There are many cars in different orientations and directions."
+    ],
+    "detected_objects": [
+      "car"
+    ],
+    "object_counts": {
+      "car": 6
+    },
+    "premise_groundings": [
+      {
+        "premise": "There are many cars sunk in a river or a street filled with water.",
+        "grounded": true,
+        "matched_keywords": [
+          "tree",
+          "car"
+        ],
+        "matched_objects": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 6
+        }
+      },
+      {
+        "premise": "There are many cars in different orientations and directions.",
+        "grounded": true,
+        "matched_keywords": [
+          "car"
+        ],
+        "matched_objects": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "64",
+    "premises": [
+      "There is a water tanker in an area with many dried trees.",
+      "People have many containers for collecting water."
+    ],
+    "detected_objects": [
+      "person"
+    ],
+    "object_counts": {
+      "person": 11
+    },
+    "premise_groundings": [
+      {
+        "premise": "There is a water tanker in an area with many dried trees.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "People have many containers for collecting water.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "65",
+    "premises": [
+      "A USA TODAY newspaper cover displays the headline THE CLIMATE FUTURE IS NOW.",
+      "A dome-shaped building is partially submerged in water.",
+      "A dead leafless tree stands in front of the flooded area.",
+      "The subtitle reads Humans navigate global-warming effects on East Coast."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "A USA TODAY newspaper cover displays the headline THE CLIMATE FUTURE IS NOW.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A dome-shaped building is partially submerged in water.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A dead leafless tree stands in front of the flooded area.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The subtitle reads Humans navigate global-warming effects on East Coast.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "66",
+    "premises": [
+      "A VICE article headline reads People of Colour Experience Climate Grief More Deeply Than White People.",
+      "The article states that people of colour are disproportionately affected by the climate crisis and carry pain from racial terror.",
+      "An illustration shows a person sitting alone on a piece of ice in water, looking distressed.",
+      "The article was written by Nylah Burton on May 14, 2020."
+    ],
+    "detected_objects": [
+      "boat",
+      "person"
+    ],
+    "object_counts": {
+      "boat": 4,
+      "person": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A VICE article headline reads People of Colour Experience Climate Grief More Deeply Than White People.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The article states that people of colour are disproportionately affected by the climate crisis and carry pain from racial terror.",
+        "grounded": false,
+        "matched_keywords": [
+          "car"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "An illustration shows a person sitting alone on a piece of ice in water, looking distressed.",
+        "grounded": true,
+        "matched_keywords": [
+          "person"
+        ],
+        "matched_objects": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 1
+        }
+      },
+      {
+        "premise": "The article was written by Nylah Burton on May 14, 2020.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "67",
+    "premises": [
+      "A man is wearing a medical mask in the street.",
+      "The sky is not clear and looks polluted."
+    ],
+    "detected_objects": [
+      "person",
+      "bird"
+    ],
+    "object_counts": {
+      "person": 1,
+      "bird": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A man is wearing a medical mask in the street.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The sky is not clear and looks polluted.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "68",
+    "premises": [
+      "A road and bridge are completely submerged in fast-flowing floodwater.",
+      "Industrial buildings with chimneys are visible on the left side of the flooded area.",
+      "The water appears muddy and is flowing rapidly over the submerged infrastructure.",
+      "The sky is overcast with grey clouds."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "A road and bridge are completely submerged in fast-flowing floodwater.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Industrial buildings with chimneys are visible on the left side of the flooded area.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The water appears muddy and is flowing rapidly over the submerged infrastructure.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The sky is overcast with grey clouds.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "69",
+    "premises": [
+      "The upper part of the world map is red, and the middle part is mostly yellow."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "The upper part of the world map is red, and the middle part is mostly yellow.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "70",
+    "premises": [
+      "A large fire is happening next to the road.",
+      "A firefighter is running away from the flames.",
+      "Trees are burning."
+    ],
+    "detected_objects": [
+      "person"
+    ],
+    "object_counts": {
+      "person": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A large fire is happening next to the road.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A firefighter is running away from the flames.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Trees are burning.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "71",
+    "premises": [
+      "The landscape is dry and arid with sandy terrain.",
+      "A makeshift shelter with a UNHCR logo is visible.",
+      "Three children stand on top of a sandy hill in the background.",
+      "A young girl in a red shirt stands near a large water hose in the foreground.",
+      "Large hoses run along the ground for water delivery."
+    ],
+    "detected_objects": [
+      "person"
+    ],
+    "object_counts": {
+      "person": 4
+    },
+    "premise_groundings": [
+      {
+        "premise": "The landscape is dry and arid with sandy terrain.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A makeshift shelter with a UNHCR logo is visible.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Three children stand on top of a sandy hill in the background.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A young girl in a red shirt stands near a large water hose in the foreground.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Large hoses run along the ground for water delivery.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "72",
+    "premises": [
+      "A shot from above the burning jungle is seen.",
+      "There is a lot of smoke in the air.",
+      "At the top of a mountain, some flames are visible."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "A shot from above the burning jungle is seen.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "There is a lot of smoke in the air.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "At the top of a mountain, some flames are visible.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "73",
+    "premises": [
+      "An Instagram post is about wildfires in Australia.",
+      "The writer is worried about wildfires in their homeland.",
+      "The writer has suffered from wildfires in Australia.",
+      "Australia is the writer\u2019s homeland.",
+      "A firefighter is hugging two kangaroos, with a burning forest in the background."
+    ],
+    "detected_objects": [
+      "sports ball"
+    ],
+    "object_counts": {
+      "sports ball": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "An Instagram post is about wildfires in Australia.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The writer is worried about wildfires in their homeland.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The writer has suffered from wildfires in Australia.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Australia is the writer\u2019s homeland.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A firefighter is hugging two kangaroos, with a burning forest in the background.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "75",
+    "premises": [
+      "Three cars are almost submerged in the street.",
+      "The street is full of the water.",
+      "there are some waves in the water.",
+      "Some trees are half submerged."
+    ],
+    "detected_objects": [
+      "car"
+    ],
+    "object_counts": {
+      "car": 2
+    },
+    "premise_groundings": [
+      {
+        "premise": "Three cars are almost submerged in the street.",
+        "grounded": true,
+        "matched_keywords": [
+          "tree",
+          "car"
+        ],
+        "matched_objects": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 2
+        }
+      },
+      {
+        "premise": "The street is full of the water.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "there are some waves in the water.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Some trees are half submerged.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "76",
+    "premises": [
+      "A tree is half submerged in the middle of the water.",
+      "A man with many kangaroos is in a boat."
+    ],
+    "detected_objects": [
+      "dog",
+      "person",
+      "sheep",
+      "boat"
+    ],
+    "object_counts": {
+      "person": 1,
+      "dog": 1,
+      "boat": 1,
+      "sheep": 3
+    },
+    "premise_groundings": [
+      {
+        "premise": "A tree is half submerged in the middle of the water.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A man with many kangaroos is in a boat.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "77",
+    "premises": [
+      "A burnt car is in the middle of the water in a road.",
+      "There is a bridge over a road full of water.",
+      "Many cars are in the middle of the water in different orientations and directions."
+    ],
+    "detected_objects": [
+      "car"
+    ],
+    "object_counts": {
+      "car": 5
+    },
+    "premise_groundings": [
+      {
+        "premise": "A burnt car is in the middle of the water in a road.",
+        "grounded": true,
+        "matched_keywords": [
+          "car"
+        ],
+        "matched_objects": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 5
+        }
+      },
+      {
+        "premise": "There is a bridge over a road full of water.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Many cars are in the middle of the water in different orientations and directions.",
+        "grounded": true,
+        "matched_keywords": [
+          "car"
+        ],
+        "matched_objects": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "78",
+    "premises": [
+      "A forest is burning.",
+      "The news covers a death toll during the West Coast wildfires."
+    ],
+    "detected_objects": [
+      "tv"
+    ],
+    "object_counts": {
+      "tv": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A forest is burning.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The news covers a death toll during the West Coast wildfires.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "79",
+    "premises": [
+      "An old black-and-white photo shows a man in a boat in the middle of the water, looking at a large mountain of ice.",
+      "A new color photo shows a man in a boat looking at a mountain."
+    ],
+    "detected_objects": [
+      "boat",
+      "person"
+    ],
+    "object_counts": {
+      "boat": 2,
+      "person": 2
+    },
+    "premise_groundings": [
+      {
+        "premise": "An old black-and-white photo shows a man in a boat in the middle of the water, looking at a large mountain of ice.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A new color photo shows a man in a boat looking at a mountain.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "80",
+    "premises": [
+      "An alone kangaroo is standing in the middle of many trees.",
+      "The tree trunks are black instead of brown."
+    ],
+    "detected_objects": [
+      "cat"
+    ],
+    "object_counts": {
+      "cat": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "An alone kangaroo is standing in the middle of many trees.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The tree trunks are black instead of brown.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "81",
+    "premises": [
+      "A poster from November 2021 states that we cannot negotiate with the melting point of ice.",
+      "There are many separate pieces of ice in the poster.",
+      "The poster states that urgent action is needed."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "A poster from November 2021 states that we cannot negotiate with the melting point of ice.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "There are many separate pieces of ice in the poster.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The poster states that urgent action is needed.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "84",
+    "premises": [
+      "The water rises from the river and reaches the pedestrian walkway."
+    ],
+    "detected_objects": [
+      "boat",
+      "person",
+      "clock"
+    ],
+    "object_counts": {
+      "person": 2,
+      "boat": 2,
+      "clock": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "The water rises from the river and reaches the pedestrian walkway.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "85",
+    "premises": [
+      "Part of a residential areas is ruined.",
+      "Trees and some buildings are surrounded by water."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "Part of a residential areas is ruined.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "Trees and some buildings are surrounded by water.",
+        "grounded": false,
+        "matched_keywords": [
+          "tree"
+        ],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "86",
+    "premises": [
+      "A thin polar bear is walking on a piece of ice near the sea."
+    ],
+    "detected_objects": [
+      "bear"
+    ],
+    "object_counts": {
+      "bear": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A thin polar bear is walking on a piece of ice near the sea.",
+        "grounded": true,
+        "matched_keywords": [
+          "polar bear",
+          "bear"
+        ],
+        "matched_objects": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "89",
+    "premises": [
+      "A large dead bee is on a dry area near tall buildings.",
+      "The sky is orange and black and looks polluted."
+    ],
+    "detected_objects": [
+      "dog"
+    ],
+    "object_counts": {
+      "dog": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "A large dead bee is on a dry area near tall buildings.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "The sky is orange and black and looks polluted.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "90",
+    "premises": [
+      "NASA reported on 11.02.2016 that climate change and the rate of sea level rise have slowed.",
+      "NewScientist reported on 28.03.2019 that climate change is causing sea levels to rise faster than ever.",
+      "A man is standing on top of a handmade structure, watching the rising sea level that is causing the structure to sink."
+    ],
+    "detected_objects": [
+      "person"
+    ],
+    "object_counts": {
+      "person": 1
+    },
+    "premise_groundings": [
+      {
+        "premise": "NASA reported on 11.02.2016 that climate change and the rate of sea level rise have slowed.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "NewScientist reported on 28.03.2019 that climate change is causing sea levels to rise faster than ever.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      },
+      {
+        "premise": "A man is standing on top of a handmade structure, watching the rising sea level that is causing the structure to sink.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  },
+  {
+    "id": "91",
+    "premises": [
+      "A shot from above the sea showing a crowded boat full of people in the middle of the sea."
+    ],
+    "detected_objects": [],
+    "object_counts": {},
+    "premise_groundings": [
+      {
+        "premise": "A shot from above the sea showing a crowded boat full of people in the middle of the sea.",
+        "grounded": false,
+        "matched_keywords": [],
+        "matched_objects": [],
+        "object_counts": {}
+      }
+    ]
+  }
+]

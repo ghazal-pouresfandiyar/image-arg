@@ -1,0 +1,33 @@
+{
+  "num_images": 58,
+  "total_feature_dim": 932,
+  "feature_dims": {
+    "clip_embeddings": 512,
+    "object_counts": 18,
+    "scene_onehot": 4,
+    "climate_attributes": 14,
+    "premise_embeddings": 384
+  },
+  "scene_categories": [
+    "urban",
+    "rural",
+    "industrial",
+    "natural"
+  ],
+  "climate_attributes": [
+    "smoke",
+    "fire",
+    "water",
+    "flood",
+    "ice",
+    "ice_melting",
+    "deforestation",
+    "dry_land",
+    "greenery",
+    "pollution",
+    "urbanization",
+    "industrial_activity",
+    "brightness_level",
+    "color_dominance"
+  ]
+}
