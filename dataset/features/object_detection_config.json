@@ -1,0 +1,29 @@
+{
+  "model": "yolov8m.pt",
+  "object_classes": [
+    "bear",
+    "bird",
+    "boat",
+    "bottle",
+    "broccoli",
+    "car",
+    "cat",
+    "cell phone",
+    "clock",
+    "dog",
+    "fire hydrant",
+    "horse",
+    "person",
+    "sheep",
+    "sports ball",
+    "truck",
+    "tv",
+    "umbrella"
+  ],
+  "num_classes": 18,
+  "object_counts_shape": [
+    58,
+    18
+  ],
+  "confidence_threshold": 0.5
+}
