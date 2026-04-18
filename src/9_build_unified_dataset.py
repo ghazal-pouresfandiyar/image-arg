@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Build unified multimodal dataset combining all extracted features."""
 
-from __future__ import annotations
-
 import json
 from pathlib import Path
 
@@ -16,6 +14,7 @@ FEATURES_DIR = ROOT_DIR / "dataset" / "features"
 
 # Input feature files
 CLIP_EMB_PATH = FEATURES_DIR / "clip_image_embeddings.npy"
+METADATA_ONEHOT_PATH = FEATURES_DIR / "metadata_onehot.npy"
 OBJ_COUNTS_PATH = FEATURES_DIR / "object_counts.npy"
 SCENE_CLASS_PATH = FEATURES_DIR / "scene_classifications.json"
 ATTRS_PATH = FEATURES_DIR / "climate_attributes.json"
@@ -23,7 +22,8 @@ PREMISE_EMB_PATH = FEATURES_DIR / "premise_embeddings.npy"
 FACT_RETR_PATH = FEATURES_DIR / "fact_retrievals.json"
 CAPTIONS_PATH = FEATURES_DIR / "image_captions.json"
 
-CLIP_INDEX_PATH = FEATURES_DIR / "feature_index.csv"
+CLIP_INDEX_PATH = FEATURES_DIR / "clip_index.csv"
+METADATA_INDEX_PATH = FEATURES_DIR / "metadata_index.csv"
 
 # Output
 OUTPUT_DIR = ROOT_DIR / "dataset" / "unified_features"
@@ -31,21 +31,24 @@ UNIFIED_FEATURES_PATH = OUTPUT_DIR / "unified_features.npz"
 METADATA_PATH = OUTPUT_DIR / "metadata.json"
 
 
-def load_all_features() -> dict:
+def load_all_features():
 	"""Load all pre-extracted features."""
 	features = {}
 	
 	print("Loading features...")
 	
 	clip_emb = np.load(CLIP_EMB_PATH)
+	metadata_onehot = np.load(METADATA_ONEHOT_PATH)
 	obj_counts = np.load(OBJ_COUNTS_PATH)
 	premise_emb = np.load(PREMISE_EMB_PATH)
 	
 	features["clip_embeddings"] = clip_emb
+	features["metadata_onehot"] = metadata_onehot
 	features["object_counts"] = obj_counts
 	features["premise_embeddings"] = premise_emb
 	
 	print(f"  CLIP embeddings: {clip_emb.shape}")
+	print(f"  Metadata one-hot: {metadata_onehot.shape}")
 	print(f"  Object counts: {obj_counts.shape}")
 	print(f"  Premise embeddings: {premise_emb.shape}")
 	
@@ -116,13 +119,14 @@ def load_all_features() -> dict:
 	return features
 
 
-def create_unified_tensor(features: dict) -> dict:
+def create_unified_tensor(features):
 	"""Concatenate all features into unified tensor."""
 	
 	print("\nCreating unified feature tensor...")
 	
 	unified = np.concatenate([
 		features["clip_embeddings"],
+		features["metadata_onehot"],
 		features["object_counts"],
 		features["scene_onehot"],
 		features["climate_attributes"],
@@ -131,8 +135,11 @@ def create_unified_tensor(features: dict) -> dict:
 	
 	unified = unified.astype(np.float32)
 	
+	metadata_dim = features["metadata_onehot"].shape[1]
+	
 	feature_dims = {
 		"clip_embeddings": 512,
+		"metadata_onehot": metadata_dim,
 		"object_counts": 18,
 		"scene_onehot": 4,
 		"climate_attributes": 14,
@@ -140,7 +147,15 @@ def create_unified_tensor(features: dict) -> dict:
 	}
 	
 	print(f"Unified feature shape: {unified.shape}")
+	print(f"Feature dimensions breakdown:")
+	for fname, fdim in feature_dims.items():
+		print(f"  {fname}: {fdim}")
 	print(f"Total dimension: {sum(feature_dims.values())}")
+	total_expected = unified.shape[1]
+	if sum(feature_dims.values()) == total_expected:
+		print(f"✓ Dimensions match: {total_expected}")
+	else:
+		print(f"✗ Dimension mismatch! Expected {sum(feature_dims.values())}, got {total_expected}")
 	
 	return {
 		"unified": unified,

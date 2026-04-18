@@ -5,8 +5,6 @@ This script analyzes each image to detect environmental and climate-related visu
 such as smoke, fire, water, floods, ice, deforestation, pollution, etc.
 """
 
-from __future__ import annotations
-
 import json
 from pathlib import Path
 
@@ -63,25 +61,22 @@ ATTRIBUTE_PROMPTS = {
 }
 
 
-def find_image_path(row_id: str) -> Path | None:
+def find_image_path(row_id):
 	"""Return the first matching local image path for a row id."""
 	row_id = str(row_id).strip()
 	if not row_id:
 		return None
 
 	for suffix in IMAGE_SUFFIXES:
-		candidate = IMAGES_DIR / f"{row_id}{suffix}"
+		candidate = IMAGES_DIR / (row_id + suffix)
 		if candidate.exists():
 			return candidate
 
-	matches = sorted(IMAGES_DIR.glob(f"{row_id}.*"))
-	for candidate in matches:
-		if candidate.is_file():
-			return candidate
+	return None
 	return None
 
 
-def load_clip_model() -> tuple[CLIPProcessor, CLIPModel, str]:
+def load_clip_model():
 	"""Load CLIP model and processor."""
 	device = "cuda" if torch.cuda.is_available() else "cpu"
 	processor = CLIPProcessor.from_pretrained(MODEL_NAME)
@@ -91,13 +86,7 @@ def load_clip_model() -> tuple[CLIPProcessor, CLIPModel, str]:
 	return processor, model, device
 
 
-def detect_attributes_clip(
-	image_path: Path,
-	processor: CLIPProcessor,
-	model: CLIPModel,
-	device: str,
-	threshold: float = 0.5,
-) -> dict[str, int]:
+def detect_attributes_clip(image_path, processor, model, device, threshold=0.5):
 	"""Detect climate attributes using CLIP text-image matching."""
 	image = Image.open(image_path).convert("RGB")
 	
@@ -132,7 +121,7 @@ def detect_attributes_clip(
 	return attributes
 
 
-def analyze_brightness_and_color(image_path: Path) -> tuple[str, str]:
+def analyze_brightness_and_color(image_path):
 	"""Analyze brightness level and color dominance."""
 	image = cv2.imread(str(image_path))
 	if image is None:

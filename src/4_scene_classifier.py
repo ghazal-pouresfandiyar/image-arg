@@ -5,8 +5,6 @@ This script classifies images into scene categories (urban, rural, industrial, n
 using a pretrained Places365 model, supporting climate argument grounding.
 """
 
-from __future__ import annotations
-
 import json
 from pathlib import Path
 
@@ -48,36 +46,27 @@ SCENE_MAPPING = {
 }
 
 
-def find_image_path(row_id: str) -> Path | None:
+def find_image_path(row_id):
 	"""Return the first matching local image path for a row id."""
 	row_id = str(row_id).strip()
 	if not row_id:
 		return None
 
 	for suffix in IMAGE_SUFFIXES:
-		candidate = IMAGES_DIR / f"{row_id}{suffix}"
+		candidate = IMAGES_DIR / (row_id + suffix)
 		if candidate.exists():
 			return candidate
 
-	matches = sorted(IMAGES_DIR.glob(f"{row_id}.*"))
-	for candidate in matches:
-		if candidate.is_file():
-			return candidate
 	return None
 
 
-def load_places365_model() -> tuple[None, None, str]:
+def load_places365_model():
 	"""Initialize scene classifier (no model download needed)."""
 	device = "cpu"
 	return None, None, device
 
 
-def classify_scene(
-	image_path: Path,
-	model: None = None,
-	transform: None = None,
-	device: str = "cpu",
-) -> dict[str, str | list | float]:
+def classify_scene(image_path, model=None, transform=None, device="cpu"):
 	"""Classify image scene using color analysis and heuristics.
 	
 	Analyzes dominant colors and image statistics to infer scene type:
@@ -96,15 +85,20 @@ def classify_scene(
 	h, s, v = hsv_image[:, :, 0], hsv_image[:, :, 1], hsv_image[:, :, 2]
 	
 	# Dominant hue ranges
-	green_pixels = ((h >= 35) & (h <= 85)).sum()
-	blue_pixels = ((h >= 100) & (h <= 130)).sum()
-	red_pixels = ((h < 10) | (h >= 170)).sum()
+	green_mask = (h >= 35) & (h <= 85)
+	green_pixels = green_mask.sum()
+	
+	blue_mask = (h >= 100) & (h <= 130)
+	blue_pixels = blue_mask.sum()
+	
+	red_mask = (h < 10) | (h >= 170)
+	red_pixels = red_mask.sum()
 	
 	total_pixels = img_array.shape[0] * img_array.shape[1]
-	green_ratio = green_pixels / total_pixels
-	blue_ratio = blue_pixels / total_pixels
-	saturation_mean = s.mean()
-	brightness_mean = v.mean()
+	green_ratio = float(green_pixels) / float(total_pixels)
+	blue_ratio = float(blue_pixels) / float(total_pixels)
+	saturation_mean = float(s.mean())
+	brightness_mean = float(v.mean())
 	
 	# Simple heuristic classification
 	if green_ratio > 0.3:
@@ -122,21 +116,26 @@ def classify_scene(
 	else:
 		category = "urban"  # Default to urban
 	
-	confidence = min(max([green_ratio, blue_ratio]) if category == "natural" else 0.6, 0.95)
+	if category == "natural":
+		confidence_base = max([green_ratio, blue_ratio])
+	else:
+		confidence_base = 0.6
+	confidence = min(confidence_base, 0.95)
 	
-	return {
+	result = {
 		"raw_category": category,
-		"confidence": round(float(confidence), 4),
+		"confidence": round(confidence, 4),
 		"primary_category": category,
 		"color_analysis": {
-			"green_ratio": round(float(green_ratio), 3),
-			"blue_ratio": round(float(blue_ratio), 3),
+			"green_ratio": round(green_ratio, 3),
+			"blue_ratio": round(blue_ratio, 3),
 			"brightness": int(brightness_mean),
 		},
 	}
+	return result
 
 
-def main() -> None:
+def main():
 	if not DATASET_PATH.exists():
 		raise FileNotFoundError(f"CSV not found: {DATASET_PATH}")
 	if not IMAGES_DIR.exists():
@@ -147,8 +146,8 @@ def main() -> None:
 
 	df = pd.read_csv(DATASET_PATH, dtype=str, keep_default_na=False)
 
-	kept_rows: list[dict] = []
-	scene_classifications: list[dict] = []
+	kept_rows = []
+	scene_classifications = []
 	category_counts = {"urban": 0, "rural": 0, "industrial": 0, "natural": 0}
 	skipped = 0
 

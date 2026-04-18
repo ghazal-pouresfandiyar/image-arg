@@ -5,8 +5,6 @@ This script reads dataset/annotated.csv, detects objects in each image using YOL
 extracts object classes, counts, and bounding boxes, and saves features for model grounding.
 """
 
-from __future__ import annotations
-
 import json
 from pathlib import Path
 
@@ -30,30 +28,21 @@ OBJECT_COUNTS_PATH = FEATURES_DIR / "object_counts.npy"
 CONFIG_PATH = FEATURES_DIR / "object_detection_config.json"
 
 
-def find_image_path(row_id: str) -> Path | None:
+def find_image_path(row_id):
 	"""Return the first matching local image path for a row id."""
 	row_id = str(row_id).strip()
 	if not row_id:
 		return None
 
 	for suffix in IMAGE_SUFFIXES:
-		candidate = IMAGES_DIR / f"{row_id}{suffix}"
+		candidate = IMAGES_DIR / (row_id + suffix)
 		if candidate.exists():
-			return candidate
-
-	matches = sorted(IMAGES_DIR.glob(f"{row_id}.*"))
-	for candidate in matches:
-		if candidate.is_file():
 			return candidate
 
 	return None
 
 
-def extract_objects(
-	image_path: Path,
-	model: YOLO,
-	confidence_threshold: float = 0.5,
-) -> dict[str, int | list]:
+def extract_objects(image_path, model, confidence_threshold=0.5):
 	"""Extract detected objects, counts, and bounding boxes from image.
 	
 	Returns:
@@ -75,21 +64,35 @@ def extract_objects(
 			class_id = int(box.cls[0])
 			class_name = result.names[class_id]
 			confidence = float(box.conf[0])
-			bbox_xyxy = box.xyxy[0].cpu().numpy().tolist()  # [x1, y1, x2, y2]
+			bbox_xyxy = box.xyxy[0].cpu().numpy().tolist()
 			
 			detected["objects"].append(class_name)
-			detected["counts"][class_name] = detected["counts"].get(class_name, 0) + 1
+			
+			if class_name in detected["counts"]:
+				detected["counts"][class_name] = detected["counts"][class_name] + 1
+			else:
+				detected["counts"][class_name] = 1
+			
+			bbox_rounded = []
+			for x in bbox_xyxy:
+				bbox_rounded.append(round(x, 2))
+			
 			detected["bboxes"].append({
 				"class": class_name,
 				"confidence": round(confidence, 3),
-				"bbox": [round(x, 2) for x in bbox_xyxy],  # [x1, y1, x2, y2]
+				"bbox": bbox_rounded,
 			})
 	
-	detected["objects"] = list(set(detected["objects"]))  # Unique classes
+	unique_objects = []
+	for obj in detected["objects"]:
+		if obj not in unique_objects:
+			unique_objects.append(obj)
+	detected["objects"] = unique_objects
+	
 	return detected
 
 
-def main() -> None:
+def main():
 	if not DATASET_PATH.exists():
 		raise FileNotFoundError(f"CSV not found: {DATASET_PATH}")
 	if not IMAGES_DIR.exists():
@@ -101,14 +104,14 @@ def main() -> None:
 
 	df = pd.read_csv(DATASET_PATH, dtype=str, keep_default_na=False)
 	
-	kept_rows: list[dict[str, str]] = []
-	all_objects_data: list[dict] = []
-	object_counts_list: list[list] = []
+	kept_rows = []
+	all_objects_data = []
+	object_counts_list = []
 	skipped_missing_image = 0
 	skipped_detection_error = 0
 
 	# Global tracking for consistent feature vectors
-	all_classes_set = set()
+	all_classes_set = []
 
 	# First pass: collect all detected classes
 	print("First pass: scanning for all object classes...")
@@ -126,12 +129,15 @@ def main() -> None:
 
 		try:
 			detected = extract_objects(image_path, model, confidence_threshold=0.5)
-			all_classes_set.update(detected["counts"].keys())
+			for class_name in detected["counts"].keys():
+				if class_name not in all_classes_set:
+					all_classes_set.append(class_name)
 		except Exception:
 			skipped_detection_error += 1
 			continue
 
-	sorted_classes = sorted(list(all_classes_set))
+	all_classes_set.sort()
+	sorted_classes = all_classes_set
 	print(f"Found {len(sorted_classes)} unique object classes: {sorted_classes}\n")
 
 	# Second pass: extract counts for all images
@@ -158,7 +164,12 @@ def main() -> None:
 			continue
 
 		# Build count vector for this image
-		count_vector = [detected["counts"].get(cls, 0) for cls in sorted_classes]
+		count_vector = []
+		for cls in sorted_classes:
+			if cls in detected["counts"]:
+				count_vector.append(detected["counts"][cls])
+			else:
+				count_vector.append(0)
 		object_counts_list.append(count_vector)
 
 		# Store object data for JSON export

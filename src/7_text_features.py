@@ -8,7 +8,6 @@ This script:
 4. Enables retrieval-augmented argument generation
 """
 
-from __future__ import annotations
 
 import json
 from pathlib import Path

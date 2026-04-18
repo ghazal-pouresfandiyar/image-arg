@@ -6,8 +6,6 @@ premises are grounded in image evidence. E.g., premise "Polar bears are losing h
 is grounded if bears are detected in the image.
 """
 
-from __future__ import annotations
-
 import json
 from pathlib import Path
 
@@ -40,7 +38,7 @@ GROUNDING_KEYWORDS = {
 }
 
 
-def extract_premise_keywords(premise: str) -> list[str]:
+def extract_premise_keywords(premise):
 	"""Extract grounding keywords from a premise."""
 	premise_lower = premise.lower()
 	matched = []
@@ -50,10 +48,7 @@ def extract_premise_keywords(premise: str) -> list[str]:
 	return matched
 
 
-def ground_premise(
-	premise: str,
-	detected_objects: dict[str, int],
-) -> dict[str, bool | list]:
+def ground_premise(premise, detected_objects):
 	"""Check if premise is grounded in detected objects.
 	
 	Returns:
@@ -75,8 +70,11 @@ def ground_premise(
 				matched_objects.append(obj_class)
 				matched_counts[obj_class] = detected_objects[obj_class]
 
-	# Remove duplicates
-	matched_objects = list(set(matched_objects))
+	unique_objects = []
+	for obj in matched_objects:
+		if obj not in unique_objects:
+			unique_objects.append(obj)
+	matched_objects = unique_objects
 
 	return {
 		"premise": premise,
@@ -87,7 +85,7 @@ def ground_premise(
 	}
 
 
-def main() -> None:
+def main():
 	if not DATASET_PATH.exists():
 		raise FileNotFoundError(f"CSV not found: {DATASET_PATH}")
 	if not OBJECTS_JSON_PATH.exists():

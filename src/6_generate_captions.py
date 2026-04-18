@@ -5,8 +5,6 @@ This script creates one-sentence captions per image describing what is visually 
 focusing on main objects, visible actions, and environment type.
 """
 
-from __future__ import annotations
-
 import json
 from pathlib import Path
 
@@ -53,25 +51,21 @@ CAPTION_TEMPLATES = {
 }
 
 
-def find_image_path(row_id: str) -> Path | None:
+def find_image_path(row_id):
 	"""Return the first matching local image path for a row id."""
 	row_id = str(row_id).strip()
 	if not row_id:
 		return None
 
 	for suffix in IMAGE_SUFFIXES:
-		candidate = IMAGES_DIR / f"{row_id}{suffix}"
+		candidate = IMAGES_DIR / (row_id + suffix)
 		if candidate.exists():
 			return candidate
 
-	matches = sorted(IMAGES_DIR.glob(f"{row_id}.*"))
-	for candidate in matches:
-		if candidate.is_file():
-			return candidate
 	return None
 
 
-def load_clip_model() -> tuple[CLIPProcessor, CLIPModel, str]:
+def load_clip_model():
 	"""Load CLIP model."""
 	device = "cuda" if torch.cuda.is_available() else "cpu"
 	processor = CLIPProcessor.from_pretrained(MODEL_NAME)
