@@ -1,29 +1,36 @@
 {
-  "model": "yolov8m.pt",
+  "model": "yolov8l.pt",
   "object_classes": [
+    "backpack",
     "bear",
     "bird",
     "boat",
-    "bottle",
+    "book",
     "broccoli",
+    "bus",
+    "cake",
     "car",
-    "cat",
     "cell phone",
-    "clock",
+    "cow",
     "dog",
-    "fire hydrant",
+    "handbag",
     "horse",
     "person",
+    "pizza",
+    "remote",
     "sheep",
-    "sports ball",
+    "suitcase",
+    "teddy bear",
+    "train",
     "truck",
     "tv",
-    "umbrella"
+    "umbrella",
+    "vase"
   ],
-  "num_classes": 18,
+  "num_classes": 25,
   "object_counts_shape": [
     58,
-    18
+    25
   ],
   "confidence_threshold": 0.5
 }

@@ -22,22 +22,22 @@
     "bboxes": [
       {
         "class": "bear",
-        "confidence": 0.852,
+        "confidence": 0.887,
         "bbox": [
-          327.53,
-          94.05,
-          418.55,
-          208.47
+          324.89,
+          94.11,
+          419.23,
+          209.1
         ]
       },
       {
         "class": "bear",
-        "confidence": 0.766,
+        "confidence": 0.881,
         "bbox": [
-          266.03,
-          122.24,
-          338.66,
-          193.54
+          266.14,
+          122.61,
+          334.96,
+          195.53
         ]
       }
     ]
@@ -58,31 +58,31 @@
     "id": "8",
     "detected_objects": [
       "person",
-      "horse"
+      "cow"
     ],
     "object_counts": {
       "person": 1,
-      "horse": 1
+      "cow": 1
     },
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.931,
+        "confidence": 0.936,
         "bbox": [
-          214.1,
-          274.91,
-          620.46,
-          1032.36
+          212.07,
+          275.76,
+          621.06,
+          1035.46
         ]
       },
       {
-        "class": "horse",
-        "confidence": 0.553,
+        "class": "cow",
+        "confidence": 0.63,
         "bbox": [
-          126.63,
-          502.6,
-          347.61,
-          966.31
+          127.17,
+          502.73,
+          347.72,
+          967.39
         ]
       }
     ]
@@ -104,21 +104,36 @@
     "bboxes": [
       {
         "class": "bear",
-        "confidence": 0.943,
+        "confidence": 0.94,
         "bbox": [
-          250.15,
-          165.47,
-          313.59,
-          242.57
+          249.7,
+          165.9,
+          313.96,
+          242.45
         ]
       }
     ]
   },
   {
     "id": "12",
-    "detected_objects": [],
-    "object_counts": {},
-    "bboxes": []
+    "detected_objects": [
+      "teddy bear"
+    ],
+    "object_counts": {
+      "teddy bear": 1
+    },
+    "bboxes": [
+      {
+        "class": "teddy bear",
+        "confidence": 0.883,
+        "bbox": [
+          140.75,
+          63.18,
+          295.91,
+          351.95
+        ]
+      }
+    ]
   },
   {
     "id": "13",
@@ -137,12 +152,12 @@
     "bboxes": [
       {
         "class": "bear",
-        "confidence": 0.671,
+        "confidence": 0.903,
         "bbox": [
-          301.87,
-          207.96,
-          369.85,
-          246.63
+          301.46,
+          207.86,
+          370.07,
+          246.93
         ]
       }
     ]
@@ -164,22 +179,22 @@
     "bboxes": [
       {
         "class": "broccoli",
-        "confidence": 0.703,
+        "confidence": 0.634,
         "bbox": [
-          903.3,
-          351.1,
-          1016.17,
-          473.08
+          903.63,
+          350.24,
+          1017.76,
+          471.74
         ]
       },
       {
         "class": "broccoli",
-        "confidence": 0.652,
+        "confidence": 0.514,
         "bbox": [
-          890.09,
-          252.71,
-          979.99,
-          345.55
+          886.44,
+          252.88,
+          980.18,
+          344.13
         ]
       }
     ]
@@ -195,12 +210,12 @@
     "bboxes": [
       {
         "class": "bear",
-        "confidence": 0.964,
+        "confidence": 0.967,
         "bbox": [
-          313.54,
-          885.37,
-          772.56,
-          1152.25
+          312.51,
+          884.91,
+          772.49,
+          1152.48
         ]
       }
     ]
@@ -216,12 +231,12 @@
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.934,
+        "confidence": 0.8,
         "bbox": [
-          386.84,
-          311.58,
-          897.75,
-          1197.5
+          382.7,
+          299.53,
+          898.89,
+          1197.66
         ]
       }
     ]
@@ -229,52 +244,40 @@
   {
     "id": "25",
     "detected_objects": [
-      "person",
-      "clock"
+      "person"
     ],
     "object_counts": {
-      "person": 3,
-      "clock": 1
+      "person": 3
     },
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.78,
+        "confidence": 0.739,
         "bbox": [
-          281.95,
-          225.47,
-          404.66,
-          504.49
-        ]
-      },
-      {
-        "class": "clock",
-        "confidence": 0.771,
-        "bbox": [
-          667.32,
-          482.98,
-          701.89,
-          515.37
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.723,
-        "bbox": [
-          1.14,
-          312.49,
-          15.89,
-          346.67
+          282.07,
+          225.3,
+          403.51,
+          503.37
         ]
       },
       {
         "class": "person",
         "confidence": 0.663,
         "bbox": [
-          159.38,
-          310.51,
-          173.49,
-          346.84
+          1.38,
+          312.4,
+          15.84,
+          349.46
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.651,
+        "bbox": [
+          159.52,
+          309.66,
+          174.23,
+          347.79
         ]
       }
     ]
@@ -298,168 +301,158 @@
       "person"
     ],
     "object_counts": {
-      "person": 14,
-      "boat": 2
+      "boat": 2,
+      "person": 13
     },
     "bboxes": [
       {
-        "class": "person",
-        "confidence": 0.792,
+        "class": "boat",
+        "confidence": 0.912,
         "bbox": [
-          142.9,
-          194.49,
-          169.37,
-          268.1
+          126.46,
+          241.2,
+          669.65,
+          432.85
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.85,
+        "bbox": [
+          143.1,
+          194.5,
+          169.52,
+          267.65
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.806,
+        "bbox": [
+          166.25,
+          196.53,
+          193.46,
+          279.45
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.802,
+        "bbox": [
+          226.18,
+          233.68,
+          253.87,
+          310.48
         ]
       },
       {
         "class": "person",
         "confidence": 0.788,
         "bbox": [
-          224.65,
-          232.91,
-          253.7,
-          310.14
+          425.7,
+          261.86,
+          451.65,
+          329.83
         ]
       },
       {
         "class": "person",
-        "confidence": 0.78,
+        "confidence": 0.782,
         "bbox": [
-          343.39,
-          282.1,
-          372.52,
-          337.06
+          43.54,
+          192.09,
+          67.41,
+          245.97
         ]
       },
       {
         "class": "person",
-        "confidence": 0.762,
+        "confidence": 0.771,
         "bbox": [
-          43.52,
-          191.96,
-          68.75,
-          246.49
+          403.42,
+          273.97,
+          430.36,
+          344.98
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.755,
+        "bbox": [
+          339.39,
+          281.33,
+          372.82,
+          337.45
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.745,
+        "bbox": [
+          291.35,
+          273.63,
+          324.87,
+          329.02
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.739,
+        "bbox": [
+          540.27,
+          282.57,
+          578.02,
+          318.49
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.713,
+        "bbox": [
+          313.92,
+          251.42,
+          351.4,
+          328.77
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.687,
+        "bbox": [
+          544.61,
+          297.81,
+          579.68,
+          367.96
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.684,
+        "bbox": [
+          607.84,
+          306.8,
+          634.43,
+          375.21
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.68,
+        "bbox": [
+          295.47,
+          249.1,
+          319.08,
+          286.12
         ]
       },
       {
         "class": "boat",
-        "confidence": 0.749,
+        "confidence": 0.56,
         "bbox": [
-          26.12,
-          150.67,
-          133.3,
-          167.72
-        ]
-      },
-      {
-        "class": "boat",
-        "confidence": 0.728,
-        "bbox": [
-          126.98,
-          254.17,
-          668.81,
-          431.17
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.725,
-        "bbox": [
-          311.8,
-          253.19,
-          352.13,
-          328.36
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.723,
-        "bbox": [
-          166.64,
-          196.32,
-          191.86,
-          279.9
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.722,
-        "bbox": [
-          425.17,
-          261.49,
-          451.69,
-          328.85
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.708,
-        "bbox": [
-          84.31,
-          195.24,
-          135.91,
-          259.12
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.681,
-        "bbox": [
-          404.13,
-          273.94,
-          430.89,
-          345.35
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.651,
-        "bbox": [
-          291.57,
-          273.08,
-          324.43,
-          328.53
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.559,
-        "bbox": [
-          607.87,
-          306.77,
-          634.4,
-          374.96
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.548,
-        "bbox": [
-          540.32,
-          282.35,
-          577.67,
-          317.58
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.547,
-        "bbox": [
-          295.63,
-          248.87,
-          319.14,
-          284.94
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.529,
-        "bbox": [
-          545.32,
-          297.86,
-          580.73,
-          368.63
+          19.84,
+          150.21,
+          133.09,
+          167.51
         ]
       }
     ]
@@ -493,52 +486,52 @@
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.864,
+        "confidence": 0.891,
         "bbox": [
-          176.61,
-          514.77,
-          329.52,
-          871.56
+          176.01,
+          513.69,
+          329.64,
+          877.72
         ]
       },
       {
         "class": "person",
-        "confidence": 0.826,
+        "confidence": 0.824,
         "bbox": [
-          387.54,
-          544.96,
-          455.67,
-          737.28
+          317.02,
+          547.88,
+          398.19,
+          876.34
         ]
       },
       {
         "class": "person",
-        "confidence": 0.805,
+        "confidence": 0.817,
         "bbox": [
-          312.17,
-          546.35,
-          398.73,
-          875.83
+          104.81,
+          511.5,
+          174.13,
+          722.95
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.811,
+        "bbox": [
+          54.04,
+          509.97,
+          110.6,
+          734.21
         ]
       },
       {
         "class": "person",
         "confidence": 0.792,
         "bbox": [
-          104.79,
-          510.81,
-          173.7,
-          726.76
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.776,
-        "bbox": [
-          54.1,
-          510.09,
-          109.93,
-          733.66
+          388.91,
+          544.77,
+          454.91,
+          731.18
         ]
       }
     ]
@@ -551,24 +544,9 @@
   },
   {
     "id": "40",
-    "detected_objects": [
-      "bird"
-    ],
-    "object_counts": {
-      "bird": 1
-    },
-    "bboxes": [
-      {
-        "class": "bird",
-        "confidence": 0.864,
-        "bbox": [
-          616.45,
-          163.19,
-          767.83,
-          368.83
-        ]
-      }
-    ]
+    "detected_objects": [],
+    "object_counts": {},
+    "bboxes": []
   },
   {
     "id": "41",
@@ -576,47 +554,37 @@
       "person"
     ],
     "object_counts": {
-      "person": 4
+      "person": 3
     },
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.767,
+        "confidence": 0.794,
         "bbox": [
-          484.83,
-          696.0,
-          670.83,
-          986.24
+          551.05,
+          694.89,
+          672.35,
+          863.58
         ]
       },
       {
         "class": "person",
-        "confidence": 0.689,
+        "confidence": 0.662,
         "bbox": [
-          593.44,
-          714.78,
-          883.09,
-          999.25
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.56,
-        "bbox": [
-          782.88,
-          739.55,
-          913.81,
-          983.5
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.545,
-        "bbox": [
-          758.24,
-          700.32,
+          760.24,
+          700.98,
           802.72,
-          816.21
+          818.58
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.52,
+        "bbox": [
+          587.06,
+          718.08,
+          885.41,
+          992.48
         ]
       }
     ]
@@ -632,12 +600,12 @@
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.902,
+        "confidence": 0.895,
         "bbox": [
-          444.82,
-          76.52,
-          559.55,
-          333.06
+          447.53,
+          74.95,
+          556.2,
+          332.0
         ]
       }
     ]
@@ -645,134 +613,136 @@
   {
     "id": "45",
     "detected_objects": [
-      "car",
+      "cell phone",
       "person",
-      "cell phone"
+      "car",
+      "remote"
     ],
     "object_counts": {
+      "cell phone": 1,
       "person": 2,
       "car": 8,
-      "cell phone": 2
+      "remote": 1
     },
     "bboxes": [
       {
-        "class": "person",
-        "confidence": 0.917,
+        "class": "cell phone",
+        "confidence": 0.932,
         "bbox": [
-          286.55,
-          540.9,
-          556.11,
-          765.63
+          844.88,
+          541.21,
+          961.33,
+          805.0
+        ]
+      },
+      {
+        "class": "person",
+        "confidence": 0.926,
+        "bbox": [
+          835.02,
+          378.89,
+          1123.0,
+          801.95
         ]
       },
       {
         "class": "person",
         "confidence": 0.909,
         "bbox": [
-          839.11,
-          381.88,
-          1123.0,
-          797.6
+          286.4,
+          540.84,
+          555.59,
+          765.61
         ]
       },
       {
         "class": "car",
-        "confidence": 0.861,
+        "confidence": 0.885,
         "bbox": [
-          103.86,
-          419.91,
-          199.32,
-          473.25
+          103.6,
+          420.87,
+          200.41,
+          473.58
         ]
       },
       {
         "class": "car",
-        "confidence": 0.83,
+        "confidence": 0.864,
         "bbox": [
-          774.16,
-          383.02,
-          835.33,
-          419.98
+          774.14,
+          383.25,
+          834.9,
+          420.27
+        ]
+      },
+      {
+        "class": "remote",
+        "confidence": 0.852,
+        "bbox": [
+          248.53,
+          591.26,
+          395.32,
+          824.94
         ]
       },
       {
         "class": "car",
-        "confidence": 0.807,
+        "confidence": 0.761,
         "bbox": [
-          1071.39,
-          366.1,
-          1122.64,
-          421.15
-        ]
-      },
-      {
-        "class": "cell phone",
-        "confidence": 0.794,
-        "bbox": [
-          846.54,
-          539.85,
-          961.71,
-          804.86
+          1072.13,
+          366.79,
+          1122.93,
+          421.76
         ]
       },
       {
         "class": "car",
-        "confidence": 0.725,
+        "confidence": 0.642,
         "bbox": [
-          1039.93,
-          370.05,
-          1086.0,
-          416.52
+          1040.63,
+          370.28,
+          1085.9,
+          417.9
         ]
       },
       {
         "class": "car",
-        "confidence": 0.624,
+        "confidence": 0.577,
         "bbox": [
-          210.0,
-          446.35,
-          255.46,
-          471.31
+          933.23,
+          396.59,
+          967.42,
+          412.21
         ]
       },
       {
         "class": "car",
-        "confidence": 0.563,
+        "confidence": 0.571,
         "bbox": [
-          871.3,
-          387.8,
-          896.36,
-          412.98
+          872.9,
+          387.24,
+          896.92,
+          413.37
         ]
       },
       {
         "class": "car",
-        "confidence": 0.551,
+        "confidence": 0.556,
         "bbox": [
-          850.39,
-          389.69,
-          881.16,
-          414.16
-        ]
-      },
-      {
-        "class": "cell phone",
-        "confidence": 0.55,
-        "bbox": [
-          248.25,
-          592.91,
-          394.4,
-          824.86
+          847.36,
+          389.73,
+          881.52,
+          414.85
         ]
       },
       {
         "class": "car",
-        "confidence": 0.539,
+        "confidence": 0.545,
         "bbox": [
-          826.76,
-          384.63,
-          859.95,
-          415.41
+          209.32,
+          448.07,
+          258.5,
+          471.73
         ]
       }
     ]
@@ -780,62 +750,52 @@
   {
     "id": "48",
     "detected_objects": [
-      "boat",
-      "person"
+      "person",
+      "boat"
     ],
     "object_counts": {
-      "person": 4,
+      "person": 3,
       "boat": 1
     },
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.896,
+        "confidence": 0.91,
         "bbox": [
-          405.17,
-          364.46,
-          541.67,
-          513.37
+          404.47,
+          364.71,
+          539.15,
+          513.59
         ]
       },
       {
         "class": "boat",
-        "confidence": 0.873,
+        "confidence": 0.836,
         "bbox": [
-          403.42,
-          402.73,
-          771.9,
-          620.02
+          404.24,
+          397.02,
+          771.56,
+          617.07
         ]
       },
       {
         "class": "person",
-        "confidence": 0.751,
+        "confidence": 0.821,
         "bbox": [
-          493.48,
-          433.3,
-          584.09,
-          549.61
+          492.82,
+          434.54,
+          582.17,
+          550.3
         ]
       },
       {
         "class": "person",
-        "confidence": 0.661,
+        "confidence": 0.541,
         "bbox": [
-          570.93,
-          378.82,
-          630.71,
-          484.75
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.504,
-        "bbox": [
-          562.09,
-          406.18,
-          705.73,
-          573.68
+          572.1,
+          379.79,
+          630.53,
+          485.71
         ]
       }
     ]
@@ -843,111 +803,92 @@
   {
     "id": "49",
     "detected_objects": [
-      "fire hydrant",
       "car",
-      "person",
       "truck"
     ],
     "object_counts": {
       "car": 3,
-      "person": 2,
-      "truck": 2,
-      "fire hydrant": 1
+      "truck": 2
     },
     "bboxes": [
       {
         "class": "car",
-        "confidence": 0.851,
+        "confidence": 0.87,
         "bbox": [
-          443.88,
-          544.17,
-          661.28,
-          620.24
+          447.59,
+          544.92,
+          661.24,
+          618.58
         ]
       },
       {
         "class": "car",
-        "confidence": 0.828,
+        "confidence": 0.798,
         "bbox": [
-          386.26,
-          511.06,
-          527.85,
-          573.78
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.636,
-        "bbox": [
-          407.01,
-          851.97,
-          482.32,
-          899.48
+          386.44,
+          511.67,
+          527.33,
+          573.27
         ]
       },
       {
         "class": "truck",
-        "confidence": 0.622,
+        "confidence": 0.651,
         "bbox": [
-          337.07,
-          183.19,
-          482.36,
-          298.47
+          338.63,
+          185.81,
+          473.95,
+          289.15
+        ]
+      },
+      {
+        "class": "truck",
+        "confidence": 0.543,
+        "bbox": [
+          567.32,
+          443.97,
+          743.7,
+          553.12
         ]
       },
       {
         "class": "car",
-        "confidence": 0.585,
+        "confidence": 0.53,
         "bbox": [
-          1128.08,
-          267.36,
-          1199.19,
-          313.95
-        ]
-      },
-      {
-        "class": "fire hydrant",
-        "confidence": 0.56,
-        "bbox": [
-          853.79,
-          824.45,
-          910.94,
-          899.62
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.538,
-        "bbox": [
-          764.33,
-          434.34,
-          787.98,
-          499.85
-        ]
-      },
-      {
-        "class": "truck",
-        "confidence": 0.512,
-        "bbox": [
-          567.3,
-          432.62,
-          858.33,
-          558.86
+          1128.69,
+          268.31,
+          1199.6,
+          313.62
         ]
       }
     ]
   },
   {
     "id": "51",
-    "detected_objects": [],
-    "object_counts": {},
-    "bboxes": []
+    "detected_objects": [
+      "bird"
+    ],
+    "object_counts": {
+      "bird": 1
+    },
+    "bboxes": [
+      {
+        "class": "bird",
+        "confidence": 0.626,
+        "bbox": [
+          610.56,
+          54.78,
+          810.3,
+          452.32
+        ]
+      }
+    ]
   },
   {
     "id": "52",
     "detected_objects": [
-      "car",
-      "person"
+      "person",
+      "car"
     ],
     "object_counts": {
       "person": 1,
@@ -956,58 +897,31 @@
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.917,
+        "confidence": 0.928,
         "bbox": [
-          166.58,
-          178.89,
-          354.74,
-          752.35
+          166.81,
+          178.77,
+          354.78,
+          749.91
         ]
       },
       {
         "class": "car",
-        "confidence": 0.865,
+        "confidence": 0.885,
         "bbox": [
-          0.56,
-          266.67,
-          220.8,
-          645.78
+          0.22,
+          262.55,
+          220.13,
+          644.12
         ]
       }
     ]
   },
   {
     "id": "54",
-    "detected_objects": [
-      "bottle",
-      "umbrella"
-    ],
-    "object_counts": {
-      "umbrella": 1,
-      "bottle": 1
-    },
-    "bboxes": [
-      {
-        "class": "umbrella",
-        "confidence": 0.873,
-        "bbox": [
-          498.75,
-          507.67,
-          656.05,
-          626.62
-        ]
-      },
-      {
-        "class": "bottle",
-        "confidence": 0.68,
-        "bbox": [
-          534.05,
-          676.83,
-          597.93,
-          797.99
-        ]
-      }
-    ]
+    "detected_objects": [],
+    "object_counts": {},
+    "bboxes": []
   },
   {
     "id": "55",
@@ -1026,62 +940,62 @@
     "bboxes": [
       {
         "class": "car",
-        "confidence": 0.926,
+        "confidence": 0.953,
         "bbox": [
-          271.01,
-          393.72,
-          678.57,
-          641.39
+          272.82,
+          393.54,
+          679.2,
+          640.57
         ]
       },
       {
         "class": "car",
-        "confidence": 0.826,
+        "confidence": 0.895,
         "bbox": [
-          306.23,
-          224.56,
-          374.67,
-          274.12
+          281.62,
+          316.34,
+          390.31,
+          409.44
         ]
       },
       {
         "class": "car",
-        "confidence": 0.787,
+        "confidence": 0.774,
         "bbox": [
-          743.11,
-          194.2,
-          827.27,
-          236.37
+          742.94,
+          194.25,
+          827.58,
+          237.81
         ]
       },
       {
         "class": "car",
-        "confidence": 0.738,
+        "confidence": 0.706,
         "bbox": [
-          281.35,
-          316.57,
-          390.52,
-          415.29
+          326.06,
+          170.56,
+          370.36,
+          208.74
         ]
       },
       {
         "class": "car",
-        "confidence": 0.683,
+        "confidence": 0.647,
         "bbox": [
-          400.42,
-          147.14,
-          434.24,
-          180.83
+          400.38,
+          147.43,
+          434.08,
+          181.13
         ]
       },
       {
         "class": "car",
-        "confidence": 0.613,
+        "confidence": 0.635,
         "bbox": [
-          326.81,
-          170.53,
-          370.73,
-          214.28
+          306.63,
+          224.65,
+          373.67,
+          275.2
         ]
       }
     ]
@@ -1089,120 +1003,124 @@
   {
     "id": "64",
     "detected_objects": [
-      "person"
+      "person",
+      "suitcase",
+      "train"
     ],
     "object_counts": {
-      "person": 11
+      "person": 9,
+      "suitcase": 1,
+      "train": 1
     },
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.886,
+        "confidence": 0.844,
         "bbox": [
-          894.5,
-          336.84,
-          996.12,
-          616.38
+          895.17,
+          341.29,
+          995.75,
+          614.75
         ]
       },
       {
         "class": "person",
-        "confidence": 0.878,
+        "confidence": 0.84,
         "bbox": [
-          229.37,
-          336.65,
-          319.92,
-          605.86
+          228.84,
+          330.34,
+          320.21,
+          606.56
         ]
       },
       {
         "class": "person",
-        "confidence": 0.798,
+        "confidence": 0.84,
         "bbox": [
-          586.44,
-          351.92,
-          713.31,
-          618.89
+          589.89,
+          352.26,
+          710.65,
+          616.31
         ]
       },
       {
         "class": "person",
-        "confidence": 0.756,
+        "confidence": 0.82,
         "bbox": [
-          490.09,
-          286.15,
-          551.86,
-          431.04
+          491.27,
+          286.06,
+          552.68,
+          429.04
         ]
       },
       {
         "class": "person",
-        "confidence": 0.742,
+        "confidence": 0.722,
         "bbox": [
-          844.67,
-          387.93,
-          883.04,
-          525.77
+          196.41,
+          234.32,
+          235.81,
+          359.84
         ]
       },
       {
         "class": "person",
-        "confidence": 0.696,
+        "confidence": 0.693,
         "bbox": [
-          195.63,
-          234.26,
-          235.28,
-          359.21
+          845.31,
+          387.17,
+          882.11,
+          525.33
         ]
       },
       {
         "class": "person",
-        "confidence": 0.595,
+        "confidence": 0.625,
         "bbox": [
-          954.31,
-          247.46,
-          1004.45,
-          384.39
+          574.41,
+          274.29,
+          619.06,
+          447.06
         ]
       },
       {
         "class": "person",
-        "confidence": 0.581,
+        "confidence": 0.612,
         "bbox": [
-          0.03,
-          216.11,
-          39.53,
-          316.25
+          954.94,
+          249.04,
+          1005.04,
+          383.12
         ]
       },
       {
         "class": "person",
-        "confidence": 0.563,
+        "confidence": 0.599,
         "bbox": [
-          574.17,
-          275.12,
-          619.84,
-          446.59
+          116.14,
+          198.8,
+          151.82,
+          301.37
         ]
       },
       {
-        "class": "person",
-        "confidence": 0.558,
+        "class": "suitcase",
+        "confidence": 0.583,
         "bbox": [
-          152.63,
-          223.4,
-          190.26,
-          324.09
+          711.03,
+          404.34,
+          774.27,
+          464.21
         ]
       },
       {
-        "class": "person",
-        "confidence": 0.544,
+        "class": "train",
+        "confidence": 0.564,
         "bbox": [
-          115.95,
-          199.32,
-          152.68,
-          300.99
+          640.02,
+          107.05,
+          829.37,
+          259.81
         ]
       }
     ]
@@ -1216,62 +1134,42 @@
   {
     "id": "66",
     "detected_objects": [
-      "boat",
-      "person"
+      "person",
+      "boat"
     ],
     "object_counts": {
-      "boat": 4,
-      "person": 1
+      "person": 1,
+      "boat": 2
     },
     "bboxes": [
       {
-        "class": "boat",
-        "confidence": 0.834,
-        "bbox": [
-          19.94,
-          1003.38,
-          164.19,
-          1090.11
-        ]
-      },
-      {
         "class": "person",
-        "confidence": 0.815,
+        "confidence": 0.877,
         "bbox": [
-          276.78,
-          984.98,
-          338.34,
-          1059.56
+          276.6,
+          985.32,
+          337.5,
+          1060.13
         ]
       },
       {
         "class": "boat",
-        "confidence": 0.689,
+        "confidence": 0.764,
         "bbox": [
-          438.19,
-          1058.92,
-          594.24,
-          1193.9
+          177.28,
+          1025.41,
+          460.52,
+          1144.2
         ]
       },
       {
         "class": "boat",
-        "confidence": 0.633,
+        "confidence": 0.673,
         "bbox": [
-          175.71,
-          1024.44,
-          459.94,
-          1144.5
-        ]
-      },
-      {
-        "class": "boat",
-        "confidence": 0.532,
-        "bbox": [
-          19.69,
-          1103.48,
-          235.43,
-          1191.08
+          19.57,
+          1103.73,
+          235.83,
+          1192.06
         ]
       }
     ]
@@ -1289,22 +1187,22 @@
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.904,
+        "confidence": 0.908,
         "bbox": [
-          866.62,
-          282.12,
-          993.36,
-          724.15
+          865.83,
+          282.4,
+          992.98,
+          729.97
         ]
       },
       {
         "class": "bird",
-        "confidence": 0.748,
+        "confidence": 0.751,
         "bbox": [
-          72.34,
-          473.63,
-          119.4,
-          538.13
+          71.87,
+          474.77,
+          118.89,
+          537.25
         ]
       }
     ]
@@ -1332,12 +1230,12 @@
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.824,
+        "confidence": 0.828,
         "bbox": [
-          541.31,
-          718.88,
-          590.55,
-          815.08
+          542.43,
+          719.18,
+          589.59,
+          814.71
         ]
       }
     ]
@@ -1348,47 +1246,37 @@
       "person"
     ],
     "object_counts": {
-      "person": 4
+      "person": 3
     },
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.821,
+        "confidence": 0.797,
         "bbox": [
-          581.61,
-          687.39,
-          638.19,
-          935.03
+          397.13,
+          298.52,
+          422.24,
+          352.65
         ]
       },
       {
         "class": "person",
-        "confidence": 0.815,
+        "confidence": 0.791,
         "bbox": [
-          379.24,
-          302.1,
-          397.14,
-          351.75
+          419.78,
+          289.79,
+          439.02,
+          352.22
         ]
       },
       {
         "class": "person",
-        "confidence": 0.803,
+        "confidence": 0.777,
         "bbox": [
-          396.24,
-          298.22,
-          418.89,
-          352.5
-        ]
-      },
-      {
-        "class": "person",
-        "confidence": 0.801,
-        "bbox": [
-          419.28,
-          289.4,
-          439.19,
-          351.31
+          379.32,
+          301.92,
+          397.86,
+          350.96
         ]
       }
     ]
@@ -1401,24 +1289,9 @@
   },
   {
     "id": "73",
-    "detected_objects": [
-      "sports ball"
-    ],
-    "object_counts": {
-      "sports ball": 1
-    },
-    "bboxes": [
-      {
-        "class": "sports ball",
-        "confidence": 0.639,
-        "bbox": [
-          26.03,
-          709.02,
-          53.63,
-          736.54
-        ]
-      }
-    ]
+    "detected_objects": [],
+    "object_counts": {},
+    "bboxes": []
   },
   {
     "id": "75",
@@ -1431,22 +1304,22 @@
     "bboxes": [
       {
         "class": "car",
-        "confidence": 0.817,
+        "confidence": 0.805,
         "bbox": [
-          7.49,
-          294.44,
-          207.39,
-          350.38
+          161.82,
+          516.65,
+          1156.4,
+          796.96
         ]
       },
       {
         "class": "car",
-        "confidence": 0.759,
+        "confidence": 0.729,
         "bbox": [
-          160.19,
-          522.61,
-          1166.05,
-          793.89
+          12.75,
+          295.9,
+          206.12,
+          351.21
         ]
       }
     ]
@@ -1454,76 +1327,86 @@
   {
     "id": "76",
     "detected_objects": [
-      "dog",
       "person",
       "sheep",
-      "boat"
+      "boat",
+      "dog"
     ],
     "object_counts": {
       "person": 1,
-      "dog": 1,
+      "sheep": 4,
       "boat": 1,
-      "sheep": 3
+      "dog": 1
     },
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.934,
+        "confidence": 0.924,
         "bbox": [
-          360.59,
-          6.64,
-          680.23,
-          469.41
+          360.51,
+          6.3,
+          679.57,
+          487.1
         ]
       },
       {
-        "class": "dog",
-        "confidence": 0.918,
+        "class": "sheep",
+        "confidence": 0.887,
         "bbox": [
-          561.3,
-          275.91,
-          877.85,
-          706.97
+          664.77,
+          470.62,
+          959.4,
+          717.56
+        ]
+      },
+      {
+        "class": "sheep",
+        "confidence": 0.877,
+        "bbox": [
+          337.44,
+          301.13,
+          606.82,
+          715.85
         ]
       },
       {
         "class": "boat",
-        "confidence": 0.841,
+        "confidence": 0.863,
         "bbox": [
-          15.13,
-          303.72,
-          936.9,
-          715.35
+          33.06,
+          311.14,
+          990.0,
+          716.65
         ]
       },
       {
         "class": "sheep",
-        "confidence": 0.82,
+        "confidence": 0.81,
         "bbox": [
-          659.26,
-          470.34,
-          961.14,
-          718.37
+          219.61,
+          413.22,
+          456.17,
+          714.54
         ]
       },
       {
         "class": "sheep",
-        "confidence": 0.699,
+        "confidence": 0.532,
         "bbox": [
-          219.42,
-          409.61,
-          455.18,
-          715.38
+          559.61,
+          274.73,
+          878.19,
+          709.49
         ]
       },
       {
-        "class": "sheep",
-        "confidence": 0.687,
+        "class": "dog",
+        "confidence": 0.526,
         "bbox": [
-          337.68,
-          300.32,
-          616.15,
-          717.26
+          558.92,
+          274.29,
+          879.86,
+          708.98
         ]
       }
     ]
@@ -1534,57 +1417,47 @@
       "car"
     ],
     "object_counts": {
-      "car": 5
+      "car": 4
     },
     "bboxes": [
       {
         "class": "car",
-        "confidence": 0.918,
+        "confidence": 0.906,
         "bbox": [
-          241.21,
-          391.3,
-          588.08,
-          642.51
+          240.66,
+          391.22,
+          590.63,
+          646.59
         ]
       },
       {
         "class": "car",
-        "confidence": 0.82,
+        "confidence": 0.848,
         "bbox": [
-          592.46,
-          230.64,
-          670.83,
-          268.31
+          592.62,
+          230.72,
+          671.24,
+          266.67
         ]
       },
       {
         "class": "car",
-        "confidence": 0.781,
+        "confidence": 0.568,
         "bbox": [
-          314.71,
-          216.47,
-          359.64,
-          245.99
+          313.68,
+          217.46,
+          359.88,
+          247.93
         ]
       },
       {
         "class": "car",
-        "confidence": 0.713,
+        "confidence": 0.567,
         "bbox": [
-          167.76,
-          197.3,
-          193.56,
-          218.21
-        ]
-      },
-      {
-        "class": "car",
-        "confidence": 0.665,
-        "bbox": [
-          82.34,
-          204.56,
-          161.7,
-          235.17
+          166.98,
+          197.42,
+          194.14,
+          218.72
         ]
       }
     ]
@@ -1600,12 +1473,12 @@
     "bboxes": [
       {
         "class": "tv",
-        "confidence": 0.875,
+        "confidence": 0.868,
         "bbox": [
-          10.0,
-          5.6,
-          1200.0,
-          896.69
+          2.8,
+          3.77,
+          1198.17,
+          897.37
         ]
       }
     ]
@@ -1623,42 +1496,42 @@
     "bboxes": [
       {
         "class": "boat",
-        "confidence": 0.908,
+        "confidence": 0.913,
         "bbox": [
-          249.73,
-          305.39,
-          375.77,
-          366.63
+          172.6,
+          730.11,
+          359.5,
+          797.64
         ]
       },
       {
         "class": "boat",
-        "confidence": 0.855,
+        "confidence": 0.882,
         "bbox": [
-          172.6,
-          730.86,
-          358.67,
-          796.12
+          249.92,
+          304.95,
+          375.19,
+          367.29
         ]
       },
       {
         "class": "person",
-        "confidence": 0.713,
+        "confidence": 0.773,
         "bbox": [
-          284.38,
-          715.95,
-          329.93,
-          762.91
+          284.61,
+          715.92,
+          329.63,
+          758.69
         ]
       },
       {
         "class": "person",
-        "confidence": 0.661,
+        "confidence": 0.709,
         "bbox": [
-          324.81,
-          301.32,
-          352.85,
-          342.63
+          323.04,
+          301.77,
+          352.53,
+          341.78
         ]
       }
     ]
@@ -1666,20 +1539,20 @@
   {
     "id": "80",
     "detected_objects": [
-      "cat"
+      "dog"
     ],
     "object_counts": {
-      "cat": 1
+      "dog": 1
     },
     "bboxes": [
       {
-        "class": "cat",
-        "confidence": 0.773,
+        "class": "dog",
+        "confidence": 0.839,
         "bbox": [
-          334.8,
-          47.15,
-          427.96,
-          194.7
+          333.75,
+          47.78,
+          427.41,
+          194.49
         ]
       }
     ]
@@ -1693,64 +1566,30 @@
   {
     "id": "84",
     "detected_objects": [
-      "boat",
-      "person",
-      "clock"
+      "person"
     ],
     "object_counts": {
-      "person": 2,
-      "boat": 2,
-      "clock": 1
+      "person": 2
     },
     "bboxes": [
       {
         "class": "person",
         "confidence": 0.881,
         "bbox": [
-          47.07,
-          244.33,
-          123.86,
-          421.26
+          47.73,
+          244.19,
+          124.82,
+          421.6
         ]
       },
       {
         "class": "person",
-        "confidence": 0.667,
+        "confidence": 0.698,
         "bbox": [
-          25.5,
-          258.07,
-          53.99,
-          366.34
-        ]
-      },
-      {
-        "class": "boat",
-        "confidence": 0.633,
-        "bbox": [
-          401.02,
-          304.48,
-          518.88,
-          336.49
-        ]
-      },
-      {
-        "class": "boat",
-        "confidence": 0.623,
-        "bbox": [
-          826.41,
-          289.56,
-          899.42,
-          371.23
-        ]
-      },
-      {
-        "class": "clock",
-        "confidence": 0.519,
-        "bbox": [
-          830.13,
-          136.73,
-          853.2,
-          173.08
+          25.63,
+          259.95,
+          54.82,
+          366.94
         ]
       }
     ]
@@ -1772,12 +1611,12 @@
     "bboxes": [
       {
         "class": "bear",
-        "confidence": 0.973,
+        "confidence": 0.955,
         "bbox": [
-          125.35,
-          49.79,
-          451.85,
-          299.15
+          125.16,
+          50.0,
+          451.59,
+          298.81
         ]
       }
     ]
@@ -1793,12 +1632,12 @@
     "bboxes": [
       {
         "class": "dog",
-        "confidence": 0.614,
+        "confidence": 0.849,
         "bbox": [
-          160.69,
-          127.04,
-          595.44,
-          380.3
+          160.19,
+          43.53,
+          596.12,
+          380.71
         ]
       }
     ]
@@ -1814,20 +1653,35 @@
     "bboxes": [
       {
         "class": "person",
-        "confidence": 0.685,
+        "confidence": 0.678,
         "bbox": [
-          854.6,
-          535.42,
-          874.64,
-          588.42
+          854.21,
+          535.0,
+          874.62,
+          588.62
         ]
       }
     ]
   },
   {
     "id": "91",
-    "detected_objects": [],
-    "object_counts": {},
-    "bboxes": []
+    "detected_objects": [
+      "boat"
+    ],
+    "object_counts": {
+      "boat": 1
+    },
+    "bboxes": [
+      {
+        "class": "boat",
+        "confidence": 0.78,
+        "bbox": [
+          6.9,
+          190.59,
+          568.69,
+          355.04
+        ]
+      }
+    ]
   }
 ]

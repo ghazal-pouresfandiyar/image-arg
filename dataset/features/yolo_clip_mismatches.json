@@ -1,0 +1,1019 @@
+[
+  {
+    "image_id": "9",
+    "bbox_index": 0,
+    "yolo_label": "bear",
+    "yolo_confidence": 0.887,
+    "clip_suggestion": "bear",
+    "clip_similarity_to_yolo_label": 0.2565823197364807,
+    "clip_similarity_to_suggestion": 0.2565823197364807
+  },
+  {
+    "image_id": "9",
+    "bbox_index": 1,
+    "yolo_label": "bear",
+    "yolo_confidence": 0.881,
+    "clip_suggestion": "bear",
+    "clip_similarity_to_yolo_label": 0.25894585251808167,
+    "clip_similarity_to_suggestion": 0.25894585251808167
+  },
+  {
+    "image_id": "8",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.936,
+    "clip_suggestion": "horse",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2587318420410156
+  },
+  {
+    "image_id": "8",
+    "bbox_index": 1,
+    "yolo_label": "cow",
+    "yolo_confidence": 0.63,
+    "clip_suggestion": "horse",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.27980974316596985
+  },
+  {
+    "image_id": "11",
+    "bbox_index": 0,
+    "yolo_label": "bear",
+    "yolo_confidence": 0.94,
+    "clip_suggestion": "bear",
+    "clip_similarity_to_yolo_label": 0.24810561537742615,
+    "clip_similarity_to_suggestion": 0.24810561537742615
+  },
+  {
+    "image_id": "12",
+    "bbox_index": 0,
+    "yolo_label": "teddy bear",
+    "yolo_confidence": 0.883,
+    "clip_suggestion": "bear",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.30042701959609985
+  },
+  {
+    "image_id": "14",
+    "bbox_index": 0,
+    "yolo_label": "bear",
+    "yolo_confidence": 0.903,
+    "clip_suggestion": "elephant",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.25736626982688904
+  },
+  {
+    "image_id": "21",
+    "bbox_index": 0,
+    "yolo_label": "broccoli",
+    "yolo_confidence": 0.634,
+    "clip_suggestion": "bush",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2547764778137207
+  },
+  {
+    "image_id": "21",
+    "bbox_index": 1,
+    "yolo_label": "broccoli",
+    "yolo_confidence": 0.514,
+    "clip_suggestion": "bush",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24138665199279785
+  },
+  {
+    "image_id": "23",
+    "bbox_index": 0,
+    "yolo_label": "bear",
+    "yolo_confidence": 0.967,
+    "clip_suggestion": "bear",
+    "clip_similarity_to_yolo_label": 0.25184348225593567,
+    "clip_similarity_to_suggestion": 0.25184348225593567
+  },
+  {
+    "image_id": "24",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.8,
+    "clip_suggestion": "bush",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.22574469447135925
+  },
+  {
+    "image_id": "25",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.739,
+    "clip_suggestion": "parking meter",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.20309536159038544
+  },
+  {
+    "image_id": "25",
+    "bbox_index": 1,
+    "yolo_label": "person",
+    "yolo_confidence": 0.663,
+    "clip_suggestion": "baseball glove",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23827119171619415
+  },
+  {
+    "image_id": "25",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.651,
+    "clip_suggestion": "baseball glove",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23829592764377594
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 0,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.912,
+    "clip_suggestion": "boat",
+    "clip_similarity_to_yolo_label": 0.2555224597454071,
+    "clip_similarity_to_suggestion": 0.2555224597454071
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 1,
+    "yolo_label": "person",
+    "yolo_confidence": 0.85,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.24251803755760193,
+    "clip_similarity_to_suggestion": 0.24251803755760193
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.806,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.22876296937465668,
+    "clip_similarity_to_suggestion": 0.22876296937465668
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 3,
+    "yolo_label": "person",
+    "yolo_confidence": 0.802,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.20810577273368835,
+    "clip_similarity_to_suggestion": 0.20810577273368835
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 4,
+    "yolo_label": "person",
+    "yolo_confidence": 0.788,
+    "clip_suggestion": "surfboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.22192683815956116
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 5,
+    "yolo_label": "person",
+    "yolo_confidence": 0.782,
+    "clip_suggestion": "surfboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23018068075180054
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 6,
+    "yolo_label": "person",
+    "yolo_confidence": 0.771,
+    "clip_suggestion": "parking meter",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23262178897857666
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 7,
+    "yolo_label": "person",
+    "yolo_confidence": 0.755,
+    "clip_suggestion": "backpack",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2421521246433258
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 8,
+    "yolo_label": "person",
+    "yolo_confidence": 0.745,
+    "clip_suggestion": "backpack",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23628677427768707
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 9,
+    "yolo_label": "person",
+    "yolo_confidence": 0.739,
+    "clip_suggestion": "surfboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.22535820305347443
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 10,
+    "yolo_label": "person",
+    "yolo_confidence": 0.713,
+    "clip_suggestion": "baseball glove",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23177042603492737
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 11,
+    "yolo_label": "person",
+    "yolo_confidence": 0.687,
+    "clip_suggestion": "tie",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24983030557632446
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 12,
+    "yolo_label": "person",
+    "yolo_confidence": 0.684,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.2348380982875824,
+    "clip_similarity_to_suggestion": 0.2348380982875824
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 13,
+    "yolo_label": "person",
+    "yolo_confidence": 0.68,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.23753643035888672,
+    "clip_similarity_to_suggestion": 0.23753643035888672
+  },
+  {
+    "image_id": "30",
+    "bbox_index": 14,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.56,
+    "clip_suggestion": "baseball bat",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2677696943283081
+  },
+  {
+    "image_id": "36",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.891,
+    "clip_suggestion": "backpack",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.25410008430480957
+  },
+  {
+    "image_id": "36",
+    "bbox_index": 1,
+    "yolo_label": "person",
+    "yolo_confidence": 0.824,
+    "clip_suggestion": "giraffe",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24451608955860138
+  },
+  {
+    "image_id": "36",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.817,
+    "clip_suggestion": "skateboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24873191118240356
+  },
+  {
+    "image_id": "36",
+    "bbox_index": 3,
+    "yolo_label": "person",
+    "yolo_confidence": 0.811,
+    "clip_suggestion": "snowboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.253058522939682
+  },
+  {
+    "image_id": "36",
+    "bbox_index": 4,
+    "yolo_label": "person",
+    "yolo_confidence": 0.792,
+    "clip_suggestion": "snowboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.264023095369339
+  },
+  {
+    "image_id": "41",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.794,
+    "clip_suggestion": "bus",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2439725548028946
+  },
+  {
+    "image_id": "41",
+    "bbox_index": 1,
+    "yolo_label": "person",
+    "yolo_confidence": 0.662,
+    "clip_suggestion": "bush",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.233397975564003
+  },
+  {
+    "image_id": "41",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.52,
+    "clip_suggestion": "bus",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2622692883014679
+  },
+  {
+    "image_id": "43",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.895,
+    "clip_suggestion": "orange",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2116098254919052
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 0,
+    "yolo_label": "cell phone",
+    "yolo_confidence": 0.932,
+    "clip_suggestion": "parking meter",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2444562017917633
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 1,
+    "yolo_label": "person",
+    "yolo_confidence": 0.926,
+    "clip_suggestion": "parking meter",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2620018720626831
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.909,
+    "clip_suggestion": "parking meter",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23686739802360535
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 3,
+    "yolo_label": "car",
+    "yolo_confidence": 0.885,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.23528912663459778,
+    "clip_similarity_to_suggestion": 0.23528912663459778
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 4,
+    "yolo_label": "car",
+    "yolo_confidence": 0.864,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.2289382517337799,
+    "clip_similarity_to_suggestion": 0.2289382517337799
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 5,
+    "yolo_label": "remote",
+    "yolo_confidence": 0.852,
+    "clip_suggestion": "parking meter",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2357056736946106
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 6,
+    "yolo_label": "car",
+    "yolo_confidence": 0.761,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.2178010493516922,
+    "clip_similarity_to_suggestion": 0.2178010493516922
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 7,
+    "yolo_label": "car",
+    "yolo_confidence": 0.642,
+    "clip_suggestion": "parking meter",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.21308642625808716
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 8,
+    "yolo_label": "car",
+    "yolo_confidence": 0.577,
+    "clip_suggestion": "truck",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2556906044483185
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 9,
+    "yolo_label": "car",
+    "yolo_confidence": 0.571,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.2351377010345459,
+    "clip_similarity_to_suggestion": 0.2351377010345459
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 10,
+    "yolo_label": "car",
+    "yolo_confidence": 0.556,
+    "clip_suggestion": "truck",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23524491488933563
+  },
+  {
+    "image_id": "45",
+    "bbox_index": 11,
+    "yolo_label": "car",
+    "yolo_confidence": 0.545,
+    "clip_suggestion": "parking meter",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2422189712524414
+  },
+  {
+    "image_id": "48",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.91,
+    "clip_suggestion": "motorcycle",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.26308906078338623
+  },
+  {
+    "image_id": "48",
+    "bbox_index": 1,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.836,
+    "clip_suggestion": "boat",
+    "clip_similarity_to_yolo_label": 0.2335699498653412,
+    "clip_similarity_to_suggestion": 0.2335699498653412
+  },
+  {
+    "image_id": "48",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.821,
+    "clip_suggestion": "couch",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23600727319717407
+  },
+  {
+    "image_id": "48",
+    "bbox_index": 3,
+    "yolo_label": "person",
+    "yolo_confidence": 0.541,
+    "clip_suggestion": "backpack",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24307039380073547
+  },
+  {
+    "image_id": "49",
+    "bbox_index": 0,
+    "yolo_label": "car",
+    "yolo_confidence": 0.87,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.26868295669555664,
+    "clip_similarity_to_suggestion": 0.26868295669555664
+  },
+  {
+    "image_id": "49",
+    "bbox_index": 1,
+    "yolo_label": "car",
+    "yolo_confidence": 0.798,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.24164563417434692,
+    "clip_similarity_to_suggestion": 0.24164563417434692
+  },
+  {
+    "image_id": "49",
+    "bbox_index": 2,
+    "yolo_label": "truck",
+    "yolo_confidence": 0.651,
+    "clip_suggestion": "truck",
+    "clip_similarity_to_yolo_label": 0.27265676856040955,
+    "clip_similarity_to_suggestion": 0.27265676856040955
+  },
+  {
+    "image_id": "49",
+    "bbox_index": 3,
+    "yolo_label": "truck",
+    "yolo_confidence": 0.543,
+    "clip_suggestion": "truck",
+    "clip_similarity_to_yolo_label": 0.25731703639030457,
+    "clip_similarity_to_suggestion": 0.25731703639030457
+  },
+  {
+    "image_id": "49",
+    "bbox_index": 4,
+    "yolo_label": "car",
+    "yolo_confidence": 0.53,
+    "clip_suggestion": "truck",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2669889032840729
+  },
+  {
+    "image_id": "51",
+    "bbox_index": 0,
+    "yolo_label": "bird",
+    "yolo_confidence": 0.626,
+    "clip_suggestion": "dog",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2563343346118927
+  },
+  {
+    "image_id": "52",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.928,
+    "clip_suggestion": "fire hydrant",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2724829316139221
+  },
+  {
+    "image_id": "52",
+    "bbox_index": 1,
+    "yolo_label": "car",
+    "yolo_confidence": 0.885,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.27186062932014465,
+    "clip_similarity_to_suggestion": 0.27186062932014465
+  },
+  {
+    "image_id": "58",
+    "bbox_index": 0,
+    "yolo_label": "car",
+    "yolo_confidence": 0.953,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.2666621208190918,
+    "clip_similarity_to_suggestion": 0.2666621208190918
+  },
+  {
+    "image_id": "58",
+    "bbox_index": 1,
+    "yolo_label": "car",
+    "yolo_confidence": 0.895,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.23527546226978302,
+    "clip_similarity_to_suggestion": 0.23527546226978302
+  },
+  {
+    "image_id": "58",
+    "bbox_index": 2,
+    "yolo_label": "car",
+    "yolo_confidence": 0.774,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.24087080359458923,
+    "clip_similarity_to_suggestion": 0.24087080359458923
+  },
+  {
+    "image_id": "58",
+    "bbox_index": 3,
+    "yolo_label": "car",
+    "yolo_confidence": 0.706,
+    "clip_suggestion": "truck",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23878157138824463
+  },
+  {
+    "image_id": "58",
+    "bbox_index": 4,
+    "yolo_label": "car",
+    "yolo_confidence": 0.647,
+    "clip_suggestion": "truck",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24680235981941223
+  },
+  {
+    "image_id": "58",
+    "bbox_index": 5,
+    "yolo_label": "car",
+    "yolo_confidence": 0.635,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.21501471102237701,
+    "clip_similarity_to_suggestion": 0.21501471102237701
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.844,
+    "clip_suggestion": "tie",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24168597161769867
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 1,
+    "yolo_label": "person",
+    "yolo_confidence": 0.84,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.2352779358625412,
+    "clip_similarity_to_suggestion": 0.2352779358625412
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.84,
+    "clip_suggestion": "orange",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24900510907173157
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 3,
+    "yolo_label": "person",
+    "yolo_confidence": 0.82,
+    "clip_suggestion": "rock",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.21745654940605164
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 4,
+    "yolo_label": "person",
+    "yolo_confidence": 0.722,
+    "clip_suggestion": "backpack",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2339591681957245
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 5,
+    "yolo_label": "person",
+    "yolo_confidence": 0.693,
+    "clip_suggestion": "backpack",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23889221251010895
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 6,
+    "yolo_label": "person",
+    "yolo_confidence": 0.625,
+    "clip_suggestion": "surfboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23761582374572754
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 7,
+    "yolo_label": "person",
+    "yolo_confidence": 0.612,
+    "clip_suggestion": "snowboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2527099549770355
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 8,
+    "yolo_label": "person",
+    "yolo_confidence": 0.599,
+    "clip_suggestion": "baseball glove",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23937052488327026
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 9,
+    "yolo_label": "suitcase",
+    "yolo_confidence": 0.583,
+    "clip_suggestion": "orange",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2334921956062317
+  },
+  {
+    "image_id": "64",
+    "bbox_index": 10,
+    "yolo_label": "train",
+    "yolo_confidence": 0.564,
+    "clip_suggestion": "truck",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.22870182991027832
+  },
+  {
+    "image_id": "66",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.877,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.2375643402338028,
+    "clip_similarity_to_suggestion": 0.2375643402338028
+  },
+  {
+    "image_id": "66",
+    "bbox_index": 1,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.764,
+    "clip_suggestion": "carrot",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.250447541475296
+  },
+  {
+    "image_id": "66",
+    "bbox_index": 2,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.673,
+    "clip_suggestion": "knife",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.25275346636772156
+  },
+  {
+    "image_id": "67",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.908,
+    "clip_suggestion": "cake",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.22571082413196564
+  },
+  {
+    "image_id": "67",
+    "bbox_index": 1,
+    "yolo_label": "bird",
+    "yolo_confidence": 0.751,
+    "clip_suggestion": "bird",
+    "clip_similarity_to_yolo_label": 0.2781459391117096,
+    "clip_similarity_to_suggestion": 0.2781459391117096
+  },
+  {
+    "image_id": "70",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.828,
+    "clip_suggestion": "baseball glove",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23969286680221558
+  },
+  {
+    "image_id": "71",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.797,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.26887500286102295,
+    "clip_similarity_to_suggestion": 0.26887500286102295
+  },
+  {
+    "image_id": "71",
+    "bbox_index": 1,
+    "yolo_label": "person",
+    "yolo_confidence": 0.791,
+    "clip_suggestion": "baseball glove",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24370595812797546
+  },
+  {
+    "image_id": "71",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.777,
+    "clip_suggestion": "bear",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24323433637619019
+  },
+  {
+    "image_id": "75",
+    "bbox_index": 0,
+    "yolo_label": "car",
+    "yolo_confidence": 0.805,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.2524464428424835,
+    "clip_similarity_to_suggestion": 0.2524464428424835
+  },
+  {
+    "image_id": "75",
+    "bbox_index": 1,
+    "yolo_label": "car",
+    "yolo_confidence": 0.729,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.25627291202545166,
+    "clip_similarity_to_suggestion": 0.25627291202545166
+  },
+  {
+    "image_id": "76",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.924,
+    "clip_suggestion": "boat",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2120475172996521
+  },
+  {
+    "image_id": "76",
+    "bbox_index": 1,
+    "yolo_label": "sheep",
+    "yolo_confidence": 0.887,
+    "clip_suggestion": "sheep",
+    "clip_similarity_to_yolo_label": 0.23804980516433716,
+    "clip_similarity_to_suggestion": 0.23804980516433716
+  },
+  {
+    "image_id": "76",
+    "bbox_index": 2,
+    "yolo_label": "sheep",
+    "yolo_confidence": 0.877,
+    "clip_suggestion": "sheep",
+    "clip_similarity_to_yolo_label": 0.23502615094184875,
+    "clip_similarity_to_suggestion": 0.23502615094184875
+  },
+  {
+    "image_id": "76",
+    "bbox_index": 3,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.863,
+    "clip_suggestion": "sheep",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23308566212654114
+  },
+  {
+    "image_id": "76",
+    "bbox_index": 4,
+    "yolo_label": "sheep",
+    "yolo_confidence": 0.81,
+    "clip_suggestion": "sheep",
+    "clip_similarity_to_yolo_label": 0.2342739701271057,
+    "clip_similarity_to_suggestion": 0.2342739701271057
+  },
+  {
+    "image_id": "76",
+    "bbox_index": 5,
+    "yolo_label": "sheep",
+    "yolo_confidence": 0.532,
+    "clip_suggestion": "giraffe",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2186749428510666
+  },
+  {
+    "image_id": "76",
+    "bbox_index": 6,
+    "yolo_label": "dog",
+    "yolo_confidence": 0.526,
+    "clip_suggestion": "sheep",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.21577118337154388
+  },
+  {
+    "image_id": "77",
+    "bbox_index": 0,
+    "yolo_label": "car",
+    "yolo_confidence": 0.906,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.2530669867992401,
+    "clip_similarity_to_suggestion": 0.2530669867992401
+  },
+  {
+    "image_id": "77",
+    "bbox_index": 1,
+    "yolo_label": "car",
+    "yolo_confidence": 0.848,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.22415418922901154,
+    "clip_similarity_to_suggestion": 0.22415418922901154
+  },
+  {
+    "image_id": "77",
+    "bbox_index": 2,
+    "yolo_label": "car",
+    "yolo_confidence": 0.568,
+    "clip_suggestion": "car",
+    "clip_similarity_to_yolo_label": 0.2341293841600418,
+    "clip_similarity_to_suggestion": 0.2341293841600418
+  },
+  {
+    "image_id": "77",
+    "bbox_index": 3,
+    "yolo_label": "car",
+    "yolo_confidence": 0.567,
+    "clip_suggestion": "keyboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2337871640920639
+  },
+  {
+    "image_id": "78",
+    "bbox_index": 0,
+    "yolo_label": "tv",
+    "yolo_confidence": 0.868,
+    "clip_suggestion": "tv",
+    "clip_similarity_to_yolo_label": 0.21800120174884796,
+    "clip_similarity_to_suggestion": 0.21800120174884796
+  },
+  {
+    "image_id": "79",
+    "bbox_index": 0,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.913,
+    "clip_suggestion": "snowboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23109592497348785
+  },
+  {
+    "image_id": "79",
+    "bbox_index": 1,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.882,
+    "clip_suggestion": "surfboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.25239282846450806
+  },
+  {
+    "image_id": "79",
+    "bbox_index": 2,
+    "yolo_label": "person",
+    "yolo_confidence": 0.773,
+    "clip_suggestion": "snowboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.24948298931121826
+  },
+  {
+    "image_id": "79",
+    "bbox_index": 3,
+    "yolo_label": "person",
+    "yolo_confidence": 0.709,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.2371481955051422,
+    "clip_similarity_to_suggestion": 0.2371481955051422
+  },
+  {
+    "image_id": "80",
+    "bbox_index": 0,
+    "yolo_label": "dog",
+    "yolo_confidence": 0.839,
+    "clip_suggestion": "dog",
+    "clip_similarity_to_yolo_label": 0.22350305318832397,
+    "clip_similarity_to_suggestion": 0.22350305318832397
+  },
+  {
+    "image_id": "84",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.881,
+    "clip_suggestion": "person",
+    "clip_similarity_to_yolo_label": 0.2555215358734131,
+    "clip_similarity_to_suggestion": 0.2555215358734131
+  },
+  {
+    "image_id": "84",
+    "bbox_index": 1,
+    "yolo_label": "person",
+    "yolo_confidence": 0.698,
+    "clip_suggestion": "skateboard",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2338487058877945
+  },
+  {
+    "image_id": "86",
+    "bbox_index": 0,
+    "yolo_label": "bear",
+    "yolo_confidence": 0.955,
+    "clip_suggestion": "bear",
+    "clip_similarity_to_yolo_label": 0.26213541626930237,
+    "clip_similarity_to_suggestion": 0.26213541626930237
+  },
+  {
+    "image_id": "89",
+    "bbox_index": 0,
+    "yolo_label": "dog",
+    "yolo_confidence": 0.849,
+    "clip_suggestion": "insect",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.23284271359443665
+  },
+  {
+    "image_id": "90",
+    "bbox_index": 0,
+    "yolo_label": "person",
+    "yolo_confidence": 0.678,
+    "clip_suggestion": "baseball glove",
+    "clip_similarity_to_yolo_label": 0.0,
+    "clip_similarity_to_suggestion": 0.2507350444793701
+  },
+  {
+    "image_id": "91",
+    "bbox_index": 0,
+    "yolo_label": "boat",
+    "yolo_confidence": 0.78,
+    "clip_suggestion": "boat",
+    "clip_similarity_to_yolo_label": 0.23270806670188904,
+    "clip_similarity_to_suggestion": 0.23270806670188904
+  }
+]

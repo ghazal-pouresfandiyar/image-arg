@@ -265,7 +265,7 @@ def render_input(field, value):
 						rows_html.append(
 							f"""
 							<div class="sentence-row" data-item-row>
-								<input type="text" class="sentence-input" value="{html.escape(item)}" placeholder="Add a sentence">
+								<textarea class="sentence-input" placeholder="Add a sentence">{html.escape(item)}</textarea>
 								<button type="button" class="delete-item" data-remove-item aria-label="Delete sentence">Delete</button>
 							</div>
 							"""
@@ -357,13 +357,24 @@ def render_page(index, message="", empty_premises_only=False):
 						fields_html.append(render_input(field, row.get(field)))
 
 		for field in STORE.editable_fields:
-				if field not in DISPLAY_ORDER:
-						fields_html.append(render_input(field, row.get(field)))
+			# hide blip2_caption from the right-hand sidebar (we render it above the image)
+			if field == "blip2_caption":
+				continue
+			if field not in DISPLAY_ORDER:
+				fields_html.append(render_input(field, row.get(field)))
 
 		if image_path:
-				image_html = f'<img src="/image/{quote(current_id)}" alt="Image {html.escape(current_id)}">'
+			image_html = f'<img src="/image/{quote(current_id)}" alt="Image {html.escape(current_id)}">'
 		else:
 				image_html = '<div class="missing">Image not found for this id.</div>'
+
+		# BLIP-2 generated caption (if present in CSV column `blip2_caption`)
+		blip_caption = normalize_value(row.get("blip2_caption")).strip()
+		if blip_caption:
+			# display with required style above image: BLIP2 generated caption :"caption"
+			caption_html = f'<div class="blip2-caption"><strong>BLIP2 generated caption :</strong> "{html.escape(blip_caption)}"</div>'
+		else:
+			caption_html = ''
 
 		prev_disabled = "disabled" if position <= 1 else ""
 		next_disabled = "disabled" if position >= total else ""
@@ -412,7 +423,7 @@ def render_page(index, message="", empty_premises_only=False):
 						padding: 6px 8px;
 						font: inherit;
 					}}
-					.jump-form button {{
+					.jump-form button {{f
 						border: 0;
 						border-radius: 8px;
 						padding: 6px 10px;
@@ -428,7 +439,9 @@ def render_page(index, message="", empty_premises_only=False):
 						min-height: calc(100vh - 58px);
 					}}
 					.viewer {{
-						flex: 1 1 auto;
+						/* make image/viewer 50% of horizontal space */
+						flex: 0 0 50%;
+						max-width: 50%;
 						padding: 20px;
 						display: flex;
 						flex-direction: column;
@@ -438,7 +451,7 @@ def render_page(index, message="", empty_premises_only=False):
 					}}
 					.canvas {{
 						width: 100%;
-						max-width: 1100px;
+						max-width: 100%;
 						min-height: 70vh;
 						display: flex;
 						align-items: center;
@@ -474,8 +487,17 @@ def render_page(index, message="", empty_premises_only=False):
 						color: var(--accent);
 						text-decoration: underline;
 					}}
+					.blip2-caption {{
+						width: 100%;
+						max-width: 1100px;
+						text-align: center;
+						font-size: 18px;
+						margin-bottom: 8px;
+					}}
 					.sidebar {{
-						width: 420px;
+						/* make sidebar 50% of horizontal space */
+						flex: 0 0 50%;
+						width: 50%;
 						background: var(--panel);
 						border-left: 1px solid var(--border);
 						padding: 12px 14px 14px;
@@ -506,8 +528,8 @@ def render_page(index, message="", empty_premises_only=False):
 					}}
 					.list-editor {{ display: flex; flex-direction: column; gap: 10px; }}
 					.sentence-list {{ display: flex; flex-direction: column; gap: 8px; }}
-					.sentence-row {{ display: flex; gap: 8px; align-items: center; }}
-					.sentence-row .sentence-input {{ flex: 1 1 auto; }}
+					.sentence-row {{ display: flex; gap: 8px; align-items: flex-start; }}
+					.sentence-row .sentence-input {{ flex: 1 1 auto; min-height: 50px; padding: 10px 12px; line-height: 1.5; resize: vertical; max-height: 200px; font-family: inherit; }}
 					.delete-item {{
 						border: 1px solid var(--border);
 						border-radius: 10px;
@@ -516,9 +538,11 @@ def render_page(index, message="", empty_premises_only=False):
 						cursor: pointer;
 						background: #fff;
 						color: #7f1d1d;
+						margin-top: 0;
+						height: fit-content;
 					}}
 					.list-buttons {{ margin-top: 0; }}
-					.field textarea {{ resize: vertical; min-height: 110px; }}
+					.field textarea {{ resize: vertical; min-height: 180px; line-height: 1.5; }}
 					.readonly {{ background: #f9fafb; color: #4b5563; }}
 					.buttons {{ display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }}
 					.buttons button {{
@@ -575,6 +599,7 @@ def render_page(index, message="", empty_premises_only=False):
 				<div class="wrap">
 					<div class="viewer">
 						{message_html}
+						{caption_html}
 						<div class="canvas">{image_html}</div>
 						{image_url_html}
 					</div>
@@ -605,11 +630,10 @@ def render_page(index, message="", empty_premises_only=False):
 								row.className = 'sentence-row';
 								row.setAttribute('data-item-row', '');
 
-								const input = document.createElement('input');
-								input.type = 'text';
-								input.className = 'sentence-input';
-								input.placeholder = 'Add a sentence';
-								input.value = value;
+								const textarea = document.createElement('textarea');
+								textarea.className = 'sentence-input';
+								textarea.placeholder = 'Add a sentence';
+								textarea.textContent = value;
 
 								const removeButton = document.createElement('button');
 								removeButton.type = 'button';
@@ -618,7 +642,7 @@ def render_page(index, message="", empty_premises_only=False):
 								removeButton.setAttribute('aria-label', 'Delete sentence');
 								removeButton.textContent = 'Delete';
 
-								row.append(input, removeButton);
+								row.append(textarea, removeButton);
 								return row;
 							}}
 

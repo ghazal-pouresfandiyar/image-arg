@@ -1,0 +1,4358 @@
+[
+  {
+    "image_id": "9",
+    "detections": [
+      {
+        "bbox": [
+          324.89,
+          94.11,
+          419.23,
+          209.1
+        ],
+        "yolo_label": "bear",
+        "yolo_confidence": 0.887,
+        "bbox_clip_top_label": "bear",
+        "bbox_clip_top_score": 0.2565823197364807,
+        "bbox_clip_second_score": 0.23503074049949646,
+        "bbox_clip_margin": 0.021551579236984253,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bear",
+            "score": 0.23011890053749084
+          },
+          {
+            "label": "surfboard",
+            "score": 0.228010356426239
+          },
+          {
+            "label": "snowboard",
+            "score": 0.219501331448555
+          },
+          {
+            "label": "skateboard",
+            "score": 0.21319696307182312
+          },
+          {
+            "label": "frisbee",
+            "score": 0.21035230159759521
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          266.14,
+          122.61,
+          334.96,
+          195.53
+        ],
+        "yolo_label": "bear",
+        "yolo_confidence": 0.881,
+        "bbox_clip_top_label": "bear",
+        "bbox_clip_top_score": 0.25894585251808167,
+        "bbox_clip_second_score": 0.23901870846748352,
+        "bbox_clip_margin": 0.019927144050598145,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bear",
+            "score": 0.23011890053749084
+          },
+          {
+            "label": "surfboard",
+            "score": 0.228010356426239
+          },
+          {
+            "label": "snowboard",
+            "score": 0.219501331448555
+          },
+          {
+            "label": "skateboard",
+            "score": 0.21319696307182312
+          },
+          {
+            "label": "frisbee",
+            "score": 0.21035230159759521
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "8",
+    "detections": [
+      {
+        "bbox": [
+          212.07,
+          275.76,
+          621.06,
+          1035.46
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.936,
+        "bbox_clip_top_label": "horse",
+        "bbox_clip_top_score": 0.2587318420410156,
+        "bbox_clip_second_score": 0.24812382459640503,
+        "bbox_clip_margin": 0.010608017444610596,
+        "full_image_clip_top_labels": [
+          {
+            "label": "cow",
+            "score": 0.23164553940296173
+          },
+          {
+            "label": "horse",
+            "score": 0.2123185396194458
+          },
+          {
+            "label": "sheep",
+            "score": 0.210377037525177
+          },
+          {
+            "label": "hair drier",
+            "score": 0.20993006229400635
+          },
+          {
+            "label": "zebra",
+            "score": 0.20240497589111328
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          127.17,
+          502.73,
+          347.72,
+          967.39
+        ],
+        "yolo_label": "cow",
+        "yolo_confidence": 0.63,
+        "bbox_clip_top_label": "horse",
+        "bbox_clip_top_score": 0.27980974316596985,
+        "bbox_clip_second_score": 0.2658489942550659,
+        "bbox_clip_margin": 0.01396074891090393,
+        "full_image_clip_top_labels": [
+          {
+            "label": "cow",
+            "score": 0.23164553940296173
+          },
+          {
+            "label": "horse",
+            "score": 0.2123185396194458
+          },
+          {
+            "label": "sheep",
+            "score": 0.210377037525177
+          },
+          {
+            "label": "hair drier",
+            "score": 0.20993006229400635
+          },
+          {
+            "label": "zebra",
+            "score": 0.20240497589111328
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "11",
+    "detections": [
+      {
+        "bbox": [
+          249.7,
+          165.9,
+          313.96,
+          242.45
+        ],
+        "yolo_label": "bear",
+        "yolo_confidence": 0.94,
+        "bbox_clip_top_label": "bear",
+        "bbox_clip_top_score": 0.24810561537742615,
+        "bbox_clip_second_score": 0.2104862928390503,
+        "bbox_clip_margin": 0.037619322538375854,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bear",
+            "score": 0.23621997237205505
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.21669185161590576
+          },
+          {
+            "label": "elephant",
+            "score": 0.2152390331029892
+          },
+          {
+            "label": "teddy bear",
+            "score": 0.21027830243110657
+          },
+          {
+            "label": "remote",
+            "score": 0.20676811039447784
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "12",
+    "detections": [
+      {
+        "bbox": [
+          140.75,
+          63.18,
+          295.91,
+          351.95
+        ],
+        "yolo_label": "teddy bear",
+        "yolo_confidence": 0.883,
+        "bbox_clip_top_label": "bear",
+        "bbox_clip_top_score": 0.30042701959609985,
+        "bbox_clip_second_score": 0.2646605670452118,
+        "bbox_clip_margin": 0.03576645255088806,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bear",
+            "score": 0.23923665285110474
+          },
+          {
+            "label": "snowboard",
+            "score": 0.221278116106987
+          },
+          {
+            "label": "boat",
+            "score": 0.2209499627351761
+          },
+          {
+            "label": "surfboard",
+            "score": 0.21051724255084991
+          },
+          {
+            "label": "dog",
+            "score": 0.20870980620384216
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "14",
+    "detections": [
+      {
+        "bbox": [
+          301.46,
+          207.86,
+          370.07,
+          246.93
+        ],
+        "yolo_label": "bear",
+        "yolo_confidence": 0.903,
+        "bbox_clip_top_label": "elephant",
+        "bbox_clip_top_score": 0.25736626982688904,
+        "bbox_clip_second_score": 0.255139023065567,
+        "bbox_clip_margin": 0.0022272467613220215,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bear",
+            "score": 0.24939511716365814
+          },
+          {
+            "label": "dog",
+            "score": 0.23844653367996216
+          },
+          {
+            "label": "elephant",
+            "score": 0.2312580645084381
+          },
+          {
+            "label": "teddy bear",
+            "score": 0.22865737974643707
+          },
+          {
+            "label": "hot dog",
+            "score": 0.2198043167591095
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "21",
+    "detections": [
+      {
+        "bbox": [
+          903.63,
+          350.24,
+          1017.76,
+          471.74
+        ],
+        "yolo_label": "broccoli",
+        "yolo_confidence": 0.634,
+        "bbox_clip_top_label": "bush",
+        "bbox_clip_top_score": 0.2547764778137207,
+        "bbox_clip_second_score": 0.2486906796693802,
+        "bbox_clip_margin": 0.006085798144340515,
+        "full_image_clip_top_labels": [
+          {
+            "label": "broccoli",
+            "score": 0.23348048329353333
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.21863791346549988
+          },
+          {
+            "label": "potted plant",
+            "score": 0.2180115133523941
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.21646547317504883
+          },
+          {
+            "label": "sink",
+            "score": 0.21487680077552795
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          886.44,
+          252.88,
+          980.18,
+          344.13
+        ],
+        "yolo_label": "broccoli",
+        "yolo_confidence": 0.514,
+        "bbox_clip_top_label": "bush",
+        "bbox_clip_top_score": 0.24138665199279785,
+        "bbox_clip_second_score": 0.23230604827404022,
+        "bbox_clip_margin": 0.00908060371875763,
+        "full_image_clip_top_labels": [
+          {
+            "label": "broccoli",
+            "score": 0.23348048329353333
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.21863791346549988
+          },
+          {
+            "label": "potted plant",
+            "score": 0.2180115133523941
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.21646547317504883
+          },
+          {
+            "label": "sink",
+            "score": 0.21487680077552795
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "23",
+    "detections": [
+      {
+        "bbox": [
+          312.51,
+          884.91,
+          772.49,
+          1152.48
+        ],
+        "yolo_label": "bear",
+        "yolo_confidence": 0.967,
+        "bbox_clip_top_label": "bear",
+        "bbox_clip_top_score": 0.25184348225593567,
+        "bbox_clip_second_score": 0.21663182973861694,
+        "bbox_clip_margin": 0.035211652517318726,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bear",
+            "score": 0.2320999801158905
+          },
+          {
+            "label": "teddy bear",
+            "score": 0.19240519404411316
+          },
+          {
+            "label": "elephant",
+            "score": 0.19102632999420166
+          },
+          {
+            "label": "",
+            "score": 0.19045479595661163
+          },
+          {
+            "label": "sheep",
+            "score": 0.18820177018642426
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "24",
+    "detections": [
+      {
+        "bbox": [
+          382.7,
+          299.53,
+          898.89,
+          1197.66
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.8,
+        "bbox_clip_top_label": "bush",
+        "bbox_clip_top_score": 0.22574469447135925,
+        "bbox_clip_second_score": 0.21785558760166168,
+        "bbox_clip_margin": 0.00788910686969757,
+        "full_image_clip_top_labels": [
+          {
+            "label": "refrigerator",
+            "score": 0.2256881296634674
+          },
+          {
+            "label": "parking meter",
+            "score": 0.20974063873291016
+          },
+          {
+            "label": "",
+            "score": 0.20812714099884033
+          },
+          {
+            "label": "hot dog",
+            "score": 0.20804177224636078
+          },
+          {
+            "label": "clock",
+            "score": 0.20298485457897186
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "25",
+    "detections": [
+      {
+        "bbox": [
+          282.07,
+          225.3,
+          403.51,
+          503.37
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.739,
+        "bbox_clip_top_label": "parking meter",
+        "bbox_clip_top_score": 0.20309536159038544,
+        "bbox_clip_second_score": 0.20185744762420654,
+        "bbox_clip_margin": 0.001237913966178894,
+        "full_image_clip_top_labels": [
+          {
+            "label": "parking meter",
+            "score": 0.19584119319915771
+          },
+          {
+            "label": "boat",
+            "score": 0.194715216755867
+          },
+          {
+            "label": "",
+            "score": 0.1910472810268402
+          },
+          {
+            "label": "building",
+            "score": 0.18754063546657562
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.18710817396640778
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          1.38,
+          312.4,
+          15.84,
+          349.46
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.663,
+        "bbox_clip_top_label": "baseball glove",
+        "bbox_clip_top_score": 0.23827119171619415,
+        "bbox_clip_second_score": 0.22974000871181488,
+        "bbox_clip_margin": 0.008531183004379272,
+        "full_image_clip_top_labels": [
+          {
+            "label": "parking meter",
+            "score": 0.19584119319915771
+          },
+          {
+            "label": "boat",
+            "score": 0.194715216755867
+          },
+          {
+            "label": "",
+            "score": 0.1910472810268402
+          },
+          {
+            "label": "building",
+            "score": 0.18754063546657562
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.18710817396640778
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          159.52,
+          309.66,
+          174.23,
+          347.79
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.651,
+        "bbox_clip_top_label": "baseball glove",
+        "bbox_clip_top_score": 0.23829592764377594,
+        "bbox_clip_second_score": 0.23158349096775055,
+        "bbox_clip_margin": 0.006712436676025391,
+        "full_image_clip_top_labels": [
+          {
+            "label": "parking meter",
+            "score": 0.19584119319915771
+          },
+          {
+            "label": "boat",
+            "score": 0.194715216755867
+          },
+          {
+            "label": "",
+            "score": 0.1910472810268402
+          },
+          {
+            "label": "building",
+            "score": 0.18754063546657562
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.18710817396640778
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "30",
+    "detections": [
+      {
+        "bbox": [
+          126.46,
+          241.2,
+          669.65,
+          432.85
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.912,
+        "bbox_clip_top_label": "boat",
+        "bbox_clip_top_score": 0.2555224597454071,
+        "bbox_clip_second_score": 0.24043907225131989,
+        "bbox_clip_margin": 0.01508338749408722,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          143.1,
+          194.5,
+          169.52,
+          267.65
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.85,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.24251803755760193,
+        "bbox_clip_second_score": 0.24110537767410278,
+        "bbox_clip_margin": 0.0014126598834991455,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          166.25,
+          196.53,
+          193.46,
+          279.45
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.806,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.22876296937465668,
+        "bbox_clip_second_score": 0.22715209424495697,
+        "bbox_clip_margin": 0.001610875129699707,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          226.18,
+          233.68,
+          253.87,
+          310.48
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.802,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.20810577273368835,
+        "bbox_clip_second_score": 0.20006372034549713,
+        "bbox_clip_margin": 0.008042052388191223,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          425.7,
+          261.86,
+          451.65,
+          329.83
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.788,
+        "bbox_clip_top_label": "surfboard",
+        "bbox_clip_top_score": 0.22192683815956116,
+        "bbox_clip_second_score": 0.2198869287967682,
+        "bbox_clip_margin": 0.0020399093627929688,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          43.54,
+          192.09,
+          67.41,
+          245.97
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.782,
+        "bbox_clip_top_label": "surfboard",
+        "bbox_clip_top_score": 0.23018068075180054,
+        "bbox_clip_second_score": 0.22401201725006104,
+        "bbox_clip_margin": 0.006168663501739502,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          403.42,
+          273.97,
+          430.36,
+          344.98
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.771,
+        "bbox_clip_top_label": "parking meter",
+        "bbox_clip_top_score": 0.23262178897857666,
+        "bbox_clip_second_score": 0.22956104576587677,
+        "bbox_clip_margin": 0.00306074321269989,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          339.39,
+          281.33,
+          372.82,
+          337.45
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.755,
+        "bbox_clip_top_label": "backpack",
+        "bbox_clip_top_score": 0.2421521246433258,
+        "bbox_clip_second_score": 0.23942650854587555,
+        "bbox_clip_margin": 0.0027256160974502563,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          291.35,
+          273.63,
+          324.87,
+          329.02
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.745,
+        "bbox_clip_top_label": "backpack",
+        "bbox_clip_top_score": 0.23628677427768707,
+        "bbox_clip_second_score": 0.23620954155921936,
+        "bbox_clip_margin": 7.72327184677124e-05,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          540.27,
+          282.57,
+          578.02,
+          318.49
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.739,
+        "bbox_clip_top_label": "surfboard",
+        "bbox_clip_top_score": 0.22535820305347443,
+        "bbox_clip_second_score": 0.22411763668060303,
+        "bbox_clip_margin": 0.001240566372871399,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          313.92,
+          251.42,
+          351.4,
+          328.77
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.713,
+        "bbox_clip_top_label": "baseball glove",
+        "bbox_clip_top_score": 0.23177042603492737,
+        "bbox_clip_second_score": 0.22753731906414032,
+        "bbox_clip_margin": 0.004233106970787048,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          544.61,
+          297.81,
+          579.68,
+          367.96
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.687,
+        "bbox_clip_top_label": "tie",
+        "bbox_clip_top_score": 0.24983030557632446,
+        "bbox_clip_second_score": 0.22490911185741425,
+        "bbox_clip_margin": 0.024921193718910217,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          607.84,
+          306.8,
+          634.43,
+          375.21
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.684,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.2348380982875824,
+        "bbox_clip_second_score": 0.2331121265888214,
+        "bbox_clip_margin": 0.0017259716987609863,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          295.47,
+          249.1,
+          319.08,
+          286.12
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.68,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.23753643035888672,
+        "bbox_clip_second_score": 0.23052386939525604,
+        "bbox_clip_margin": 0.007012560963630676,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          19.84,
+          150.21,
+          133.09,
+          167.51
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.56,
+        "bbox_clip_top_label": "baseball bat",
+        "bbox_clip_top_score": 0.2677696943283081,
+        "bbox_clip_second_score": 0.2645260691642761,
+        "bbox_clip_margin": 0.0032436251640319824,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.22587695717811584
+          },
+          {
+            "label": "bridge",
+            "score": 0.21215371787548065
+          },
+          {
+            "label": "building",
+            "score": 0.202651247382164
+          },
+          {
+            "label": "rock",
+            "score": 0.19083541631698608
+          },
+          {
+            "label": "kite",
+            "score": 0.1903734803199768
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "36",
+    "detections": [
+      {
+        "bbox": [
+          176.01,
+          513.69,
+          329.64,
+          877.72
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.891,
+        "bbox_clip_top_label": "backpack",
+        "bbox_clip_top_score": 0.25410008430480957,
+        "bbox_clip_second_score": 0.24465496838092804,
+        "bbox_clip_margin": 0.00944511592388153,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.17449867725372314
+          },
+          {
+            "label": "bridge",
+            "score": 0.17083637416362762
+          },
+          {
+            "label": "building",
+            "score": 0.17029057443141937
+          },
+          {
+            "label": "surfboard",
+            "score": 0.16284240782260895
+          },
+          {
+            "label": "",
+            "score": 0.162123441696167
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          317.02,
+          547.88,
+          398.19,
+          876.34
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.824,
+        "bbox_clip_top_label": "giraffe",
+        "bbox_clip_top_score": 0.24451608955860138,
+        "bbox_clip_second_score": 0.2384003847837448,
+        "bbox_clip_margin": 0.006115704774856567,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.17449867725372314
+          },
+          {
+            "label": "bridge",
+            "score": 0.17083637416362762
+          },
+          {
+            "label": "building",
+            "score": 0.17029057443141937
+          },
+          {
+            "label": "surfboard",
+            "score": 0.16284240782260895
+          },
+          {
+            "label": "",
+            "score": 0.162123441696167
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          104.81,
+          511.5,
+          174.13,
+          722.95
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.817,
+        "bbox_clip_top_label": "skateboard",
+        "bbox_clip_top_score": 0.24873191118240356,
+        "bbox_clip_second_score": 0.2451847791671753,
+        "bbox_clip_margin": 0.0035471320152282715,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.17449867725372314
+          },
+          {
+            "label": "bridge",
+            "score": 0.17083637416362762
+          },
+          {
+            "label": "building",
+            "score": 0.17029057443141937
+          },
+          {
+            "label": "surfboard",
+            "score": 0.16284240782260895
+          },
+          {
+            "label": "",
+            "score": 0.162123441696167
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          54.04,
+          509.97,
+          110.6,
+          734.21
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.811,
+        "bbox_clip_top_label": "snowboard",
+        "bbox_clip_top_score": 0.253058522939682,
+        "bbox_clip_second_score": 0.23957806825637817,
+        "bbox_clip_margin": 0.013480454683303833,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.17449867725372314
+          },
+          {
+            "label": "bridge",
+            "score": 0.17083637416362762
+          },
+          {
+            "label": "building",
+            "score": 0.17029057443141937
+          },
+          {
+            "label": "surfboard",
+            "score": 0.16284240782260895
+          },
+          {
+            "label": "",
+            "score": 0.162123441696167
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          388.91,
+          544.77,
+          454.91,
+          731.18
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.792,
+        "bbox_clip_top_label": "snowboard",
+        "bbox_clip_top_score": 0.264023095369339,
+        "bbox_clip_second_score": 0.25725558400154114,
+        "bbox_clip_margin": 0.0067675113677978516,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.17449867725372314
+          },
+          {
+            "label": "bridge",
+            "score": 0.17083637416362762
+          },
+          {
+            "label": "building",
+            "score": 0.17029057443141937
+          },
+          {
+            "label": "surfboard",
+            "score": 0.16284240782260895
+          },
+          {
+            "label": "",
+            "score": 0.162123441696167
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "41",
+    "detections": [
+      {
+        "bbox": [
+          551.05,
+          694.89,
+          672.35,
+          863.58
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.794,
+        "bbox_clip_top_label": "bus",
+        "bbox_clip_top_score": 0.2439725548028946,
+        "bbox_clip_second_score": 0.23136326670646667,
+        "bbox_clip_margin": 0.012609288096427917,
+        "full_image_clip_top_labels": [
+          {
+            "label": "traffic light",
+            "score": 0.19692911207675934
+          },
+          {
+            "label": "truck",
+            "score": 0.19422191381454468
+          },
+          {
+            "label": "",
+            "score": 0.19381961226463318
+          },
+          {
+            "label": "tie",
+            "score": 0.19057796895503998
+          },
+          {
+            "label": "train",
+            "score": 0.18347641825675964
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          760.24,
+          700.98,
+          802.72,
+          818.58
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.662,
+        "bbox_clip_top_label": "bush",
+        "bbox_clip_top_score": 0.233397975564003,
+        "bbox_clip_second_score": 0.22777654230594635,
+        "bbox_clip_margin": 0.005621433258056641,
+        "full_image_clip_top_labels": [
+          {
+            "label": "traffic light",
+            "score": 0.19692911207675934
+          },
+          {
+            "label": "truck",
+            "score": 0.19422191381454468
+          },
+          {
+            "label": "",
+            "score": 0.19381961226463318
+          },
+          {
+            "label": "tie",
+            "score": 0.19057796895503998
+          },
+          {
+            "label": "train",
+            "score": 0.18347641825675964
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          587.06,
+          718.08,
+          885.41,
+          992.48
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.52,
+        "bbox_clip_top_label": "bus",
+        "bbox_clip_top_score": 0.2622692883014679,
+        "bbox_clip_second_score": 0.24500714242458344,
+        "bbox_clip_margin": 0.01726214587688446,
+        "full_image_clip_top_labels": [
+          {
+            "label": "traffic light",
+            "score": 0.19692911207675934
+          },
+          {
+            "label": "truck",
+            "score": 0.19422191381454468
+          },
+          {
+            "label": "",
+            "score": 0.19381961226463318
+          },
+          {
+            "label": "tie",
+            "score": 0.19057796895503998
+          },
+          {
+            "label": "train",
+            "score": 0.18347641825675964
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "43",
+    "detections": [
+      {
+        "bbox": [
+          447.53,
+          74.95,
+          556.2,
+          332.0
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.895,
+        "bbox_clip_top_label": "orange",
+        "bbox_clip_top_score": 0.2116098254919052,
+        "bbox_clip_second_score": 0.21146681904792786,
+        "bbox_clip_margin": 0.00014300644397735596,
+        "full_image_clip_top_labels": [
+          {
+            "label": "hair drier",
+            "score": 0.18872040510177612
+          },
+          {
+            "label": "frisbee",
+            "score": 0.18652696907520294
+          },
+          {
+            "label": "kite",
+            "score": 0.18207156658172607
+          },
+          {
+            "label": "umbrella",
+            "score": 0.1802951544523239
+          },
+          {
+            "label": "broccoli",
+            "score": 0.17934414744377136
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "45",
+    "detections": [
+      {
+        "bbox": [
+          844.88,
+          541.21,
+          961.33,
+          805.0
+        ],
+        "yolo_label": "cell phone",
+        "yolo_confidence": 0.932,
+        "bbox_clip_top_label": "parking meter",
+        "bbox_clip_top_score": 0.2444562017917633,
+        "bbox_clip_second_score": 0.22622404992580414,
+        "bbox_clip_margin": 0.018232151865959167,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          835.02,
+          378.89,
+          1123.0,
+          801.95
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.926,
+        "bbox_clip_top_label": "parking meter",
+        "bbox_clip_top_score": 0.2620018720626831,
+        "bbox_clip_second_score": 0.23258066177368164,
+        "bbox_clip_margin": 0.029421210289001465,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          286.4,
+          540.84,
+          555.59,
+          765.61
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.909,
+        "bbox_clip_top_label": "parking meter",
+        "bbox_clip_top_score": 0.23686739802360535,
+        "bbox_clip_second_score": 0.20573268830776215,
+        "bbox_clip_margin": 0.0311347097158432,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          103.6,
+          420.87,
+          200.41,
+          473.58
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.885,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.23528912663459778,
+        "bbox_clip_second_score": 0.21042580902576447,
+        "bbox_clip_margin": 0.024863317608833313,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          774.14,
+          383.25,
+          834.9,
+          420.27
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.864,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.2289382517337799,
+        "bbox_clip_second_score": 0.20405137538909912,
+        "bbox_clip_margin": 0.024886876344680786,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          248.53,
+          591.26,
+          395.32,
+          824.94
+        ],
+        "yolo_label": "remote",
+        "yolo_confidence": 0.852,
+        "bbox_clip_top_label": "parking meter",
+        "bbox_clip_top_score": 0.2357056736946106,
+        "bbox_clip_second_score": 0.20949743688106537,
+        "bbox_clip_margin": 0.026208236813545227,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          1072.13,
+          366.79,
+          1122.93,
+          421.76
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.761,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.2178010493516922,
+        "bbox_clip_second_score": 0.208807572722435,
+        "bbox_clip_margin": 0.008993476629257202,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          1040.63,
+          370.28,
+          1085.9,
+          417.9
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.642,
+        "bbox_clip_top_label": "parking meter",
+        "bbox_clip_top_score": 0.21308642625808716,
+        "bbox_clip_second_score": 0.20614215731620789,
+        "bbox_clip_margin": 0.0069442689418792725,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          933.23,
+          396.59,
+          967.42,
+          412.21
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.577,
+        "bbox_clip_top_label": "truck",
+        "bbox_clip_top_score": 0.2556906044483185,
+        "bbox_clip_second_score": 0.2553040385246277,
+        "bbox_clip_margin": 0.0003865659236907959,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          872.9,
+          387.24,
+          896.92,
+          413.37
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.571,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.2351377010345459,
+        "bbox_clip_second_score": 0.22742386162281036,
+        "bbox_clip_margin": 0.007713839411735535,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          847.36,
+          389.73,
+          881.52,
+          414.85
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.556,
+        "bbox_clip_top_label": "truck",
+        "bbox_clip_top_score": 0.23524491488933563,
+        "bbox_clip_second_score": 0.2247338443994522,
+        "bbox_clip_margin": 0.010511070489883423,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          209.32,
+          448.07,
+          258.5,
+          471.73
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.545,
+        "bbox_clip_top_label": "parking meter",
+        "bbox_clip_top_score": 0.2422189712524414,
+        "bbox_clip_second_score": 0.23107415437698364,
+        "bbox_clip_margin": 0.011144816875457764,
+        "full_image_clip_top_labels": [
+          {
+            "label": "remote",
+            "score": 0.21920564770698547
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21063746511936188
+          },
+          {
+            "label": "car",
+            "score": 0.20901693403720856
+          },
+          {
+            "label": "skateboard",
+            "score": 0.20360946655273438
+          },
+          {
+            "label": "fork",
+            "score": 0.20095153152942657
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "48",
+    "detections": [
+      {
+        "bbox": [
+          404.47,
+          364.71,
+          539.15,
+          513.59
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.91,
+        "bbox_clip_top_label": "motorcycle",
+        "bbox_clip_top_score": 0.26308906078338623,
+        "bbox_clip_second_score": 0.234088733792305,
+        "bbox_clip_margin": 0.029000326991081238,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.21992453932762146
+          },
+          {
+            "label": "bridge",
+            "score": 0.20972754061222076
+          },
+          {
+            "label": "car",
+            "score": 0.20652012526988983
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.20602655410766602
+          },
+          {
+            "label": "",
+            "score": 0.20239078998565674
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          404.24,
+          397.02,
+          771.56,
+          617.07
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.836,
+        "bbox_clip_top_label": "boat",
+        "bbox_clip_top_score": 0.2335699498653412,
+        "bbox_clip_second_score": 0.22225628793239594,
+        "bbox_clip_margin": 0.011313661932945251,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.21992453932762146
+          },
+          {
+            "label": "bridge",
+            "score": 0.20972754061222076
+          },
+          {
+            "label": "car",
+            "score": 0.20652012526988983
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.20602655410766602
+          },
+          {
+            "label": "",
+            "score": 0.20239078998565674
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          492.82,
+          434.54,
+          582.17,
+          550.3
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.821,
+        "bbox_clip_top_label": "couch",
+        "bbox_clip_top_score": 0.23600727319717407,
+        "bbox_clip_second_score": 0.23405835032463074,
+        "bbox_clip_margin": 0.001948922872543335,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.21992453932762146
+          },
+          {
+            "label": "bridge",
+            "score": 0.20972754061222076
+          },
+          {
+            "label": "car",
+            "score": 0.20652012526988983
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.20602655410766602
+          },
+          {
+            "label": "",
+            "score": 0.20239078998565674
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          572.1,
+          379.79,
+          630.53,
+          485.71
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.541,
+        "bbox_clip_top_label": "backpack",
+        "bbox_clip_top_score": 0.24307039380073547,
+        "bbox_clip_second_score": 0.2239910364151001,
+        "bbox_clip_margin": 0.019079357385635376,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.21992453932762146
+          },
+          {
+            "label": "bridge",
+            "score": 0.20972754061222076
+          },
+          {
+            "label": "car",
+            "score": 0.20652012526988983
+          },
+          {
+            "label": "motorcycle",
+            "score": 0.20602655410766602
+          },
+          {
+            "label": "",
+            "score": 0.20239078998565674
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "49",
+    "detections": [
+      {
+        "bbox": [
+          447.59,
+          544.92,
+          661.24,
+          618.58
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.87,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.26868295669555664,
+        "bbox_clip_second_score": 0.2524202764034271,
+        "bbox_clip_margin": 0.016262680292129517,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bridge",
+            "score": 0.23471172153949738
+          },
+          {
+            "label": "boat",
+            "score": 0.2318585366010666
+          },
+          {
+            "label": "car",
+            "score": 0.2307128608226776
+          },
+          {
+            "label": "truck",
+            "score": 0.2278699278831482
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21658924221992493
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          386.44,
+          511.67,
+          527.33,
+          573.27
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.798,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.24164563417434692,
+        "bbox_clip_second_score": 0.22047249972820282,
+        "bbox_clip_margin": 0.021173134446144104,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bridge",
+            "score": 0.23471172153949738
+          },
+          {
+            "label": "boat",
+            "score": 0.2318585366010666
+          },
+          {
+            "label": "car",
+            "score": 0.2307128608226776
+          },
+          {
+            "label": "truck",
+            "score": 0.2278699278831482
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21658924221992493
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          338.63,
+          185.81,
+          473.95,
+          289.15
+        ],
+        "yolo_label": "truck",
+        "yolo_confidence": 0.651,
+        "bbox_clip_top_label": "truck",
+        "bbox_clip_top_score": 0.27265676856040955,
+        "bbox_clip_second_score": 0.21925809979438782,
+        "bbox_clip_margin": 0.05339866876602173,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bridge",
+            "score": 0.23471172153949738
+          },
+          {
+            "label": "boat",
+            "score": 0.2318585366010666
+          },
+          {
+            "label": "car",
+            "score": 0.2307128608226776
+          },
+          {
+            "label": "truck",
+            "score": 0.2278699278831482
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21658924221992493
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          567.32,
+          443.97,
+          743.7,
+          553.12
+        ],
+        "yolo_label": "truck",
+        "yolo_confidence": 0.543,
+        "bbox_clip_top_label": "truck",
+        "bbox_clip_top_score": 0.25731703639030457,
+        "bbox_clip_second_score": 0.24184148013591766,
+        "bbox_clip_margin": 0.015475556254386902,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bridge",
+            "score": 0.23471172153949738
+          },
+          {
+            "label": "boat",
+            "score": 0.2318585366010666
+          },
+          {
+            "label": "car",
+            "score": 0.2307128608226776
+          },
+          {
+            "label": "truck",
+            "score": 0.2278699278831482
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21658924221992493
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          1128.69,
+          268.31,
+          1199.6,
+          313.62
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.53,
+        "bbox_clip_top_label": "truck",
+        "bbox_clip_top_score": 0.2669889032840729,
+        "bbox_clip_second_score": 0.2626747190952301,
+        "bbox_clip_margin": 0.0043141841888427734,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bridge",
+            "score": 0.23471172153949738
+          },
+          {
+            "label": "boat",
+            "score": 0.2318585366010666
+          },
+          {
+            "label": "car",
+            "score": 0.2307128608226776
+          },
+          {
+            "label": "truck",
+            "score": 0.2278699278831482
+          },
+          {
+            "label": "parking meter",
+            "score": 0.21658924221992493
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "51",
+    "detections": [
+      {
+        "bbox": [
+          610.56,
+          54.78,
+          810.3,
+          452.32
+        ],
+        "yolo_label": "bird",
+        "yolo_confidence": 0.626,
+        "bbox_clip_top_label": "dog",
+        "bbox_clip_top_score": 0.2563343346118927,
+        "bbox_clip_second_score": 0.25102120637893677,
+        "bbox_clip_margin": 0.005313128232955933,
+        "full_image_clip_top_labels": [
+          {
+            "label": "person",
+            "score": 0.24424564838409424
+          },
+          {
+            "label": "keyboard",
+            "score": 0.23548081517219543
+          },
+          {
+            "label": "rock",
+            "score": 0.2277931571006775
+          },
+          {
+            "label": "",
+            "score": 0.22086124122142792
+          },
+          {
+            "label": "fish",
+            "score": 0.21887196600437164
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "52",
+    "detections": [
+      {
+        "bbox": [
+          166.81,
+          178.77,
+          354.78,
+          749.91
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.928,
+        "bbox_clip_top_label": "fire hydrant",
+        "bbox_clip_top_score": 0.2724829316139221,
+        "bbox_clip_second_score": 0.2508021593093872,
+        "bbox_clip_margin": 0.021680772304534912,
+        "full_image_clip_top_labels": [
+          {
+            "label": "orange",
+            "score": 0.22431477904319763
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.21579445898532867
+          },
+          {
+            "label": "oven",
+            "score": 0.20512869954109192
+          },
+          {
+            "label": "",
+            "score": 0.19349707663059235
+          },
+          {
+            "label": "hair drier",
+            "score": 0.192228302359581
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          0.22,
+          262.55,
+          220.13,
+          644.12
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.885,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.27186062932014465,
+        "bbox_clip_second_score": 0.24885869026184082,
+        "bbox_clip_margin": 0.023001939058303833,
+        "full_image_clip_top_labels": [
+          {
+            "label": "orange",
+            "score": 0.22431477904319763
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.21579445898532867
+          },
+          {
+            "label": "oven",
+            "score": 0.20512869954109192
+          },
+          {
+            "label": "",
+            "score": 0.19349707663059235
+          },
+          {
+            "label": "hair drier",
+            "score": 0.192228302359581
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "58",
+    "detections": [
+      {
+        "bbox": [
+          272.82,
+          393.54,
+          679.2,
+          640.57
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.953,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.2666621208190918,
+        "bbox_clip_second_score": 0.21685531735420227,
+        "bbox_clip_margin": 0.049806803464889526,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.21745029091835022
+          },
+          {
+            "label": "bridge",
+            "score": 0.21361392736434937
+          },
+          {
+            "label": "truck",
+            "score": 0.20528361201286316
+          },
+          {
+            "label": "parking meter",
+            "score": 0.20243075489997864
+          },
+          {
+            "label": "boat",
+            "score": 0.19622744619846344
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          281.62,
+          316.34,
+          390.31,
+          409.44
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.895,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.23527546226978302,
+        "bbox_clip_second_score": 0.2072376310825348,
+        "bbox_clip_margin": 0.02803783118724823,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.21745029091835022
+          },
+          {
+            "label": "bridge",
+            "score": 0.21361392736434937
+          },
+          {
+            "label": "truck",
+            "score": 0.20528361201286316
+          },
+          {
+            "label": "parking meter",
+            "score": 0.20243075489997864
+          },
+          {
+            "label": "boat",
+            "score": 0.19622744619846344
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          742.94,
+          194.25,
+          827.58,
+          237.81
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.774,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.24087080359458923,
+        "bbox_clip_second_score": 0.22938396036624908,
+        "bbox_clip_margin": 0.011486843228340149,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.21745029091835022
+          },
+          {
+            "label": "bridge",
+            "score": 0.21361392736434937
+          },
+          {
+            "label": "truck",
+            "score": 0.20528361201286316
+          },
+          {
+            "label": "parking meter",
+            "score": 0.20243075489997864
+          },
+          {
+            "label": "boat",
+            "score": 0.19622744619846344
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          326.06,
+          170.56,
+          370.36,
+          208.74
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.706,
+        "bbox_clip_top_label": "truck",
+        "bbox_clip_top_score": 0.23878157138824463,
+        "bbox_clip_second_score": 0.22037971019744873,
+        "bbox_clip_margin": 0.0184018611907959,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.21745029091835022
+          },
+          {
+            "label": "bridge",
+            "score": 0.21361392736434937
+          },
+          {
+            "label": "truck",
+            "score": 0.20528361201286316
+          },
+          {
+            "label": "parking meter",
+            "score": 0.20243075489997864
+          },
+          {
+            "label": "boat",
+            "score": 0.19622744619846344
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          400.38,
+          147.43,
+          434.08,
+          181.13
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.647,
+        "bbox_clip_top_label": "truck",
+        "bbox_clip_top_score": 0.24680235981941223,
+        "bbox_clip_second_score": 0.23577967286109924,
+        "bbox_clip_margin": 0.011022686958312988,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.21745029091835022
+          },
+          {
+            "label": "bridge",
+            "score": 0.21361392736434937
+          },
+          {
+            "label": "truck",
+            "score": 0.20528361201286316
+          },
+          {
+            "label": "parking meter",
+            "score": 0.20243075489997864
+          },
+          {
+            "label": "boat",
+            "score": 0.19622744619846344
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          306.63,
+          224.65,
+          373.67,
+          275.2
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.635,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.21501471102237701,
+        "bbox_clip_second_score": 0.21428604423999786,
+        "bbox_clip_margin": 0.0007286667823791504,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.21745029091835022
+          },
+          {
+            "label": "bridge",
+            "score": 0.21361392736434937
+          },
+          {
+            "label": "truck",
+            "score": 0.20528361201286316
+          },
+          {
+            "label": "parking meter",
+            "score": 0.20243075489997864
+          },
+          {
+            "label": "boat",
+            "score": 0.19622744619846344
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "64",
+    "detections": [
+      {
+        "bbox": [
+          895.17,
+          341.29,
+          995.75,
+          614.75
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.844,
+        "bbox_clip_top_label": "tie",
+        "bbox_clip_top_score": 0.24168597161769867,
+        "bbox_clip_second_score": 0.24076689779758453,
+        "bbox_clip_margin": 0.0009190738201141357,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          228.84,
+          330.34,
+          320.21,
+          606.56
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.84,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.2352779358625412,
+        "bbox_clip_second_score": 0.22826318442821503,
+        "bbox_clip_margin": 0.007014751434326172,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          589.89,
+          352.26,
+          710.65,
+          616.31
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.84,
+        "bbox_clip_top_label": "orange",
+        "bbox_clip_top_score": 0.24900510907173157,
+        "bbox_clip_second_score": 0.2194281816482544,
+        "bbox_clip_margin": 0.029576927423477173,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          491.27,
+          286.06,
+          552.68,
+          429.04
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.82,
+        "bbox_clip_top_label": "rock",
+        "bbox_clip_top_score": 0.21745654940605164,
+        "bbox_clip_second_score": 0.21008913218975067,
+        "bbox_clip_margin": 0.007367417216300964,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          196.41,
+          234.32,
+          235.81,
+          359.84
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.722,
+        "bbox_clip_top_label": "backpack",
+        "bbox_clip_top_score": 0.2339591681957245,
+        "bbox_clip_second_score": 0.22215616703033447,
+        "bbox_clip_margin": 0.011803001165390015,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          845.31,
+          387.17,
+          882.11,
+          525.33
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.693,
+        "bbox_clip_top_label": "backpack",
+        "bbox_clip_top_score": 0.23889221251010895,
+        "bbox_clip_second_score": 0.23574784398078918,
+        "bbox_clip_margin": 0.003144368529319763,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          574.41,
+          274.29,
+          619.06,
+          447.06
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.625,
+        "bbox_clip_top_label": "surfboard",
+        "bbox_clip_top_score": 0.23761582374572754,
+        "bbox_clip_second_score": 0.23125433921813965,
+        "bbox_clip_margin": 0.006361484527587891,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          954.94,
+          249.04,
+          1005.04,
+          383.12
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.612,
+        "bbox_clip_top_label": "snowboard",
+        "bbox_clip_top_score": 0.2527099549770355,
+        "bbox_clip_second_score": 0.2514082193374634,
+        "bbox_clip_margin": 0.0013017356395721436,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          116.14,
+          198.8,
+          151.82,
+          301.37
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.599,
+        "bbox_clip_top_label": "baseball glove",
+        "bbox_clip_top_score": 0.23937052488327026,
+        "bbox_clip_second_score": 0.22588160634040833,
+        "bbox_clip_margin": 0.013488918542861938,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          711.03,
+          404.34,
+          774.27,
+          464.21
+        ],
+        "yolo_label": "suitcase",
+        "yolo_confidence": 0.583,
+        "bbox_clip_top_label": "orange",
+        "bbox_clip_top_score": 0.2334921956062317,
+        "bbox_clip_second_score": 0.2255791425704956,
+        "bbox_clip_margin": 0.007913053035736084,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          640.02,
+          107.05,
+          829.37,
+          259.81
+        ],
+        "yolo_label": "train",
+        "yolo_confidence": 0.564,
+        "bbox_clip_top_label": "truck",
+        "bbox_clip_top_score": 0.22870182991027832,
+        "bbox_clip_second_score": 0.20160989463329315,
+        "bbox_clip_margin": 0.02709193527698517,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sink",
+            "score": 0.19116953015327454
+          },
+          {
+            "label": "hair drier",
+            "score": 0.18735559284687042
+          },
+          {
+            "label": "toilet",
+            "score": 0.1869708001613617
+          },
+          {
+            "label": "bottle",
+            "score": 0.18611642718315125
+          },
+          {
+            "label": "orange",
+            "score": 0.18510708212852478
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "66",
+    "detections": [
+      {
+        "bbox": [
+          276.6,
+          985.32,
+          337.5,
+          1060.13
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.877,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.2375643402338028,
+        "bbox_clip_second_score": 0.22689038515090942,
+        "bbox_clip_margin": 0.010673955082893372,
+        "full_image_clip_top_labels": [
+          {
+            "label": "",
+            "score": 0.23775094747543335
+          },
+          {
+            "label": "bush",
+            "score": 0.23623421788215637
+          },
+          {
+            "label": "zebra",
+            "score": 0.22245320677757263
+          },
+          {
+            "label": "banana",
+            "score": 0.22237786650657654
+          },
+          {
+            "label": "orange",
+            "score": 0.22008363902568817
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          177.28,
+          1025.41,
+          460.52,
+          1144.2
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.764,
+        "bbox_clip_top_label": "carrot",
+        "bbox_clip_top_score": 0.250447541475296,
+        "bbox_clip_second_score": 0.2504202425479889,
+        "bbox_clip_margin": 2.7298927307128906e-05,
+        "full_image_clip_top_labels": [
+          {
+            "label": "",
+            "score": 0.23775094747543335
+          },
+          {
+            "label": "bush",
+            "score": 0.23623421788215637
+          },
+          {
+            "label": "zebra",
+            "score": 0.22245320677757263
+          },
+          {
+            "label": "banana",
+            "score": 0.22237786650657654
+          },
+          {
+            "label": "orange",
+            "score": 0.22008363902568817
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          19.57,
+          1103.73,
+          235.83,
+          1192.06
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.673,
+        "bbox_clip_top_label": "knife",
+        "bbox_clip_top_score": 0.25275346636772156,
+        "bbox_clip_second_score": 0.2458166927099228,
+        "bbox_clip_margin": 0.006936773657798767,
+        "full_image_clip_top_labels": [
+          {
+            "label": "",
+            "score": 0.23775094747543335
+          },
+          {
+            "label": "bush",
+            "score": 0.23623421788215637
+          },
+          {
+            "label": "zebra",
+            "score": 0.22245320677757263
+          },
+          {
+            "label": "banana",
+            "score": 0.22237786650657654
+          },
+          {
+            "label": "orange",
+            "score": 0.22008363902568817
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "67",
+    "detections": [
+      {
+        "bbox": [
+          865.83,
+          282.4,
+          992.98,
+          729.97
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.908,
+        "bbox_clip_top_label": "cake",
+        "bbox_clip_top_score": 0.22571082413196564,
+        "bbox_clip_second_score": 0.2242274433374405,
+        "bbox_clip_margin": 0.0014833807945251465,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bridge",
+            "score": 0.24114258587360382
+          },
+          {
+            "label": "orange",
+            "score": 0.2279701679944992
+          },
+          {
+            "label": "person",
+            "score": 0.20079538226127625
+          },
+          {
+            "label": "",
+            "score": 0.19719569385051727
+          },
+          {
+            "label": "baseball bat",
+            "score": 0.1931307017803192
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          71.87,
+          474.77,
+          118.89,
+          537.25
+        ],
+        "yolo_label": "bird",
+        "yolo_confidence": 0.751,
+        "bbox_clip_top_label": "bird",
+        "bbox_clip_top_score": 0.2781459391117096,
+        "bbox_clip_second_score": 0.26648959517478943,
+        "bbox_clip_margin": 0.011656343936920166,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bridge",
+            "score": 0.24114258587360382
+          },
+          {
+            "label": "orange",
+            "score": 0.2279701679944992
+          },
+          {
+            "label": "person",
+            "score": 0.20079538226127625
+          },
+          {
+            "label": "",
+            "score": 0.19719569385051727
+          },
+          {
+            "label": "baseball bat",
+            "score": 0.1931307017803192
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "70",
+    "detections": [
+      {
+        "bbox": [
+          542.43,
+          719.18,
+          589.59,
+          814.71
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.828,
+        "bbox_clip_top_label": "baseball glove",
+        "bbox_clip_top_score": 0.23969286680221558,
+        "bbox_clip_second_score": 0.23803691565990448,
+        "bbox_clip_margin": 0.0016559511423110962,
+        "full_image_clip_top_labels": [
+          {
+            "label": "orange",
+            "score": 0.22492356598377228
+          },
+          {
+            "label": "",
+            "score": 0.21735110878944397
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.2146676927804947
+          },
+          {
+            "label": "car",
+            "score": 0.2130754292011261
+          },
+          {
+            "label": "skis",
+            "score": 0.20965752005577087
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "71",
+    "detections": [
+      {
+        "bbox": [
+          397.13,
+          298.52,
+          422.24,
+          352.65
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.797,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.26887500286102295,
+        "bbox_clip_second_score": 0.24966643750667572,
+        "bbox_clip_margin": 0.01920856535434723,
+        "full_image_clip_top_labels": [
+          {
+            "label": "building",
+            "score": 0.20785216987133026
+          },
+          {
+            "label": "rock",
+            "score": 0.19776961207389832
+          },
+          {
+            "label": "house",
+            "score": 0.19741344451904297
+          },
+          {
+            "label": "toilet",
+            "score": 0.19163614511489868
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.19080594182014465
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          419.78,
+          289.79,
+          439.02,
+          352.22
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.791,
+        "bbox_clip_top_label": "baseball glove",
+        "bbox_clip_top_score": 0.24370595812797546,
+        "bbox_clip_second_score": 0.2430143505334854,
+        "bbox_clip_margin": 0.0006916075944900513,
+        "full_image_clip_top_labels": [
+          {
+            "label": "building",
+            "score": 0.20785216987133026
+          },
+          {
+            "label": "rock",
+            "score": 0.19776961207389832
+          },
+          {
+            "label": "house",
+            "score": 0.19741344451904297
+          },
+          {
+            "label": "toilet",
+            "score": 0.19163614511489868
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.19080594182014465
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          379.32,
+          301.92,
+          397.86,
+          350.96
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.777,
+        "bbox_clip_top_label": "bear",
+        "bbox_clip_top_score": 0.24323433637619019,
+        "bbox_clip_second_score": 0.24047152698040009,
+        "bbox_clip_margin": 0.0027628093957901,
+        "full_image_clip_top_labels": [
+          {
+            "label": "building",
+            "score": 0.20785216987133026
+          },
+          {
+            "label": "rock",
+            "score": 0.19776961207389832
+          },
+          {
+            "label": "house",
+            "score": 0.19741344451904297
+          },
+          {
+            "label": "toilet",
+            "score": 0.19163614511489868
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.19080594182014465
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "75",
+    "detections": [
+      {
+        "bbox": [
+          161.82,
+          516.65,
+          1156.4,
+          796.96
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.805,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.2524464428424835,
+        "bbox_clip_second_score": 0.23151880502700806,
+        "bbox_clip_margin": 0.020927637815475464,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.23583132028579712
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.2316785454750061
+          },
+          {
+            "label": "parking meter",
+            "score": 0.23045088350772858
+          },
+          {
+            "label": "surfboard",
+            "score": 0.21642856299877167
+          },
+          {
+            "label": "boat",
+            "score": 0.21377766132354736
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          12.75,
+          295.9,
+          206.12,
+          351.21
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.729,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.25627291202545166,
+        "bbox_clip_second_score": 0.2553461790084839,
+        "bbox_clip_margin": 0.0009267330169677734,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.23583132028579712
+          },
+          {
+            "label": "fire hydrant",
+            "score": 0.2316785454750061
+          },
+          {
+            "label": "parking meter",
+            "score": 0.23045088350772858
+          },
+          {
+            "label": "surfboard",
+            "score": 0.21642856299877167
+          },
+          {
+            "label": "boat",
+            "score": 0.21377766132354736
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "76",
+    "detections": [
+      {
+        "bbox": [
+          360.51,
+          6.3,
+          679.57,
+          487.1
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.924,
+        "bbox_clip_top_label": "boat",
+        "bbox_clip_top_score": 0.2120475172996521,
+        "bbox_clip_second_score": 0.2068851888179779,
+        "bbox_clip_margin": 0.005162328481674194,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sheep",
+            "score": 0.2322108894586563
+          },
+          {
+            "label": "boat",
+            "score": 0.21365319192409515
+          },
+          {
+            "label": "hair drier",
+            "score": 0.19843512773513794
+          },
+          {
+            "label": "bush",
+            "score": 0.19564901292324066
+          },
+          {
+            "label": "remote",
+            "score": 0.18958935141563416
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          664.77,
+          470.62,
+          959.4,
+          717.56
+        ],
+        "yolo_label": "sheep",
+        "yolo_confidence": 0.887,
+        "bbox_clip_top_label": "sheep",
+        "bbox_clip_top_score": 0.23804980516433716,
+        "bbox_clip_second_score": 0.21236510574817657,
+        "bbox_clip_margin": 0.025684699416160583,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sheep",
+            "score": 0.2322108894586563
+          },
+          {
+            "label": "boat",
+            "score": 0.21365319192409515
+          },
+          {
+            "label": "hair drier",
+            "score": 0.19843512773513794
+          },
+          {
+            "label": "bush",
+            "score": 0.19564901292324066
+          },
+          {
+            "label": "remote",
+            "score": 0.18958935141563416
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          337.44,
+          301.13,
+          606.82,
+          715.85
+        ],
+        "yolo_label": "sheep",
+        "yolo_confidence": 0.877,
+        "bbox_clip_top_label": "sheep",
+        "bbox_clip_top_score": 0.23502615094184875,
+        "bbox_clip_second_score": 0.21768273413181305,
+        "bbox_clip_margin": 0.017343416810035706,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sheep",
+            "score": 0.2322108894586563
+          },
+          {
+            "label": "boat",
+            "score": 0.21365319192409515
+          },
+          {
+            "label": "hair drier",
+            "score": 0.19843512773513794
+          },
+          {
+            "label": "bush",
+            "score": 0.19564901292324066
+          },
+          {
+            "label": "remote",
+            "score": 0.18958935141563416
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          33.06,
+          311.14,
+          990.0,
+          716.65
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.863,
+        "bbox_clip_top_label": "sheep",
+        "bbox_clip_top_score": 0.23308566212654114,
+        "bbox_clip_second_score": 0.22512808442115784,
+        "bbox_clip_margin": 0.0079575777053833,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sheep",
+            "score": 0.2322108894586563
+          },
+          {
+            "label": "boat",
+            "score": 0.21365319192409515
+          },
+          {
+            "label": "hair drier",
+            "score": 0.19843512773513794
+          },
+          {
+            "label": "bush",
+            "score": 0.19564901292324066
+          },
+          {
+            "label": "remote",
+            "score": 0.18958935141563416
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          219.61,
+          413.22,
+          456.17,
+          714.54
+        ],
+        "yolo_label": "sheep",
+        "yolo_confidence": 0.81,
+        "bbox_clip_top_label": "sheep",
+        "bbox_clip_top_score": 0.2342739701271057,
+        "bbox_clip_second_score": 0.20607918500900269,
+        "bbox_clip_margin": 0.028194785118103027,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sheep",
+            "score": 0.2322108894586563
+          },
+          {
+            "label": "boat",
+            "score": 0.21365319192409515
+          },
+          {
+            "label": "hair drier",
+            "score": 0.19843512773513794
+          },
+          {
+            "label": "bush",
+            "score": 0.19564901292324066
+          },
+          {
+            "label": "remote",
+            "score": 0.18958935141563416
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          559.61,
+          274.73,
+          878.19,
+          709.49
+        ],
+        "yolo_label": "sheep",
+        "yolo_confidence": 0.532,
+        "bbox_clip_top_label": "giraffe",
+        "bbox_clip_top_score": 0.2186749428510666,
+        "bbox_clip_second_score": 0.215554878115654,
+        "bbox_clip_margin": 0.0031200647354125977,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sheep",
+            "score": 0.2322108894586563
+          },
+          {
+            "label": "boat",
+            "score": 0.21365319192409515
+          },
+          {
+            "label": "hair drier",
+            "score": 0.19843512773513794
+          },
+          {
+            "label": "bush",
+            "score": 0.19564901292324066
+          },
+          {
+            "label": "remote",
+            "score": 0.18958935141563416
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          558.92,
+          274.29,
+          879.86,
+          708.98
+        ],
+        "yolo_label": "dog",
+        "yolo_confidence": 0.526,
+        "bbox_clip_top_label": "sheep",
+        "bbox_clip_top_score": 0.21577118337154388,
+        "bbox_clip_second_score": 0.21535362303256989,
+        "bbox_clip_margin": 0.000417560338973999,
+        "full_image_clip_top_labels": [
+          {
+            "label": "sheep",
+            "score": 0.2322108894586563
+          },
+          {
+            "label": "boat",
+            "score": 0.21365319192409515
+          },
+          {
+            "label": "hair drier",
+            "score": 0.19843512773513794
+          },
+          {
+            "label": "bush",
+            "score": 0.19564901292324066
+          },
+          {
+            "label": "remote",
+            "score": 0.18958935141563416
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "77",
+    "detections": [
+      {
+        "bbox": [
+          240.66,
+          391.22,
+          590.63,
+          646.59
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.906,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.2530669867992401,
+        "bbox_clip_second_score": 0.22818218171596527,
+        "bbox_clip_margin": 0.02488480508327484,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.2489778995513916
+          },
+          {
+            "label": "boat",
+            "score": 0.22515100240707397
+          },
+          {
+            "label": "bridge",
+            "score": 0.22503511607646942
+          },
+          {
+            "label": "sink",
+            "score": 0.22493964433670044
+          },
+          {
+            "label": "truck",
+            "score": 0.21890205144882202
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          592.62,
+          230.72,
+          671.24,
+          266.67
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.848,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.22415418922901154,
+        "bbox_clip_second_score": 0.20726217329502106,
+        "bbox_clip_margin": 0.01689201593399048,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.2489778995513916
+          },
+          {
+            "label": "boat",
+            "score": 0.22515100240707397
+          },
+          {
+            "label": "bridge",
+            "score": 0.22503511607646942
+          },
+          {
+            "label": "sink",
+            "score": 0.22493964433670044
+          },
+          {
+            "label": "truck",
+            "score": 0.21890205144882202
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          313.68,
+          217.46,
+          359.88,
+          247.93
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.568,
+        "bbox_clip_top_label": "car",
+        "bbox_clip_top_score": 0.2341293841600418,
+        "bbox_clip_second_score": 0.21984702348709106,
+        "bbox_clip_margin": 0.014282360672950745,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.2489778995513916
+          },
+          {
+            "label": "boat",
+            "score": 0.22515100240707397
+          },
+          {
+            "label": "bridge",
+            "score": 0.22503511607646942
+          },
+          {
+            "label": "sink",
+            "score": 0.22493964433670044
+          },
+          {
+            "label": "truck",
+            "score": 0.21890205144882202
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          166.98,
+          197.42,
+          194.14,
+          218.72
+        ],
+        "yolo_label": "car",
+        "yolo_confidence": 0.567,
+        "bbox_clip_top_label": "keyboard",
+        "bbox_clip_top_score": 0.2337871640920639,
+        "bbox_clip_second_score": 0.2329385131597519,
+        "bbox_clip_margin": 0.0008486509323120117,
+        "full_image_clip_top_labels": [
+          {
+            "label": "car",
+            "score": 0.2489778995513916
+          },
+          {
+            "label": "boat",
+            "score": 0.22515100240707397
+          },
+          {
+            "label": "bridge",
+            "score": 0.22503511607646942
+          },
+          {
+            "label": "sink",
+            "score": 0.22493964433670044
+          },
+          {
+            "label": "truck",
+            "score": 0.21890205144882202
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "78",
+    "detections": [
+      {
+        "bbox": [
+          2.8,
+          3.77,
+          1198.17,
+          897.37
+        ],
+        "yolo_label": "tv",
+        "yolo_confidence": 0.868,
+        "bbox_clip_top_label": "tv",
+        "bbox_clip_top_score": 0.21800120174884796,
+        "bbox_clip_second_score": 0.19709865748882294,
+        "bbox_clip_margin": 0.020902544260025024,
+        "full_image_clip_top_labels": [
+          {
+            "label": "tv",
+            "score": 0.21800120174884796
+          },
+          {
+            "label": "",
+            "score": 0.20009703934192657
+          },
+          {
+            "label": "orange",
+            "score": 0.19709865748882294
+          },
+          {
+            "label": "microwave",
+            "score": 0.19393637776374817
+          },
+          {
+            "label": "bush",
+            "score": 0.19124260544776917
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "79",
+    "detections": [
+      {
+        "bbox": [
+          172.6,
+          730.11,
+          359.5,
+          797.64
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.913,
+        "bbox_clip_top_label": "snowboard",
+        "bbox_clip_top_score": 0.23109592497348785,
+        "bbox_clip_second_score": 0.21901893615722656,
+        "bbox_clip_margin": 0.012076988816261292,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.2327091097831726
+          },
+          {
+            "label": "surfboard",
+            "score": 0.22589068114757538
+          },
+          {
+            "label": "skis",
+            "score": 0.22492212057113647
+          },
+          {
+            "label": "",
+            "score": 0.222983255982399
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.22292152047157288
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          249.92,
+          304.95,
+          375.19,
+          367.29
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.882,
+        "bbox_clip_top_label": "surfboard",
+        "bbox_clip_top_score": 0.25239282846450806,
+        "bbox_clip_second_score": 0.24594755470752716,
+        "bbox_clip_margin": 0.006445273756980896,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.2327091097831726
+          },
+          {
+            "label": "surfboard",
+            "score": 0.22589068114757538
+          },
+          {
+            "label": "skis",
+            "score": 0.22492212057113647
+          },
+          {
+            "label": "",
+            "score": 0.222983255982399
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.22292152047157288
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          284.61,
+          715.92,
+          329.63,
+          758.69
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.773,
+        "bbox_clip_top_label": "snowboard",
+        "bbox_clip_top_score": 0.24948298931121826,
+        "bbox_clip_second_score": 0.2479531615972519,
+        "bbox_clip_margin": 0.0015298277139663696,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.2327091097831726
+          },
+          {
+            "label": "surfboard",
+            "score": 0.22589068114757538
+          },
+          {
+            "label": "skis",
+            "score": 0.22492212057113647
+          },
+          {
+            "label": "",
+            "score": 0.222983255982399
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.22292152047157288
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          323.04,
+          301.77,
+          352.53,
+          341.78
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.709,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.2371481955051422,
+        "bbox_clip_second_score": 0.23103849589824677,
+        "bbox_clip_margin": 0.006109699606895447,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.2327091097831726
+          },
+          {
+            "label": "surfboard",
+            "score": 0.22589068114757538
+          },
+          {
+            "label": "skis",
+            "score": 0.22492212057113647
+          },
+          {
+            "label": "",
+            "score": 0.222983255982399
+          },
+          {
+            "label": "refrigerator",
+            "score": 0.22292152047157288
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "80",
+    "detections": [
+      {
+        "bbox": [
+          333.75,
+          47.78,
+          427.41,
+          194.49
+        ],
+        "yolo_label": "dog",
+        "yolo_confidence": 0.839,
+        "bbox_clip_top_label": "dog",
+        "bbox_clip_top_score": 0.22350305318832397,
+        "bbox_clip_second_score": 0.22132284939289093,
+        "bbox_clip_margin": 0.0021802037954330444,
+        "full_image_clip_top_labels": [
+          {
+            "label": "",
+            "score": 0.1875389665365219
+          },
+          {
+            "label": "cow",
+            "score": 0.18138530850410461
+          },
+          {
+            "label": "dog",
+            "score": 0.1804673820734024
+          },
+          {
+            "label": "sheep",
+            "score": 0.18012115359306335
+          },
+          {
+            "label": "bush",
+            "score": 0.17811116576194763
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "84",
+    "detections": [
+      {
+        "bbox": [
+          47.73,
+          244.19,
+          124.82,
+          421.6
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.881,
+        "bbox_clip_top_label": "person",
+        "bbox_clip_top_score": 0.2555215358734131,
+        "bbox_clip_second_score": 0.24787719547748566,
+        "bbox_clip_margin": 0.007644340395927429,
+        "full_image_clip_top_labels": [
+          {
+            "label": "fire hydrant",
+            "score": 0.22178959846496582
+          },
+          {
+            "label": "umbrella",
+            "score": 0.22057485580444336
+          },
+          {
+            "label": "",
+            "score": 0.21738946437835693
+          },
+          {
+            "label": "bridge",
+            "score": 0.2135855108499527
+          },
+          {
+            "label": "sink",
+            "score": 0.21178393065929413
+          }
+        ],
+        "analysis_flag": "uncertain"
+      },
+      {
+        "bbox": [
+          25.63,
+          259.95,
+          54.82,
+          366.94
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.698,
+        "bbox_clip_top_label": "skateboard",
+        "bbox_clip_top_score": 0.2338487058877945,
+        "bbox_clip_second_score": 0.23258545994758606,
+        "bbox_clip_margin": 0.001263245940208435,
+        "full_image_clip_top_labels": [
+          {
+            "label": "fire hydrant",
+            "score": 0.22178959846496582
+          },
+          {
+            "label": "umbrella",
+            "score": 0.22057485580444336
+          },
+          {
+            "label": "",
+            "score": 0.21738946437835693
+          },
+          {
+            "label": "bridge",
+            "score": 0.2135855108499527
+          },
+          {
+            "label": "sink",
+            "score": 0.21178393065929413
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "86",
+    "detections": [
+      {
+        "bbox": [
+          125.16,
+          50.0,
+          451.59,
+          298.81
+        ],
+        "yolo_label": "bear",
+        "yolo_confidence": 0.955,
+        "bbox_clip_top_label": "bear",
+        "bbox_clip_top_score": 0.26213541626930237,
+        "bbox_clip_second_score": 0.2285708636045456,
+        "bbox_clip_margin": 0.033564552664756775,
+        "full_image_clip_top_labels": [
+          {
+            "label": "bear",
+            "score": 0.25594213604927063
+          },
+          {
+            "label": "dog",
+            "score": 0.23855483531951904
+          },
+          {
+            "label": "elephant",
+            "score": 0.23194199800491333
+          },
+          {
+            "label": "frisbee",
+            "score": 0.22354312241077423
+          },
+          {
+            "label": "",
+            "score": 0.22295179963111877
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "89",
+    "detections": [
+      {
+        "bbox": [
+          160.19,
+          43.53,
+          596.12,
+          380.71
+        ],
+        "yolo_label": "dog",
+        "yolo_confidence": 0.849,
+        "bbox_clip_top_label": "insect",
+        "bbox_clip_top_score": 0.23284271359443665,
+        "bbox_clip_second_score": 0.2022695094347,
+        "bbox_clip_margin": 0.030573204159736633,
+        "full_image_clip_top_labels": [
+          {
+            "label": "insect",
+            "score": 0.20931364595890045
+          },
+          {
+            "label": "lizard",
+            "score": 0.2074146866798401
+          },
+          {
+            "label": "toaster",
+            "score": 0.20088568329811096
+          },
+          {
+            "label": "hot dog",
+            "score": 0.19930531084537506
+          },
+          {
+            "label": "snake",
+            "score": 0.19838348031044006
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "90",
+    "detections": [
+      {
+        "bbox": [
+          854.21,
+          535.0,
+          874.62,
+          588.62
+        ],
+        "yolo_label": "person",
+        "yolo_confidence": 0.678,
+        "bbox_clip_top_label": "baseball glove",
+        "bbox_clip_top_score": 0.2507350444793701,
+        "bbox_clip_second_score": 0.2453751564025879,
+        "bbox_clip_margin": 0.0053598880767822266,
+        "full_image_clip_top_labels": [
+          {
+            "label": "skis",
+            "score": 0.23411336541175842
+          },
+          {
+            "label": "scissors",
+            "score": 0.2081742137670517
+          },
+          {
+            "label": "umbrella",
+            "score": 0.20711901783943176
+          },
+          {
+            "label": "sink",
+            "score": 0.20645251870155334
+          },
+          {
+            "label": "",
+            "score": 0.20556160807609558
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  },
+  {
+    "image_id": "91",
+    "detections": [
+      {
+        "bbox": [
+          6.9,
+          190.59,
+          568.69,
+          355.04
+        ],
+        "yolo_label": "boat",
+        "yolo_confidence": 0.78,
+        "bbox_clip_top_label": "boat",
+        "bbox_clip_top_score": 0.23270806670188904,
+        "bbox_clip_second_score": 0.20703846216201782,
+        "bbox_clip_margin": 0.025669604539871216,
+        "full_image_clip_top_labels": [
+          {
+            "label": "boat",
+            "score": 0.23298655450344086
+          },
+          {
+            "label": "surfboard",
+            "score": 0.20532912015914917
+          },
+          {
+            "label": "",
+            "score": 0.20006711781024933
+          },
+          {
+            "label": "bus",
+            "score": 0.19754058122634888
+          },
+          {
+            "label": "train",
+            "score": 0.1954101026058197
+          }
+        ],
+        "analysis_flag": "uncertain"
+      }
+    ]
+  }
+]
