@@ -1,22 +1,22 @@
 [
   {
     "id": "0",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "1",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "9",
-    "detected_objects": [
+    "objects": [
       "bear"
     ],
-    "object_counts": {
+    "counts": {
       "bear": 2
     },
     "bboxes": [
@@ -44,23 +44,23 @@
   },
   {
     "id": "2",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "5",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "8",
-    "detected_objects": [
+    "objects": [
       "person",
       "cow"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1,
       "cow": 1
     },
@@ -89,16 +89,16 @@
   },
   {
     "id": "10",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "11",
-    "detected_objects": [
+    "objects": [
       "bear"
     ],
-    "object_counts": {
+    "counts": {
       "bear": 1
     },
     "bboxes": [
@@ -116,10 +116,10 @@
   },
   {
     "id": "12",
-    "detected_objects": [
+    "objects": [
       "teddy bear"
     ],
-    "object_counts": {
+    "counts": {
       "teddy bear": 1
     },
     "bboxes": [
@@ -137,16 +137,16 @@
   },
   {
     "id": "13",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "14",
-    "detected_objects": [
+    "objects": [
       "bear"
     ],
-    "object_counts": {
+    "counts": {
       "bear": 1
     },
     "bboxes": [
@@ -164,16 +164,16 @@
   },
   {
     "id": "16",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "21",
-    "detected_objects": [
+    "objects": [
       "broccoli"
     ],
-    "object_counts": {
+    "counts": {
       "broccoli": 2
     },
     "bboxes": [
@@ -201,10 +201,10 @@
   },
   {
     "id": "23",
-    "detected_objects": [
+    "objects": [
       "bear"
     ],
-    "object_counts": {
+    "counts": {
       "bear": 1
     },
     "bboxes": [
@@ -222,10 +222,10 @@
   },
   {
     "id": "24",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1
     },
     "bboxes": [
@@ -243,10 +243,10 @@
   },
   {
     "id": "25",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 3
     },
     "bboxes": [
@@ -284,23 +284,23 @@
   },
   {
     "id": "28",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "29",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "30",
-    "detected_objects": [
+    "objects": [
       "boat",
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "boat": 2,
       "person": 13
     },
@@ -459,28 +459,28 @@
   },
   {
     "id": "31",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "32",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "34",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "36",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 5
     },
     "bboxes": [
@@ -538,22 +538,22 @@
   },
   {
     "id": "39",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "40",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "41",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 3
     },
     "bboxes": [
@@ -591,10 +591,10 @@
   },
   {
     "id": "43",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1
     },
     "bboxes": [
@@ -612,13 +612,13 @@
   },
   {
     "id": "45",
-    "detected_objects": [
+    "objects": [
       "cell phone",
       "person",
       "car",
       "remote"
     ],
-    "object_counts": {
+    "counts": {
       "cell phone": 1,
       "person": 2,
       "car": 8,
@@ -749,11 +749,11 @@
   },
   {
     "id": "48",
-    "detected_objects": [
+    "objects": [
       "person",
       "boat"
     ],
-    "object_counts": {
+    "counts": {
       "person": 3,
       "boat": 1
     },
@@ -802,11 +802,11 @@
   },
   {
     "id": "49",
-    "detected_objects": [
+    "objects": [
       "car",
       "truck"
     ],
-    "object_counts": {
+    "counts": {
       "car": 3,
       "truck": 2
     },
@@ -865,10 +865,10 @@
   },
   {
     "id": "51",
-    "detected_objects": [
+    "objects": [
       "bird"
     ],
-    "object_counts": {
+    "counts": {
       "bird": 1
     },
     "bboxes": [
@@ -886,11 +886,11 @@
   },
   {
     "id": "52",
-    "detected_objects": [
+    "objects": [
       "person",
       "car"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1,
       "car": 1
     },
@@ -919,22 +919,22 @@
   },
   {
     "id": "54",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "55",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "58",
-    "detected_objects": [
+    "objects": [
       "car"
     ],
-    "object_counts": {
+    "counts": {
       "car": 6
     },
     "bboxes": [
@@ -1002,12 +1002,12 @@
   },
   {
     "id": "64",
-    "detected_objects": [
+    "objects": [
       "person",
       "suitcase",
       "train"
     ],
-    "object_counts": {
+    "counts": {
       "person": 9,
       "suitcase": 1,
       "train": 1
@@ -1127,17 +1127,17 @@
   },
   {
     "id": "65",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "66",
-    "detected_objects": [
+    "objects": [
       "person",
       "boat"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1,
       "boat": 2
     },
@@ -1176,11 +1176,11 @@
   },
   {
     "id": "67",
-    "detected_objects": [
+    "objects": [
       "person",
       "bird"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1,
       "bird": 1
     },
@@ -1209,22 +1209,22 @@
   },
   {
     "id": "68",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "69",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "70",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1
     },
     "bboxes": [
@@ -1242,10 +1242,10 @@
   },
   {
     "id": "71",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 3
     },
     "bboxes": [
@@ -1283,22 +1283,22 @@
   },
   {
     "id": "72",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "73",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "75",
-    "detected_objects": [
+    "objects": [
       "car"
     ],
-    "object_counts": {
+    "counts": {
       "car": 2
     },
     "bboxes": [
@@ -1326,13 +1326,13 @@
   },
   {
     "id": "76",
-    "detected_objects": [
+    "objects": [
       "person",
       "sheep",
       "boat",
       "dog"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1,
       "sheep": 4,
       "boat": 1,
@@ -1413,10 +1413,10 @@
   },
   {
     "id": "77",
-    "detected_objects": [
+    "objects": [
       "car"
     ],
-    "object_counts": {
+    "counts": {
       "car": 4
     },
     "bboxes": [
@@ -1464,10 +1464,10 @@
   },
   {
     "id": "78",
-    "detected_objects": [
+    "objects": [
       "tv"
     ],
-    "object_counts": {
+    "counts": {
       "tv": 1
     },
     "bboxes": [
@@ -1485,11 +1485,11 @@
   },
   {
     "id": "79",
-    "detected_objects": [
+    "objects": [
       "boat",
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "boat": 2,
       "person": 2
     },
@@ -1538,10 +1538,10 @@
   },
   {
     "id": "80",
-    "detected_objects": [
+    "objects": [
       "dog"
     ],
-    "object_counts": {
+    "counts": {
       "dog": 1
     },
     "bboxes": [
@@ -1559,16 +1559,16 @@
   },
   {
     "id": "81",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "84",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 2
     },
     "bboxes": [
@@ -1596,16 +1596,16 @@
   },
   {
     "id": "85",
-    "detected_objects": [],
-    "object_counts": {},
+    "objects": [],
+    "counts": {},
     "bboxes": []
   },
   {
     "id": "86",
-    "detected_objects": [
+    "objects": [
       "bear"
     ],
-    "object_counts": {
+    "counts": {
       "bear": 1
     },
     "bboxes": [
@@ -1623,10 +1623,10 @@
   },
   {
     "id": "89",
-    "detected_objects": [
+    "objects": [
       "dog"
     ],
-    "object_counts": {
+    "counts": {
       "dog": 1
     },
     "bboxes": [
@@ -1644,10 +1644,10 @@
   },
   {
     "id": "90",
-    "detected_objects": [
+    "objects": [
       "person"
     ],
-    "object_counts": {
+    "counts": {
       "person": 1
     },
     "bboxes": [
@@ -1665,10 +1665,10 @@
   },
   {
     "id": "91",
-    "detected_objects": [
+    "objects": [
       "boat"
     ],
-    "object_counts": {
+    "counts": {
       "boat": 1
     },
     "bboxes": [
