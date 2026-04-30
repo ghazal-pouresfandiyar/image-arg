@@ -68,7 +68,7 @@ def main():
 		raise FileNotFoundError(f"CSV not found: {DATASET_PATH}")
 
 	df = pd.read_csv(DATASET_PATH, dtype=str, keep_default_na=False)
-	
+
 	print(f"Processing {len(df)} rows...")
 	metadata_matrix, metadata_feature_names = build_metadata_onehot(df)
 	
@@ -89,12 +89,12 @@ def main():
 		"feature_dim": int(metadata_matrix.shape[1]),
 	}
 	CONFIG_PATH.write_text(json.dumps(config, indent=2), encoding="utf-8")
-	
-	print(f"Processed rows: {len(df)}")
-	print(f"Metadata features created: {metadata_matrix.shape[1]}")
-	print(f"Saved metadata features: {METADATA_FEATURES_PATH} (shape: {metadata_matrix.shape})")
-	print(f"Saved metadata index: {METADATA_INDEX_PATH}")
-	print(f"Saved config: {CONFIG_PATH}")
+
+	print(f"✓ Processed rows: {len(df)}")
+	print(f"✓ Metadata features created: {metadata_matrix.shape[1]}")
+	print(f"✓ Saved metadata features: {METADATA_FEATURES_PATH} (shape: {metadata_matrix.shape})")
+	print(f"✓ Saved metadata index: {METADATA_INDEX_PATH}")
+	print(f"✓ Saved config: {CONFIG_PATH}")
 
 
 if __name__ == "__main__":

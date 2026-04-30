@@ -79,7 +79,7 @@ def main():
 
 		try:
 			embedding = extract_clip_embedding(image_path, processor, model, device)
-		except Exception:
+		except Exception as e:
 			skipped_bad_image += 1
 			continue
 
@@ -110,13 +110,13 @@ def main():
 		"note": "CLIP embeddings only. Metadata features handled separately in 1_one_hot_encoding.py",
 	}
 	CONFIG_PATH.write_text(json.dumps(config, indent=2), encoding="utf-8")
-
-	print(f"Processed rows: {len(df)}")
-	print(f"Rows kept: {len(kept_df)}")
-	print(f"Rows dropped (unreadable image): {skipped_bad_image}")
-	print(f"Saved image features: {IMAGE_FEATURES_PATH} (shape: {image_matrix.shape})")
-	print(f"Saved row index: {INDEX_PATH}")
-	print(f"Saved config: {CONFIG_PATH}")
+	
+	print(f"✓ Processed rows: {len(df)}")
+	print(f"✓ Rows kept: {len(kept_df)}")
+	print(f"⚠️  Rows dropped (unreadable image): {skipped_bad_image}")
+	print(f"✓ Saved image features: {IMAGE_FEATURES_PATH} (shape: {image_matrix.shape})")
+	print(f"✓ Saved row index: {INDEX_PATH}")
+	print(f"✓ Saved config: {CONFIG_PATH}")
 
 
 if __name__ == "__main__":

@@ -1,33 +1,6569 @@
 {
-  "num_images": 58,
-  "total_feature_dim": 932,
-  "feature_dims": {
+  "dataset_info": {
+    "num_images": 58,
+    "total_feature_dim": 972,
+    "feature_modalities": 7
+  },
+  "feature_breakdown": {
     "clip_embeddings": 512,
-    "object_counts": 18,
+    "metadata_onehot": 33,
+    "object_counts": 25,
     "scene_onehot": 4,
     "climate_attributes": 14,
     "premise_embeddings": 384
   },
-  "scene_categories": [
-    "urban",
-    "rural",
-    "industrial",
-    "natural"
-  ],
-  "climate_attributes": [
-    "smoke",
-    "fire",
-    "water",
-    "flood",
-    "ice",
-    "ice_melting",
-    "deforestation",
-    "dry_land",
-    "greenery",
-    "pollution",
-    "urbanization",
-    "industrial_activity",
-    "brightness_level",
-    "color_dominance"
-  ]
+  "image_metadata": {
+    "0": {
+      "id": "0",
+      "index": 0,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1487,
+          "rural": 0.1975,
+          "industrial": 0.3293,
+          "natural": 0.3245
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Coral reefs can die \u0628\u0633\u0628\u0628 rising ocean temperatures",
+            "relevance_score": 0.4147610068321228
+          },
+          {
+            "fact": "Healthy ecosystems support biodiversity",
+            "relevance_score": 0.3200068771839142
+          },
+          {
+            "fact": "Overfishing can damage marine ecosystems",
+            "relevance_score": 0.300981342792511
+          },
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.29061195254325867
+          },
+          {
+            "fact": "Loss of biodiversity weakens ecosystems",
+            "relevance_score": 0.27842915058135986
+          }
+        ]
+      },
+      "caption": "A natural landscape."
+    },
+    "1": {
+      "id": "1",
+      "index": 1,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2545,
+          "rural": 0.1373,
+          "industrial": 0.4167,
+          "natural": 0.1914
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Overfishing can damage marine ecosystems",
+            "relevance_score": 0.4013429880142212
+          },
+          {
+            "fact": "Animals can lose their habitats due to climate change",
+            "relevance_score": 0.3101375699043274
+          },
+          {
+            "fact": "Oil spills damage ocean life",
+            "relevance_score": 0.27694493532180786
+          },
+          {
+            "fact": "Eating less meat can reduce environmental impact",
+            "relevance_score": 0.2680218815803528
+          },
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.2633318305015564
+          }
+        ]
+      },
+      "caption": "A natural landscape."
+    },
+    "9": {
+      "id": "9",
+      "index": 2,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 2
+        },
+        "num_bboxes": 2
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1888,
+          "rural": 0.1572,
+          "industrial": 0.4561,
+          "natural": 0.1979
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.3184276819229126
+          },
+          {
+            "fact": "Ice caps are melting faster than before",
+            "relevance_score": 0.3138633072376251
+          },
+          {
+            "fact": "Glaciers are shrinking around the world",
+            "relevance_score": 0.2892678678035736
+          },
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.26574403047561646
+          },
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.22242608666419983
+          }
+        ]
+      },
+      "caption": "A urban area featuring bear."
+    },
+    "2": {
+      "id": "2",
+      "index": 3,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.5343,
+          "rural": 0.0466,
+          "industrial": 0.361,
+          "natural": 0.058
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.5787831544876099
+          },
+          {
+            "fact": "Climate change can force people to migrate",
+            "relevance_score": 0.5014008283615112
+          },
+          {
+            "fact": "Climate actions must be taken.",
+            "relevance_score": 0.4728131592273712
+          },
+          {
+            "fact": "Food waste contributes to climate change",
+            "relevance_score": 0.46930181980133057
+          },
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.4466056227684021
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "5": {
+      "id": "5",
+      "index": 4,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.6564,
+          "rural": 0.0756,
+          "industrial": 0.268,
+          "natural": 0.0
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Wildfires are becoming more frequent",
+            "relevance_score": 0.6938198804855347
+          },
+          {
+            "fact": "Burning coal is a major source of emissions",
+            "relevance_score": 0.5843189358711243
+          },
+          {
+            "fact": "Burning fossil fuels releases carbon dioxide",
+            "relevance_score": 0.48963871598243713
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.46870023012161255
+          },
+          {
+            "fact": "Urban areas can become hotter than rural areas",
+            "relevance_score": 0.41902628540992737
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "8": {
+      "id": "8",
+      "index": 5,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person",
+          "cow"
+        ],
+        "object_counts": {
+          "person": 1,
+          "cow": 1
+        },
+        "num_bboxes": 2
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2983,
+          "rural": 0.2003,
+          "industrial": 0.4767,
+          "natural": 0.0247
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Climate change can cause stronger storms",
+            "relevance_score": 0.3267267048358917
+          },
+          {
+            "fact": "Climate change affects weather patterns",
+            "relevance_score": 0.31220704317092896
+          },
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.26729923486709595
+          },
+          {
+            "fact": "Protecting nature helps fight climate change",
+            "relevance_score": 0.26472562551498413
+          },
+          {
+            "fact": "Animals can lose their habitats due to climate change",
+            "relevance_score": 0.25478246808052063
+          }
+        ]
+      },
+      "caption": "A urban area featuring person, horse."
+    },
+    "10": {
+      "id": "10",
+      "index": 6,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3759,
+          "rural": 0.0945,
+          "industrial": 0.3517,
+          "natural": 0.1779
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Food waste contributes to climate change",
+            "relevance_score": 0.49818742275238037
+          },
+          {
+            "fact": "Recycling helps reduce waste",
+            "relevance_score": 0.46372708678245544
+          },
+          {
+            "fact": "Plastic pollution affects ocean ecosystems",
+            "relevance_score": 0.4480303227901459
+          },
+          {
+            "fact": "Waste in landfills produces greenhouse gases",
+            "relevance_score": 0.40716204047203064
+          },
+          {
+            "fact": "Oil spills damage ocean life",
+            "relevance_score": 0.37541860342025757
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "11": {
+      "id": "11",
+      "index": 7,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.127,
+          "rural": 0.1971,
+          "industrial": 0.3323,
+          "natural": 0.3436
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Glaciers are shrinking around the world",
+            "relevance_score": 0.39495742321014404
+          },
+          {
+            "fact": "Ice caps are melting faster than before",
+            "relevance_score": 0.39086633920669556
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.37070006132125854
+          },
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.33708444237709045
+          },
+          {
+            "fact": "Snowfall patterns are changing",
+            "relevance_score": 0.2788207530975342
+          }
+        ]
+      },
+      "caption": "A natural area featuring bear."
+    },
+    "12": {
+      "id": "12",
+      "index": 8,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "teddy bear"
+        ],
+        "object_counts": {
+          "teddy bear": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3287,
+          "rural": 0.1758,
+          "industrial": 0.3975,
+          "natural": 0.098
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.4933294951915741
+          },
+          {
+            "fact": "Ice caps are melting faster than before",
+            "relevance_score": 0.44626951217651367
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.39081355929374695
+          },
+          {
+            "fact": "Glaciers are shrinking around the world",
+            "relevance_score": 0.3625498116016388
+          },
+          {
+            "fact": "Snowfall patterns are changing",
+            "relevance_score": 0.2444370687007904
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "13": {
+      "id": "13",
+      "index": 9,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1731,
+          "rural": 0.3034,
+          "industrial": 0.1925,
+          "natural": 0.3309
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Some species cannot adapt quickly to temperature changes",
+            "relevance_score": 0.48440641164779663
+          },
+          {
+            "fact": "Extreme heat can harm humans and animals",
+            "relevance_score": 0.40751394629478455
+          },
+          {
+            "fact": "The Earth is getting warmer over time",
+            "relevance_score": 0.32792171835899353
+          },
+          {
+            "fact": "Carbon dioxide traps heat in the atmosphere",
+            "relevance_score": 0.32641565799713135
+          },
+          {
+            "fact": "Animals can lose their habitats due to climate change",
+            "relevance_score": 0.3248400390148163
+          }
+        ]
+      },
+      "caption": "A rural landscape."
+    },
+    "14": {
+      "id": "14",
+      "index": 10,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1973,
+          "rural": 0.1256,
+          "industrial": 0.382,
+          "natural": 0.295
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Ice caps are melting faster than before",
+            "relevance_score": 0.31198859214782715
+          },
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.29734355211257935
+          },
+          {
+            "fact": "Glaciers are shrinking around the world",
+            "relevance_score": 0.2531278133392334
+          },
+          {
+            "fact": "Some species cannot adapt quickly to temperature changes",
+            "relevance_score": 0.23257014155387878
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.2054203301668167
+          }
+        ]
+      },
+      "caption": "A natural area featuring bear."
+    },
+    "16": {
+      "id": "16",
+      "index": 11,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1975,
+          "rural": 0.1703,
+          "industrial": 0.3754,
+          "natural": 0.2568
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "natural"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.5032792091369629
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.498578280210495
+          },
+          {
+            "fact": "Glaciers are shrinking around the world",
+            "relevance_score": 0.4532743990421295
+          },
+          {
+            "fact": "Ice caps are melting faster than before",
+            "relevance_score": 0.4518257975578308
+          },
+          {
+            "fact": "Snowfall patterns are changing",
+            "relevance_score": 0.3533966839313507
+          }
+        ]
+      },
+      "caption": "A natural landscape."
+    },
+    "21": {
+      "id": "21",
+      "index": 12,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "broccoli"
+        ],
+        "object_counts": {
+          "broccoli": 2
+        },
+        "num_bboxes": 2
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3345,
+          "rural": 0.199,
+          "industrial": 0.4615,
+          "natural": 0.0051
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.4929041266441345
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.49079370498657227
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.40439343452453613
+          },
+          {
+            "fact": "Forests help absorb carbon dioxide",
+            "relevance_score": 0.38348788022994995
+          },
+          {
+            "fact": "Deforestation increases carbon dioxide levels",
+            "relevance_score": 0.31593501567840576
+          }
+        ]
+      },
+      "caption": "A urban area featuring broccoli."
+    },
+    "23": {
+      "id": "23",
+      "index": 13,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3599,
+          "rural": 0.0925,
+          "industrial": 0.358,
+          "natural": 0.1896
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Animals can lose their habitats due to climate change",
+            "relevance_score": 0.3798845708370209
+          },
+          {
+            "fact": "Protecting nature helps fight climate change",
+            "relevance_score": 0.3658057451248169
+          },
+          {
+            "fact": "Extreme heat can harm humans and animals",
+            "relevance_score": 0.32555118203163147
+          },
+          {
+            "fact": "Climate actions must be taken.",
+            "relevance_score": 0.3118375241756439
+          },
+          {
+            "fact": "Climate action can protect ecosystems",
+            "relevance_score": 0.2949523627758026
+          }
+        ]
+      },
+      "caption": "A urban area featuring bear."
+    },
+    "24": {
+      "id": "24",
+      "index": 14,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2972,
+          "rural": 0.1347,
+          "industrial": 0.3772,
+          "natural": 0.1909
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "The Earth is getting warmer over time",
+            "relevance_score": 0.3941646218299866
+          },
+          {
+            "fact": "Extreme heat can harm humans and animals",
+            "relevance_score": 0.3506510257720947
+          },
+          {
+            "fact": "Some species cannot adapt quickly to temperature changes",
+            "relevance_score": 0.3496243953704834
+          },
+          {
+            "fact": "Carbon dioxide traps heat in the atmosphere",
+            "relevance_score": 0.3005354404449463
+          },
+          {
+            "fact": "Urban areas can become hotter than rural areas",
+            "relevance_score": 0.2975504398345947
+          }
+        ]
+      },
+      "caption": "A urban area featuring person."
+    },
+    "25": {
+      "id": "25",
+      "index": 15,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 3
+        },
+        "num_bboxes": 3
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1752,
+          "rural": 0.1509,
+          "industrial": 0.3473,
+          "natural": 0.3267
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "low",
+        "color_dominance_value": "dark"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.29174888134002686
+          },
+          {
+            "fact": "Polluted water harms animals and humans",
+            "relevance_score": 0.27471140027046204
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.2630547285079956
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.26286256313323975
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.25097066164016724
+          }
+        ]
+      },
+      "caption": "A natural area featuring person, clock."
+    },
+    "28": {
+      "id": "28",
+      "index": 16,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3203,
+          "rural": 0.1459,
+          "industrial": 0.4174,
+          "natural": 0.1164
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Animals can lose their habitats due to climate change",
+            "relevance_score": 0.3868512809276581
+          },
+          {
+            "fact": "Methane is produced by livestock and waste",
+            "relevance_score": 0.2844375669956207
+          },
+          {
+            "fact": "Extreme heat can harm humans and animals",
+            "relevance_score": 0.24686327576637268
+          },
+          {
+            "fact": "Healthy ecosystems support biodiversity",
+            "relevance_score": 0.24364352226257324
+          },
+          {
+            "fact": "Coral reefs can die \u0628\u0633\u0628\u0628 rising ocean temperatures",
+            "relevance_score": 0.23317070305347443
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "29": {
+      "id": "29",
+      "index": 17,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.7503,
+          "rural": 0.0837,
+          "industrial": 0.166,
+          "natural": 0.0
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.4383735656738281
+          },
+          {
+            "fact": "Overfishing can damage marine ecosystems",
+            "relevance_score": 0.30971401929855347
+          },
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.30715861916542053
+          },
+          {
+            "fact": "Oil spills damage ocean life",
+            "relevance_score": 0.30574288964271545
+          },
+          {
+            "fact": "Plastic pollution affects ocean ecosystems",
+            "relevance_score": 0.2920079529285431
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "30": {
+      "id": "30",
+      "index": 18,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "boat",
+          "person"
+        ],
+        "object_counts": {
+          "boat": 2,
+          "person": 13
+        },
+        "num_bboxes": 15
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1753,
+          "rural": 0.115,
+          "industrial": 0.3811,
+          "natural": 0.3286
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Overfishing can damage marine ecosystems",
+            "relevance_score": 0.32016247510910034
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.3180038332939148
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.26186203956604004
+          },
+          {
+            "fact": "Polluted water harms animals and humans",
+            "relevance_score": 0.257947713136673
+          },
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.24764856696128845
+          }
+        ]
+      },
+      "caption": "A natural area featuring boat, person."
+    },
+    "31": {
+      "id": "31",
+      "index": 19,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1856,
+          "rural": 0.1241,
+          "industrial": 0.3239,
+          "natural": 0.3664
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.5214784741401672
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.4991297125816345
+          },
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.35200345516204834
+          },
+          {
+            "fact": "Climate change can cause stronger storms",
+            "relevance_score": 0.3421810269355774
+          },
+          {
+            "fact": "Coral reefs can die \u0628\u0633\u0628\u0628 rising ocean temperatures",
+            "relevance_score": 0.31550341844558716
+          }
+        ]
+      },
+      "caption": "A natural landscape."
+    },
+    "32": {
+      "id": "32",
+      "index": 20,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2092,
+          "rural": 0.174,
+          "industrial": 0.4228,
+          "natural": 0.1939
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.2812371850013733
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.27945274114608765
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.2470083087682724
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.23897644877433777
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.18607056140899658
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "34": {
+      "id": "34",
+      "index": 21,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2161,
+          "rural": 0.1763,
+          "industrial": 0.3857,
+          "natural": 0.2219
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.48570024967193604
+          },
+          {
+            "fact": "Oil spills damage ocean life",
+            "relevance_score": 0.2955530285835266
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.27303534746170044
+          },
+          {
+            "fact": "Overfishing can damage marine ecosystems",
+            "relevance_score": 0.27136367559432983
+          },
+          {
+            "fact": "Plastic pollution affects ocean ecosystems",
+            "relevance_score": 0.26370948553085327
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "36": {
+      "id": "36",
+      "index": 22,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 5
+        },
+        "num_bboxes": 5
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1639,
+          "rural": 0.1171,
+          "industrial": 0.343,
+          "natural": 0.3759
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.46473580598831177
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.32569846510887146
+          },
+          {
+            "fact": "Wind energy uses air movement to generate power",
+            "relevance_score": 0.3023664355278015
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.29705747961997986
+          },
+          {
+            "fact": "Oil spills damage ocean life",
+            "relevance_score": 0.28718024492263794
+          }
+        ]
+      },
+      "caption": "A natural area featuring person."
+    },
+    "39": {
+      "id": "39",
+      "index": 23,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2319,
+          "rural": 0.0955,
+          "industrial": 0.4205,
+          "natural": 0.2521
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.5670228004455566
+          },
+          {
+            "fact": "Climate actions must be taken.",
+            "relevance_score": 0.5608406662940979
+          },
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.5570039749145508
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.5303785800933838
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.4761717617511749
+          }
+        ]
+      },
+      "caption": "A natural landscape."
+    },
+    "40": {
+      "id": "40",
+      "index": 24,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.4127,
+          "rural": 0.0708,
+          "industrial": 0.2728,
+          "natural": 0.2437
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.45395320653915405
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.4402543902397156
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.40703555941581726
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.38855135440826416
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.33595341444015503
+          }
+        ]
+      },
+      "caption": "A natural area featuring bird."
+    },
+    "41": {
+      "id": "41",
+      "index": 25,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 3
+        },
+        "num_bboxes": 3
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.4223,
+          "rural": 0.0628,
+          "industrial": 0.4338,
+          "natural": 0.081
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "low",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Climate actions must be taken.",
+            "relevance_score": 0.5723747611045837
+          },
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.5675656795501709
+          },
+          {
+            "fact": "Climate change can force people to migrate",
+            "relevance_score": 0.5311461687088013
+          },
+          {
+            "fact": "Protecting nature helps fight climate change",
+            "relevance_score": 0.4799693524837494
+          },
+          {
+            "fact": "Climate action can protect ecosystems",
+            "relevance_score": 0.46054786443710327
+          }
+        ]
+      },
+      "caption": "A industrial area featuring person."
+    },
+    "43": {
+      "id": "43",
+      "index": 26,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3686,
+          "rural": 0.1624,
+          "industrial": 0.451,
+          "natural": 0.0179
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.1956169158220291
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.19507688283920288
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.183454692363739
+          },
+          {
+            "fact": "Oil spills damage ocean life",
+            "relevance_score": 0.17912641167640686
+          },
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.16763263940811157
+          }
+        ]
+      },
+      "caption": "A urban area featuring person."
+    },
+    "45": {
+      "id": "45",
+      "index": 27,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "cell phone",
+          "person",
+          "car",
+          "remote"
+        ],
+        "object_counts": {
+          "cell phone": 1,
+          "person": 2,
+          "car": 8,
+          "remote": 1
+        },
+        "num_bboxes": 12
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2426,
+          "rural": 0.1393,
+          "industrial": 0.39,
+          "natural": 0.2281
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.4653288424015045
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.36367231607437134
+          },
+          {
+            "fact": "The Earth is getting warmer over time",
+            "relevance_score": 0.3593883812427521
+          },
+          {
+            "fact": "Urban areas can become hotter than rural areas",
+            "relevance_score": 0.32286232709884644
+          },
+          {
+            "fact": "Some species cannot adapt quickly to temperature changes",
+            "relevance_score": 0.29307371377944946
+          }
+        ]
+      },
+      "caption": "A industrial area featuring car, person."
+    },
+    "48": {
+      "id": "48",
+      "index": 28,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person",
+          "boat"
+        ],
+        "object_counts": {
+          "person": 3,
+          "boat": 1
+        },
+        "num_bboxes": 4
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1882,
+          "rural": 0.1987,
+          "industrial": 0.3185,
+          "natural": 0.2947
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "greenish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.46330299973487854
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.4556618928909302
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.43199849128723145
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.4080376923084259
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.40197402238845825
+          }
+        ]
+      },
+      "caption": "A natural area featuring boat, person."
+    },
+    "49": {
+      "id": "49",
+      "index": 29,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "car",
+          "truck"
+        ],
+        "object_counts": {
+          "car": 3,
+          "truck": 2
+        },
+        "num_bboxes": 5
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1805,
+          "rural": 0.1706,
+          "industrial": 0.4381,
+          "natural": 0.2108
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.4695085287094116
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.3798656165599823
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.29587292671203613
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.2574324905872345
+          },
+          {
+            "fact": "Electric vehicles produce fewer emissions than gasoline cars",
+            "relevance_score": 0.2538963556289673
+          }
+        ]
+      },
+      "caption": "A industrial area featuring fire hydrant, car."
+    },
+    "51": {
+      "id": "51",
+      "index": 30,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "bird"
+        ],
+        "object_counts": {
+          "bird": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2794,
+          "rural": 0.1018,
+          "industrial": 0.4007,
+          "natural": 0.2182
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.16537749767303467
+          },
+          {
+            "fact": "Plastic pollution affects ocean ecosystems",
+            "relevance_score": 0.15890412032604218
+          },
+          {
+            "fact": "Polluted water harms animals and humans",
+            "relevance_score": 0.13746364414691925
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.13579633831977844
+          },
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.13226956129074097
+          }
+        ]
+      },
+      "caption": "A natural landscape."
+    },
+    "52": {
+      "id": "52",
+      "index": 31,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person",
+          "car"
+        ],
+        "object_counts": {
+          "person": 1,
+          "car": 1
+        },
+        "num_bboxes": 2
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.7056,
+          "rural": 0.0688,
+          "industrial": 0.2254,
+          "natural": 0.0002
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Wildfires are becoming more frequent",
+            "relevance_score": 0.37583479285240173
+          },
+          {
+            "fact": "Burning fossil fuels releases carbon dioxide",
+            "relevance_score": 0.2030230015516281
+          },
+          {
+            "fact": "Burning coal is a major source of emissions",
+            "relevance_score": 0.17877116799354553
+          },
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.12713123857975006
+          },
+          {
+            "fact": "Snowfall patterns are changing",
+            "relevance_score": 0.12440461665391922
+          }
+        ]
+      },
+      "caption": "A urban area featuring car, person."
+    },
+    "54": {
+      "id": "54",
+      "index": 32,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3628,
+          "rural": 0.158,
+          "industrial": 0.3445,
+          "natural": 0.1347
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Heatwaves can cause health problems",
+            "relevance_score": 0.6188563704490662
+          },
+          {
+            "fact": "Extreme heat can harm humans and animals",
+            "relevance_score": 0.5129455327987671
+          },
+          {
+            "fact": "Climate actions must be taken.",
+            "relevance_score": 0.3860066831111908
+          },
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.37554895877838135
+          },
+          {
+            "fact": "Pollution can harm human health",
+            "relevance_score": 0.3636183738708496
+          }
+        ]
+      },
+      "caption": "A urban area featuring bottle, umbrella."
+    },
+    "55": {
+      "id": "55",
+      "index": 33,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.6539,
+          "rural": 0.0989,
+          "industrial": 0.2472,
+          "natural": 0.0
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.3284725248813629
+          },
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.30514538288116455
+          },
+          {
+            "fact": "Forests help absorb carbon dioxide",
+            "relevance_score": 0.3020790219306946
+          },
+          {
+            "fact": "Healthy ecosystems support biodiversity",
+            "relevance_score": 0.2828049659729004
+          },
+          {
+            "fact": "Deforestation increases carbon dioxide levels",
+            "relevance_score": 0.26636260747909546
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "58": {
+      "id": "58",
+      "index": 34,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 6
+        },
+        "num_bboxes": 6
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2186,
+          "rural": 0.1301,
+          "industrial": 0.461,
+          "natural": 0.1903
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.3358752131462097
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.3185049295425415
+          },
+          {
+            "fact": "Cars and airplanes contribute to air pollution",
+            "relevance_score": 0.3116215467453003
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.28608983755111694
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.27385324239730835
+          }
+        ]
+      },
+      "caption": "A natural area featuring car."
+    },
+    "64": {
+      "id": "64",
+      "index": 35,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person",
+          "suitcase",
+          "train"
+        ],
+        "object_counts": {
+          "person": 9,
+          "suitcase": 1,
+          "train": 1
+        },
+        "num_bboxes": 11
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.4061,
+          "rural": 0.147,
+          "industrial": 0.3457,
+          "natural": 0.1011
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.4316152334213257
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.40286242961883545
+          },
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.40021005272865295
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.3885751962661743
+          },
+          {
+            "fact": "Forests help absorb carbon dioxide",
+            "relevance_score": 0.3450424075126648
+          }
+        ]
+      },
+      "caption": "A urban area featuring person."
+    },
+    "65": {
+      "id": "65",
+      "index": 36,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.4251,
+          "rural": 0.0889,
+          "industrial": 0.3724,
+          "natural": 0.1137
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.5113689303398132
+          },
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.48616456985473633
+          },
+          {
+            "fact": "Protecting nature helps fight climate change",
+            "relevance_score": 0.4780706763267517
+          },
+          {
+            "fact": "The Earth is getting warmer over time",
+            "relevance_score": 0.4692753255367279
+          },
+          {
+            "fact": "Climate change affects weather patterns",
+            "relevance_score": 0.46039748191833496
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "66": {
+      "id": "66",
+      "index": 37,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person",
+          "boat"
+        ],
+        "object_counts": {
+          "person": 1,
+          "boat": 2
+        },
+        "num_bboxes": 3
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.5107,
+          "rural": 0.0234,
+          "industrial": 0.3641,
+          "natural": 0.1019
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Climate change can force people to migrate",
+            "relevance_score": 0.4811910092830658
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.4591405689716339
+          },
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.43330320715904236
+          },
+          {
+            "fact": "Climate actions must be taken.",
+            "relevance_score": 0.42385199666023254
+          },
+          {
+            "fact": "Extreme heat can harm humans and animals",
+            "relevance_score": 0.3511231541633606
+          }
+        ]
+      },
+      "caption": "A urban area featuring boat, person."
+    },
+    "67": {
+      "id": "67",
+      "index": 38,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person",
+          "bird"
+        ],
+        "object_counts": {
+          "person": 1,
+          "bird": 1
+        },
+        "num_bboxes": 2
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.4421,
+          "rural": 0.2017,
+          "industrial": 0.3551,
+          "natural": 0.001
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Cars and airplanes contribute to air pollution",
+            "relevance_score": 0.43854349851608276
+          },
+          {
+            "fact": "Plastic pollution affects ocean ecosystems",
+            "relevance_score": 0.4316193759441376
+          },
+          {
+            "fact": "Pollution can harm human health",
+            "relevance_score": 0.41487789154052734
+          },
+          {
+            "fact": "Air pollution can cause respiratory diseases",
+            "relevance_score": 0.40152692794799805
+          },
+          {
+            "fact": "Polluted water harms animals and humans",
+            "relevance_score": 0.39141201972961426
+          }
+        ]
+      },
+      "caption": "A urban area featuring person, bird."
+    },
+    "68": {
+      "id": "68",
+      "index": 39,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.219,
+          "rural": 0.1562,
+          "industrial": 0.4629,
+          "natural": 0.1619
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.48537418246269226
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.35552775859832764
+          },
+          {
+            "fact": "The Earth is getting warmer over time",
+            "relevance_score": 0.3281089663505554
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.324668288230896
+          },
+          {
+            "fact": "Climate change can cause stronger storms",
+            "relevance_score": 0.2965124249458313
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "69": {
+      "id": "69",
+      "index": 40,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.4733,
+          "rural": 0.1569,
+          "industrial": 0.346,
+          "natural": 0.0238
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.1686556339263916
+          },
+          {
+            "fact": "Public awareness can help reduce climate change",
+            "relevance_score": 0.15398620069026947
+          },
+          {
+            "fact": "Greenhouse gases include carbon dioxide and methane",
+            "relevance_score": 0.14498287439346313
+          },
+          {
+            "fact": "The Earth is getting warmer over time",
+            "relevance_score": 0.13151760399341583
+          },
+          {
+            "fact": "Coral reefs can die \u0628\u0633\u0628\u0628 rising ocean temperatures",
+            "relevance_score": 0.12496036291122437
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "70": {
+      "id": "70",
+      "index": 41,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.5558,
+          "rural": 0.1788,
+          "industrial": 0.2654,
+          "natural": 0.0
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.6539808511734009
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.5737207531929016
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.5576772093772888
+          },
+          {
+            "fact": "Wildfires are becoming more frequent",
+            "relevance_score": 0.4948733150959015
+          },
+          {
+            "fact": "Burning fossil fuels releases carbon dioxide",
+            "relevance_score": 0.4726365804672241
+          }
+        ]
+      },
+      "caption": "A urban area featuring person."
+    },
+    "71": {
+      "id": "71",
+      "index": 42,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 3
+        },
+        "num_bboxes": 3
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2238,
+          "rural": 0.1735,
+          "industrial": 0.4094,
+          "natural": 0.1932
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.40110090374946594
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.36577948927879333
+          },
+          {
+            "fact": "Healthy ecosystems support biodiversity",
+            "relevance_score": 0.34096384048461914
+          },
+          {
+            "fact": "Urban areas can become hotter than rural areas",
+            "relevance_score": 0.3366909623146057
+          },
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.33398205041885376
+          }
+        ]
+      },
+      "caption": "A urban area featuring person."
+    },
+    "72": {
+      "id": "72",
+      "index": 43,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.269,
+          "rural": 0.1379,
+          "industrial": 0.4041,
+          "natural": 0.189
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "high",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Cars and airplanes contribute to air pollution",
+            "relevance_score": 0.4764704406261444
+          },
+          {
+            "fact": "Air pollution can cause respiratory diseases",
+            "relevance_score": 0.45815062522888184
+          },
+          {
+            "fact": "Burning coal is a major source of emissions",
+            "relevance_score": 0.43734729290008545
+          },
+          {
+            "fact": "Wildfires are becoming more frequent",
+            "relevance_score": 0.428657203912735
+          },
+          {
+            "fact": "Carbon dioxide traps heat in the atmosphere",
+            "relevance_score": 0.37064337730407715
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "73": {
+      "id": "73",
+      "index": 44,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.6086,
+          "rural": 0.0167,
+          "industrial": 0.3687,
+          "natural": 0.006
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Wildfires are becoming more frequent",
+            "relevance_score": 0.5712062120437622
+          },
+          {
+            "fact": "Climate actions must be taken.",
+            "relevance_score": 0.4256027042865753
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.36793071031570435
+          },
+          {
+            "fact": "Extreme heat can harm humans and animals",
+            "relevance_score": 0.35141170024871826
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.33230650424957275
+          }
+        ]
+      },
+      "caption": "A urban area featuring sports ball."
+    },
+    "75": {
+      "id": "75",
+      "index": 45,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 2
+        },
+        "num_bboxes": 2
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1693,
+          "rural": 0.1614,
+          "industrial": 0.3883,
+          "natural": 0.2811
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.5232140421867371
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.4860530495643616
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.4706834554672241
+          },
+          {
+            "fact": "Forests help absorb carbon dioxide",
+            "relevance_score": 0.37911248207092285
+          },
+          {
+            "fact": "Polluted water harms animals and humans",
+            "relevance_score": 0.3328070342540741
+          }
+        ]
+      },
+      "caption": "A natural area featuring car."
+    },
+    "76": {
+      "id": "76",
+      "index": 46,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person",
+          "sheep",
+          "boat",
+          "dog"
+        ],
+        "object_counts": {
+          "person": 1,
+          "sheep": 4,
+          "boat": 1,
+          "dog": 1
+        },
+        "num_bboxes": 7
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.321,
+          "rural": 0.0731,
+          "industrial": 0.3594,
+          "natural": 0.2465
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.4118560552597046
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.3496759533882141
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.3285377621650696
+          },
+          {
+            "fact": "Forests help absorb carbon dioxide",
+            "relevance_score": 0.2644989490509033
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.24594224989414215
+          }
+        ]
+      },
+      "caption": "A natural area featuring dog, person."
+    },
+    "77": {
+      "id": "77",
+      "index": 47,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "car"
+        ],
+        "object_counts": {
+          "car": 4
+        },
+        "num_bboxes": 4
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1979,
+          "rural": 0.1192,
+          "industrial": 0.4284,
+          "natural": 0.2545
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.3173600435256958
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.3142320513725281
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.27736908197402954
+          },
+          {
+            "fact": "Burning fossil fuels releases carbon dioxide",
+            "relevance_score": 0.26061323285102844
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.24878455698490143
+          }
+        ]
+      },
+      "caption": "A natural area featuring car."
+    },
+    "78": {
+      "id": "78",
+      "index": 48,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "tv"
+        ],
+        "object_counts": {
+          "tv": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3332,
+          "rural": 0.1227,
+          "industrial": 0.3713,
+          "natural": 0.1728
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.5840826034545898
+          },
+          {
+            "fact": "Wildfires are becoming more frequent",
+            "relevance_score": 0.5474824905395508
+          },
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.5358366370201111
+          },
+          {
+            "fact": "Burning fossil fuels releases carbon dioxide",
+            "relevance_score": 0.5030542016029358
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.4733788073062897
+          }
+        ]
+      },
+      "caption": "A urban area featuring tv."
+    },
+    "79": {
+      "id": "79",
+      "index": 49,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "boat",
+          "person"
+        ],
+        "object_counts": {
+          "boat": 2,
+          "person": 2
+        },
+        "num_bboxes": 4
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2009,
+          "rural": 0.1363,
+          "industrial": 0.4241,
+          "natural": 0.2386
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "natural"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.3321931064128876
+          },
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.3000231385231018
+          },
+          {
+            "fact": "Ice caps are melting faster than before",
+            "relevance_score": 0.25997433066368103
+          },
+          {
+            "fact": "Glaciers are shrinking around the world",
+            "relevance_score": 0.2555848956108093
+          },
+          {
+            "fact": "Snowfall patterns are changing",
+            "relevance_score": 0.225729838013649
+          }
+        ]
+      },
+      "caption": "A natural area featuring boat, person."
+    },
+    "80": {
+      "id": "80",
+      "index": 50,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "dog"
+        ],
+        "object_counts": {
+          "dog": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3617,
+          "rural": 0.0953,
+          "industrial": 0.4358,
+          "natural": 0.1072
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "low",
+        "color_dominance_value": "dark"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.46626099944114685
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.3889954686164856
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.3238328695297241
+          },
+          {
+            "fact": "Forests help absorb carbon dioxide",
+            "relevance_score": 0.2971487045288086
+          },
+          {
+            "fact": "Deforestation increases carbon dioxide levels",
+            "relevance_score": 0.24773946404457092
+          }
+        ]
+      },
+      "caption": "A industrial area featuring cat."
+    },
+    "81": {
+      "id": "81",
+      "index": 51,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1752,
+          "rural": 0.0966,
+          "industrial": 0.3326,
+          "natural": 0.3956
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.433464378118515
+          },
+          {
+            "fact": "Ice caps are melting faster than before",
+            "relevance_score": 0.43078482151031494
+          },
+          {
+            "fact": "Climate actions must be taken.",
+            "relevance_score": 0.39689958095550537
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.32933199405670166
+          },
+          {
+            "fact": "Climate change can force people to migrate",
+            "relevance_score": 0.27656033635139465
+          }
+        ]
+      },
+      "caption": "A natural landscape."
+    },
+    "84": {
+      "id": "84",
+      "index": 52,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 2
+        },
+        "num_bboxes": 2
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.211,
+          "rural": 0.1605,
+          "industrial": 0.4744,
+          "natural": 0.1541
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "dark"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.38275182247161865
+          },
+          {
+            "fact": "Polluted water harms animals and humans",
+            "relevance_score": 0.307942271232605
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.30122554302215576
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.2556706964969635
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.21830178797245026
+          }
+        ]
+      },
+      "caption": "A industrial area featuring boat, person."
+    },
+    "85": {
+      "id": "85",
+      "index": 53,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [],
+        "object_counts": {},
+        "num_bboxes": 0
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2108,
+          "rural": 0.1711,
+          "industrial": 0.4255,
+          "natural": 0.1926
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Trees provide shade and reduce heat",
+            "relevance_score": 0.5097053647041321
+          },
+          {
+            "fact": "Floods can destroy homes and infrastructure",
+            "relevance_score": 0.49909478425979614
+          },
+          {
+            "fact": "Hot weather can dry out forests",
+            "relevance_score": 0.4424456059932709
+          },
+          {
+            "fact": "Droughts can reduce water supply",
+            "relevance_score": 0.38912850618362427
+          },
+          {
+            "fact": "Cutting down trees reduces oxygen production",
+            "relevance_score": 0.38785770535469055
+          }
+        ]
+      },
+      "caption": "A urban landscape."
+    },
+    "86": {
+      "id": "86",
+      "index": 54,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "bear"
+        ],
+        "object_counts": {
+          "bear": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.2222,
+          "rural": 0.1086,
+          "industrial": 0.3489,
+          "natural": 0.3203
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Glaciers are shrinking around the world",
+            "relevance_score": 0.2956112325191498
+          },
+          {
+            "fact": "Melting ice is caused by rising temperatures",
+            "relevance_score": 0.2867123782634735
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.28312328457832336
+          },
+          {
+            "fact": "Some species cannot adapt quickly to temperature changes",
+            "relevance_score": 0.22161707282066345
+          },
+          {
+            "fact": "Ice caps are melting faster than before",
+            "relevance_score": 0.20774316787719727
+          }
+        ]
+      },
+      "caption": "A natural area featuring bear."
+    },
+    "89": {
+      "id": "89",
+      "index": 55,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "dog"
+        ],
+        "object_counts": {
+          "dog": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.3918,
+          "rural": 0.1581,
+          "industrial": 0.343,
+          "natural": 0.1072
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "polluted"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Cars and airplanes contribute to air pollution",
+            "relevance_score": 0.40462207794189453
+          },
+          {
+            "fact": "Plastic pollution affects ocean ecosystems",
+            "relevance_score": 0.3550513982772827
+          },
+          {
+            "fact": "Air pollution can cause respiratory diseases",
+            "relevance_score": 0.33778494596481323
+          },
+          {
+            "fact": "Pollution can harm human health",
+            "relevance_score": 0.3362664580345154
+          },
+          {
+            "fact": "Polluted water harms animals and humans",
+            "relevance_score": 0.3256204128265381
+          }
+        ]
+      },
+      "caption": "A urban area featuring dog."
+    },
+    "90": {
+      "id": "90",
+      "index": 56,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "person"
+        ],
+        "object_counts": {
+          "person": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.5151,
+          "rural": 0.0313,
+          "industrial": 0.4202,
+          "natural": 0.0334
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "grayish"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.6130269169807434
+          },
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.5762035846710205
+          },
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.5225163698196411
+          },
+          {
+            "fact": "Water scarcity can be worsened by climate change",
+            "relevance_score": 0.5062651634216309
+          },
+          {
+            "fact": "Climate change affects weather patterns",
+            "relevance_score": 0.48606282472610474
+          }
+        ]
+      },
+      "caption": "A urban area featuring person."
+    },
+    "91": {
+      "id": "91",
+      "index": 57,
+      "clip_embedding": {
+        "dimension": 512,
+        "model": "openai/clip-vit-base-patch32"
+      },
+      "metadata_onehot": {
+        "dimension": 33,
+        "categories": []
+      },
+      "yolo_detection": {
+        "dimension": 18,
+        "model": "yolov8l",
+        "objects_detected": [
+          "boat"
+        ],
+        "object_counts": {
+          "boat": 1
+        },
+        "num_bboxes": 1
+      },
+      "scene_classification": {
+        "dimension": 4,
+        "categories": [
+          "urban",
+          "rural",
+          "industrial",
+          "natural"
+        ],
+        "probabilities": {
+          "urban": 0.1961,
+          "rural": 0.1055,
+          "industrial": 0.2383,
+          "natural": 0.46
+        },
+        "color_analysis": {}
+      },
+      "climate_attributes": {
+        "dimension": 14,
+        "binary_attributes": [
+          "smoke",
+          "fire",
+          "water",
+          "flood",
+          "ice",
+          "ice_melting",
+          "deforestation",
+          "dry_land",
+          "greenery",
+          "pollution",
+          "urbanization",
+          "industrial_activity"
+        ],
+        "brightness_level": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "color_dominance": [
+          "natural",
+          "grayish",
+          "dark",
+          "greenish",
+          "polluted"
+        ],
+        "detected": {
+          "smoke": 0,
+          "fire": 0,
+          "water": 0,
+          "flood": 0,
+          "ice": 0,
+          "ice_melting": 0,
+          "deforestation": 0,
+          "dry_land": 0,
+          "greenery": 0,
+          "pollution": 0,
+          "urbanization": 0,
+          "industrial_activity": 0
+        },
+        "brightness_level_value": "medium",
+        "color_dominance_value": "dark"
+      },
+      "premise_embeddings": {
+        "dimension": 384,
+        "model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "fact_retrieval": {
+        "top_k": 5,
+        "retrieved_facts": [
+          {
+            "fact": "Rising sea levels can flood cities",
+            "relevance_score": 0.27379167079925537
+          },
+          {
+            "fact": "Overfishing can damage marine ecosystems",
+            "relevance_score": 0.2710900902748108
+          },
+          {
+            "fact": "Oil spills damage ocean life",
+            "relevance_score": 0.19080641865730286
+          },
+          {
+            "fact": "Sea levels rise when ice melts",
+            "relevance_score": 0.189571350812912
+          },
+          {
+            "fact": "Ocean warming can harm marine life",
+            "relevance_score": 0.18213766813278198
+          }
+        ]
+      },
+      "caption": "A natural landscape."
+    }
+  }
 }

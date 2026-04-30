@@ -3,10 +3,12 @@
 
 import csv
 import os
+from pathlib import Path
 
-# Edit these values directly.
-CSV_PATH = "./filtered/annotation/argumet-manual.csv"
-IMAGES_DIR = "./filtered/annotation"
+# Get root directory
+ROOT_DIR = Path(__file__).resolve().parent.parent
+CSV_PATH = ROOT_DIR / "dataset" / "annotated.csv"
+IMAGES_DIR = ROOT_DIR / "dataset" / "images_for_annotation"
 ID_COLUMN = "id"
 IMAGE_EXT = ".jpg"
 OUTPUT_PATH = None  # Example: "./filtered/annotation/argumet-manual.filtered.csv"
@@ -40,22 +42,22 @@ def read_csv_with_fallback(path):
 
 
 def main():
-    if not os.path.exists(CSV_PATH):
-        raise FileNotFoundError("CSV not found: " + CSV_PATH)
+    if not CSV_PATH.exists():
+        raise FileNotFoundError("CSV not found: " + str(CSV_PATH))
 
-    if not os.path.isdir(IMAGES_DIR):
-        raise NotADirectoryError("Images directory not found: " + IMAGES_DIR)
+    if not IMAGES_DIR.is_dir():
+        raise NotADirectoryError("Images directory not found: " + str(IMAGES_DIR))
 
     valid_ids = set()
-    for name in os.listdir(IMAGES_DIR):
-        file_path = os.path.join(IMAGES_DIR, name)
-        if os.path.isfile(file_path) and name.lower().endswith(IMAGE_EXT.lower()):
-            valid_ids.add(os.path.splitext(name)[0])
+    for name in os.listdir(str(IMAGES_DIR)):
+        file_path = IMAGES_DIR / name
+        if file_path.is_file() and name.lower().endswith(IMAGE_EXT.lower()):
+            valid_ids.add(file_path.stem)
 
     if not valid_ids:
         raise ValueError("No image files found with extension " + IMAGE_EXT)
 
-    fieldnames, rows = read_csv_with_fallback(CSV_PATH)
+    fieldnames, rows = read_csv_with_fallback(str(CSV_PATH))
     if ID_COLUMN not in fieldnames:
         raise KeyError("ID column not found: " + ID_COLUMN)
 
@@ -73,8 +75,8 @@ def main():
     if DRY_RUN:
         return
 
-    target_path = OUTPUT_PATH if OUTPUT_PATH else CSV_PATH
-    with open(target_path, "w", newline="", encoding="utf-8") as f:
+    target_path = Path(OUTPUT_PATH) if OUTPUT_PATH else CSV_PATH
+    with open(str(target_path), "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(kept_rows)

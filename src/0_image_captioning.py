@@ -53,18 +53,15 @@ for idx, row in df.iterrows():
 	image_path = get_image_path(image_id)
 
 	if not image_path.exists():
-		print(f"Missing image: {image_id}")
+		print(f"⚠️  Missing image: {image_id}")
 		continue
 
 	if pd.notna(row.get("blip2_caption")) and row["blip2_caption"]:
 		continue  # already processed
 
-	try:
-		caption = caption_image(image_path)
-		df.at[idx, "blip2_caption"] = caption
-		print(f"{image_id}: {caption}")
-	except Exception as e:
-		print(f"Error on {image_id}: {e}")
+	caption = caption_image(image_path)
+	df.at[idx, "blip2_caption"] = caption
+	print(f"✓ {image_id}: {caption}")
 
 # Save CSV
 df.to_csv(CSV_PATH, index=False)

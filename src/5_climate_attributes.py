@@ -211,7 +211,7 @@ def main() -> None:
 			all_attributes.append(attribute_record)
 			kept_rows.append(row_dict)
 		except Exception as e:
-			print(f"  Error processing {row_id}: {e}")
+			print(f"  ⚠️  Error processing {row_id}: {e}")
 			skipped += 1
 			continue
 
@@ -238,12 +238,12 @@ def main() -> None:
 	}
 	CONFIG_PATH.write_text(json.dumps(config, indent=2), encoding="utf-8")
 
-	print(f"\nProcessed: {len(df)} rows")
-	print(f"Kept: {len(kept_rows)} rows")
-	print(f"Skipped: {skipped} rows")
-	print(f"\nSaved: {ATTRIBUTES_JSON_PATH}")
-	print(f"Saved: {ATTRIBUTES_INDEX_PATH}")
-	print(f"Saved: {CONFIG_PATH}")
+	print(f"\n✓ Processed: {len(df)} rows")
+	print(f"✓ Kept: {len(kept_rows)} rows")
+	print(f"⚠️  Skipped: {skipped} rows")
+	print(f"\n✓ Saved: {ATTRIBUTES_JSON_PATH}")
+	print(f"✓ Saved: {ATTRIBUTES_INDEX_PATH}")
+	print(f"✓ Saved: {CONFIG_PATH}")
 
 	# Print sample
 	print("\n--- Sample attributes (first 2 images) ---")

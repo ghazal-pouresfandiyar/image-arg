@@ -161,46 +161,50 @@ def main() -> None:
 		premises_str = str(row.get("premises", "")).strip()
 		conclusions_str = str(row.get("conclusions", "")).strip()
 
-		premises = parse_premises(premises_str)
-		conclusions = parse_conclusions(conclusions_str)
+		try:
+			premises = parse_premises(premises_str)
+			conclusions = parse_conclusions(conclusions_str)
 
-		if not premises:
+			if not premises:
+				skipped += 1
+				continue
+
+			# Encode premises
+			premise_embeddings = model.encode(premises, convert_to_tensor=False)
+			premise_embeddings = np.array(premise_embeddings, dtype=np.float32)
+
+			# Retrieve relevant facts
+			retrievals = retrieve_relevant_facts(
+				premises,
+				torch.tensor(fact_embeddings, dtype=torch.float32),
+				all_facts,
+				model,
+				top_k=5,
+			)
+
+			# Store record
+			all_premise_records.append({
+				"id": row_id,
+				"num_premises": len(premises),
+				"num_conclusions": len(conclusions),
+				"premise_texts": premises,
+				"conclusion_texts": conclusions,
+				"num_retrieved_facts": len(retrievals),
+			})
+
+			# Average premise embeddings per image (if multiple premises)
+			avg_embedding = premise_embeddings.mean(axis=0)
+			all_premise_embeddings.append(avg_embedding)
+
+			# Store retrievals
+			all_retrievals.append({
+				"id": row_id,
+				"num_premises": len(premises),
+				"retrieved_facts": retrievals,
+			})
+		except Exception as e:
 			skipped += 1
 			continue
-
-		# Encode premises
-		premise_embeddings = model.encode(premises, convert_to_tensor=False)
-		premise_embeddings = np.array(premise_embeddings, dtype=np.float32)
-
-		# Retrieve relevant facts
-		retrievals = retrieve_relevant_facts(
-			premises,
-			torch.tensor(fact_embeddings, dtype=torch.float32),
-			all_facts,
-			model,
-			top_k=5,
-		)
-
-		# Store record
-		all_premise_records.append({
-			"id": row_id,
-			"num_premises": len(premises),
-			"num_conclusions": len(conclusions),
-			"premise_texts": premises,
-			"conclusion_texts": conclusions,
-			"num_retrieved_facts": len(retrievals),
-		})
-
-		# Average premise embeddings per image (if multiple premises)
-		avg_embedding = premise_embeddings.mean(axis=0)
-		all_premise_embeddings.append(avg_embedding)
-
-		# Store retrievals
-		all_retrievals.append({
-			"id": row_id,
-			"num_premises": len(premises),
-			"retrieved_facts": retrievals,
-		})
 
 	if not all_premise_records:
 		raise RuntimeError("No premise records created.")
@@ -232,16 +236,16 @@ def main() -> None:
 	}
 	CONFIG_PATH.write_text(json.dumps(config, indent=2), encoding="utf-8")
 
-	print(f"\nProcessed: {len(df)} rows")
-	print(f"Premise records: {len(all_premise_records)}")
-	print(f"Skipped: {skipped}")
+	print(f"\n✓ Processed: {len(df)} rows")
+	print(f"✓ Premise records: {len(all_premise_records)}")
+	print(f"⚠️  Skipped: {skipped}")
 	print(f"\nPremise embeddings shape: {premise_embeddings_array.shape}")
 	print(f"Fact embeddings shape: {fact_embeddings.shape}")
-	print(f"\nSaved: {PREMISE_EMBEDDINGS_PATH}")
-	print(f"Saved: {PREMISE_INDEX_PATH}")
-	print(f"Saved: {FACT_EMBEDDINGS_PATH}")
-	print(f"Saved: {FACT_RETRIEVAL_PATH}")
-	print(f"Saved: {CONFIG_PATH}")
+	print(f"\n✓ Saved: {PREMISE_EMBEDDINGS_PATH}")
+	print(f"✓ Saved: {PREMISE_INDEX_PATH}")
+	print(f"✓ Saved: {FACT_EMBEDDINGS_PATH}")
+	print(f"✓ Saved: {FACT_RETRIEVAL_PATH}")
+	print(f"✓ Saved: {CONFIG_PATH}")
 
 	# Print samples
 	print("\n--- Sample premise records (first 2 images) ---")

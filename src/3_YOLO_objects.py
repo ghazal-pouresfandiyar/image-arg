@@ -112,22 +112,29 @@ def main():
 			skipped += 1
 			continue
 
-		# Run detection
-		detected = extract_objects(image_path, model, CONFIDENCE_THRESHOLD)
+		try:
+			# Run detection
+			detected = extract_objects(image_path, model, CONFIDENCE_THRESHOLD)
+			
+			# Save image with boxes
+			output_image_path = YOLO_DETECTION_DIR / f"{row_id}.jpg"
+			draw_boxes(image_path, detected, output_image_path)
+
+			# Store results
+			all_results.append({
+				"id": row_id,
+				"objects": detected["objects"],
+				"counts": detected["counts"],
+				"bboxes": detected["bboxes"]
+			})
+
+			processed += 1
+		except Exception as e:
+			logger.log_failure("script_3_yolo", row_id, str(e))
+			logger.log_failure("script_3_yolo", row_id, str(e))
+			print(f"⚠️  Error processing {row_id}: {e}")
+			continue
 		
-		# Save image with boxes
-		output_image_path = YOLO_DETECTION_DIR / f"{row_id}.jpg"
-		draw_boxes(image_path, detected, output_image_path)
-
-		# Store results
-		all_results.append({
-			"id": row_id,
-			"objects": detected["objects"],
-			"counts": detected["counts"],
-			"bboxes": detected["bboxes"]
-		})
-
-		processed += 1
 		if (processed) % 10 == 0:
 			print(f"  Processed: {processed}")
 
