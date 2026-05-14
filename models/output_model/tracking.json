@@ -1,0 +1,16 @@
+{
+  "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": [
+    "80",
+    "81",
+    "84",
+    "85",
+    "86",
+    "89",
+    "90",
+    "91"
+  ],
+  "google/gemma-4-26b-a4b-it:free": [],
+  "qwen/qwen-2.5-vl-7b-instruct:free": [],
+  "google/gemma-4-31b:free": [],
+  "openai/gpt-oss-120b:free": []
+}
