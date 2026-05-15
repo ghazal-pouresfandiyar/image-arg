@@ -19,7 +19,7 @@ st.set_page_config(
     page_title="Model Results Viewer",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="hidden"
 )
 
 st.markdown("""
@@ -316,11 +316,8 @@ def display_results(model_output, model_name, is_human=False, show_header=True):
             st.write(parsed.get('text', output_data))
 
 # ============================================================================
-# SIDEBAR - Controls
+# SIDEBAR - Controls (Hidden)
 # ============================================================================
-
-st.sidebar.markdown("# 📋 Controls")
-st.sidebar.markdown('<div class="read-only-badge">🔒 Read-Only Mode</div>', unsafe_allow_html=True)
 
 # Load data
 all_models, image_url_lookup = load_all_data()
