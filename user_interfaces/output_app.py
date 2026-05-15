@@ -81,7 +81,9 @@ st.markdown("""
 # ROOT DIRECTORY & PATHS
 # ============================================================================
 
-ROOT_DIR = Path('/Users/poures/Desktop/PC/image-arg')
+# Get the root directory relative to this script
+SCRIPT_DIR = Path(__file__).parent.parent  # Go up from user_interfaces/ to project root
+ROOT_DIR = SCRIPT_DIR
 IMAGE_DIR = ROOT_DIR / 'dataset' / 'images_for_annotation'
 CSV_PATH = ROOT_DIR / 'dataset' / 'annotated.csv'
 
