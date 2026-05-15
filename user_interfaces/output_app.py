@@ -1,7 +1,7 @@
 """
 Climate Argument Results Viewer
 Interactive Streamlit app to review and compare model outputs
-run command: streamlit run "user interfaces/output.py"
+run command: streamlit run "user_interfaces/output_app.py"
 """
 
 import streamlit as st
@@ -19,7 +19,7 @@ st.set_page_config(
     page_title="Model Results Viewer",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="hidden"
+    initial_sidebar_state="collapsed"
 )
 
 st.markdown("""
