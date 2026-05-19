@@ -1,0 +1,448 @@
+# Image-Only Climate Argument Generation via OpenRouter
+# No metadata, no facts - just the image!
+
+import os
+import json
+import base64
+import pandas as pd
+from pathlib import Path
+from openai import OpenAI
+import re
+import time
+from datetime import datetime
+
+# =========================================================
+# CONFIG
+# =========================================================
+
+# Prefer a local `models/access` file for the API key. Fall back to the
+# environment variable if the file isn't present.
+ACCESS_FILE = Path(__file__).resolve().parent / "access"
+
+if ACCESS_FILE.exists():
+    OPENROUTER_API_KEY = ACCESS_FILE.read_text().strip()
+else:
+    OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+
+# Single model for image-only processing
+MODEL_NAME = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free"
+model_slug = MODEL_NAME.split("/")[-1].split(":")[0]
+
+# Retry and rate-limit configuration
+MAX_RETRIES = 3
+RETRY_DELAY = 2  # seconds between retries
+REQUEST_DELAY = 2  # seconds between successful requests
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+IMAGE_DIR = ROOT_DIR / "dataset" / "images_for_annotation"
+
+OUTPUT_DIR = ROOT_DIR / "models" / "output_model"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# Separate tracking files for image-only processing
+OUTPUT_FILE = OUTPUT_DIR / f"{model_slug}-image-only.json"
+TRACKING_FILE = OUTPUT_DIR / "tracking_image_only.json"
+FAILED_FILE = OUTPUT_DIR / "failed_image_only.json"
+LOG_FILE = OUTPUT_DIR / "processing_log_image_only.txt"
+
+# =========================================================
+# TRACKING & LOGGING
+# =========================================================
+
+def load_tracking():
+    """Load processing tracking data"""
+    if TRACKING_FILE.exists():
+        with open(TRACKING_FILE, 'r') as f:
+            return json.load(f)
+    return {"last_processed": None, "total_processed": 0, "token_limit_hit": False}
+
+def load_failed():
+    """Load failed processing data"""
+    if FAILED_FILE.exists():
+        with open(FAILED_FILE, 'r') as f:
+            return json.load(f)
+    return {"failed": []}
+
+def save_tracking(tracking):
+    """Save processing tracking data"""
+    with open(TRACKING_FILE, 'w') as f:
+        json.dump(tracking, f, indent=2)
+
+def save_failed(failed_data):
+    """Save failed processing data"""
+    with open(FAILED_FILE, 'w') as f:
+        json.dump(failed_data, f, indent=2)
+
+def log_message(msg, level="INFO"):
+    """Log messages to both console and file"""
+    timestamp = pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_entry = f"[{timestamp}] [{level}] {msg}"
+    print(log_entry)
+    with open(LOG_FILE, 'a') as f:
+        f.write(log_entry + "\n")
+
+def is_token_limit_error(error):
+    """Check if error is related to token limits"""
+    error_str = str(error).lower()
+    return any(keyword in error_str for keyword in [
+        "rate limit",
+        "quota",
+        "token",
+        "limit",
+        "429",
+        "503",
+    ])
+
+# =========================================================
+# HELPER FUNCTIONS FOR PROCESSING
+# =========================================================
+
+def parse_json_output(output_text):
+    """
+    Parse JSON from model output.
+    Handles cases where JSON is wrapped in markdown code blocks.
+    """
+    try:
+        # Try direct parsing first
+        return json.loads(output_text)
+    except json.JSONDecodeError:
+        pass
+    
+    # Try to extract JSON from markdown code blocks
+    patterns = [
+        r'```(?:json)?\s*(\{.*?\})\s*```',  # markdown code blocks
+        r'({.*})',  # raw JSON object
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, output_text, re.DOTALL)
+        if match:
+            try:
+                return json.loads(match.group(1))
+            except json.JSONDecodeError:
+                continue
+    
+    # If parsing fails, return None
+    return None
+
+def save_result_immediately(image_id, result_data):
+    """Save result immediately after processing"""
+    # Load existing results
+    if OUTPUT_FILE.exists():
+        try:
+            with open(OUTPUT_FILE, "r") as f:
+                existing_results = json.load(f)
+        except Exception:
+            existing_results = []
+    else:
+        existing_results = []
+    
+    # Append new result
+    existing_results.append(result_data)
+    
+    # Save immediately
+    with open(OUTPUT_FILE, "w") as f:
+        json.dump(existing_results, f, indent=2)
+
+def get_image_list():
+    """
+    Get list of images to process.
+    Filters out already-processed images.
+    """
+    # Scan images directory
+    image_files = sorted([f.stem for f in IMAGE_DIR.glob("*.jpg")])
+    
+    if not image_files:
+        log_message(f"❌ No images found in {IMAGE_DIR}", "WARN")
+        return []
+    
+    log_message(f"Found {len(image_files)} total images in dataset")
+    
+    # Load already-processed images
+    if OUTPUT_FILE.exists():
+        try:
+            with open(OUTPUT_FILE, "r") as f:
+                existing_results = json.load(f)
+            processed_ids = {r["image_id"] for r in existing_results}
+        except Exception:
+            processed_ids = set()
+    else:
+        processed_ids = set()
+    
+    # Filter to only unprocessed
+    to_process = [img_id for img_id in image_files if img_id not in processed_ids]
+    
+    log_message(f"Already processed: {len(processed_ids)}")
+    log_message(f"Remaining to process: {len(to_process)}")
+    
+    return to_process
+
+# =========================================================
+# CLIENT
+# =========================================================
+
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=OPENROUTER_API_KEY,
+)
+
+# =========================================================
+# HELPERS
+# =========================================================
+
+def encode_image(image_path):
+    """Encode image to base64"""
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode("utf-8")
+
+
+def build_image_only_prompt():
+    return """
+You are an AI system for climate-related visual reasoning.
+
+You will be given an image.
+
+TASK:
+Generate:
+1. 2 to 4 PREMISES (observations from the image)
+2. 1 to 2 CONCLUSIONS (reasoned inferences based only on the premises)
+
+DEFINITIONS:
+- Premises = ONLY what is directly visible in the image
+- Conclusions = logical interpretations derived ONLY from the premises
+
+RULES:
+- Do NOT use external knowledge not supported by the image
+- Do NOT assume unseen events or hidden context
+- Keep reasoning strictly grounded in visual evidence
+- Focus on environmental or climate-related interpretation ONLY if visually relevant
+
+OUTPUT FORMAT (STRICT JSON):
+{
+  "premises": [
+    "...",
+    "..."
+  ],
+  "conclusions": [
+    "...",
+    "..."
+  ]
+}
+"""
+
+# =========================================================
+# GENERATION LOOP - IMAGE ONLY
+# =========================================================
+
+print("\n" + "="*70)
+print("STARTING IMAGE-ONLY PROCESSING")
+print("="*70)
+
+# Load tracking and failed data
+tracking = load_tracking()
+failed_data = load_failed()
+
+log_message(f"Starting image-only processing with {MODEL_NAME}")
+log_message(f"Previously processed: {tracking['total_processed']}")
+
+# Get list of images to process
+images_to_process = get_image_list()
+
+if not images_to_process:
+    log_message("✅ All images already processed!", "INFO")
+    log_message("="*70 + "\n")
+    exit(0)
+
+log_message(f"\n{'='*70}")
+log_message(f"Processing {len(images_to_process)} images with IMAGE-ONLY prompt")
+log_message('='*70)
+
+token_limit_hit = False
+successful_count = 0
+failed_count = 0
+
+for idx, image_id in enumerate(images_to_process):
+    try:
+        # Skip if previously failed
+        if image_id in [f["image_id"] for f in failed_data.get("failed", [])]:
+            log_message(f"⏭ Skipping image {image_id} (previously failed)")
+            continue
+        
+        image_path = IMAGE_DIR / f"{image_id}.jpg"
+        if not image_path.exists():
+            log_message(f"❌ Missing image: {image_path}", "WARN")
+            failed_data["failed"].append({
+                "image_id": image_id,
+                "error": "Image file not found"
+            })
+            save_failed(failed_data)
+            failed_count += 1
+            continue
+        
+        prompt = build_image_only_prompt()
+        
+        log_message(f"[{idx+1}/{len(images_to_process)}] Processing image {image_id}")
+        
+        # Retry logic
+        success = False
+        for attempt in range(MAX_RETRIES):
+            try:
+                # Encode image
+                base64_image = encode_image(image_path)
+                
+                # Call API with image-only prompt
+                response = client.chat.completions.create(
+                    model=MODEL_NAME,
+                    temperature=0.7,
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": (
+                                "You generate structured argumentative reasoning "
+                                "from climate and environmental images. Return ONLY valid JSON."
+                            ),
+                        },
+                        {
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": prompt},
+                                {
+                                    "type": "image_url",
+                                    "image_url": {
+                                        "url": f"data:image/jpeg;base64,{base64_image}"
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                )
+                
+                output_text = response.choices[0].message.content
+                
+                # Parse JSON immediately
+                parsed_output = parse_json_output(output_text)
+                
+                # Create result object (NO metadata)
+                result_data = {
+                    "image_id": image_id,
+                    "model": MODEL_NAME,
+                    "timestamp": datetime.now().isoformat(),
+                    "parsed_output": parsed_output,
+                    "raw_output": output_text,
+                }
+                
+                # Save immediately to file
+                save_result_immediately(image_id, result_data)
+                
+                log_message(f"  ✓ Success (attempt {attempt + 1}/{MAX_RETRIES})")
+                successful_count += 1
+                success = True
+                break
+                
+            except Exception as e:
+                error_msg = str(e)[:100]
+                
+                if is_token_limit_error(e):
+                    log_message(f"⚠️  TOKEN LIMIT REACHED", "ERROR")
+                    log_message(f"   Error: {error_msg}", "ERROR")
+                    log_message(f"   Will resume from image {image_id} on next run", "WARN")
+                    
+                    # Update tracking before exiting
+                    tracking["last_processed"] = image_id
+                    tracking["total_processed"] += successful_count
+                    tracking["token_limit_hit"] = True
+                    save_tracking(tracking)
+                    
+                    token_limit_hit = True
+                    success = False
+                    break  # Don't retry on token limit, move to next model
+                elif "not support image" in error_msg.lower() or "vision" in error_msg.lower():
+                    log_message(f"⚠️  MODEL DOES NOT SUPPORT IMAGES", "ERROR")
+                    log_message(f"   Error: {error_msg}", "ERROR")
+                    failed_data["failed"].append({
+                        "image_id": image_id,
+                        "error": "Model does not support images"
+                    })
+                    save_failed(failed_data)
+                    success = False
+                    break
+                else:
+                    if attempt < MAX_RETRIES - 1:
+                        log_message(f"⚠️  Attempt {attempt + 1}/{MAX_RETRIES} failed: {error_msg}", "WARN")
+                        time.sleep(RETRY_DELAY)
+                    else:
+                        log_message(f"❌ Failed after {MAX_RETRIES} attempts: {error_msg}", "ERROR")
+                        
+                        # Track failure
+                        failed_data["failed"].append({
+                            "image_id": image_id,
+                            "error": error_msg
+                        })
+                        save_failed(failed_data)
+                        failed_count += 1
+                        success = False
+        
+        # Add delay between successful requests to avoid rate limiting
+        if success:
+            time.sleep(REQUEST_DELAY)
+    
+    except Exception as e:
+        log_message(f"❌ Unexpected error on image {image_id}: {str(e)[:100]}", "ERROR")
+        failed_count += 1
+        continue
+    
+    # Break outer loop if token limit hit
+    if token_limit_hit:
+        break
+
+# Update tracking
+tracking["total_processed"] += successful_count
+if not token_limit_hit:
+    tracking["token_limit_hit"] = False
+save_tracking(tracking)
+
+# =========================================================
+# FINAL SUMMARY
+# =========================================================
+
+log_message("\n" + "="*70)
+log_message("🎉 PROCESSING COMPLETE")
+log_message("="*70)
+
+log_message(f"\n📊 RESULTS SUMMARY:")
+log_message(f"Output file: {OUTPUT_FILE}")
+
+if OUTPUT_FILE.exists():
+    with open(OUTPUT_FILE, 'r') as f:
+        data = json.load(f)
+    log_message(f"  ✓ Total results stored: {len(data)}")
+
+log_message(f"  ✓ Successfully processed in this session: {successful_count}")
+log_message(f"  ✓ Failed in this session: {failed_count}")
+
+log_message(f"\n📁 OUTPUT FILES:")
+log_message(f"  ✓ Results: {OUTPUT_FILE}")
+log_message(f"  ✓ Tracking: {TRACKING_FILE}")
+log_message(f"  ✓ Failed: {FAILED_FILE}")
+log_message(f"  ✓ Log: {LOG_FILE}")
+
+if token_limit_hit:
+    log_message(f"\n⚠️  TOKEN LIMIT REACHED")
+    log_message(f"💡 TO RESUME:")
+    log_message(f"  Run: python3 models/run_model_image.py")
+    log_message(f"  The script will automatically resume from where it left off")
+    log_message(f"  Last processed: {tracking.get('last_processed', 'N/A')}")
+else:
+    log_message(f"\n✅ All images processed successfully!")
+
+log_message(f"\n📋 OUTPUT DATA STRUCTURE:")
+log_message(f"  Each result includes:")
+log_message(f"  - image_id: Identifier of the image")
+log_message(f"  - model: Model used for processing")
+log_message(f"  - timestamp: When it was processed")
+log_message(f"  - parsed_output: JSON-parsed model response with premises and conclusions")
+log_message(f"  - raw_output: Original text response from model")
+log_message(f"  - NO metadata fields (image-only analysis)")
+
+log_message("="*70 + "\n")

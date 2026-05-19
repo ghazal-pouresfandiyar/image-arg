@@ -226,6 +226,39 @@ def parse_output(output_data):
     
     return output_data
 
+
+def extract_image_id(item):
+    """Robustly extract an image_id from a model item.
+
+    Handles dicts, JSON-encoded strings, plain numeric strings, and
+    attempts to find digits inside freeform strings.
+    Returns None when no image id can be found.
+    """
+    if isinstance(item, dict):
+        return item.get('image_id') or item.get('id') or item.get('image')
+
+    if isinstance(item, str):
+        # Try to parse JSON
+        try:
+            parsed = json.loads(item)
+            if isinstance(parsed, dict):
+                return parsed.get('image_id') or parsed.get('id') or parsed.get('image')
+        except Exception:
+            pass
+
+        # Plain numeric id
+        s = item.strip()
+        if s.isdigit():
+            return s
+
+        # Fallback: find first sequence of digits
+        import re
+        m = re.search(r"(\d{1,10})", s)
+        if m:
+            return m.group(1)
+
+    return None
+
 def display_metadata(metadata, compact=False):
     """Display metadata in a formatted box"""
     if compact:
@@ -340,8 +373,14 @@ st.header("🔀 Compare Models")
 # Get all unique image IDs across all models
 all_image_ids = set()
 for model_data in all_models.values():
-    all_image_ids.update([item.get('image_id') for item in model_data])
-all_image_ids = sorted(list(all_image_ids))
+    # model_data may contain dicts or raw strings; handle both
+    for item in model_data:
+        img_id = extract_image_id(item)
+        if img_id:
+            all_image_ids.add(str(img_id))
+
+# Sort numerically, not alphabetically
+all_image_ids = sorted(list(all_image_ids), key=lambda x: int(x) if x.isdigit() else float('inf'))
 
 if not all_image_ids:
     st.error("No images found!")
@@ -361,41 +400,45 @@ with col_select2:
 data_1 = {item.get('image_id'): item for item in all_models[model_1]}
 data_2 = {item.get('image_id'): item for item in all_models[model_2]}
 
-# Initialize session state for image navigation
-if 'current_image_idx' not in st.session_state:
-    st.session_state.current_image_idx = 0
-
 # Image selection
 st.markdown("### 🖼️ Select Image")
+
+# Initialize session state for image navigation - store image_id, not index
+if 'current_image_id' not in st.session_state:
+    st.session_state.current_image_id = all_image_ids[0]
+
 nav_col1, nav_col2, nav_col3 = st.columns([0.6, 0.2, 0.2])
 
 with nav_col1:
     selected_id = st.selectbox(
         "Image ID",
         all_image_ids,
-        index=st.session_state.current_image_idx,
+        index=all_image_ids.index(st.session_state.current_image_id) if st.session_state.current_image_id in all_image_ids else 0,
         format_func=lambda x: f"Image {x}",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        key="image_selector"
     )
-    st.session_state.current_image_idx = all_image_ids.index(selected_id)
+    # Update session state with selected image
+    if selected_id != st.session_state.current_image_id:
+        st.session_state.current_image_id = selected_id
 
-# Get current index
-current_idx = st.session_state.current_image_idx
+# Get current index for navigation
+current_idx = all_image_ids.index(st.session_state.current_image_id) if st.session_state.current_image_id in all_image_ids else 0
 
 with nav_col2:
     if st.button("⬅️ Previous", use_container_width=True):
         if current_idx > 0:
-            st.session_state.current_image_idx = current_idx - 1
+            st.session_state.current_image_id = all_image_ids[current_idx - 1]
             st.rerun()
 
 with nav_col3:
     if st.button("Next ➡️", use_container_width=True):
         if current_idx < len(all_image_ids) - 1:
-            st.session_state.current_image_idx = current_idx + 1
+            st.session_state.current_image_id = all_image_ids[current_idx + 1]
             st.rerun()
 
-# Get the selected image ID based on current index
-selected_id = all_image_ids[st.session_state.current_image_idx]
+# Get the selected image ID
+selected_id = st.session_state.current_image_id
 
 # Get samples for selected image
 sample_1 = data_1.get(selected_id, {
