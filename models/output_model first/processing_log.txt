@@ -1,0 +1,647 @@
+[2026-05-14 18:43:32] [INFO] Loaded tracking data: 0 processed items
+[2026-05-14 18:43:32] [INFO] 
+======================================================================
+[2026-05-14 18:43:32] [INFO] Processing with: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+[2026-05-14 18:43:32] [INFO] ======================================================================
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 0 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 1 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 9 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 2 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 5 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 8 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 10 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 11 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 12 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 13 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 14 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 16 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 21 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 23 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 24 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 25 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 28 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 29 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 30 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 31 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 32 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 34 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 36 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 39 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 40 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 41 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 43 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 45 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 48 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 49 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 51 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 52 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 54 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 55 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 58 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 64 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 65 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 66 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 67 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 68 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 69 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 70 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 71 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 72 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 73 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 75 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 76 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 77 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 78 (id <= 79)
+[2026-05-14 18:43:32] [INFO] ⏭ Skipping image 79 (id <= 79)
+[2026-05-14 18:43:32] [INFO] [51/58] Processing image 80 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 18:43:40] [INFO]   ✓ Success (attempt 1/3)
+[2026-05-14 18:43:42] [INFO] [52/58] Processing image 81 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 18:43:50] [INFO]   ✓ Success (attempt 1/3)
+[2026-05-14 18:43:52] [INFO] [53/58] Processing image 84 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 18:44:07] [INFO]   ✓ Success (attempt 1/3)
+[2026-05-14 18:44:10] [INFO] [54/58] Processing image 85 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 18:44:15] [INFO]   ✓ Success (attempt 1/3)
+[2026-05-14 18:44:17] [INFO] [55/58] Processing image 86 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 18:51:01] [WARN] ⚠️  Attempt 1/3 failed: the JSON object must be str, bytes or bytearray, not NoneType
+[2026-05-14 18:51:08] [INFO]   ✓ Success (attempt 2/3)
+[2026-05-14 18:51:10] [INFO] [56/58] Processing image 89 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 18:51:19] [INFO]   ✓ Success (attempt 1/3)
+[2026-05-14 18:51:21] [INFO] [57/58] Processing image 90 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 18:51:37] [INFO]   ✓ Success (attempt 1/3)
+[2026-05-14 18:51:39] [INFO] [58/58] Processing image 91 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 18:51:50] [INFO]   ✓ Success (attempt 1/3)
+[2026-05-14 18:51:52] [INFO] ✅ Model nemotron-3-nano-omni-30b-a3b-reasoning session completed
+[2026-05-14 18:51:52] [INFO] 
+======================================================================
+[2026-05-14 18:51:52] [INFO] Processing with: google/gemma-4-26b-a4b-it:free
+[2026-05-14 18:51:52] [INFO] ======================================================================
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 0 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 1 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 9 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 2 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 5 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 8 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 10 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 11 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 12 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 13 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 14 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 16 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 21 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 23 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 24 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 25 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 28 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 29 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 30 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 31 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 32 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 34 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 36 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 39 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 40 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 41 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 43 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 45 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 48 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 49 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 51 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 52 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 54 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 55 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 58 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 64 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 65 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 66 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 67 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 68 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 69 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 70 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 71 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 72 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 73 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 75 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 76 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 77 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 78 (id <= 79)
+[2026-05-14 18:51:52] [INFO] ⏭ Skipping image 79 (id <= 79)
+[2026-05-14 18:51:52] [INFO] [51/58] Processing image 80 with gemma-4-26b-a4b-it
+[2026-05-14 18:51:55] [ERROR] ⚠️  TOKEN LIMIT REACHED for gemma-4-26b-a4b-it
+[2026-05-14 18:51:55] [ERROR]    Error: Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 
+[2026-05-14 18:51:55] [INFO] ✅ Model gemma-4-26b-a4b-it session completed
+[2026-05-14 18:51:55] [WARN] ⚠️  Model gemma-4-26b-a4b-it hit token limits. Moving to next model...
+[2026-05-14 18:51:55] [INFO] 
+======================================================================
+[2026-05-14 18:51:55] [INFO] Processing with: qwen/qwen-2.5-vl-7b-instruct:free
+[2026-05-14 18:51:55] [INFO] ======================================================================
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 0 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 1 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 9 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 2 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 5 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 8 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 10 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 11 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 12 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 13 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 14 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 16 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 21 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 23 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 24 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 25 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 28 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 29 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 30 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 31 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 32 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 34 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 36 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 39 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 40 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 41 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 43 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 45 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 48 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 49 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 51 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 52 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 54 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 55 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 58 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 64 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 65 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 66 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 67 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 68 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 69 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 70 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 71 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 72 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 73 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 75 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 76 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 77 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 78 (id <= 79)
+[2026-05-14 18:51:55] [INFO] ⏭ Skipping image 79 (id <= 79)
+[2026-05-14 18:51:55] [INFO] [51/58] Processing image 80 with qwen-2.5-vl-7b-instruct
+[2026-05-14 18:51:55] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:51:57] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:51:59] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:51:59] [INFO] [52/58] Processing image 81 with qwen-2.5-vl-7b-instruct
+[2026-05-14 18:51:59] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:01] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:03] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:03] [INFO] [53/58] Processing image 84 with qwen-2.5-vl-7b-instruct
+[2026-05-14 18:52:03] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:05] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:07] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:07] [INFO] [54/58] Processing image 85 with qwen-2.5-vl-7b-instruct
+[2026-05-14 18:52:08] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:10] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:12] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:12] [INFO] [55/58] Processing image 86 with qwen-2.5-vl-7b-instruct
+[2026-05-14 18:52:12] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:14] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:16] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:16] [INFO] [56/58] Processing image 89 with qwen-2.5-vl-7b-instruct
+[2026-05-14 18:52:16] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:18] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:20] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:20] [INFO] [57/58] Processing image 90 with qwen-2.5-vl-7b-instruct
+[2026-05-14 18:52:20] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:22] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:24] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:24] [INFO] [58/58] Processing image 91 with qwen-2.5-vl-7b-instruct
+[2026-05-14 18:52:24] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:27] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:29] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found for qwen/qwen-2.5-vl-7b-instruct:free.',
+[2026-05-14 18:52:29] [INFO] ✅ Model qwen-2.5-vl-7b-instruct session completed
+[2026-05-14 18:52:29] [INFO] 
+======================================================================
+[2026-05-14 18:52:29] [INFO] Processing with: google/gemma-4-31b:free
+[2026-05-14 18:52:29] [INFO] ======================================================================
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 0 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 1 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 9 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 2 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 5 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 8 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 10 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 11 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 12 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 13 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 14 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 16 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 21 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 23 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 24 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 25 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 28 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 29 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 30 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 31 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 32 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 34 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 36 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 39 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 40 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 41 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 43 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 45 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 48 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 49 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 51 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 52 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 54 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 55 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 58 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 64 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 65 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 66 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 67 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 68 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 69 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 70 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 71 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 72 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 73 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 75 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 76 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 77 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 78 (id <= 79)
+[2026-05-14 18:52:29] [INFO] ⏭ Skipping image 79 (id <= 79)
+[2026-05-14 18:52:29] [INFO] [51/58] Processing image 80 with gemma-4-31b
+[2026-05-14 18:52:29] [WARN] ⚠️  Attempt 1/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:31] [WARN] ⚠️  Attempt 2/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:33] [ERROR] ❌ Failed after 3 attempts: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:33] [INFO] [52/58] Processing image 81 with gemma-4-31b
+[2026-05-14 18:52:33] [WARN] ⚠️  Attempt 1/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:35] [WARN] ⚠️  Attempt 2/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:37] [ERROR] ❌ Failed after 3 attempts: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:37] [INFO] [53/58] Processing image 84 with gemma-4-31b
+[2026-05-14 18:52:37] [WARN] ⚠️  Attempt 1/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:39] [WARN] ⚠️  Attempt 2/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:42] [ERROR] ❌ Failed after 3 attempts: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:42] [INFO] [54/58] Processing image 85 with gemma-4-31b
+[2026-05-14 18:52:42] [WARN] ⚠️  Attempt 1/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:44] [WARN] ⚠️  Attempt 2/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:46] [ERROR] ❌ Failed after 3 attempts: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:46] [INFO] [55/58] Processing image 86 with gemma-4-31b
+[2026-05-14 18:52:46] [WARN] ⚠️  Attempt 1/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:48] [WARN] ⚠️  Attempt 2/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:50] [ERROR] ❌ Failed after 3 attempts: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:50] [INFO] [56/58] Processing image 89 with gemma-4-31b
+[2026-05-14 18:52:50] [WARN] ⚠️  Attempt 1/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:52] [WARN] ⚠️  Attempt 2/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:54] [ERROR] ❌ Failed after 3 attempts: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:54] [INFO] [57/58] Processing image 90 with gemma-4-31b
+[2026-05-14 18:52:54] [WARN] ⚠️  Attempt 1/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:56] [WARN] ⚠️  Attempt 2/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:58] [ERROR] ❌ Failed after 3 attempts: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:52:58] [INFO] [58/58] Processing image 91 with gemma-4-31b
+[2026-05-14 18:52:59] [WARN] ⚠️  Attempt 1/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:53:01] [WARN] ⚠️  Attempt 2/3 failed: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:53:03] [ERROR] ❌ Failed after 3 attempts: Error code: 400 - {'error': {'message': 'google/gemma-4-31b:free is not a valid model ID', 'code': 4
+[2026-05-14 18:53:03] [INFO] ✅ Model gemma-4-31b session completed
+[2026-05-14 18:53:03] [INFO] 
+======================================================================
+[2026-05-14 18:53:03] [INFO] Processing with: openai/gpt-oss-120b:free
+[2026-05-14 18:53:03] [INFO] ======================================================================
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 0 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 1 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 9 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 2 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 5 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 8 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 10 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 11 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 12 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 13 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 14 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 16 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 21 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 23 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 24 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 25 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 28 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 29 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 30 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 31 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 32 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 34 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 36 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 39 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 40 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 41 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 43 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 45 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 48 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 49 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 51 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 52 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 54 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 55 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 58 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 64 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 65 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 66 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 67 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 68 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 69 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 70 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 71 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 72 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 73 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 75 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 76 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 77 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 78 (id <= 79)
+[2026-05-14 18:53:03] [INFO] ⏭ Skipping image 79 (id <= 79)
+[2026-05-14 18:53:03] [INFO] [51/58] Processing image 80 with gpt-oss-120b
+[2026-05-14 18:53:03] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:05] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:07] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:07] [INFO] [52/58] Processing image 81 with gpt-oss-120b
+[2026-05-14 18:53:07] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:09] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:11] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:11] [INFO] [53/58] Processing image 84 with gpt-oss-120b
+[2026-05-14 18:53:11] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:13] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:16] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:16] [INFO] [54/58] Processing image 85 with gpt-oss-120b
+[2026-05-14 18:53:16] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:18] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:20] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:20] [INFO] [55/58] Processing image 86 with gpt-oss-120b
+[2026-05-14 18:53:20] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:22] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:24] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:24] [INFO] [56/58] Processing image 89 with gpt-oss-120b
+[2026-05-14 18:53:24] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:26] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:28] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:28] [INFO] [57/58] Processing image 90 with gpt-oss-120b
+[2026-05-14 18:53:28] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:30] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:32] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:32] [INFO] [58/58] Processing image 91 with gpt-oss-120b
+[2026-05-14 18:53:33] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:35] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:37] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 18:53:37] [INFO] ✅ Model gpt-oss-120b session completed
+[2026-05-14 18:53:37] [INFO] 
+======================================================================
+[2026-05-14 18:53:37] [INFO] 🎉 PROCESSING COMPLETE
+[2026-05-14 18:53:37] [INFO] ======================================================================
+[2026-05-14 18:53:37] [INFO] 
+📊 RESULTS SUMMARY:
+[2026-05-14 18:53:37] [INFO] Output directory: /Users/poures/Desktop/PC/image-arg/models/output_model
+[2026-05-14 18:53:37] [INFO]   ✓ nemotron-3-nano-omni-30b-a3b-reasoning: 8 total samples, 8 processed, 0 failed
+[2026-05-14 18:53:37] [INFO] 
+📁 OUTPUT FILES:
+[2026-05-14 18:53:37] [INFO]   ✓ Results: /Users/poures/Desktop/PC/image-arg/models/output_model/*.json
+[2026-05-14 18:53:37] [INFO]   ✓ Tracking: /Users/poures/Desktop/PC/image-arg/models/output_model/tracking.json
+[2026-05-14 18:53:37] [INFO]   ✓ Failed: /Users/poures/Desktop/PC/image-arg/models/output_model/failed.json
+[2026-05-14 18:53:37] [INFO]   ✓ Log: /Users/poures/Desktop/PC/image-arg/models/output_model/processing_log.txt
+[2026-05-14 18:53:37] [INFO] 
+💡 TO RESUME:
+[2026-05-14 18:53:37] [INFO]   Run: python3 models/run_models.py
+[2026-05-14 18:53:37] [INFO]   The script will automatically resume from where it left off using /Users/poures/Desktop/PC/image-arg/models/output_model/tracking.json
+[2026-05-14 18:53:37] [INFO] 
+📋 DATA STRUCTURE:
+[2026-05-14 18:53:37] [INFO]   Each result includes:
+[2026-05-14 18:53:37] [INFO]   - parsed_output: JSON-parsed model response
+[2026-05-14 18:53:37] [INFO]   - raw_output: Original text response
+[2026-05-14 18:53:37] [INFO]   - timestamp: When it was processed
+[2026-05-14 18:53:37] [INFO]   - prompt_version: Version of prompt used
+[2026-05-14 18:53:37] [INFO] ======================================================================
+
+[2026-05-14 23:46:52] [INFO] Loaded tracking data: 8 processed items
+[2026-05-14 23:46:52] [INFO] 
+======================================================================
+[2026-05-14 23:46:52] [INFO] Processing with: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+[2026-05-14 23:46:52] [INFO] ======================================================================
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 0 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 1 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 9 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 2 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 5 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 8 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 10 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 11 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 12 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 13 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 14 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 16 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 21 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 23 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 24 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 25 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 28 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 29 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 30 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 31 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 32 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 34 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 36 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 39 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 40 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 41 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 43 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 45 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 48 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 49 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 51 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 52 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 54 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 55 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 58 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 64 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 65 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 66 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 67 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 68 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 69 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 70 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 71 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 72 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 73 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 75 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 76 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 77 (already in output)
+[2026-05-14 23:46:52] [INFO] ⏭ Skipping image 78 (already in output)
+[2026-05-14 23:46:52] [INFO] [50/58] Processing image 79 with nemotron-3-nano-omni-30b-a3b-reasoning
+[2026-05-14 23:46:58] [INFO]   ✓ Success (attempt 1/3)
+[2026-05-14 23:47:00] [INFO] ⏭ Skipping image 80 (already in output)
+[2026-05-14 23:47:00] [INFO] ⏭ Skipping image 81 (already in output)
+[2026-05-14 23:47:00] [INFO] ⏭ Skipping image 84 (already in output)
+[2026-05-14 23:47:00] [INFO] ⏭ Skipping image 85 (already in output)
+[2026-05-14 23:47:00] [INFO] ⏭ Skipping image 86 (already in output)
+[2026-05-14 23:47:00] [INFO] ⏭ Skipping image 89 (already in output)
+[2026-05-14 23:47:00] [INFO] ⏭ Skipping image 90 (already in output)
+[2026-05-14 23:47:00] [INFO] ⏭ Skipping image 91 (already in output)
+[2026-05-14 23:47:00] [INFO] ✅ Model nemotron-3-nano-omni-30b-a3b-reasoning session completed
+[2026-05-14 23:47:00] [INFO] 
+======================================================================
+[2026-05-14 23:47:00] [INFO] Processing with: deepseek/deepseek-v4-flash:free
+[2026-05-14 23:47:00] [INFO] ======================================================================
+[2026-05-14 23:47:00] [INFO] [1/58] Processing image 0 with deepseek-v4-flash
+[2026-05-14 23:47:00] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 23:47:02] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 23:47:04] [ERROR] ❌ Failed after 3 attempts: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 23:47:04] [INFO] [2/58] Processing image 1 with deepseek-v4-flash
+[2026-05-14 23:47:04] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 23:47:06] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 23:51:44] [INFO] Loaded tracking data: 8 processed items
+[2026-05-14 23:51:44] [INFO] 
+======================================================================
+[2026-05-14 23:51:44] [INFO] Processing with: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+[2026-05-14 23:51:44] [INFO] ======================================================================
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 0 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 1 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 9 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 2 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 5 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 8 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 10 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 11 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 12 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 13 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 14 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 16 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 21 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 23 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 24 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 25 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 28 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 29 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 30 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 31 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 32 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 34 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 36 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 39 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 40 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 41 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 43 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 45 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 48 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 49 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 51 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 52 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 54 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 55 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 58 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 64 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 65 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 66 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 67 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 68 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 69 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 70 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 71 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 72 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 73 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 75 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 76 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 77 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 78 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 79 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 80 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 81 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 84 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 85 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 86 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 89 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 90 (already in output)
+[2026-05-14 23:51:44] [INFO] ⏭ Skipping image 91 (already in output)
+[2026-05-14 23:51:44] [INFO] ✅ Model nemotron-3-nano-omni-30b-a3b-reasoning session completed
+[2026-05-14 23:51:44] [INFO] 
+======================================================================
+[2026-05-14 23:51:44] [INFO] Processing with: google/gemma-4-26b-a4b-it:free
+[2026-05-14 23:51:44] [INFO] ======================================================================
+[2026-05-14 23:51:44] [INFO] [1/58] Processing image 0 with gemma-4-26b-a4b-it
+[2026-05-14 23:51:46] [ERROR] ⚠️  TOKEN LIMIT REACHED for gemma-4-26b-a4b-it
+[2026-05-14 23:51:46] [ERROR]    Error: Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 
+[2026-05-14 23:51:46] [INFO] ✅ Model gemma-4-26b-a4b-it session completed
+[2026-05-14 23:51:46] [WARN] ⚠️  Model gemma-4-26b-a4b-it hit token limits. Moving to next model...
+[2026-05-14 23:51:46] [INFO] 
+======================================================================
+[2026-05-14 23:51:46] [INFO] Processing with: meta-llama/llama-3.3-70b-instruct:free
+[2026-05-14 23:51:46] [INFO] ======================================================================
+[2026-05-14 23:51:46] [INFO] [1/58] Processing image 0 with llama-3.3-70b-instruct
+[2026-05-14 23:51:47] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 23:51:49] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 23:53:11] [INFO] Loaded tracking data: 8 processed items
+[2026-05-14 23:53:11] [INFO] 
+======================================================================
+[2026-05-14 23:53:11] [INFO] Processing with: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+[2026-05-14 23:53:11] [INFO] ======================================================================
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 0 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 1 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 9 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 2 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 5 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 8 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 10 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 11 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 12 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 13 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 14 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 16 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 21 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 23 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 24 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 25 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 28 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 29 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 30 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 31 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 32 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 34 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 36 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 39 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 40 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 41 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 43 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 45 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 48 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 49 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 51 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 52 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 54 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 55 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 58 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 64 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 65 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 66 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 67 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 68 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 69 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 70 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 71 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 72 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 73 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 75 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 76 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 77 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 78 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 79 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 80 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 81 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 84 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 85 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 86 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 89 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 90 (already in output)
+[2026-05-14 23:53:11] [INFO] ⏭ Skipping image 91 (already in output)
+[2026-05-14 23:53:11] [INFO] ✅ Model nemotron-3-nano-omni-30b-a3b-reasoning session completed
+[2026-05-14 23:53:11] [INFO] 
+======================================================================
+[2026-05-14 23:53:11] [INFO] Processing with: meta-llama/llama-3.3-70b-instruct:free
+[2026-05-14 23:53:11] [INFO] ======================================================================
+[2026-05-14 23:53:11] [INFO] [1/58] Processing image 0 with llama-3.3-70b-instruct
+[2026-05-14 23:53:11] [WARN] ⚠️  Attempt 1/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}
+[2026-05-14 23:53:13] [WARN] ⚠️  Attempt 2/3 failed: Error code: 404 - {'error': {'message': 'No endpoints found that support image input', 'code': 404}}

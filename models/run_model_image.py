@@ -147,17 +147,39 @@ def save_result_immediately(image_id, result_data):
 
 def get_image_list():
     """
-    Get list of images to process.
+    Get list of images to process FROM ANNOTATED.CSV ONLY.
     Filters out already-processed images.
     """
-    # Scan images directory
-    image_files = sorted([f.stem for f in IMAGE_DIR.glob("*.jpg")])
+    # Load annotated.csv to get the list of image IDs
+    annotated_csv = ROOT_DIR / "dataset" / "annotated.csv"
     
-    if not image_files:
-        log_message(f"❌ No images found in {IMAGE_DIR}", "WARN")
+    if not annotated_csv.exists():
+        log_message(f"❌ annotated.csv not found at {annotated_csv}", "ERROR")
         return []
     
-    log_message(f"Found {len(image_files)} total images in dataset")
+    try:
+        df = pd.read_csv(annotated_csv)
+        annotated_ids = sorted([str(img_id) for img_id in df['id'].tolist()])
+    except Exception as e:
+        log_message(f"❌ Error reading annotated.csv: {str(e)}", "ERROR")
+        return []
+    
+    if not annotated_ids:
+        log_message(f"❌ No image IDs found in annotated.csv", "WARN")
+        return []
+    
+    log_message(f"Found {len(annotated_ids)} annotated images in annotated.csv")
+    
+    # Check which annotated images exist in the directory
+    available_images = []
+    for img_id in annotated_ids:
+        img_path = IMAGE_DIR / f"{img_id}.jpg"
+        if img_path.exists():
+            available_images.append(img_id)
+        else:
+            log_message(f"⚠️  Image {img_id} not found in {IMAGE_DIR}", "WARN")
+    
+    log_message(f"Available in directory: {len(available_images)} images")
     
     # Load already-processed images
     if OUTPUT_FILE.exists():
@@ -170,8 +192,8 @@ def get_image_list():
     else:
         processed_ids = set()
     
-    # Filter to only unprocessed
-    to_process = [img_id for img_id in image_files if img_id not in processed_ids]
+    # Filter to only unprocessed from annotated list
+    to_process = [img_id for img_id in available_images if img_id not in processed_ids]
     
     log_message(f"Already processed: {len(processed_ids)}")
     log_message(f"Remaining to process: {len(to_process)}")
