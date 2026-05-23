@@ -546,7 +546,10 @@
     "image_id": "58",
     "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
     "timestamp": "2026-05-20T15:15:21.814144",
-    "parsed_output": null,
+    "parsed_output": {
+      "premises": [],
+      "conclusions": []
+    },
     "raw_output": "{\n  \"premises\": [\n    \"Multiple vehicles are driving through a flooded roadway under a bridge.\",\n    \"The road is submerged in brown, murky water that reaches the lower portions of the vehicles' tires.\"\n  ],\n  \"conclusions\": [\n    \"The area is experiencing flooding, as evidenced by the submerged roadway.\",\n    \"Traffic flow is disrupted by the flooded roadway.\"\n  ]"
   },
   {

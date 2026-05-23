@@ -121,28 +121,10 @@ def load_human_annotations():
 
 @st.cache_resource
 def discover_model_outputs():
-    """Discover all model output JSON files in root directory and models/output_model directory"""
+    """Discover all model output JSON files in models/output_model directory"""
     model_files = {}
     
-    # Search in root directory
-    for file_path in ROOT_DIR.glob('*.json'):
-        if file_path.name == 'annotated.csv':
-            continue
-        
-        try:
-            with open(file_path, 'r') as f:
-                data = json.load(f)
-                
-            # Handle both list and dict formats
-            if isinstance(data, dict):
-                data = list(data.values()) if data else []
-            
-            if isinstance(data, list) and len(data) > 0:
-                model_files[file_path.stem] = data
-        except Exception as e:
-            st.warning(f"Could not load {file_path.name}: {str(e)}")
-    
-    # Search in models/output_model directory
+    # Search only in models/output_model directory
     output_model_dir = ROOT_DIR / 'models' / 'output_model'
     if output_model_dir.exists():
         for file_path in output_model_dir.glob('*.json'):
@@ -159,8 +141,20 @@ def discover_model_outputs():
                     data = list(data.values()) if data else []
                 
                 if isinstance(data, list) and len(data) > 0:
-                    # Use more descriptive name for model files
-                    model_name = file_path.stem.replace('-', ' ').title()
+                    # Extract simplified model name
+                    stem = file_path.stem.lower()
+                    
+                    # Look for known model names with proper casing
+                    if 'nemotron' in stem:
+                        model_name = 'Nemotron'  # matches 'nemotron' key in prompts.json
+                    elif 'llava' in stem:
+                        model_name = 'LLava'  # matches 'llava' key in prompts.json
+                    elif 'minicpm' in stem:
+                        model_name = 'minicpm-v'  # matches 'minicpm-v' key in prompts.json
+                    else:
+                        # Fallback: take first word
+                        model_name = file_path.stem.split('-')[0].split('_')[0].title()
+                    
                     model_files[model_name] = data
             except Exception as e:
                 st.warning(f"Could not load {file_path.name}: {str(e)}")
@@ -225,6 +219,19 @@ def parse_output(output_data):
             return {"text": output_data}
     
     return output_data
+
+@st.cache_resource
+def load_model_prompts():
+    """Load all model prompts from centralized JSON file"""
+    prompt_file = ROOT_DIR / 'models' / 'prompts.json'
+    if prompt_file.exists():
+        try:
+            with open(prompt_file, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            st.warning(f"Could not load prompts: {e}")
+            return {}
+    return {}
 
 
 def extract_image_id(item):
@@ -357,7 +364,7 @@ all_models, image_url_lookup = load_all_data()
 model_names = list(all_models.keys())
 
 if not model_names:
-    st.error("❌ No model outputs found! Please ensure model output JSON files exist in the root directory or models/output_model/ directory.")
+    st.error("❌ No model outputs found! Please ensure model output JSON files exist in models/output_model/ directory.")
     st.stop()
 
 
@@ -487,6 +494,9 @@ with col_meta:
 st.markdown("---")
 st.markdown("### 📝 Results Comparison")
 
+# Load model prompts for display
+model_prompts = load_model_prompts()
+
 comp_col1, comp_col2 = st.columns(2)
 
 with comp_col1:
@@ -494,6 +504,12 @@ with comp_col1:
         is_human_1 = sample_1.get('is_human', False)
         box_class = "human-box" if is_human_1 else "model-box"
         st.markdown(f'<div class="{box_class}">{model_1}</div>', unsafe_allow_html=True)
+        
+        # Display prompt if available and not human
+        if not is_human_1 and model_1.lower() in model_prompts:
+            with st.expander(f"📋 Prompt for {model_1}"):
+                st.text(model_prompts[model_1.lower()])
+        
         display_results(sample_1, model_1, is_human_1, show_header=False)
     else:
         st.info(f"ℹ️ No data for {model_1} on Image {selected_id}")
@@ -503,6 +519,12 @@ with comp_col2:
         is_human_2 = sample_2.get('is_human', False)
         box_class = "human-box" if is_human_2 else "model-box"
         st.markdown(f'<div class="{box_class}">{model_2}</div>', unsafe_allow_html=True)
+        
+        # Display prompt if available and not human
+        if not is_human_2 and model_2.lower() in model_prompts:
+            with st.expander(f"📋 Prompt for {model_2}"):
+                st.text(model_prompts[model_2.lower()])
+        
         display_results(sample_2, model_2, is_human_2, show_header=False)
     else:
         st.info(f"ℹ️ No data for {model_2} on Image {selected_id}")

@@ -15,17 +15,40 @@ from datetime import datetime
 # CONFIG
 # =========================================================
 
-# Prefer a local `models/access` file for the API key. Fall back to the
-# environment variable if the file isn't present.
-ACCESS_FILE = Path(__file__).resolve().parent / "access"
+def load_api_keys():
+    """Load API keys from access file (supports multi-key format)"""
+    ACCESS_FILE = Path(__file__).resolve().parent / "access"
+    
+    if not ACCESS_FILE.exists():
+        raise ValueError(
+            "❌ 'models/access' file not found. "
+            "Please create it with format: open_router : YOUR_KEY\nhugging_face : YOUR_KEY"
+        )
+    
+    content = ACCESS_FILE.read_text().strip()
+    keys = {}
+    
+    for line in content.split('\n'):
+        if ':' in line:
+            key_name, key_value = line.split(':', 1)
+            keys[key_name.strip()] = key_value.strip()
+    
+    return keys
 
-if ACCESS_FILE.exists():
-    OPENROUTER_API_KEY = ACCESS_FILE.read_text().strip()
-else:
-    OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+# Load API keys
+api_keys = load_api_keys()
+OPENROUTER_API_KEY = api_keys.get("open_router")
+
+if not OPENROUTER_API_KEY:
+    raise ValueError(
+        "❌ 'open_router' key not found in 'models/access' file. "
+        "Please add: open_router : YOUR_KEY"
+    )
 
 # Single model for image-only processing
 MODEL_NAME = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free"
+#MODEL_NAME = "qwen/qwen2.5-vl-72b-instruct:free"
+#MODEL_NAME = "qwen/qwen2.5-vl-3b-instruct:free"
 model_slug = MODEL_NAME.split("/")[-1].split(":")[0]
 
 # Retry and rate-limit configuration
