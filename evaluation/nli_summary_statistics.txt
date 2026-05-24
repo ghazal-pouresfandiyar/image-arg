@@ -1,0 +1,67 @@
+====================================================================================================
+NLI ENTAILMENT EVALUATION SUMMARY
+====================================================================================================
+
+PER-MODEL STATISTICS
+----------------------------------------------------------------------------------------------------
+
+Model: nemotron-3-nano-omni-30b-a3b-reasoning-image-only
+  Total Conclusions Evaluated: 94
+  
+  Mean Scores (± Std Dev):
+    Entailment:     0.0050 ± 0.0188
+    Neutral:        0.7537 ± 0.3380
+    Contradiction:  0.2413 ± 0.3388
+  
+  Predicted Label Distribution:
+    Entailment:       0.00%
+    Neutral:         77.66%
+    Contradiction:   22.34%
+
+Model: minicpm-v
+  Total Conclusions Evaluated: 35
+  
+  Mean Scores (± Std Dev):
+    Entailment:     0.0039 ± 0.0058
+    Neutral:        0.8624 ± 0.2262
+    Contradiction:  0.1337 ± 0.2271
+  
+  Predicted Label Distribution:
+    Entailment:       0.00%
+    Neutral:         88.57%
+    Contradiction:   11.43%
+
+Model: llava
+  Total Conclusions Evaluated: 88
+  
+  Mean Scores (± Std Dev):
+    Entailment:     0.0025 ± 0.0079
+    Neutral:        0.8246 ± 0.3070
+    Contradiction:  0.1729 ± 0.3075
+  
+  Predicted Label Distribution:
+    Entailment:       0.00%
+    Neutral:         84.09%
+    Contradiction:   15.91%
+
+
+OVERALL STATISTICS (All Models Combined)
+----------------------------------------------------------------------------------------------------
+
+Total Conclusions Evaluated (All Models): 217
+  
+Mean Scores (All Models):
+  Entailment:     0.0038
+  Neutral:        0.8000
+  Contradiction:  0.1962
+  
+Predicted Label Distribution (All Models):
+  Entailment:       0.00%
+  Neutral:         82.03%
+  Contradiction:   17.97%
+
+====================================================================================================
+Output Files:
+  CSV Files:  {model_name}_outputs_with_nli.csv
+  JSON Files: {model_name}_outputs_with_nli.json
+====================================================================================================
