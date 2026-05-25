@@ -19,17 +19,17 @@ Model: nemotron-3-nano-omni-30b-a3b-reasoning-image-only
     Contradiction:   22.34%
 
 Model: minicpm-v
-  Total Conclusions Evaluated: 35
+  Total Conclusions Evaluated: 113
   
   Mean Scores (± Std Dev):
-    Entailment:     0.0039 ± 0.0058
-    Neutral:        0.8624 ± 0.2262
-    Contradiction:  0.1337 ± 0.2271
+    Entailment:     0.0024 ± 0.0095
+    Neutral:        0.7884 ± 0.3632
+    Contradiction:  0.1030 ± 0.2418
   
   Predicted Label Distribution:
     Entailment:       0.00%
-    Neutral:         88.57%
-    Contradiction:   11.43%
+    Neutral:         81.42%
+    Contradiction:    7.96%
 
 Model: llava
   Total Conclusions Evaluated: 88
@@ -48,17 +48,17 @@ Model: llava
 OVERALL STATISTICS (All Models Combined)
 ----------------------------------------------------------------------------------------------------
 
-Total Conclusions Evaluated (All Models): 217
+Total Conclusions Evaluated (All Models): 295
   
 Mean Scores (All Models):
-  Entailment:     0.0038
-  Neutral:        0.8000
-  Contradiction:  0.1962
+  Entailment:     0.0033
+  Neutral:        0.7882
+  Contradiction:  0.1679
   
 Predicted Label Distribution (All Models):
   Entailment:       0.00%
-  Neutral:         82.03%
-  Contradiction:   17.97%
+  Neutral:         81.02%
+  Contradiction:   14.92%
 
 ====================================================================================================
 Output Files:

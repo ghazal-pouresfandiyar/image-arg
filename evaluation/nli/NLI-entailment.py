@@ -22,7 +22,7 @@ from tqdm import tqdm
 import numpy as np
 
 # Configuration
-MODEL_DIR = Path(__file__).parent.parent / "models" / "output_model"
+MODEL_DIR = Path(__file__).parent.parent.parent / "models" / "output_model"
 EVALUATION_DIR = Path(__file__).parent
 NLI_MODEL_NAME = "microsoft/deberta-large-mnli"
 
@@ -34,6 +34,13 @@ NLI_LABEL_TO_ID = {v: k for k, v in NLI_LABELS.items()}
 def load_json_files() -> Dict[str, Path]:
     """Find and load all JSON files in models/output_model/"""
     json_files = {}
+    
+    # Ensure directory exists
+    if not MODEL_DIR.exists():
+        print(f"Error: MODEL_DIR does not exist: {MODEL_DIR}")
+        print(f"Current working directory: {Path.cwd()}")
+        return json_files
+    
     for json_file in MODEL_DIR.glob("*.json"):
         if "processing_log" not in json_file.name:
             model_name = json_file.stem.replace("_outputs", "")
@@ -427,6 +434,9 @@ def save_summary_statistics(all_stats: Dict[str, Dict]) -> Path:
 
 def main():
     """Main execution function"""
+    # Ensure output directory exists
+    EVALUATION_DIR.mkdir(parents=True, exist_ok=True)
+    
     print("\n" + "=" * 100)
     print("NLI ENTAILMENT EVALUATION PIPELINE")
     print("=" * 100)
@@ -435,6 +445,10 @@ def main():
     json_files = load_json_files()
     if not json_files:
         print("No JSON files found. Exiting.")
+        print(f"Searched in: {MODEL_DIR}")
+        print(f"Directory exists: {MODEL_DIR.exists()}")
+        if MODEL_DIR.exists():
+            print(f"Files found: {list(MODEL_DIR.glob('*.json'))}")
         return
     
     # Step 2: Load NLI model

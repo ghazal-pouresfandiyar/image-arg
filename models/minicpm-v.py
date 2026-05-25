@@ -1,3 +1,6 @@
+# before running, make sure ollama is running with the model:
+# ollama pull minicpm-v
+# ollama run minicpm-v
 import os
 import json
 from pathlib import Path
@@ -23,16 +26,21 @@ MODEL_NAME = "minicpm-v"
 
 def extract_json_from_response(response_text):
     """
-    Extract JSON from model response.
-    Handles markdown code blocks (```json ... ```) and raw JSON.
+    Extract JSON from model response with better fallback handling.
+    Handles markdown code blocks and raw JSON objects/arrays anywhere in text.
     Returns (parsed_dict, raw_json_string) or (None, raw_text) if parsing fails.
     """
-    # Try to extract JSON from markdown code blocks
+    # Try 1: Extract from markdown code blocks
     json_match = re.search(r'```(?:json)?\s*([\s\S]*?)```', response_text)
     if json_match:
         json_str = json_match.group(1).strip()
     else:
-        json_str = response_text.strip()
+        # Try 2: Find JSON object/array in response (greedy search)
+        json_match = re.search(r'\{[\s\S]*\}|\[[\s\S]*\]', response_text)
+        if json_match:
+            json_str = json_match.group(0)
+        else:
+            json_str = response_text.strip()
     
     try:
         parsed = json.loads(json_str)
@@ -45,26 +53,103 @@ def extract_json_from_response(response_text):
 def normalize_items(items):
     """
     Normalize premises/conclusions to plain string arrays.
-    Handles both formats:
-    - ["string1", "string2"] → ["string1", "string2"]
-    - [{"text": "string1"}, {"observation": "string1"}] → ["string1", "string2"]
+    Handles: strings, objects with any key, nested structures, numbered keys.
     """
     if not isinstance(items, list):
         return []
     
     normalized = []
     for item in items:
+        text = None
+        
         if isinstance(item, str):
             # Already a string
-            normalized.append(item)
+            text = item
         elif isinstance(item, dict):
-            # Extract text from common keys: text, observation, inference, description
+            # Try to find text in common keys first
             for key in ['text', 'observation', 'inference', 'description']:
                 if key in item and item[key]:
-                    normalized.append(item[key])
+                    text = str(item[key])
                     break
+            
+            # If no common key found, try any key (handles Observation_1, Observation_2, etc.)
+            if not text:
+                for key in sorted(item.keys()):
+                    value = item[key]
+                    if value:
+                        text = str(value)
+                        break
+        
+        if text:
+            normalized.append(text)
     
     return normalized
+
+
+def parse_text_format(text):
+    """
+    Fallback parser for plain text format when model doesn't return JSON.
+    Handles multiple formats:
+    1. "Premise N: ... Conclusion N: ..." (interleaved)
+    2. "Premises: 1. ... Conclusions: 1. ..." (grouped sections)
+    3. Plain numbered lists
+    
+    Returns dict with 'premises' and 'conclusions' keys.
+    """
+    premises = []
+    conclusions = []
+    
+    # Try to extract "Premise N: ..." and "Conclusion N: ..." patterns
+    # This handles interleaved format
+    premise_pattern = r'Premise\s+\d+:\s*(.+?)(?=(?:Premise|Conclusion)\s+\d+:|$)'
+    conclusion_pattern = r'Conclusion\s+\d+:\s*(.+?)(?=(?:Premise|Conclusion)\s+\d+:|$)'
+    
+    premise_matches = re.findall(premise_pattern, text, re.IGNORECASE | re.DOTALL)
+    conclusion_matches = re.findall(conclusion_pattern, text, re.IGNORECASE | re.DOTALL)
+    
+    if premise_matches:
+        premises = [m.strip() for m in premise_matches if m.strip()]
+    
+    if conclusion_matches:
+        conclusions = [m.strip() for m in conclusion_matches if m.strip()]
+    
+    # If no matches with numbered format, try section-based format
+    if not premises or not conclusions:
+        text_lower = text.lower()
+        
+        # Find Premises section
+        prem_idx = text_lower.find('premise')
+        if prem_idx >= 0:
+            conc_idx = text_lower.find('conclusion', prem_idx)
+            if conc_idx < 0:
+                conc_idx = len(text)
+            
+            premises_text = text[prem_idx:conc_idx]
+            
+            # Extract numbered items: "1. Text", "2. Text"
+            prem_lines = re.findall(r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)', premises_text, re.MULTILINE | re.DOTALL)
+            if prem_lines:
+                premises = [line.strip() for line in prem_lines if line.strip()]
+        
+        # Find Conclusions section
+        conc_idx = text_lower.find('conclusion')
+        if conc_idx >= 0:
+            conclusions_text = text[conc_idx:]
+            conclusions_text = re.sub(r'^\s*conclusions?:\s*', '', conclusions_text, flags=re.IGNORECASE).strip()
+            
+            # Try numbered conclusions first
+            conc_lines = re.findall(r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)', conclusions_text, re.MULTILINE | re.DOTALL)
+            if conc_lines:
+                conclusions = [line.strip() for line in conc_lines if line.strip()]
+            else:
+                # Fallback: take whole section as one conclusion
+                if conclusions_text.strip():
+                    conclusions = [conclusions_text.strip()]
+    
+    return {
+        "premises": premises,
+        "conclusions": conclusions
+    }
 
 
 def build_nemotron_entry(image_id, raw_output_text, parsed_output=None):
@@ -96,9 +181,11 @@ def build_nemotron_entry(image_id, raw_output_text, parsed_output=None):
             "conclusions": conclusions
         }
     else:
+        # Fallback: try to parse plain text format
+        parsed_text = parse_text_format(raw_output_text)
         entry["parsed_output"] = {
-            "premises": [],
-            "conclusions": []
+            "premises": parsed_text.get("premises", []),
+            "conclusions": parsed_text.get("conclusions", [])
         }
     
     # Store raw output as string
