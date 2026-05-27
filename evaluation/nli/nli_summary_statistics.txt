@@ -1,67 +1,69 @@
 ====================================================================================================
 NLI ENTAILMENT EVALUATION SUMMARY
+NLI Model:  microsoft/deberta-large-mnli
+Aggregation: mean pooling + contradiction override (threshold=0.8)
+Seed: 42
 ====================================================================================================
 
-PER-MODEL STATISTICS
-----------------------------------------------------------------------------------------------------
+Model: nemotron-3-nano-omni-30b-a3b-reasoning-image-only  (94 conclusions | 47 images)
+  Scores (mean ± std):
+    Entailment:    0.0602 ± 0.1143
+    Neutral:       0.9104 ± 0.1419
+    Contradiction: 0.0294 ± 0.0703
+  Label distribution:
+    Entailment:      2.13%
+    Neutral:        92.55%
+    Contradiction:   5.32%
+  Research metrics:
+    NLI Confidence (mean ± std):  0.0308 ± 0.1261
+    Support ratio (mean):         0.0426
+    Contradiction ratio (mean):   0.0222
+    Premises used per conclusion: 3.04
+    Per-image entailment rate:    0.0213 ± 0.1020
 
-Model: nemotron-3-nano-omni-30b-a3b-reasoning-image-only
-  Total Conclusions Evaluated: 94
-  
-  Mean Scores (± Std Dev):
-    Entailment:     0.0050 ± 0.0188
-    Neutral:        0.7537 ± 0.3380
-    Contradiction:  0.2413 ± 0.3388
-  
-  Predicted Label Distribution:
-    Entailment:       0.00%
-    Neutral:         77.66%
-    Contradiction:   22.34%
+Model: minicpm-v  (101 conclusions | 54 images)
+  Scores (mean ± std):
+    Entailment:    0.0229 ± 0.0627
+    Neutral:       0.9481 ± 0.1065
+    Contradiction: 0.0290 ± 0.0899
+  Label distribution:
+    Entailment:      0.00%
+    Neutral:        97.03%
+    Contradiction:   2.97%
+  Research metrics:
+    NLI Confidence (mean ± std):  -0.0060 ± 0.1127
+    Support ratio (mean):         0.0107
+    Contradiction ratio (mean):   0.0198
+    Premises used per conclusion: 2.94
+    Per-image entailment rate:    0.0000 ± 0.0000
 
-Model: minicpm-v
-  Total Conclusions Evaluated: 113
-  
-  Mean Scores (± Std Dev):
-    Entailment:     0.0024 ± 0.0095
-    Neutral:        0.7884 ± 0.3632
-    Contradiction:  0.1030 ± 0.2418
-  
-  Predicted Label Distribution:
-    Entailment:       0.00%
-    Neutral:         81.42%
-    Contradiction:    7.96%
+Model: llava  (88 conclusions | 56 images)
+  Scores (mean ± std):
+    Entailment:    0.0328 ± 0.0846
+    Neutral:       0.9441 ± 0.1149
+    Contradiction: 0.0231 ± 0.0666
+  Label distribution:
+    Entailment:      0.00%
+    Neutral:        97.73%
+    Contradiction:   2.27%
+  Research metrics:
+    NLI Confidence (mean ± std):  0.0097 ± 0.0999
+    Support ratio (mean):         0.0218
+    Contradiction ratio (mean):   0.0161
+    Premises used per conclusion: 2.90
+    Per-image entailment rate:    0.0000 ± 0.0000
 
-Model: llava
-  Total Conclusions Evaluated: 88
-  
-  Mean Scores (± Std Dev):
-    Entailment:     0.0025 ± 0.0079
-    Neutral:        0.8246 ± 0.3070
-    Contradiction:  0.1729 ± 0.3075
-  
-  Predicted Label Distribution:
-    Entailment:       0.00%
-    Neutral:         84.09%
-    Contradiction:   15.91%
-
-
-OVERALL STATISTICS (All Models Combined)
-----------------------------------------------------------------------------------------------------
-
-Total Conclusions Evaluated (All Models): 295
-  
-Mean Scores (All Models):
-  Entailment:     0.0033
-  Neutral:        0.7882
-  Contradiction:  0.1679
-  
-Predicted Label Distribution (All Models):
-  Entailment:       0.00%
-  Neutral:         81.02%
-  Contradiction:   14.92%
+OVERALL (all models combined)
+------------------------------------------------------------
+  Total conclusions:  283
+  Entailment:         0.71%
+  Neutral:            95.76%
+  Contradiction:      3.53%
+  NLI Confidence:     0.0111
+  Support ratio:      0.0247
 
 ====================================================================================================
-Output Files:
-  CSV Files:  {model_name}_outputs_with_nli.csv
-  JSON Files: {model_name}_outputs_with_nli.json
+Output files:
+  {model}_outputs_with_nli.csv  – per-conclusion scores + per-premise columns
+  nli_summary_statistics.txt    – this file
 ====================================================================================================

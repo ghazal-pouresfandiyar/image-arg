@@ -1,505 +1,462 @@
 """
-NLI Entailment Evaluation Script
+NLI Entailment Evaluation Script (v4)
 
-Evaluates model-generated arguments using Natural Language Inference (NLI) to assess
-whether conclusions are entailed by premises.
-
-Workflow:
-1. Load JSON files from models/output_model/
-2. Create expanded CSV format (one row per conclusion)
-3. Score each conclusion against merged premises using microsoft/deberta-large-mnli
-4. Generate CSV and JSON outputs with NLI scores in evaluation/
-5. Compute and export summary statistics
+Changes from v3:
+- Consistent mean aggregation (agg_e, agg_n, agg_c all use mean)
+- Chunk scores averaged per premise (not max-chunk selection)
+- Per-premise scores exported to CSV columns
+- Removed sidecar JSON (CSV is sufficient)
 """
 
 import json
+import logging
+import numpy as np
 import pandas as pd
+import torch
+import random
+
 from pathlib import Path
 from typing import Dict, List, Tuple
-import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from tqdm import tqdm
-import numpy as np
 
+# ─────────────────────────────────────────────
 # Configuration
-MODEL_DIR = Path(__file__).parent.parent.parent / "models" / "output_model"
-EVALUATION_DIR = Path(__file__).parent
-NLI_MODEL_NAME = "microsoft/deberta-large-mnli"
+# ─────────────────────────────────────────────
+MODEL_DIR        = Path(__file__).parent.parent.parent / "models" / "output_model"
+EVALUATION_DIR   = Path(__file__).parent
+NLI_MODEL_NAME   = "microsoft/deberta-large-mnli"
 
-# NLI label mapping
-NLI_LABELS = {0: "entailment", 1: "neutral", 2: "contradiction"}
-NLI_LABEL_TO_ID = {v: k for k, v in NLI_LABELS.items()}
+BATCH_SIZE        = 16
+MAX_TOKEN_LENGTH  = 512
+MAX_PREMISE_CHARS = 800
+RANDOM_SEED       = 42
+
+# Aggregation: mean all premise scores, then apply contradiction override
+# if max_contradiction > 0.8 AND > max_entailment
+CONTRADICTION_THRESHOLD = 0.8
+
+# ─────────────────────────────────────────────
+# Logging
+# ─────────────────────────────────────────────
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)-8s | %(message)s",
+    datefmt="%H:%M:%S",
+)
+log = logging.getLogger(__name__)
 
 
+def set_seed(seed: int):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
+# ─────────────────────────────────────────────
+# File loading
+# ─────────────────────────────────────────────
 def load_json_files() -> Dict[str, Path]:
-    """Find and load all JSON files in models/output_model/"""
-    json_files = {}
-    
-    # Ensure directory exists
     if not MODEL_DIR.exists():
-        print(f"Error: MODEL_DIR does not exist: {MODEL_DIR}")
-        print(f"Current working directory: {Path.cwd()}")
-        return json_files
-    
-    for json_file in MODEL_DIR.glob("*.json"):
-        if "processing_log" not in json_file.name:
-            model_name = json_file.stem.replace("_outputs", "")
-            json_files[model_name] = json_file
-    print(f"Found {len(json_files)} model output files:")
-    for model_name, path in json_files.items():
-        print(f"  - {model_name}: {path.name}")
-    return json_files
+        log.error("MODEL_DIR not found: %s", MODEL_DIR)
+        return {}
+    files = {}
+    for p in MODEL_DIR.glob("*.json"):
+        if "processing_log" not in p.name:
+            files[p.stem.replace("_outputs", "")] = p
+    log.info("Found %d model output file(s)", len(files))
+    for name, path in files.items():
+        log.info("  %s → %s", name, path.name)
+    return files
 
 
-def load_json_data(json_path: Path) -> List[Dict]:
-    """Load JSON file with error handling"""
+def load_json_data(path: Path) -> List[Dict]:
     try:
-        with open(json_path, 'r') as f:
+        with open(path) as f:
             data = json.load(f)
-        if isinstance(data, dict):
-            data = [data]
-        return data
+        return [data] if isinstance(data, dict) else data
     except Exception as e:
-        print(f"Error loading {json_path}: {e}")
+        log.error("Error loading %s: %s", path, e)
         return []
 
+# ─────────────────────────────────────────────
+# NLI model
+# ─────────────────────────────────────────────
+def load_nli_model():
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    log.info("Loading %s on %s", NLI_MODEL_NAME, device.upper())
+    if device == "cuda":
+        log.info("GPU: %s", torch.cuda.get_device_name(0))
 
-def expand_to_csv_format(data: List[Dict]) -> List[Dict]:
-    """
-    Expand JSON to CSV format where each row represents one conclusion.
-    
-    Args:
-        data: List of sample dicts from JSON
-        
-    Returns:
-        List of expanded rows (one per conclusion per sample)
-    """
-    expanded_rows = []
-    
-    for sample in data:
-        image_id = sample.get("image_id", "unknown")
-        model = sample.get("model", "unknown")
-        timestamp = sample.get("timestamp", "")
-        
-        parsed_output = sample.get("parsed_output", {})
-        premises = parsed_output.get("premises", [])
-        conclusions = parsed_output.get("conclusions", [])
-        
-        # Merge all premises into a single string
-        merged_premises = " ".join(premises) if premises else ""
-        
-        # Skip if no conclusions
-        if not conclusions:
-            continue
-        
-        # Create one row per conclusion
-        for conclusion_idx, conclusion in enumerate(conclusions):
-            row = {
-                "image_id": image_id,
-                "model": model,
-                "timestamp": timestamp,
-                "conclusion_index": conclusion_idx,
-                "premises_merged": merged_premises,
-                "conclusion_text": conclusion,
-                # NLI scores (to be filled)
-                "entailment_score": None,
-                "neutral_score": None,
-                "contradiction_score": None,
-                "predicted_label": None
-            }
-            expanded_rows.append(row)
-    
-    return expanded_rows
-
-
-def load_nli_model(device: str = "cpu"):
-    """Load NLI model and tokenizer"""
-    print(f"\nLoading NLI model: {NLI_MODEL_NAME}")
-    if device == "cuda" and torch.cuda.is_available():
-        print("Using CUDA device")
-    else:
-        device = "cpu"
-        print("Using CPU device")
-    
     tokenizer = AutoTokenizer.from_pretrained(NLI_MODEL_NAME)
     model = AutoModelForSequenceClassification.from_pretrained(NLI_MODEL_NAME)
-    model = model.to(device)
-    model.eval()
-    
-    return tokenizer, model, device
+    model = model.to(device).eval()
 
+    # Read label mapping from model config — never hardcode
+    id2label = {k: v.lower() for k, v in model.config.id2label.items()}
+    log.info("Label mapping from model config: %s", id2label)
+    return tokenizer, model, device, id2label
 
-def score_conclusion_with_nli(
-    tokenizer, 
-    model, 
-    device: str,
-    premises: str, 
-    conclusion: str,
-    max_length: int = 512
-) -> Tuple[float, float, float, str]:
-    """
-    Score a conclusion using NLI model.
-    
-    Args:
-        tokenizer: Tokenizer for NLI model
-        model: NLI model
-        device: Device to run on (cuda/cpu)
-        premises: Merged premise text
-        conclusion: Conclusion text
-        max_length: Max token length for tokenization
-        
-    Returns:
-        Tuple of (entailment_score, neutral_score, contradiction_score, predicted_label)
-    """
-    if not premises or not conclusion:
-        return 0.0, 0.0, 0.0, "unknown"
-    
-    try:
-        # Tokenize premise-conclusion pair
-        inputs = tokenizer(
-            premises,
-            conclusion,
-            truncation=True,
-            max_length=max_length,
-            return_tensors="pt"
-        )
-        
-        # Move to device
-        inputs = {k: v.to(device) for k, v in inputs.items()}
-        
-        # Forward pass
-        with torch.no_grad():
-            outputs = model(**inputs)
-        
-        # Get logits and convert to probabilities
-        logits = outputs.logits[0].cpu()
-        probabilities = torch.softmax(logits, dim=-1).numpy()
-        
-        # Extract scores for each label
-        entailment_score = float(probabilities[NLI_LABEL_TO_ID["entailment"]])
-        neutral_score = float(probabilities[NLI_LABEL_TO_ID["neutral"]])
-        contradiction_score = float(probabilities[NLI_LABEL_TO_ID["contradiction"]])
-        
-        # Get predicted label
-        predicted_label_id = torch.argmax(logits).item()
-        predicted_label = NLI_LABELS[predicted_label_id]
-        
-        return entailment_score, neutral_score, contradiction_score, predicted_label
-    
-    except Exception as e:
-        print(f"Error scoring conclusion: {e}")
-        return 0.0, 0.0, 0.0, "error"
+# ─────────────────────────────────────────────
+# Premise chunking
+# ─────────────────────────────────────────────
+def chunk_premise(premise: str, max_chars: int = MAX_PREMISE_CHARS) -> List[str]:
+    """Split long premises at sentence boundaries to avoid silent truncation."""
+    if len(premise) <= max_chars:
+        return [premise]
+    sentences = premise.replace("! ", ". ").replace("? ", ". ").split(". ")
+    chunks, current = [], ""
+    for sent in sentences:
+        if len(current) + len(sent) + 2 > max_chars and current:
+            chunks.append(current.strip())
+            current = sent
+        else:
+            current = current + ". " + sent if current else sent
+    if current:
+        chunks.append(current.strip())
+    return chunks or [premise[:max_chars]]
 
-
-def evaluate_expanded_data(
-    expanded_data: List[Dict],
-    tokenizer,
-    model,
-    device: str
+# ─────────────────────────────────────────────
+# Batched inference
+# ─────────────────────────────────────────────
+def score_pairs_batched(
+    tokenizer, model, device: str, id2label: Dict,
+    pairs: List[Tuple[str, str]],
 ) -> List[Dict]:
-    """
-    Score all conclusions with NLI model.
-    
-    Args:
-        expanded_data: List of expanded rows
-        tokenizer: NLI tokenizer
-        model: NLI model
-        device: Device to run on
-        
-    Returns:
-        List of rows with NLI scores filled in
-    """
-    scored_data = []
-    
-    print(f"\nScoring {len(expanded_data)} conclusions with NLI model...")
-    for row in tqdm(expanded_data, desc="NLI Scoring"):
-        premises = row["premises_merged"]
-        conclusion = row["conclusion_text"]
-        
-        entailment_score, neutral_score, contradiction_score, predicted_label = \
-            score_conclusion_with_nli(tokenizer, model, device, premises, conclusion)
-        
-        row["entailment_score"] = entailment_score
-        row["neutral_score"] = neutral_score
-        row["contradiction_score"] = contradiction_score
-        row["predicted_label"] = predicted_label
-        
-        scored_data.append(row)
-    
-    return scored_data
+    results = []
+    for start in range(0, len(pairs), BATCH_SIZE):
+        batch = pairs[start: start + BATCH_SIZE]
+        try:
+            enc = tokenizer(
+                [p for p, _ in batch], [c for _, c in batch],
+                truncation=True, max_length=MAX_TOKEN_LENGTH,
+                padding=True, return_tensors="pt",
+            )
+            enc = {k: v.to(device) for k, v in enc.items()}
+            with torch.no_grad():
+                logits = model(**enc).logits.cpu()
+            probs   = torch.softmax(logits, dim=-1).numpy()
+            pred_ids = torch.argmax(logits, dim=-1).numpy()
+            for prob_row, pred_id in zip(probs, pred_ids):
+                score = {id2label[i]: float(prob_row[i]) for i in range(len(prob_row))}
+                score["predicted_label"] = id2label[int(pred_id)]
+                results.append(score)
+        except Exception as e:
+            log.warning("Batch error: %s", e)
+            for _ in batch:
+                results.append({"entailment": 0.0, "neutral": 0.0,
+                                 "contradiction": 0.0, "predicted_label": "error"})
+    return results
 
+# ─────────────────────────────────────────────
+# Aggregation
+# ─────────────────────────────────────────────
+def aggregate(premise_scores: List[Dict]) -> Dict:
+    """
+    Aggregate per-premise NLI scores.
 
-def save_csv(scored_data: List[Dict], model_name: str) -> Path:
+    Design decisions (for thesis documentation):
+    - Mean pooling across all premises: consistent, symmetric, easy to defend
+    - Contradiction override: only when max_contradiction > 0.8 AND > max_entailment,
+      i.e., a premise must strongly and dominantly contradict to override
+    - nli_confidence = agg_entailment - agg_contradiction ∈ [-1, 1]
     """
-    Save scored data to CSV format.
-    
-    Args:
-        scored_data: List of scored rows
-        model_name: Name of the model (for filename)
-        
-    Returns:
-        Path to saved CSV file
-    """
-    df = pd.DataFrame(scored_data)
-    
-    # Select and order columns for output
-    output_columns = [
-        "image_id",
-        "model",
-        "timestamp",
-        "conclusion_index",
-        "premises_merged",
-        "conclusion_text",
-        "entailment_score",
-        "neutral_score",
-        "contradiction_score",
-        "predicted_label"
-    ]
-    
-    df = df[output_columns]
-    csv_path = EVALUATION_DIR / f"{model_name}_outputs_with_nli.csv"
-    df.to_csv(csv_path, index=False)
-    print(f"Saved CSV: {csv_path}")
-    return csv_path
-
-
-def save_json(original_data: List[Dict], scored_data: List[Dict], model_name: str) -> Path:
-    """
-    Create JSON output with NLI scores added to original structure.
-    
-    Args:
-        original_data: Original data from JSON file
-        scored_data: Expanded data with NLI scores
-        model_name: Name of the model (for filename)
-        
-    Returns:
-        Path to saved JSON file
-    """
-    # Create a mapping from (image_id, conclusion_index) to NLI scores
-    nli_scores_map = {}
-    for row in scored_data:
-        key = (str(row["image_id"]), row["conclusion_index"])
-        nli_scores_map[key] = {
-            "entailment_score": row["entailment_score"],
-            "neutral_score": row["neutral_score"],
-            "contradiction_score": row["contradiction_score"],
-            "predicted_label": row["predicted_label"]
+    if not premise_scores:
+        return {
+            "agg_entailment": 0.0, "agg_neutral": 0.0, "agg_contradiction": 0.0,
+            "agg_predicted_label": "unknown",
+            "nli_confidence": 0.0, "max_entailment": 0.0, "max_contradiction": 0.0,
+            "support_ratio": 0.0, "contradiction_ratio": 0.0,
+            "premise_count_used": 0,
         }
-    
-    # Add NLI scores to original data
-    enhanced_data = []
-    for sample in original_data:
-        enhanced_sample = sample.copy()
-        parsed_output = enhanced_sample.get("parsed_output", {})
-        conclusions = parsed_output.get("conclusions", [])
-        
-        # Add NLI scores to conclusions
-        enhanced_conclusions = []
-        for idx, conclusion in enumerate(conclusions):
-            key = (str(sample.get("image_id", "")), idx)
-            if key in nli_scores_map:
-                enhanced_conclusion = {
-                    "text": conclusion,
-                    "nli_scores": nli_scores_map[key]
-                }
-            else:
-                enhanced_conclusion = {
-                    "text": conclusion,
-                    "nli_scores": {
-                        "entailment_score": None,
-                        "neutral_score": None,
-                        "contradiction_score": None,
-                        "predicted_label": "unknown"
-                    }
-                }
-            enhanced_conclusions.append(enhanced_conclusion)
-        
-        enhanced_sample["parsed_output"]["conclusions"] = enhanced_conclusions
-        enhanced_data.append(enhanced_sample)
-    
-    json_path = EVALUATION_DIR / f"{model_name}_outputs_with_nli.json"
-    with open(json_path, 'w') as f:
-        json.dump(enhanced_data, f, indent=2)
-    print(f"Saved JSON: {json_path}")
-    return json_path
 
+    ents   = [s["entailment"]    for s in premise_scores]
+    neus   = [s["neutral"]       for s in premise_scores]
+    cons   = [s["contradiction"] for s in premise_scores]
+    labels = [s["predicted_label"] for s in premise_scores]
 
-def compute_statistics(scored_data: List[Dict]) -> Dict:
-    """
-    Compute aggregate NLI statistics.
-    
-    Args:
-        scored_data: List of scored rows
-        
-    Returns:
-        Dictionary of statistics
-    """
-    df = pd.DataFrame(scored_data)
-    
-    total_conclusions = len(df)
-    
-    stats = {
-        "total_conclusions": total_conclusions,
-        "mean_entailment": float(df["entailment_score"].mean()),
-        "mean_neutral": float(df["neutral_score"].mean()),
-        "mean_contradiction": float(df["contradiction_score"].mean()),
-        "std_entailment": float(df["entailment_score"].std()),
-        "std_neutral": float(df["neutral_score"].std()),
-        "std_contradiction": float(df["contradiction_score"].std()),
-        "pct_entailment": float((df["predicted_label"] == "entailment").sum() / total_conclusions * 100),
-        "pct_neutral": float((df["predicted_label"] == "neutral").sum() / total_conclusions * 100),
-        "pct_contradiction": float((df["predicted_label"] == "contradiction").sum() / total_conclusions * 100),
+    # Consistent mean pooling across all three scores
+    agg_e = float(np.mean(ents))
+    agg_n = float(np.mean(neus))
+    agg_c = float(np.mean(cons))
+
+    max_ent = max(ents)
+    max_con = max(cons)
+    n = len(premise_scores)
+
+    # Contradiction override: strong single contradiction can invalidate argument
+    if max_con > CONTRADICTION_THRESHOLD and max_con > max_ent:
+        agg_label = "contradiction"
+    else:
+        scores = {
+            "entailment": agg_e,
+            "neutral": agg_n,
+            "contradiction": agg_c
+        }
+        agg_label = max(scores, key=scores.get)
+
+    return {
+        "agg_entailment":      agg_e,
+        "agg_neutral":         agg_n,
+        "agg_contradiction":   agg_c,
+        "agg_predicted_label": agg_label,
+        "nli_confidence":      agg_e - agg_c,
+        "max_entailment":      max_ent,
+        "max_contradiction":   max_con,
+        "support_ratio":       sum(1 for l in labels if l == "entailment") / n,
+        "contradiction_ratio": sum(1 for l in labels if l == "contradiction") / n,
+        "premise_count_used":  n,
     }
-    
-    return stats
+
+# ─────────────────────────────────────────────
+# Core evaluation
+# ─────────────────────────────────────────────
+def evaluate_samples(data: List[Dict], tokenizer, model, device: str, id2label: Dict) -> List[Dict]:
+    """
+    Per conclusion:
+      - score each (premise_chunk, conclusion) pair
+      - average chunk scores per premise  ← consistent, no bias
+      - aggregate premise scores via mean pooling
+      - export per-premise scores as flat CSV columns
+    """
+    rows: List[Dict] = []
+    all_pairs: List[Tuple[str, str]] = []
+    # (row_idx, premise_idx, chunk_idx)
+    pair_map: List[Tuple[int, int, int]] = []
+
+    for sample in data:
+        image_id    = str(sample.get("image_id", "unknown"))
+        model_name  = sample.get("model", "unknown")
+        timestamp   = sample.get("timestamp", "")
+        parsed      = sample.get("parsed_output", {})
+        premises    = parsed.get("premises", [])
+        conclusions = parsed.get("conclusions", [])
+
+        for c_idx, conclusion in enumerate(conclusions):
+            if not conclusion or not isinstance(conclusion, str):
+                continue
+            row_idx = len(rows)
+            rows.append({
+                "image_id":         image_id,
+                "model":            model_name,
+                "timestamp":        timestamp,
+                "conclusion_index": c_idx,
+                "conclusion_text":  conclusion,
+                "num_premises":     len(premises),
+                "_chunk_scores":    {},  # {premise_idx: [chunk_scores]}
+            })
+
+            for p_idx, premise in enumerate(premises):
+                if not premise or not isinstance(premise, str):
+                    continue
+                for chunk_idx, chunk in enumerate(chunk_premise(premise)):
+                    all_pairs.append((chunk, conclusion))
+                    pair_map.append((row_idx, p_idx, chunk_idx))
+
+    if not all_pairs:
+        return rows
+
+    log.info("Scoring %d pairs (batch=%d)...", len(all_pairs), BATCH_SIZE)
+    pair_results = score_pairs_batched(tokenizer, model, device, id2label, all_pairs)
+
+    # Collect all chunk scores per (row, premise)
+    for (row_idx, p_idx, _), score in zip(pair_map, pair_results):
+        bucket = rows[row_idx]["_chunk_scores"]
+        if p_idx not in bucket:
+            bucket[p_idx] = []
+        bucket[p_idx].append(score)
+
+    # Average chunk scores per premise, then aggregate + flatten to CSV columns
+    for row in rows:
+        chunk_scores = row.pop("_chunk_scores")
+
+        # Per-premise: average over chunks
+        premise_scores = []
+        per_premise_cols = {}
+        for p_idx in sorted(chunk_scores.keys()):
+            chunks = chunk_scores[p_idx]
+            avg = {
+                "entailment":    float(np.mean([c["entailment"]    for c in chunks])),
+                "neutral":       float(np.mean([c["neutral"]       for c in chunks])),
+                "contradiction": float(np.mean([c["contradiction"] for c in chunks])),
+            }
+            avg["predicted_label"] = max(
+                ["entailment", "neutral", "contradiction"],
+                key=lambda k: avg[k]
+            )
+            premise_scores.append(avg)
+            per_premise_cols[f"premise_{p_idx}_entailment"]    = avg["entailment"]
+            per_premise_cols[f"premise_{p_idx}_neutral"]       = avg["neutral"]
+            per_premise_cols[f"premise_{p_idx}_contradiction"] = avg["contradiction"]
+            per_premise_cols[f"premise_{p_idx}_label"]         = avg["predicted_label"]
+
+        row.update(aggregate(premise_scores))
+        row.update(per_premise_cols)
+
+    return rows
+
+# ─────────────────────────────────────────────
+# Output
+# ─────────────────────────────────────────────
+def save_csv(rows: List[Dict], model_name: str) -> Path:
+    df = pd.DataFrame(rows)
+
+    # Fixed columns first, then per-premise columns sorted
+    fixed_cols = [
+        "image_id", "model", "timestamp", "conclusion_index", "conclusion_text",
+        "num_premises", "premise_count_used", "agg_entailment", "agg_neutral", "agg_contradiction",
+        "agg_predicted_label", "nli_confidence", "max_entailment", "max_contradiction",
+        "support_ratio", "contradiction_ratio",
+    ]
+    premise_cols = sorted([c for c in df.columns if c.startswith("premise_")])
+    df = df[fixed_cols + premise_cols]
+
+    path = EVALUATION_DIR / f"{model_name}_outputs_with_nli.csv"
+    df.to_csv(path, index=False)
+    log.info("Saved CSV: %s", path)
+    return path
+
+# ─────────────────────────────────────────────
+# Statistics
+# ─────────────────────────────────────────────
+def compute_statistics(rows: List[Dict]) -> Dict:
+    df = pd.DataFrame(rows)
+    df = df[df["agg_predicted_label"].notna() & ~df["agg_predicted_label"].isin(["unknown", "error"])]
+    if df.empty:
+        return {}
+
+    n = len(df)
+    per_image_ent = df.groupby("image_id").apply(
+        lambda g: (g["agg_predicted_label"] == "entailment").mean()
+    )
+
+    return {
+        "total_conclusions":    n,
+        "num_images":           int(df["image_id"].nunique()),
+        "mean_entailment":      float(df["agg_entailment"].mean()),
+        "mean_neutral":         float(df["agg_neutral"].mean()),
+        "mean_contradiction":   float(df["agg_contradiction"].mean()),
+        "std_entailment":       float(df["agg_entailment"].std()),
+        "std_neutral":          float(df["agg_neutral"].std()),
+        "std_contradiction":    float(df["agg_contradiction"].std()),
+        "pct_entailment":       float((df["agg_predicted_label"] == "entailment").sum() / n * 100),
+        "pct_neutral":          float((df["agg_predicted_label"] == "neutral").sum() / n * 100),
+        "pct_contradiction":    float((df["agg_predicted_label"] == "contradiction").sum() / n * 100),
+        "mean_nli_confidence":  float(df["nli_confidence"].mean()),
+        "std_nli_confidence":   float(df["nli_confidence"].std()),
+        "mean_support_ratio":   float(df["support_ratio"].mean()),
+        "mean_contradiction_ratio": float(df["contradiction_ratio"].mean()),
+        "mean_premise_count_used": float(df["premise_count_used"].mean()),
+        "per_image_entailment_mean": float(per_image_ent.mean()),
+        "per_image_entailment_std":  float(per_image_ent.std()),
+    }
 
 
-def save_summary_statistics(all_stats: Dict[str, Dict]) -> Path:
-    """
-    Create and save a summary statistics report.
-    
-    Args:
-        all_stats: Dictionary mapping model names to their statistics
-        
-    Returns:
-        Path to saved statistics file
-    """
-    summary_path = EVALUATION_DIR / "nli_summary_statistics.txt"
-    
-    with open(summary_path, 'w') as f:
-        f.write("=" * 100 + "\n")
+def save_summary(all_stats: Dict[str, Dict]) -> Path:
+    SEP = "=" * 100
+    path = EVALUATION_DIR / "nli_summary_statistics.txt"
+
+    with open(path, "w") as f:
+        f.write(SEP + "\n")
         f.write("NLI ENTAILMENT EVALUATION SUMMARY\n")
-        f.write("=" * 100 + "\n\n")
-        
-        # Per-model statistics
-        f.write("PER-MODEL STATISTICS\n")
-        f.write("-" * 100 + "\n\n")
-        
-        for model_name, stats in all_stats.items():
-            f.write(f"Model: {model_name}\n")
-            f.write(f"  Total Conclusions Evaluated: {stats['total_conclusions']}\n")
-            f.write(f"  \n")
-            f.write(f"  Mean Scores (± Std Dev):\n")
-            f.write(f"    Entailment:     {stats['mean_entailment']:.4f} ± {stats['std_entailment']:.4f}\n")
-            f.write(f"    Neutral:        {stats['mean_neutral']:.4f} ± {stats['std_neutral']:.4f}\n")
-            f.write(f"    Contradiction:  {stats['mean_contradiction']:.4f} ± {stats['std_contradiction']:.4f}\n")
-            f.write(f"  \n")
-            f.write(f"  Predicted Label Distribution:\n")
-            f.write(f"    Entailment:     {stats['pct_entailment']:6.2f}%\n")
-            f.write(f"    Neutral:        {stats['pct_neutral']:6.2f}%\n")
-            f.write(f"    Contradiction:  {stats['pct_contradiction']:6.2f}%\n")
-            f.write(f"\n")
-        
-        # Overall statistics
-        f.write("\n")
-        f.write("OVERALL STATISTICS (All Models Combined)\n")
-        f.write("-" * 100 + "\n\n")
-        
-        combined_data = []
-        for stats in all_stats.values():
-            # Approximate: create weighted average (this is simplified)
-            combined_data.append(stats)
-        
-        total_conclusions = sum(s["total_conclusions"] for s in all_stats.values())
-        mean_entailment = sum(s["mean_entailment"] * s["total_conclusions"] for s in all_stats.values()) / total_conclusions if total_conclusions > 0 else 0
-        mean_neutral = sum(s["mean_neutral"] * s["total_conclusions"] for s in all_stats.values()) / total_conclusions if total_conclusions > 0 else 0
-        mean_contradiction = sum(s["mean_contradiction"] * s["total_conclusions"] for s in all_stats.values()) / total_conclusions if total_conclusions > 0 else 0
-        
-        pct_entailment = sum(s["pct_entailment"] * s["total_conclusions"] for s in all_stats.values()) / total_conclusions if total_conclusions > 0 else 0
-        pct_neutral = sum(s["pct_neutral"] * s["total_conclusions"] for s in all_stats.values()) / total_conclusions if total_conclusions > 0 else 0
-        pct_contradiction = sum(s["pct_contradiction"] * s["total_conclusions"] for s in all_stats.values()) / total_conclusions if total_conclusions > 0 else 0
-        
-        f.write(f"Total Conclusions Evaluated (All Models): {total_conclusions}\n")
-        f.write(f"  \n")
-        f.write(f"Mean Scores (All Models):\n")
-        f.write(f"  Entailment:     {mean_entailment:.4f}\n")
-        f.write(f"  Neutral:        {mean_neutral:.4f}\n")
-        f.write(f"  Contradiction:  {mean_contradiction:.4f}\n")
-        f.write(f"  \n")
-        f.write(f"Predicted Label Distribution (All Models):\n")
-        f.write(f"  Entailment:     {pct_entailment:6.2f}%\n")
-        f.write(f"  Neutral:        {pct_neutral:6.2f}%\n")
-        f.write(f"  Contradiction:  {pct_contradiction:6.2f}%\n")
-        f.write(f"\n")
-        
-        f.write("=" * 100 + "\n")
-        f.write("Output Files:\n")
-        f.write("  CSV Files:  {model_name}_outputs_with_nli.csv\n")
-        f.write("  JSON Files: {model_name}_outputs_with_nli.json\n")
-        f.write("=" * 100 + "\n")
-    
-    print(f"Saved summary statistics: {summary_path}")
-    return summary_path
+        f.write(f"NLI Model:  {NLI_MODEL_NAME}\n")
+        f.write(f"Aggregation: mean pooling + contradiction override "
+                f"(threshold={CONTRADICTION_THRESHOLD})\n")
+        f.write(f"Seed: {RANDOM_SEED}\n")
+        f.write(SEP + "\n\n")
 
+        for model_name, s in all_stats.items():
+            if not s:
+                continue
+            f.write(f"Model: {model_name}  "
+                    f"({s['total_conclusions']} conclusions | {s['num_images']} images)\n")
+            f.write(f"  Scores (mean ± std):\n")
+            f.write(f"    Entailment:    {s['mean_entailment']:.4f} ± {s['std_entailment']:.4f}\n")
+            f.write(f"    Neutral:       {s['mean_neutral']:.4f} ± {s['std_neutral']:.4f}\n")
+            f.write(f"    Contradiction: {s['mean_contradiction']:.4f} ± {s['std_contradiction']:.4f}\n")
+            f.write(f"  Label distribution:\n")
+            f.write(f"    Entailment:    {s['pct_entailment']:6.2f}%\n")
+            f.write(f"    Neutral:       {s['pct_neutral']:6.2f}%\n")
+            f.write(f"    Contradiction: {s['pct_contradiction']:6.2f}%\n")
+            f.write(f"  Research metrics:\n")
+            f.write(f"    NLI Confidence (mean ± std):  {s['mean_nli_confidence']:.4f} ± {s['std_nli_confidence']:.4f}\n")
+            f.write(f"    Support ratio (mean):         {s['mean_support_ratio']:.4f}\n")
+            f.write(f"    Contradiction ratio (mean):   {s['mean_contradiction_ratio']:.4f}\n")
+            f.write(f"    Premises used per conclusion: {s['mean_premise_count_used']:.2f}\n")
+            f.write(f"    Per-image entailment rate:    {s['per_image_entailment_mean']:.4f} ± {s['per_image_entailment_std']:.4f}\n")
+            f.write("\n")
 
+        total_n = sum(s.get("total_conclusions", 0) for s in all_stats.values() if s)
+        if total_n > 0 and len(all_stats) > 1:
+            def wavg(k):
+                return sum(s[k] * s["total_conclusions"]
+                           for s in all_stats.values() if s) / total_n
+            f.write("OVERALL (all models combined)\n")
+            f.write("-" * 60 + "\n")
+            f.write(f"  Total conclusions:  {total_n}\n")
+            f.write(f"  Entailment:         {wavg('pct_entailment'):.2f}%\n")
+            f.write(f"  Neutral:            {wavg('pct_neutral'):.2f}%\n")
+            f.write(f"  Contradiction:      {wavg('pct_contradiction'):.2f}%\n")
+            f.write(f"  NLI Confidence:     {wavg('mean_nli_confidence'):.4f}\n")
+            f.write(f"  Support ratio:      {wavg('mean_support_ratio'):.4f}\n\n")
+
+        f.write(SEP + "\n")
+        f.write("Output files:\n")
+        f.write("  {model}_outputs_with_nli.csv  – per-conclusion scores + per-premise columns\n")
+        f.write("  nli_summary_statistics.txt    – this file\n")
+        f.write(SEP + "\n")
+
+    log.info("Saved summary: %s", path)
+    return path
+
+# ─────────────────────────────────────────────
+# Main
+# ─────────────────────────────────────────────
 def main():
-    """Main execution function"""
-    # Ensure output directory exists
+    set_seed(RANDOM_SEED)
     EVALUATION_DIR.mkdir(parents=True, exist_ok=True)
-    
-    print("\n" + "=" * 100)
-    print("NLI ENTAILMENT EVALUATION PIPELINE")
-    print("=" * 100)
-    
-    # Step 1: Load JSON files
+
+    log.info("NLI EVALUATION PIPELINE v4")
+    log.info("Batch: %d | Max tokens: %d | Contradiction threshold: %.1f",
+             BATCH_SIZE, MAX_TOKEN_LENGTH, CONTRADICTION_THRESHOLD)
+
     json_files = load_json_files()
     if not json_files:
-        print("No JSON files found. Exiting.")
-        print(f"Searched in: {MODEL_DIR}")
-        print(f"Directory exists: {MODEL_DIR.exists()}")
-        if MODEL_DIR.exists():
-            print(f"Files found: {list(MODEL_DIR.glob('*.json'))}")
+        log.error("No JSON files found in %s", MODEL_DIR)
         return
-    
-    # Step 2: Load NLI model
-    tokenizer, model, device = load_nli_model()
-    
-    # Step 3: Process each model
-    all_stats = {}
-    
+
+    tokenizer, nli_model, device, id2label = load_nli_model()
+    all_stats: Dict[str, Dict] = {}
+
     for model_name, json_path in json_files.items():
-        print(f"\n{'=' * 100}")
-        print(f"Processing: {model_name}")
-        print(f"{'=' * 100}")
-        
-        # Load original JSON data
-        original_data = load_json_data(json_path)
-        if not original_data:
-            print(f"Skipping {model_name}: no data loaded")
+        log.info("─" * 50)
+        log.info("Processing: %s", model_name)
+
+        data = load_json_data(json_path)
+        if not data:
+            log.warning("No data for %s, skipping.", model_name)
             continue
-        
-        print(f"Loaded {len(original_data)} samples from {json_path.name}")
-        
-        # Expand to CSV format
-        expanded_data = expand_to_csv_format(original_data)
-        print(f"Expanded to {len(expanded_data)} rows (one per conclusion)")
-        
-        # Score with NLI model
-        scored_data = evaluate_expanded_data(expanded_data, tokenizer, model, device)
-        
-        # Save CSV
-        save_csv(scored_data, model_name)
-        
-        # Save enhanced JSON
-        save_json(original_data, scored_data, model_name)
-        
-        # Compute statistics
-        stats = compute_statistics(scored_data)
+        log.info("Loaded %d samples", len(data))
+
+        rows = evaluate_samples(data, tokenizer, nli_model, device, id2label)
+        log.info("Evaluated %d conclusion(s)", len(rows))
+
+        save_csv(rows, model_name)
+
+        stats = compute_statistics(rows)
         all_stats[model_name] = stats
-        
-        print(f"\nStatistics for {model_name}:")
-        print(f"  Mean Entailment Score: {stats['mean_entailment']:.4f}")
-        print(f"  Entailment Rate: {stats['pct_entailment']:.2f}%")
-        print(f"  Contradiction Rate: {stats['pct_contradiction']:.2f}%")
-    
-    # Step 4: Save summary statistics
+        if stats:
+            log.info(
+                "Entailment: %.2f%%  Neutral: %.2f%%  Contradiction: %.2f%%  "
+                "Confidence: %.4f  Support: %.4f",
+                stats["pct_entailment"], stats["pct_neutral"], stats["pct_contradiction"],
+                stats["mean_nli_confidence"], stats["mean_support_ratio"],
+            )
+
     if all_stats:
-        save_summary_statistics(all_stats)
-    
-    print("\n" + "=" * 100)
-    print("PIPELINE COMPLETE")
-    print("=" * 100)
-    print(f"\nOutput files saved to: {EVALUATION_DIR}")
+        save_summary(all_stats)
+
+    log.info("PIPELINE COMPLETE — outputs in %s", EVALUATION_DIR)
 
 
 if __name__ == "__main__":
