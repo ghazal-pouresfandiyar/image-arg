@@ -226,8 +226,8 @@ def load_model_outputs() -> Dict[str, Dict[str, Dict[str, List[str]]]]:
     model_data = {}
     
     # Find all JSON files matching *_outputs.json pattern
-    json_files = list(MODELS_OUTPUT_DIR.glob("*_outputs.json"))
-    
+    #json_files = list(MODELS_OUTPUT_DIR.glob("*_outputs.json"))
+    json_files = list(MODELS_OUTPUT_DIR.glob("*.json"))
     if not json_files:
         logger.warning(f"No JSON files found in {MODELS_OUTPUT_DIR}")
         return {}
