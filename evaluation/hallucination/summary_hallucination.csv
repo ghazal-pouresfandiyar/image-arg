@@ -1,3 +1,0 @@
-Model,N_Images,Premise_Halluc_Rate_Mean,Premise_Halluc_Rate_Std,Premise_Severity_Mean,Premise_Severity_Std,Conclusion_Halluc_Rate_Mean,Conclusion_Halluc_Rate_Std,Conclusion_Severity_Mean,Conclusion_Severity_Std,Metadata_Mismatch_Mean
-llava,58,0.8491,0.2719,0.5594,0.1501,0.431,0.4535,0.5213,0.1573,0.0716
-minicpm-v,58,0.8319,0.3166,0.5616,0.1911,0.5172,0.4414,0.5408,0.109,0.0849

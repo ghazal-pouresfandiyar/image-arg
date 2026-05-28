@@ -1,0 +1,59 @@
+image_id,premise_score,conclusion_score,overall_score,label
+0,0.4281,0.4102,0.4228,weakly grounded
+1,0.5091,0.5139,0.5106,weakly grounded
+10,0.53,0.3551,0.4775,weakly grounded
+11,0.3842,0.3752,0.3815,weakly grounded
+12,0.4615,0.5389,0.4847,weakly grounded
+13,0.4654,0.3952,0.4443,weakly grounded
+14,0.4572,0.417,0.4452,weakly grounded
+16,0.533,0.5329,0.533,weakly grounded
+2,0.5419,0.4794,0.5232,weakly grounded
+21,0.4721,0.3522,0.4362,weakly grounded
+23,0.2932,0.4551,0.3418,weakly grounded
+24,0.4705,0.455,0.4658,weakly grounded
+25,0.5485,0.5047,0.5354,weakly grounded
+28,0.4716,0.4147,0.4545,weakly grounded
+29,0.6061,0.5743,0.5966,weakly grounded
+30,0.4845,0.4473,0.4734,weakly grounded
+31,0.4366,0.3829,0.4205,weakly grounded
+32,0.5215,0.4945,0.5134,weakly grounded
+34,0.4164,0.4222,0.4181,weakly grounded
+36,0.5116,0.4155,0.4828,weakly grounded
+39,0.5947,0.5673,0.5865,weakly grounded
+40,0.6049,0.541,0.5858,weakly grounded
+41,0.4753,0.4529,0.4686,weakly grounded
+43,0.5261,0.4535,0.5043,weakly grounded
+45,0.6044,0.4448,0.5565,weakly grounded
+48,0.4411,0.3738,0.4209,weakly grounded
+49,0.4209,0.4286,0.4232,weakly grounded
+5,0.6242,0.5921,0.6145,hallucinated
+51,0.5206,0.4706,0.5056,weakly grounded
+52,0.4607,0.4466,0.4565,weakly grounded
+54,0.5231,0.464,0.5054,weakly grounded
+55,0.4592,0.4518,0.457,weakly grounded
+58,1.0,1.0,1.0,hallucinated
+64,0.5121,0.4401,0.4905,weakly grounded
+65,0.5504,0.4667,0.5252,weakly grounded
+66,0.5578,0.5225,0.5472,weakly grounded
+67,0.6388,0.5737,0.6193,hallucinated
+68,0.5012,0.3833,0.4659,weakly grounded
+69,0.4756,0.4942,0.4812,weakly grounded
+70,0.465,0.4947,0.4739,weakly grounded
+71,0.6,0.5515,0.5854,weakly grounded
+72,0.4241,0.4567,0.4338,weakly grounded
+73,0.587,0.5516,0.5764,weakly grounded
+75,0.3456,0.3954,0.3605,weakly grounded
+76,0.5334,0.5191,0.5291,weakly grounded
+77,0.4093,0.4163,0.4114,weakly grounded
+78,0.4674,0.4821,0.4718,weakly grounded
+79,0.4617,0.4399,0.4552,weakly grounded
+8,1.0,1.0,1.0,hallucinated
+80,1.0,1.0,1.0,hallucinated
+81,1.0,1.0,1.0,hallucinated
+84,1.0,1.0,1.0,hallucinated
+85,1.0,1.0,1.0,hallucinated
+86,1.0,1.0,1.0,hallucinated
+89,1.0,1.0,1.0,hallucinated
+9,1.0,1.0,1.0,hallucinated
+90,1.0,1.0,1.0,hallucinated
+91,1.0,1.0,1.0,hallucinated

@@ -1,0 +1,1522 @@
+{
+  "llava": [
+    {
+      "image_id": "36",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Sea level rise",
+        "climateaction": "No climate action",
+        "setting": "Ocean, coastal",
+        "blip2_caption": "people standing on a pier near the ocean"
+      },
+      "blip2_caption": "people standing on a pier near the ocean"
+    },
+    {
+      "image_id": "40",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Human rights",
+        "climateaction": "Politics",
+        "setting": "Desert",
+        "blip2_caption": "the human rights and climate change nexus"
+      },
+      "blip2_caption": "the human rights and climate change nexus"
+    },
+    {
+      "image_id": "67",
+      "premises": [
+        "The bridge in the background is illuminated.",
+        "There's a person standing on a pier looking towards the illuminated bridge.",
+        "A clock is visible behind the person on the pier.",
+        "The sky is dark, suggesting it could be night time."
+      ],
+      "conclusions": [
+        "The bridge is likely a significant landmark or structure in this city, given its illumination and prominence in the background.",
+        "The person standing on the pier appears to be enjoying a peaceful evening with a view of the lit-up bridge, which could suggest that they appreciate architecture or have an interest in the city's nighttime views."
+      ],
+      "premise_details": [
+        {
+          "text": "The bridge in the background is illuminated.",
+          "cleaned_text": "The bridge in the background is illuminated.",
+          "metadata_similarity": 0.029216812923550606,
+          "blip_similarity": 0.4632304906845093,
+          "clip_similarity": 0.6291435211896896,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6215354917570949,
+          "label": "hallucinated"
+        },
+        {
+          "text": "There's a person standing on a pier looking towards the illuminated bridge.",
+          "cleaned_text": "There's a person standing on a pier looking towards the illuminated bridge.",
+          "metadata_similarity": 0.0,
+          "blip_similarity": 0.47970616817474365,
+          "clip_similarity": 0.6318438649177551,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6332674950361252,
+          "label": "hallucinated"
+        },
+        {
+          "text": "A clock is visible behind the person on the pier.",
+          "cleaned_text": "A clock is visible behind the person on the pier.",
+          "metadata_similarity": 0.0,
+          "blip_similarity": 0.22690463066101074,
+          "clip_similarity": 0.6246890276670456,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6722609512507915,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The sky is dark, suggesting it could be night time.",
+          "cleaned_text": "The sky is dark, suggesting it could be night time.",
+          "metadata_similarity": 0.0,
+          "blip_similarity": 0.19771318137645721,
+          "clip_similarity": 0.6062798053026199,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6794010519981384,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "The bridge is likely a significant landmark or structure in this city, given its illumination and prominence in the background.",
+          "cleaned_text": "The bridge is likely a significant landmark or structure in this city, given its illumination and prominence in the background.",
+          "metadata_similarity": 0.05476830527186394,
+          "blip_similarity": 0.42344504594802856,
+          "clip_similarity": 0.6265336871147156,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6151190374046565,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The person standing on the pier appears to be enjoying a peaceful evening with a view of the lit-up bridge, which could suggest that they appreciate architecture or have an interest in the city's nighttime views.",
+          "cleaned_text": "The person standing on the pier appears to be enjoying a peaceful evening with a view of the lit-up bridge, which could suggest that they appreciate architecture or have an interest in the city's nighttime views.",
+          "metadata_similarity": 0.06466124206781387,
+          "blip_similarity": 0.42886146903038025,
+          "clip_similarity": 0.6357598006725311,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6079761885106564,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.6516162475105376,
+      "conclusion_score": 0.6115476129576565,
+      "overall_score": 0.6395956571446733,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Wildfires",
+        "climateaction": "Other",
+        "setting": "Residential/commercial",
+        "blip2_caption": "a woman stands on a bridge in front of a smokey sky"
+      },
+      "blip2_caption": "a woman stands on a bridge in front of a smokey sky"
+    },
+    {
+      "image_id": "90",
+      "premises": [
+        "The image is a collage of two separate photographs, each with its own context and content.",
+        "In the top photo, there are two newspaper articles displayed on a screen, with headlines related to climate change."
+      ],
+      "conclusions": [
+        "From the text in the newspaper article, one can infer that the climate change issue is being reported as an important and current topic of discussion.",
+        "The image suggests the widespread coverage of environmental topics, specifically focusing on climate change, by various media outlets."
+      ],
+      "premise_details": [
+        {
+          "text": "The image is a collage of two separate photographs, each with its own context and content.",
+          "cleaned_text": "The image is a collage of two separate photographs, each with its own context and content.",
+          "metadata_similarity": 0.04483778029680252,
+          "blip_similarity": 0.2135406881570816,
+          "clip_similarity": 0.6014001071453094,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.65533999055624,
+          "label": "hallucinated"
+        },
+        {
+          "text": "In the top photo, there are two newspaper articles displayed on a screen, with headlines related to climate change.",
+          "cleaned_text": "In the top photo, there are two newspaper articles displayed on a screen, with headlines related to climate change.",
+          "metadata_similarity": 0.20257379114627838,
+          "blip_similarity": 0.30670130252838135,
+          "clip_similarity": 0.6762593686580658,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6112690037488937,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "From the text in the newspaper article, one can infer that the climate change issue is being reported as an important and current topic of discussion.",
+          "cleaned_text": "From the text in the newspaper article, one can infer that the climate change issue is being reported as an important and current topic of discussion.",
+          "metadata_similarity": 0.18224766850471497,
+          "blip_similarity": 0.20271500945091248,
+          "clip_similarity": 0.6517783254384995,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6407021655142306,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The image suggests the widespread coverage of environmental topics, specifically focusing on climate change, by various media outlets.",
+          "cleaned_text": "The image suggests the widespread coverage of environmental topics, specifically focusing on climate change, by various media outlets.",
+          "metadata_similarity": 0.18435466289520264,
+          "blip_similarity": 0.3346582055091858,
+          "clip_similarity": 0.6390673667192459,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6217638327181338,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.6333044971525669,
+      "conclusion_score": 0.6312329991161822,
+      "overall_score": 0.6326830477416514,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Sea level rise",
+        "climateaction": "No climate action",
+        "setting": "Ocean, coastal",
+        "blip2_caption": "a new scientist app with a map of the ocean"
+      },
+      "blip2_caption": "a new scientist app with a map of the ocean"
+    },
+    {
+      "image_id": "5",
+      "premises": [
+        "The sky is orange with a reddish hue, suggesting that it might be either sunrise or sunset.",
+        "There is a prominent city skyline in the background, including the iconic Golden Gate Bridge."
+      ],
+      "conclusions": [
+        "The image depicts an urban scene, possibly in San Francisco, with a notable silhouette of the downtown area during dusk or dawn.",
+        "The vibrant orange color of the sky implies that the photo could have been taken either at sunrise or sunset."
+      ],
+      "premise_details": [
+        {
+          "text": "The sky is orange with a reddish hue, suggesting that it might be either sunrise or sunset.",
+          "cleaned_text": "The sky is orange with a reddish hue, suggesting that it might be either sunrise or sunset.",
+          "metadata_similarity": 0.0,
+          "blip_similarity": 0.42841655015945435,
+          "clip_similarity": 0.6392515003681183,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6398497924208641,
+          "label": "hallucinated"
+        },
+        {
+          "text": "There is a prominent city skyline in the background, including the iconic Golden Gate Bridge.",
+          "cleaned_text": "There is a prominent city skyline in the background, including the iconic Golden Gate Bridge.",
+          "metadata_similarity": 0.036741167306900024,
+          "blip_similarity": 0.4451747238636017,
+          "clip_similarity": 0.6444288939237595,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6181888736784458,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "The image depicts an urban scene, possibly in San Francisco, with a notable silhouette of the downtown area during dusk or dawn.",
+          "cleaned_text": "The image depicts an urban scene, possibly in San Francisco, with a notable silhouette of the downtown area during dusk or dawn.",
+          "metadata_similarity": 0.19114473462104797,
+          "blip_similarity": 0.6993170380592346,
+          "clip_similarity": 0.6652591228485107,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.4997412085533142,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "The vibrant orange color of the sky implies that the photo could have been taken either at sunrise or sunset.",
+          "cleaned_text": "The vibrant orange color of the sky implies that the photo could have been taken either at sunrise or sunset.",
+          "metadata_similarity": 0.0,
+          "blip_similarity": 0.45783451199531555,
+          "clip_similarity": 0.6475351899862289,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6341945447027684,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.629019333049655,
+      "conclusion_score": 0.5669678766280413,
+      "overall_score": 0.6104038961231708,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Wildfires",
+        "climateaction": "No climate action",
+        "setting": "Residential/commercial",
+        "blip2_caption": "san francisco skyline at dusk"
+      },
+      "blip2_caption": "san francisco skyline at dusk"
+    },
+    {
+      "image_id": "10",
+      "premises": [
+        "A comic strip on a long banner is displayed in the foreground with two panels. The comic seems to be related to climate change.",
+        "The comic shows an iceberg melting with the text 'the daily news' above it, suggesting that only a small part of an important issue (in this case, climate change) is being covered by mainstream media.",
+        "In the first panel, there is a depiction of a polar bear looking worried or concerned. This could be symbolic of the effects of climate change on wildlife and the environment.",
+        "The second panel shows a person in a suit who seems to be ignoring the melting iceberg, implying that they are not paying attention to the issue or the message being conveyed by the comic strip. This could represent a public figure, a government official, or someone with significant influence who is not prioritizing climate change."
+      ],
+      "conclusions": [
+        "The comic strip appears to be making a statement about the lack of media coverage and attention given to climate change by emphasizing that only a small part of the issue is being addressed, while more serious consequences are ignored.",
+        "The portrayal of a person in a suit ignoring the melting iceberg could imply that those who hold positions of power or influence may be contributing to the underrepresentation or neglect of climate change as an important issue."
+      ],
+      "premise_details": [
+        {
+          "text": "A comic strip on a long banner is displayed in the foreground with two panels. The comic seems to be related to climate change.",
+          "cleaned_text": "A comic strip on a long banner is displayed in the foreground with two panels. The comic seems to be related to climate change.",
+          "metadata_similarity": 0.15416590869426727,
+          "blip_similarity": 0.41745758056640625,
+          "clip_similarity": 0.6066621690988541,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6292990832030774,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The comic shows an iceberg melting with the text 'the daily news' above it, suggesting that only a small part of an important issue (in this case, climate change) is being covered by mainstream media.",
+          "cleaned_text": "The comic shows an iceberg melting with the text 'the daily news' above it, suggesting that only a small part of an important issue (in this case, climate change) is being covered by mainstream media.",
+          "metadata_similarity": 0.23220796883106232,
+          "blip_similarity": 0.3139060437679291,
+          "clip_similarity": 0.6076300516724586,
+          "entity_penalty": 0.5,
+          "hallucination_score": 0.6456656012684107,
+          "label": "hallucinated"
+        },
+        {
+          "text": "In the first panel, there is a depiction of a polar bear looking worried or concerned. This could be symbolic of the effects of climate change on wildlife and the environment.",
+          "cleaned_text": "In the first panel, there is a depiction of a polar bear looking worried or concerned. This could be symbolic of the effects of climate change on wildlife and the environment.",
+          "metadata_similarity": 0.4979580342769623,
+          "blip_similarity": 0.611289381980896,
+          "clip_similarity": 0.6425537317991257,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.4229445157945156,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "The second panel shows a person in a suit who seems to be ignoring the melting iceberg, implying that they are not paying attention to the issue or the message being conveyed by the comic strip. This could represent a public figure, a government official, or someone with significant influence who is not prioritizing climate change.",
+          "cleaned_text": "The second panel shows a person in a suit who seems to be ignoring the melting iceberg, implying that they are not paying attention to the issue or the message being conveyed by the comic strip. This could represent a public figure, a government official, or someone with significant influence who is not prioritizing climate change.",
+          "metadata_similarity": 0.1669054478406906,
+          "blip_similarity": 0.29908308386802673,
+          "clip_similarity": 0.6257579475641251,
+          "entity_penalty": 0.5,
+          "hallucination_score": 0.6778211213648319,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "The comic strip appears to be making a statement about the lack of media coverage and attention given to climate change by emphasizing that only a small part of the issue is being addressed, while more serious consequences are ignored.",
+          "cleaned_text": "The comic strip appears to be making a statement about the lack of media coverage and attention given to climate change by emphasizing that only a small part of the issue is being addressed, while more serious consequences are ignored.",
+          "metadata_similarity": 0.24738562107086182,
+          "blip_similarity": 0.30827826261520386,
+          "clip_similarity": 0.6272013336420059,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.5959852500259877,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "The portrayal of a person in a suit ignoring the melting iceberg could imply that those who hold positions of power or influence may be contributing to the underrepresentation or neglect of climate change as an important issue.",
+          "cleaned_text": "The portrayal of a person in a suit ignoring the melting iceberg could imply that those who hold positions of power or influence may be contributing to the underrepresentation or neglect of climate change as an important issue.",
+          "metadata_similarity": 0.23468850553035736,
+          "blip_similarity": 0.18726226687431335,
+          "clip_similarity": 0.6157524362206459,
+          "entity_penalty": 0.5,
+          "hallucination_score": 0.6622035417705774,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.5939325804077089,
+      "conclusion_score": 0.6290943958982825,
+      "overall_score": 0.6044811250548809,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "Polar bear",
+        "consequences": "Biodiversity loss",
+        "climateaction": "Other",
+        "setting": "Arctic, Antarctic",
+        "blip2_caption": "a page with different illustrations of polar bears"
+      },
+      "blip2_caption": "a page with different illustrations of polar bears"
+    },
+    {
+      "image_id": "73",
+      "premises": [
+        "The image displays a screenshot of a social media post with an overlaid illustration.",
+        "The screenshot contains text from the user, 'Real Kids Real Stories' and text in the image, 'Pray for Australia'.",
+        "The illustration is a stylized, cartoonish depiction of people with fire around them, seemingly suffering or facing danger.",
+        "There are flames visible in the background, adding to the sense of distress and urgency in the illustration."
+      ],
+      "conclusions": [
+        "The post seems to be expressing concern for Australia's situation and possibly urging prayer or support for the country due to a current event involving fires.",
+        "The use of 'Pray for Australia' as part of the text in the image suggests that the social media user is calling for sympathy or positive action in response to a crisis affecting Australia, most likely referring to the wildfires."
+      ],
+      "premise_details": [
+        {
+          "text": "The image displays a screenshot of a social media post with an overlaid illustration.",
+          "cleaned_text": "The image displays a screenshot of a social media post with an overlaid illustration.",
+          "metadata_similarity": 0.049982279539108276,
+          "blip_similarity": 0.31459841132164,
+          "clip_similarity": 0.6348908245563507,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6325854748487473,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The screenshot contains text from the user, 'Real Kids Real Stories' and text in the image, 'Pray for Australia'.",
+          "cleaned_text": "The screenshot contains text from the user, 'Real Kids Real Stories' and text in the image, 'Pray for Australia'.",
+          "metadata_similarity": 0.0911504402756691,
+          "blip_similarity": 0.20776161551475525,
+          "clip_similarity": 0.67085100710392,
+          "entity_penalty": 0.2,
+          "hallucination_score": 0.6626328864693642,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The illustration is a stylized, cartoonish depiction of people with fire around them, seemingly suffering or facing danger.",
+          "cleaned_text": "The illustration is a stylized, cartoonish depiction of people with fire around them, seemingly suffering or facing danger.",
+          "metadata_similarity": 0.2835226058959961,
+          "blip_similarity": 0.29730063676834106,
+          "clip_similarity": 0.6340141743421555,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5185414753854275,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "There are flames visible in the background, adding to the sense of distress and urgency in the illustration.",
+          "cleaned_text": "There are flames visible in the background, adding to the sense of distress and urgency in the illustration.",
+          "metadata_similarity": 0.28587469458580017,
+          "blip_similarity": 0.21826420724391937,
+          "clip_similarity": 0.6167869344353676,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5318049814552068,
+          "label": "weakly grounded"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "The post seems to be expressing concern for Australia's situation and possibly urging prayer or support for the country due to a current event involving fires.",
+          "cleaned_text": "The post seems to be expressing concern for Australia's situation and possibly urging prayer or support for the country due to a current event involving fires.",
+          "metadata_similarity": 0.181595578789711,
+          "blip_similarity": 0.05424844101071358,
+          "clip_similarity": 0.6574209034442902,
+          "entity_penalty": 0.2,
+          "hallucination_score": 0.642451808936894,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The use of 'Pray for Australia' as part of the text in the image suggests that the social media user is calling for sympathy or positive action in response to a crisis affecting Australia, most likely referring to the wildfires.",
+          "cleaned_text": "The use of 'Pray for Australia' as part of the text in the image suggests that the social media user is calling for sympathy or positive action in response to a crisis affecting Australia, most likely referring to the wildfires.",
+          "metadata_similarity": 0.20829054713249207,
+          "blip_similarity": 0.05002456530928612,
+          "clip_similarity": 0.6673063188791275,
+          "entity_penalty": 0.2,
+          "hallucination_score": 0.6282550938054919,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.5863912045396864,
+      "conclusion_score": 0.6353534513711929,
+      "overall_score": 0.6010798785891384,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "Land mammal",
+        "consequences": "Wildfires",
+        "climateaction": "Other",
+        "setting": "Forest, jungle",
+        "blip2_caption": "a picture of a man with a hat and a tiger"
+      },
+      "blip2_caption": "a picture of a man with a hat and a tiger"
+    },
+    {
+      "image_id": "29",
+      "premises": [
+        "The image shows a red-tinged sunset or sunrise over a cityscape with a prominent skyline, suggesting either early morning or late evening lighting conditions.",
+        "There are no visible clouds in the sky, which is unusual for an urban area during a sunset or sunrise.",
+        "The cityscape features several lights from street lamps and buildings, indicating that it is a populated area with infrastructure."
+      ],
+      "conclusions": [
+        "The lack of clouds may indicate an unusual atmospheric condition or a meteorological event, such as fog or smog, which has obscured the normal view of the sky.",
+        "The city's lights reflect off a body of water nearby, which can help deduce that this is an urban area with water bodies adjacent to it. This can also provide context for why the lighting conditions are so dramatic in the image, as light reflections may enhance or change the colors of the sky."
+      ],
+      "premise_details": [
+        {
+          "text": "The image shows a red-tinged sunset or sunrise over a cityscape with a prominent skyline, suggesting either early morning or late evening lighting conditions.",
+          "cleaned_text": "The image shows a red-tinged sunset or sunrise over a cityscape with a prominent skyline, suggesting either early morning or late evening lighting conditions.",
+          "metadata_similarity": 0.0702538788318634,
+          "blip_similarity": 0.6821074485778809,
+          "clip_similarity": 0.6668471544981003,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5625298701226711,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "There are no visible clouds in the sky, which is unusual for an urban area during a sunset or sunrise.",
+          "cleaned_text": "There are no visible clouds in the sky, which is unusual for an urban area during a sunset or sunrise.",
+          "metadata_similarity": 0.06121433898806572,
+          "blip_similarity": 0.4434119462966919,
+          "clip_similarity": 0.641917884349823,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6065933559089899,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The cityscape features several lights from street lamps and buildings, indicating that it is a populated area with infrastructure.",
+          "cleaned_text": "The cityscape features several lights from street lamps and buildings, indicating that it is a populated area with infrastructure.",
+          "metadata_similarity": 0.23214411735534668,
+          "blip_similarity": 0.3094980716705322,
+          "clip_similarity": 0.6247409582138062,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.543792086839676,
+          "label": "weakly grounded"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "The lack of clouds may indicate an unusual atmospheric condition or a meteorological event, such as fog or smog, which has obscured the normal view of the sky.",
+          "cleaned_text": "The lack of clouds may indicate an unusual atmospheric condition or a meteorological event, such as fog or smog, which has obscured the normal view of the sky.",
+          "metadata_similarity": 0.020651813596487045,
+          "blip_similarity": 0.20917156338691711,
+          "clip_similarity": 0.6301139742136002,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.7237812625616789,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The city's lights reflect off a body of water nearby, which can help deduce that this is an urban area with water bodies adjacent to it. This can also provide context for why the lighting conditions are so dramatic in the image, as light reflections may enhance or change the colors of the sky.",
+          "cleaned_text": "The city's lights reflect off a body of water nearby, which can help deduce that this is an urban area with water bodies adjacent to it. This can also provide context for why the lighting conditions are so dramatic in the image, as light reflections may enhance or change the colors of the sky.",
+          "metadata_similarity": 0.14066191017627716,
+          "blip_similarity": 0.39810290932655334,
+          "clip_similarity": 0.6425182372331619,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5735758729279041,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 0.5709717709571123,
+      "conclusion_score": 0.6486785677447915,
+      "overall_score": 0.594283809993416,
+      "label": "weakly grounded",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Wildfires",
+        "climateaction": "No climate action",
+        "setting": "Residential/commercial",
+        "blip2_caption": "san francisco skyline at sunset"
+      },
+      "blip2_caption": "san francisco skyline at sunset"
+    },
+    {
+      "image_id": "66",
+      "premises": [
+        "The image shows a newspaper article with a headline.",
+        "The headline is 'People of Color Experience More Climate Grief Than White People'",
+        "A graphic illustration accompanies the text."
+      ],
+      "conclusions": [
+        "It can be inferred that the newspaper is addressing an issue related to climate change and its disproportionate impact on communities of color.",
+        "The headline suggests a call for greater awareness or action regarding this disparity in climate grief."
+      ],
+      "premise_details": [
+        {
+          "text": "The image shows a newspaper article with a headline.",
+          "cleaned_text": "The image shows a newspaper article with a headline.",
+          "metadata_similarity": 0.11471515893936157,
+          "blip_similarity": 0.15757079422473907,
+          "clip_similarity": 0.6379077732563019,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6233206354081631,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The headline is 'People of Color Experience More Climate Grief Than White People'",
+          "cleaned_text": "The headline is 'People of Color Experience More Climate Grief Than White People'",
+          "metadata_similarity": 0.2859256863594055,
+          "blip_similarity": 0.20055176317691803,
+          "clip_similarity": 0.6934804618358612,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5229323230683803,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "A graphic illustration accompanies the text.",
+          "cleaned_text": "A graphic illustration accompanies the text.",
+          "metadata_similarity": 0.10436441749334335,
+          "blip_similarity": 0.13719698786735535,
+          "clip_similarity": 0.613284520804882,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6352455649524927,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "It can be inferred that the newspaper is addressing an issue related to climate change and its disproportionate impact on communities of color.",
+          "cleaned_text": "It can be inferred that the newspaper is addressing an issue related to climate change and its disproportionate impact on communities of color.",
+          "metadata_similarity": 0.2063884735107422,
+          "blip_similarity": 0.01941014640033245,
+          "clip_similarity": 0.6723051369190216,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6530484707467259,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The headline suggests a call for greater awareness or action regarding this disparity in climate grief.",
+          "cleaned_text": "The headline suggests a call for greater awareness or action regarding this disparity in climate grief.",
+          "metadata_similarity": 0.30916884541511536,
+          "blip_similarity": 0.12268278002738953,
+          "clip_similarity": 0.6653510630130768,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5272105008363723,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 0.593832841143012,
+      "conclusion_score": 0.5901294857915491,
+      "overall_score": 0.5927218345375731,
+      "label": "weakly grounded",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Human rights",
+        "climateaction": "No climate action",
+        "setting": "Arctic, Antarctic",
+        "blip2_caption": "a white man with an iceberg on his face"
+      },
+      "blip2_caption": "a white man with an iceberg on his face"
+    },
+    {
+      "image_id": "65",
+      "premises": [
+        "The headline on the newspaper is 'THE CLIMATE IS NOW'.",
+        "There is an image of a tree with no leaves on it in the background.",
+        "The paper features a photo of the ocean with a small island in it."
+      ],
+      "conclusions": [
+        "The newspaper appears to be reporting on environmental concerns, specifically climate change and its impact on vegetation and coastal areas.",
+        "The use of an evergreen tree without leaves may indicate a concern for global warming or seasonal changes affecting plant life."
+      ],
+      "premise_details": [
+        {
+          "text": "The headline on the newspaper is 'THE CLIMATE IS NOW'.",
+          "cleaned_text": "The headline on the newspaper is 'THE CLIMATE IS NOW'.",
+          "metadata_similarity": 0.22851741313934326,
+          "blip_similarity": 0.6678388714790344,
+          "clip_similarity": 0.660816565155983,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.48644297793507574,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "There is an image of a tree with no leaves on it in the background.",
+          "cleaned_text": "There is an image of a tree with no leaves on it in the background.",
+          "metadata_similarity": 0.0018326063873246312,
+          "blip_similarity": 0.0892673209309578,
+          "clip_similarity": 0.6042293310165405,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.695059199014213,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The paper features a photo of the ocean with a small island in it.",
+          "cleaned_text": "The paper features a photo of the ocean with a small island in it.",
+          "metadata_similarity": 0.33436447381973267,
+          "blip_similarity": 0.17843160033226013,
+          "clip_similarity": 0.6275532692670822,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5119200326502323,
+          "label": "weakly grounded"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "The newspaper appears to be reporting on environmental concerns, specifically climate change and its impact on vegetation and coastal areas.",
+          "cleaned_text": "The newspaper appears to be reporting on environmental concerns, specifically climate change and its impact on vegetation and coastal areas.",
+          "metadata_similarity": 0.2852320373058319,
+          "blip_similarity": 0.4620022773742676,
+          "clip_similarity": 0.6529850959777832,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.5501358753442764,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "The use of an evergreen tree without leaves may indicate a concern for global warming or seasonal changes affecting plant life.",
+          "cleaned_text": "The use of an evergreen tree without leaves may indicate a concern for global warming or seasonal changes affecting plant life.",
+          "metadata_similarity": 0.0,
+          "blip_similarity": 0.19848299026489258,
+          "clip_similarity": 0.602369487285614,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.7398721283674241,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.564474069866507,
+      "conclusion_score": 0.6450040018558503,
+      "overall_score": 0.5886330494633099,
+      "label": "weakly grounded",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Sea level rise",
+        "climateaction": "No climate action",
+        "setting": "Ocean, coastal",
+        "blip2_caption": "the climate future is now"
+      },
+      "blip2_caption": "the climate future is now"
+    }
+  ],
+  "minicpm-v": [
+    {
+      "image_id": "66",
+      "premises": [],
+      "conclusions": [
+        "The article discusses how people of color experience climate grief more deeply than white people.",
+        "Climate-related visuals include melting icebergs with a figure sitting alone.",
+        "There is an overlap between racial trauma experienced by marginalized groups and their response to the impacts of climate change, as evidenced by the image's depiction of isolation amidst environmental decline.",
+        "The visual representation suggests that individuals from diverse backgrounds may feel more connected to climate suffering due to historical injustices faced."
+      ],
+      "premise_details": [],
+      "conclusion_details": [
+        {
+          "text": "The article discusses how people of color experience climate grief more deeply than white people.",
+          "cleaned_text": "The article discusses how people of color experience climate grief more deeply than white people.",
+          "metadata_similarity": 0.20909512042999268,
+          "blip_similarity": 0.1366153210401535,
+          "clip_similarity": 0.6781710982322693,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5732344768941402,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "Climate-related visuals include melting icebergs with a figure sitting alone.",
+          "cleaned_text": "Climate-related visuals include melting icebergs with a figure sitting alone.",
+          "metadata_similarity": 0.3416956067085266,
+          "blip_similarity": 0.482683926820755,
+          "clip_similarity": 0.6200147718191147,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.5237473918497562,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "There is an overlap between racial trauma experienced by marginalized groups and their response to the impacts of climate change, as evidenced by the image's depiction of isolation amidst environmental decline.",
+          "cleaned_text": "There is an overlap between racial trauma experienced by marginalized groups and their response to the impacts of climate change, as evidenced by the image's depiction of isolation amidst environmental decline.",
+          "metadata_similarity": 0.2910330593585968,
+          "blip_similarity": 0.11077992618083954,
+          "clip_similarity": 0.6521187126636505,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6000486744940281,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The visual representation suggests that individuals from diverse backgrounds may feel more connected to climate suffering due to historical injustices faced.",
+          "cleaned_text": "The visual representation suggests that individuals from diverse backgrounds may feel more connected to climate suffering due to historical injustices faced.",
+          "metadata_similarity": 0.27122870087623596,
+          "blip_similarity": 0.1569710522890091,
+          "clip_similarity": 0.6506858766078949,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5432371102273464,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 1.0,
+      "conclusion_score": 0.5600669133663178,
+      "overall_score": 0.8680200740098953,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Human rights",
+        "climateaction": "No climate action",
+        "setting": "Arctic, Antarctic",
+        "blip2_caption": "a white man with an iceberg on his face"
+      },
+      "blip2_caption": "a white man with an iceberg on his face"
+    },
+    {
+      "image_id": "36",
+      "premises": [],
+      "conclusions": [
+        "There is a group of people near an urban waterfront.",
+        "The individuals seem to be engaging with or observing something related to water."
+      ],
+      "premise_details": [],
+      "conclusion_details": [
+        {
+          "text": "There is a group of people near an urban waterfront.",
+          "cleaned_text": "There is a group of people near an urban waterfront.",
+          "metadata_similarity": 0.202252596616745,
+          "blip_similarity": 0.47823601961135864,
+          "clip_similarity": 0.6241800338029861,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5335112936794758,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "The individuals seem to be engaging with or observing something related to water.",
+          "cleaned_text": "The individuals seem to be engaging with or observing something related to water.",
+          "metadata_similarity": 0.15172016620635986,
+          "blip_similarity": 0.44143906235694885,
+          "clip_similarity": 0.6081017106771469,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5667088009417057,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 1.0,
+      "conclusion_score": 0.5501100473105908,
+      "overall_score": 0.8650330141931772,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Sea level rise",
+        "climateaction": "No climate action",
+        "setting": "Ocean, coastal",
+        "blip2_caption": "people standing on a pier near the ocean"
+      },
+      "blip2_caption": "people standing on a pier near the ocean"
+    },
+    {
+      "image_id": "43",
+      "premises": [],
+      "conclusions": [
+        "The field shown in the background is dry with cracked soil.",
+        "There is a person carrying a container of water."
+      ],
+      "premise_details": [],
+      "conclusion_details": [
+        {
+          "text": "The field shown in the background is dry with cracked soil.",
+          "cleaned_text": "The field shown in the background is dry with cracked soil.",
+          "metadata_similarity": 0.3715045154094696,
+          "blip_similarity": 0.5358480215072632,
+          "clip_similarity": 0.6300577074289322,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.4393618829548359,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "There is a person carrying a container of water.",
+          "cleaned_text": "There is a person carrying a container of water.",
+          "metadata_similarity": 0.16921430826187134,
+          "blip_similarity": 0.31699714064598083,
+          "clip_similarity": 0.6212934330105782,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5746492598205805,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 1.0,
+      "conclusion_score": 0.5070055713877082,
+      "overall_score": 0.8521016714163124,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Drought",
+        "climateaction": "No climate action",
+        "setting": "Desert",
+        "blip2_caption": "a woman is standing in a dry field"
+      },
+      "blip2_caption": "a woman is standing in a dry field"
+    },
+    {
+      "image_id": "89",
+      "premises": [],
+      "conclusions": [
+        "There is a large bee lying motionless on cracked earth.",
+        "The background features an urban skyline with tall buildings at sunset or sunrise.",
+        "Climate change might be affecting biodiversity as evidenced by the dying or dead bee.",
+        "Urban expansion could contribute to habitat destruction and environmental degradation, impacting local wildlife such as bees."
+      ],
+      "premise_details": [],
+      "conclusion_details": [
+        {
+          "text": "There is a large bee lying motionless on cracked earth.",
+          "cleaned_text": "There is a large bee lying motionless on cracked earth.",
+          "metadata_similarity": 0.24501588940620422,
+          "blip_similarity": 0.666628897190094,
+          "clip_similarity": 0.6371813118457794,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.48192052394151685,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "The background features an urban skyline with tall buildings at sunset or sunrise.",
+          "cleaned_text": "The background features an urban skyline with tall buildings at sunset or sunrise.",
+          "metadata_similarity": 0.07040517777204514,
+          "blip_similarity": 0.31308674812316895,
+          "clip_similarity": 0.6236693039536476,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6242840033024549,
+          "label": "hallucinated"
+        },
+        {
+          "text": "Climate change might be affecting biodiversity as evidenced by the dying or dead bee.",
+          "cleaned_text": "Climate change might be affecting biodiversity as evidenced by the dying or dead bee.",
+          "metadata_similarity": 0.5258013010025024,
+          "blip_similarity": 0.41497066617012024,
+          "clip_similarity": 0.6374598294496536,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.4392347751557827,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "Urban expansion could contribute to habitat destruction and environmental degradation, impacting local wildlife such as bees.",
+          "cleaned_text": "Urban expansion could contribute to habitat destruction and environmental degradation, impacting local wildlife such as bees.",
+          "metadata_similarity": 0.5300977826118469,
+          "blip_similarity": 0.4370027184486389,
+          "clip_similarity": 0.6433468759059906,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.37289866954088213,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 1.0,
+      "conclusion_score": 0.47958449298515915,
+      "overall_score": 0.8438753478955476,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "Insects",
+        "consequences": "Biodiversity loss",
+        "climateaction": "No climate action",
+        "setting": "Residential/commercial",
+        "blip2_caption": "a bee is sitting on a deserted ground with a city in the background"
+      },
+      "blip2_caption": "a bee is sitting on a deserted ground with a city in the background"
+    },
+    {
+      "image_id": "40",
+      "premises": [
+        "The ground is cracked with a reddish-brown hue.",
+        "A person is carrying what appears to be a large round object on their head.",
+        "There is text overlaid on top of the photo."
+      ],
+      "conclusions": [
+        "This scene likely represents drought or extreme weather conditions affecting agriculture and food security, which are relevant topics in discussions about climate change impacts."
+      ],
+      "premise_details": [
+        {
+          "text": "The ground is cracked with a reddish-brown hue.",
+          "cleaned_text": "The ground is cracked with a reddish-brown hue.",
+          "metadata_similarity": 0.10678981244564056,
+          "blip_similarity": 0.048254963010549545,
+          "clip_similarity": 0.588475190103054,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6510955708101391,
+          "label": "hallucinated"
+        },
+        {
+          "text": "A person is carrying what appears to be a large round object on their head.",
+          "cleaned_text": "A person is carrying what appears to be a large round object on their head.",
+          "metadata_similarity": 0.021161934360861778,
+          "blip_similarity": 0.0,
+          "clip_similarity": 0.5829955786466599,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.7019696960225701,
+          "label": "hallucinated"
+        },
+        {
+          "text": "There is text overlaid on top of the photo.",
+          "cleaned_text": "There is text overlaid on top of the photo.",
+          "metadata_similarity": 0.10069790482521057,
+          "blip_similarity": 0.06830181181430817,
+          "clip_similarity": 0.6036792695522308,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6488538853824138,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "This scene likely represents drought or extreme weather conditions affecting agriculture and food security, which are relevant topics in discussions about climate change impacts.",
+          "cleaned_text": "This scene likely represents drought or extreme weather conditions affecting agriculture and food security, which are relevant topics in discussions about climate change impacts.",
+          "metadata_similarity": 0.2542356848716736,
+          "blip_similarity": 0.3626474440097809,
+          "clip_similarity": 0.6245050504803658,
+          "entity_penalty": 0.15,
+          "hallucination_score": 0.5548092833906413,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 0.6673063840717077,
+      "conclusion_score": 0.5548092833906413,
+      "overall_score": 0.6335572538673877,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Human rights",
+        "climateaction": "Politics",
+        "setting": "Desert",
+        "blip2_caption": "the human rights and climate change nexus"
+      },
+      "blip2_caption": "the human rights and climate change nexus"
+    },
+    {
+      "image_id": "67",
+      "premises": [
+        "A person is standing near a body of water with their back facing the camera, looking at a bridge.",
+        "The sky and surrounding environment are filled with an orange haze, suggesting air pollution or smog.",
+        "There is a bird on a railing beside the individual."
+      ],
+      "conclusions": [
+        "It appears to be either early morning or late evening based on the lighting conditions near the water.",
+        "The presence of smoke in the atmosphere might indicate that there are fires nearby, contributing to air pollution and haze."
+      ],
+      "premise_details": [
+        {
+          "text": "A person is standing near a body of water with their back facing the camera, looking at a bridge.",
+          "cleaned_text": "A person is standing near a body of water with their back facing the camera, looking at a bridge.",
+          "metadata_similarity": 0.0,
+          "blip_similarity": 0.5607370734214783,
+          "clip_similarity": 0.6287474781274796,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6215773172676563,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The sky and surrounding environment are filled with an orange haze, suggesting air pollution or smog.",
+          "cleaned_text": "The sky and surrounding environment are filled with an orange haze, suggesting air pollution or smog.",
+          "metadata_similarity": 0.1603706330060959,
+          "blip_similarity": 0.25422903895378113,
+          "clip_similarity": 0.6461701840162277,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6447548000514507,
+          "label": "hallucinated"
+        },
+        {
+          "text": "There is a bird on a railing beside the individual.",
+          "cleaned_text": "There is a bird on a railing beside the individual.",
+          "metadata_similarity": 0.08123640716075897,
+          "blip_similarity": 0.22550876438617706,
+          "clip_similarity": 0.6034466847777367,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6950384790450335,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "It appears to be either early morning or late evening based on the lighting conditions near the water.",
+          "cleaned_text": "It appears to be either early morning or late evening based on the lighting conditions near the water.",
+          "metadata_similarity": 0.0669201910495758,
+          "blip_similarity": 0.2216266393661499,
+          "clip_similarity": 0.61599500477314,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6408966578543186,
+          "label": "hallucinated"
+        },
+        {
+          "text": "The presence of smoke in the atmosphere might indicate that there are fires nearby, contributing to air pollution and haze.",
+          "cleaned_text": "The presence of smoke in the atmosphere might indicate that there are fires nearby, contributing to air pollution and haze.",
+          "metadata_similarity": 0.38696300983428955,
+          "blip_similarity": 0.3574233055114746,
+          "clip_similarity": 0.6204408705234528,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.5198388686776161,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 0.6537901987880469,
+      "conclusion_score": 0.5803677632659674,
+      "overall_score": 0.631763468131423,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Wildfires",
+        "climateaction": "Other",
+        "setting": "Residential/commercial",
+        "blip2_caption": "a woman stands on a bridge in front of a smokey sky"
+      },
+      "blip2_caption": "a woman stands on a bridge in front of a smokey sky"
+    },
+    {
+      "image_id": "39",
+      "premises": [
+        "The image shows a dark sky with smoke rising from what appears to be fire damage.",
+        "There is an active wildfire burning through trees on the right side of the image."
+      ],
+      "conclusions": [
+        "Climate-related fires pose significant environmental risks such as habitat destruction for wildlife and air pollution impacting human health.",
+        "Wildfires suggest increased frequency or intensity due to climate change, which could be linked to warmer temperatures leading to drier conditions in fire-prone areas."
+      ],
+      "premise_details": [
+        {
+          "text": "The image shows a dark sky with smoke rising from what appears to be fire damage.",
+          "cleaned_text": "The image shows a dark sky with smoke rising from what appears to be fire damage.",
+          "metadata_similarity": 0.12610755860805511,
+          "blip_similarity": 0.15757405757904053,
+          "clip_similarity": 0.6217623800039291,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.620045755058527,
+          "label": "hallucinated"
+        },
+        {
+          "text": "There is an active wildfire burning through trees on the right side of the image.",
+          "cleaned_text": "There is an active wildfire burning through trees on the right side of the image.",
+          "metadata_similarity": 0.28316301107406616,
+          "blip_similarity": 0.13928528130054474,
+          "clip_similarity": 0.6197381019592285,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6045649869740009,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "Climate-related fires pose significant environmental risks such as habitat destruction for wildlife and air pollution impacting human health.",
+          "cleaned_text": "Climate-related fires pose significant environmental risks such as habitat destruction for wildlife and air pollution impacting human health.",
+          "metadata_similarity": 0.17453618347644806,
+          "blip_similarity": 0.4206305146217346,
+          "clip_similarity": 0.6427019387483597,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6132320402562619,
+          "label": "hallucinated"
+        },
+        {
+          "text": "Wildfires suggest increased frequency or intensity due to climate change, which could be linked to warmer temperatures leading to drier conditions in fire-prone areas.",
+          "cleaned_text": "Wildfires suggest increased frequency or intensity due to climate change, which could be linked to warmer temperatures leading to drier conditions in fire-prone areas.",
+          "metadata_similarity": 0.08632747083902359,
+          "blip_similarity": 0.18263985216617584,
+          "clip_similarity": 0.6267837882041931,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6354227185249328,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.6123053710162639,
+      "conclusion_score": 0.6243273793905973,
+      "overall_score": 0.6159119735285639,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Human rights",
+        "climateaction": "No climate action",
+        "setting": "Forest, jungle",
+        "blip2_caption": "climate change and human rights"
+      },
+      "blip2_caption": "climate change and human rights"
+    },
+    {
+      "image_id": "71",
+      "premises": [
+        "The environment appears arid with reddish-brown soil.",
+        "There is a makeshift hut made of various materials including wood and cloth.",
+        "A child is standing next to a hose-like structure that runs from what seems like an elevated water source on the hilltop.",
+        "Three individuals are seen atop a mound, possibly observing or discussing something."
+      ],
+      "conclusions": [
+        "The area might be experiencing drought conditions as indicated by the arid landscape and sparse vegetation.",
+        "Water scarcity is likely being addressed through the use of hoses to transport water from an elevated source down to where it's needed on lower ground levels."
+      ],
+      "premise_details": [
+        {
+          "text": "The environment appears arid with reddish-brown soil.",
+          "cleaned_text": "The environment appears arid with reddish-brown soil.",
+          "metadata_similarity": 0.3883279263973236,
+          "blip_similarity": 0.036637019366025925,
+          "clip_similarity": 0.6115559190511703,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5086070960387588,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "There is a makeshift hut made of various materials including wood and cloth.",
+          "cleaned_text": "There is a makeshift hut made of various materials including wood and cloth.",
+          "metadata_similarity": 0.18288834393024445,
+          "blip_similarity": 0.28868746757507324,
+          "clip_similarity": 0.6285148710012436,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5709754772484302,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "A child is standing next to a hose-like structure that runs from what seems like an elevated water source on the hilltop.",
+          "cleaned_text": "A child is standing next to a hose-like structure that runs from what seems like an elevated water source on the hilltop.",
+          "metadata_similarity": 0.1152530163526535,
+          "blip_similarity": 0.27595001459121704,
+          "clip_similarity": 0.6190509721636772,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6081233438104391,
+          "label": "hallucinated"
+        },
+        {
+          "text": "Three individuals are seen atop a mound, possibly observing or discussing something.",
+          "cleaned_text": "Three individuals are seen atop a mound, possibly observing or discussing something.",
+          "metadata_similarity": 0.05740228295326233,
+          "blip_similarity": 0.33798232674598694,
+          "clip_similarity": 0.6154134944081306,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6282894853502512,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "The area might be experiencing drought conditions as indicated by the arid landscape and sparse vegetation.",
+          "cleaned_text": "The area might be experiencing drought conditions as indicated by the arid landscape and sparse vegetation.",
+          "metadata_similarity": 0.2607094645500183,
+          "blip_similarity": 0.05612574517726898,
+          "clip_similarity": 0.6011237651109695,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6310578411817551,
+          "label": "hallucinated"
+        },
+        {
+          "text": "Water scarcity is likely being addressed through the use of hoses to transport water from an elevated source down to where it's needed on lower ground levels.",
+          "cleaned_text": "Water scarcity is likely being addressed through the use of hoses to transport water from an elevated source down to where it's needed on lower ground levels.",
+          "metadata_similarity": 0.09784665703773499,
+          "blip_similarity": 0.07470571249723434,
+          "clip_similarity": 0.6297208517789841,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6454126868396998,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.5789988506119699,
+      "conclusion_score": 0.6382352640107274,
+      "overall_score": 0.5967697746315971,
+      "label": "weakly grounded",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Human rights",
+        "climateaction": "No climate action",
+        "setting": "Desert",
+        "blip2_caption": "a group of people standing on top of a hill with a shack"
+      },
+      "blip2_caption": "a group of people standing on top of a hill with a shack"
+    },
+    {
+      "image_id": "29",
+      "premises": [
+        "The coloration suggests air pollution or wildfire.",
+        "There is no visible direct source of light reflecting off bodies like clouds."
+      ],
+      "conclusions": [
+        "It could be inferred that there might have been a significant fire event causing the sky to take on such an orange-red hue as seen in wildfires or controlled burn practices during controlled conditions.",
+        "Another possibility is air pollution, although this seems less likely given it's nighttime."
+      ],
+      "premise_details": [
+        {
+          "text": "The coloration suggests air pollution or wildfire.",
+          "cleaned_text": "The coloration suggests air pollution or wildfire.",
+          "metadata_similarity": 0.4670349955558777,
+          "blip_similarity": 0.22693735361099243,
+          "clip_similarity": 0.64414381980896,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.4958203262090683,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "There is no visible direct source of light reflecting off bodies like clouds.",
+          "cleaned_text": "There is no visible direct source of light reflecting off bodies like clouds.",
+          "metadata_similarity": 0.0,
+          "blip_similarity": 0.24395348131656647,
+          "clip_similarity": 0.6174363866448402,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.670791519805789,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "It could be inferred that there might have been a significant fire event causing the sky to take on such an orange-red hue as seen in wildfires or controlled burn practices during controlled conditions.",
+          "cleaned_text": "It could be inferred that there might have been a significant fire event causing the sky to take on such an orange-red hue as seen in wildfires or controlled burn practices during controlled conditions.",
+          "metadata_similarity": 0.2895612418651581,
+          "blip_similarity": 0.3043946325778961,
+          "clip_similarity": 0.6528109759092331,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5116385377943515,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "Another possibility is air pollution, although this seems less likely given it's nighttime.",
+          "cleaned_text": "Another possibility is air pollution, although this seems less likely given it's nighttime.",
+          "metadata_similarity": 0.1679309904575348,
+          "blip_similarity": 0.27267536520957947,
+          "clip_similarity": 0.6350687891244888,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.6398728816211223,
+          "label": "hallucinated"
+        }
+      ],
+      "premise_score": 0.5833059230074287,
+      "conclusion_score": 0.5757557097077369,
+      "overall_score": 0.5810408590175211,
+      "label": "weakly grounded",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Wildfires",
+        "climateaction": "No climate action",
+        "setting": "Residential/commercial",
+        "blip2_caption": "san francisco skyline at sunset"
+      },
+      "blip2_caption": "san francisco skyline at sunset"
+    },
+    {
+      "image_id": "5",
+      "premises": [
+        "It is evening or night time in a city with significant illumination from artificial lights.",
+        "The skyline includes prominent skyscrapers, one of which has a distinctive spire-like shape."
+      ],
+      "conclusions": [
+        "Given that it's nighttime due to the dark sky lit by streetlights and building lights, there may be higher emissions related to energy usage for lighting and heating in this urban environment during colder months.",
+        "The presence of tall buildings indicates an area with high-density population or business activity which can contribute significantly to greenhouse gas emissions through transportation, industry, and general consumption."
+      ],
+      "premise_details": [
+        {
+          "text": "It is evening or night time in a city with significant illumination from artificial lights.",
+          "cleaned_text": "It is evening or night time in a city with significant illumination from artificial lights.",
+          "metadata_similarity": 0.1733657270669937,
+          "blip_similarity": 0.4782736301422119,
+          "clip_similarity": 0.6313434094190598,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.5468745805323124,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "The skyline includes prominent skyscrapers, one of which has a distinctive spire-like shape.",
+          "cleaned_text": "The skyline includes prominent skyscrapers, one of which has a distinctive spire-like shape.",
+          "metadata_similarity": 0.026796624064445496,
+          "blip_similarity": 0.481791228055954,
+          "clip_similarity": 0.6339398473501205,
+          "entity_penalty": 0.0,
+          "hallucination_score": 0.6192420266568661,
+          "label": "hallucinated"
+        }
+      ],
+      "conclusion_details": [
+        {
+          "text": "Given that it's nighttime due to the dark sky lit by streetlights and building lights, there may be higher emissions related to energy usage for lighting and heating in this urban environment during colder months.",
+          "cleaned_text": "Given that it's nighttime due to the dark sky lit by streetlights and building lights, there may be higher emissions related to energy usage for lighting and heating in this urban environment during colder months.",
+          "metadata_similarity": 0.274050235748291,
+          "blip_similarity": 0.3506394326686859,
+          "clip_similarity": 0.6290460526943207,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.5760220593214036,
+          "label": "weakly grounded"
+        },
+        {
+          "text": "The presence of tall buildings indicates an area with high-density population or business activity which can contribute significantly to greenhouse gas emissions through transportation, industry, and general consumption.",
+          "cleaned_text": "The presence of tall buildings indicates an area with high-density population or business activity which can contribute significantly to greenhouse gas emissions through transportation, industry, and general consumption.",
+          "metadata_similarity": 0.3419397473335266,
+          "blip_similarity": 0.2497890591621399,
+          "clip_similarity": 0.6346981525421143,
+          "entity_penalty": 0.3,
+          "hallucination_score": 0.5563570445775985,
+          "label": "weakly grounded"
+        }
+      ],
+      "premise_score": 0.5830583035945893,
+      "conclusion_score": 0.566189551949501,
+      "overall_score": 0.5779976781010627,
+      "label": "weakly grounded",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Wildfires",
+        "climateaction": "No climate action",
+        "setting": "Residential/commercial",
+        "blip2_caption": "san francisco skyline at dusk"
+      },
+      "blip2_caption": "san francisco skyline at dusk"
+    }
+  ],
+  "nemotron-3-nano-omni-30b-a3b-reasoning-image-only": [
+    {
+      "image_id": "58",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Floods",
+        "climateaction": "No climate action",
+        "setting": "Residential/commercial",
+        "blip2_caption": "a car is parked in a flooded area"
+      },
+      "blip2_caption": "a car is parked in a flooded area"
+    },
+    {
+      "image_id": "8",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "Farm animals",
+        "consequences": "Drought",
+        "climateaction": "No climate action",
+        "setting": "Desert",
+        "blip2_caption": "a woman is walking a donkey in the desert"
+      },
+      "blip2_caption": "a woman is walking a donkey in the desert"
+    },
+    {
+      "image_id": "80",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "Land mammal",
+        "consequences": "Biodiversity loss",
+        "climateaction": "No climate action",
+        "setting": "Forest, jungle",
+        "blip2_caption": "the biodiversity and climate crises must be solved together"
+      },
+      "blip2_caption": "the biodiversity and climate crises must be solved together"
+    },
+    {
+      "image_id": "81",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Melting Ice",
+        "climateaction": "Other",
+        "setting": "Arctic, Antarctic",
+        "blip2_caption": "state of the cryosphere 2021 a needed decade of urgent action"
+      },
+      "blip2_caption": "state of the cryosphere 2021 a needed decade of urgent action"
+    },
+    {
+      "image_id": "84",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Sea level rise",
+        "climateaction": "Other",
+        "setting": "Residential/commercial",
+        "blip2_caption": "a person walking down a sidewalk next to a canal"
+      },
+      "blip2_caption": "a person walking down a sidewalk next to a canal"
+    },
+    {
+      "image_id": "85",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Floods",
+        "climateaction": "No climate action",
+        "setting": "Ocean, coastal",
+        "blip2_caption": "an aerial view of a destroyed city"
+      },
+      "blip2_caption": "an aerial view of a destroyed city"
+    },
+    {
+      "image_id": "86",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "Polar bear",
+        "consequences": "Biodiversity loss",
+        "climateaction": "No climate action",
+        "setting": "Arctic, Antarctic",
+        "blip2_caption": "polar bears are a big threat to the arctic"
+      },
+      "blip2_caption": "polar bears are a big threat to the arctic"
+    },
+    {
+      "image_id": "89",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "Insects",
+        "consequences": "Biodiversity loss",
+        "climateaction": "No climate action",
+        "setting": "Residential/commercial",
+        "blip2_caption": "a bee is sitting on a deserted ground with a city in the background"
+      },
+      "blip2_caption": "a bee is sitting on a deserted ground with a city in the background"
+    },
+    {
+      "image_id": "9",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "Polar bear",
+        "consequences": "Melting Ice",
+        "climateaction": "No climate action",
+        "setting": "Arctic, Antarctic",
+        "blip2_caption": "polar bear on iceberg"
+      },
+      "blip2_caption": "polar bear on iceberg"
+    },
+    {
+      "image_id": "90",
+      "premises": [],
+      "conclusions": [],
+      "premise_details": [],
+      "conclusion_details": [],
+      "premise_score": 1.0,
+      "conclusion_score": 1.0,
+      "overall_score": 1.0,
+      "label": "hallucinated",
+      "metadata": {
+        "animals": "No animals",
+        "consequences": "Sea level rise",
+        "climateaction": "No climate action",
+        "setting": "Ocean, coastal",
+        "blip2_caption": "a new scientist app with a map of the ocean"
+      },
+      "blip2_caption": "a new scientist app with a map of the ocean"
+    }
+  ]
+}

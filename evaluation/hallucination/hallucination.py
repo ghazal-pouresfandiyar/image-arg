@@ -1,29 +1,37 @@
 """
-Hallucination Detection Script
-===============================
+Hallucination Detection Script (Deep Grounding)
+==============================================
 Detect unsupported claims in model outputs using:
-1. Embedding similarity (model text vs metadata support)
-2. Metadata entity matching (is entity in image metadata?)
+1. SBERT similarity to metadata support
+2. SBERT similarity to BLIP2 captions
+3. CLIP text-image similarity (optional)
+4. Rule-based entity mismatch penalties
 
-No NLI scoring — pure embedding + metadata grounding.
-
-Output:
-  - Per-model CSVs: {model_name}_hallucination.csv
-  - Summary CSV: summary_hallucination.csv
-  - Details JSON: hallucination_details.json
+Outputs (new names - legacy outputs untouched):
+  - Per-model CSVs: {model_name}_hallucination_deep.csv
+  - Summary CSV: summary_hallucination_deep.csv
+  - Details JSON: hallucination_details_deep.json
 """
 
-import os
 import json
 import logging
 import re
-import pandas as pd
-import numpy as np
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
-from collections import defaultdict
-from sklearn.metrics.pairwise import cosine_similarity
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
+import pandas as pd
 from sentence_transformers import SentenceTransformer
+
+try:
+    import torch
+    import torch.nn.functional as F
+    from transformers import CLIPModel, CLIPProcessor
+    HAS_CLIP = True
+except Exception as exc:  # pragma: no cover - environment dependent
+    HAS_CLIP = False
+    CLIP_IMPORT_ERROR = str(exc)
+
 
 # ============================================================================
 # CONFIGURATION & SETUP
@@ -36,13 +44,29 @@ MODELS_OUTPUT_DIR = PROJECT_ROOT / "models" / "output_model"
 EVAL_OUTPUT_DIR = Path(__file__).parent
 ANNOTATED_CSV = DATA_DIR / "annotated.csv"
 
+# CLIP assets
+CLIP_FEATURES_DIR = DATA_DIR / "features"
+CLIP_EMBEDDINGS_PATH = CLIP_FEATURES_DIR / "clip_image_embeddings.npy"
+CLIP_INDEX_PATH = CLIP_FEATURES_DIR / "clip_index.csv"
+CLIP_CONFIG_PATH = CLIP_FEATURES_DIR / "clip_config.json"
+DEFAULT_CLIP_MODEL = "openai/clip-vit-base-patch32"
+
 # SBERT model
 SBERT_MODEL_NAME = "all-MiniLM-L6-v2"
-EMBEDDING_DIM = 384
 
-# Hallucination thresholds
-PREMISE_THRESHOLD = 0.60
-CONCLUSION_THRESHOLD = 0.45
+# Scoring weights
+WEIGHT_METADATA = 0.50
+WEIGHT_SIGNAL_B = 0.30
+WEIGHT_ENTITY = 0.20
+
+# Label thresholds
+GROUNDED_MAX = 0.30
+WEAKLY_GROUNDED_MAX = 0.60
+
+# Output names (avoid overwriting legacy outputs)
+PER_MODEL_SUFFIX = "hallucination_deep.csv"
+SUMMARY_FILE = "summary_hallucination_deep.csv"
+DETAILS_FILE = "hallucination_details_deep.json"
 
 # Setup logging
 logging.basicConfig(
@@ -51,551 +75,878 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
 # ============================================================================
-# ENTITY EXTRACTION & MATCHING
+# TEXT NORMALIZATION
 # ============================================================================
 
-# Common climate/environment keywords
-CLIMATE_KEYWORDS = {
-    'climate': 0,
-    'warming': 0,
-    'greenhouse': 0,
-    'carbon': 0,
-    'emissions': 0,
-    'fossil': 0,
-    'renewable': 0,
-    'solar': 0,
-    'wind': 0,
-    'temperature': 0,
-    'heat': 0,
-    'melting': 0,
-    'drought': 0,
-    'flood': 0,
-    'wildfire': 0,
-    'hurricane': 0,
-    'storm': 0,
-    'pollution': 0,
-    'acidification': 0,
-    'bleaching': 0,
-    'extinction': 0,
-    'habitat': 0,
-    'biodiversity': 0,
-    'ecosystem': 0,
-    'conservation': 0,
-    'sustainability': 0,
-    'renewable': 0,
+NO_VALUE_MARKERS = {"no animals", "no climate action", "none", "n/a", "na"}
+
+
+def normalize_text(text: Any) -> str:
+    if not isinstance(text, str):
+        return ""
+    return re.sub(r"\s+", " ", text).strip().lower()
+
+
+def clean_support_parts(parts: List[Any]) -> List[str]:
+    cleaned: List[str] = []
+    seen = set()
+    for part in parts:
+        value = normalize_text(part)
+        if not value or value in NO_VALUE_MARKERS:
+            continue
+        if value in seen:
+            continue
+        seen.add(value)
+        cleaned.append(value)
+    return cleaned
+
+
+def build_support_context(metadata: Dict[str, str]) -> Tuple[str, str, str]:
+    metadata_parts = [
+        metadata.get("animals", ""),
+        metadata.get("consequences", ""),
+        metadata.get("climateaction", ""),
+        metadata.get("setting", ""),
+    ]
+    metadata_text = " ".join(clean_support_parts(metadata_parts))
+    blip_text = normalize_text(metadata.get("blip2_caption", ""))
+    support_text = " ".join(clean_support_parts([metadata_text, blip_text]))
+    return metadata_text, blip_text, support_text
+
+
+# ============================================================================
+# ENTITY EXTRACTION
+# ============================================================================
+
+ANIMAL_TERMS = {
+    "bear", "polar bear", "fish", "whale", "dolphin", "seal", "penguin",
+    "bird", "eagle", "owl", "deer", "elk", "cow", "sheep", "goat",
+    "chicken", "bee", "butterfly", "turtle", "coral", "shark", "frog",
+    "elephant", "lion", "tiger", "insect", "spider", "ant",
 }
 
-# Specificity markers (dates, numbers, percentages)
-SPECIFICITY_PATTERNS = [
-    r'\d{4}',  # Years
-    r'\d+%',  # Percentages
-    r'\d+°',  # Temperature
-    r'\d+\s*(km|miles|meters|feet)',  # Distances
-    r'january|february|march|april|may|june|july|august|september|october|november|december',
+CLIMATE_EVENT_TERMS = {
+    "climate change", "warming", "heatwave", "drought", "flood", "wildfire",
+    "hurricane", "storm", "typhoon", "cyclone", "melting", "ice melt",
+    "sea level", "acidification", "bleaching", "extinction", "pollution",
+    "deforestation", "smog", "emissions", "greenhouse", "carbon",
+}
+
+LOCATION_TERMS = {
+    "arctic", "antarctic", "pacific", "atlantic", "indian ocean",
+    "north america", "south america", "europe", "asia", "africa",
+    "australia", "great barrier reef", "reef", "coast", "river", "lake",
+    "ocean", "sea", "glacier", "iceberg",
+}
+
+NUMERIC_PATTERNS = [
+    r"\b(19|20)\d{2}\b",  # Years
+    r"\b\d+(?:\.\d+)?%\b",  # Percentages
+    r"\b-?\d+(?:\.\d+)?\s*(?:°c|°f|degrees?)\b",  # Temperatures
+    r"\b\d+(?:\.\d+)?\s*(?:to|-)\s*\d+(?:\.\d+)?\b",  # Ranges
+    r"\b\d+(?:\.\d+)?\s*ppm\b",  # PPM values
 ]
 
-def normalize_text(text: str) -> str:
-    """Normalize text for matching."""
-    if isinstance(text, str):
-        return text.lower().strip()
-    return ""
+
+def _contains_term(text: str, term: str) -> bool:
+    if " " in term or "-" in term:
+        return term in text
+    return re.search(r"\b" + re.escape(term) + r"\b", text) is not None
 
 
-def extract_metadata_entities(metadata: Dict[str, str]) -> Dict[str, List[str]]:
-    """
-    Extract entities from metadata fields.
-    
-    Returns:
-        Dict with keys: animals, consequences, climate_actions, settings
-    """
+def extract_entities(text: str) -> Dict[str, set]:
+    text_norm = normalize_text(text)
     entities = {
-        'animals': [],
-        'consequences': [],
-        'climate_actions': [],
-        'settings': [],
+        "animals": set(),
+        "climate_events": set(),
+        "locations": set(),
+        "numeric_claims": set(),
     }
-    
-    # Animals
-    if 'animals' in metadata and metadata['animals']:
-        animals = str(metadata['animals']).lower()
-        if animals != 'no animals':
-            entities['animals'] = [a.strip() for a in animals.split(',')]
-    
-    # Consequences
-    if 'consequences' in metadata and metadata['consequences']:
-        consequences = str(metadata['consequences']).lower()
-        entities['consequences'] = [c.strip() for c in consequences.split(',')]
-    
-    # Climate action
-    if 'climateaction' in metadata and metadata['climateaction']:
-        climateaction = str(metadata['climateaction']).lower()
-        if climateaction != 'no climate action':
-            entities['climate_actions'] = [climateaction.strip()]
-    
-    # Setting
-    if 'setting' in metadata and metadata['setting']:
-        setting = str(metadata['setting']).lower()
-        entities['settings'] = [s.strip() for s in setting.split(',')]
-    
+
+    for term in ANIMAL_TERMS:
+        if _contains_term(text_norm, term):
+            entities["animals"].add(term)
+
+    for term in CLIMATE_EVENT_TERMS:
+        if _contains_term(text_norm, term):
+            entities["climate_events"].add(term)
+
+    for term in LOCATION_TERMS:
+        if _contains_term(text_norm, term):
+            entities["locations"].add(term)
+
+    for pattern in NUMERIC_PATTERNS:
+        for match in re.findall(pattern, text_norm):
+            entities["numeric_claims"].add(match)
+
     return entities
 
 
-def extract_text_entities(text: str) -> Dict[str, List[str]]:
-    """
-    Extract potential entities from model-generated text.
-    
-    Returns:
-        Dict with keys: animals, consequences, climate_actions, settings, specific_claims
-    """
-    text_lower = text.lower()
-    entities = {
-        'animals': [],
-        'consequences': [],
-        'climate_actions': [],
-        'settings': [],
-        'specific_claims': [],
-    }
-    
-    # Extract climate keywords found
-    for keyword in CLIMATE_KEYWORDS.keys():
-        if keyword in text_lower:
-            entities['climate_actions'].append(keyword)
-    
-    # Detect specific claims (dates, numbers, percentages)
-    for pattern in SPECIFICITY_PATTERNS:
-        matches = re.findall(pattern, text_lower)
-        if matches:
-            entities['specific_claims'].extend(matches)
-    
-    # Extract noun phrases (simple heuristic: capitalized words or known animals)
-    animal_keywords = [
-        'fish', 'bear', 'whale', 'dolphin', 'seal', 'bird', 'deer', 'elk',
-        'cow', 'sheep', 'chicken', 'insect', 'bee', 'butterfly', 'lion',
-        'tiger', 'elephant', 'penguin', 'owl', 'eagle', 'ant', 'spider'
-    ]
-    for animal in animal_keywords:
-        if animal in text_lower:
-            entities['animals'].append(animal)
-    
-    return entities
+def _mismatch_penalty(text_set: set, support_set: set, weight: float) -> float:
+    if not text_set:
+        return 0.0
+    if not support_set:
+        return weight
+    unmatched = text_set - support_set
+    if not unmatched:
+        return 0.0
+    return weight * (len(unmatched) / max(len(text_set), 1))
 
 
-def compute_entity_mismatch_penalty(text_entities: Dict, metadata_entities: Dict) -> float:
-    """
-    Compute penalty for entity mismatches.
-    
-    Returns:
-        Penalty score in [0, 1]
-    """
+def compute_entity_penalty(
+    text_entities: Dict[str, set],
+    support_entities: Dict[str, set],
+    support_text: str,
+) -> float:
     penalty = 0.0
-    
-    # Penalty for animals mentioned but not in metadata
-    if text_entities['animals']:
-        metadata_animals = set(metadata_entities['animals'])
-        text_animals = set(text_entities['animals'])
-        unmatched_animals = text_animals - metadata_animals
-        if unmatched_animals and metadata_animals:
-            # Only penalize if we have metadata animals to compare against
-            penalty += 0.15 * len(unmatched_animals) / len(text_animals)
-    
-    # Penalty for consequences mentioned but not in metadata
-    if text_entities['consequences']:
-        metadata_cons = set(metadata_entities['consequences'])
-        text_cons = set(text_entities['consequences'])
-        unmatched_cons = text_cons - metadata_cons
-        if unmatched_cons and metadata_cons:
-            penalty += 0.15 * len(unmatched_cons) / len(text_cons)
-    
-    # Penalty for specific claims without context in metadata
-    if text_entities['specific_claims']:
-        # Heavy penalty for dates/numbers/percentages
-        penalty += 0.20 * min(len(text_entities['specific_claims']) / 2, 1.0)
-    
+    penalty += _mismatch_penalty(text_entities["animals"], support_entities["animals"], 0.30)
+    penalty += _mismatch_penalty(
+        text_entities["climate_events"], support_entities["climate_events"], 0.30
+    )
+    penalty += _mismatch_penalty(
+        text_entities["locations"], support_entities["locations"], 0.20
+    )
+
+    if text_entities["numeric_claims"]:
+        has_numeric_support = bool(re.search(r"\d", support_text))
+        if not has_numeric_support:
+            penalty += 0.20 * min(len(text_entities["numeric_claims"]) / 2, 1.0)
+
     return min(penalty, 1.0)
 
 
 # ============================================================================
-# TEXT PREPROCESSING & EMBEDDING
+# MODEL LOADING
 # ============================================================================
 
+
 def load_sbert_model() -> SentenceTransformer:
-    """Load SBERT model once for reuse."""
     logger.info(f"Loading SBERT model: {SBERT_MODEL_NAME}")
-    model = SentenceTransformer(SBERT_MODEL_NAME)
-    return model
+    return SentenceTransformer(SBERT_MODEL_NAME)
 
 
-def embed_text(text: str, model: SentenceTransformer) -> np.ndarray:
-    """Embed single text or list of texts."""
-    if isinstance(text, str):
-        text = [text]
-    
-    if not text or len(text) == 0:
-        return np.empty((0, EMBEDDING_DIM), dtype=np.float32)
-    
-    embeddings = model.encode(text, convert_to_numpy=True)
-    return embeddings
+def load_clip_resources() -> Optional[Dict[str, Any]]:
+    if not (CLIP_EMBEDDINGS_PATH.exists() and CLIP_INDEX_PATH.exists()):
+        logger.warning("CLIP embeddings or index missing; skipping CLIP signal.")
+        return None
+
+    if not HAS_CLIP:
+        logger.warning(f"CLIP dependencies missing; skipping CLIP signal: {CLIP_IMPORT_ERROR}")
+        return None
+
+    model_name = DEFAULT_CLIP_MODEL
+    if CLIP_CONFIG_PATH.exists():
+        try:
+            config = json.loads(CLIP_CONFIG_PATH.read_text(encoding="utf-8"))
+            model_name = config.get("model", model_name)
+        except Exception as exc:
+            logger.warning(f"Failed to read CLIP config: {exc}")
+
+    try:
+        image_embeddings = np.load(CLIP_EMBEDDINGS_PATH)
+    except Exception as exc:
+        logger.warning(f"Failed to load CLIP embeddings: {exc}")
+        return None
+
+    try:
+        index_df = pd.read_csv(CLIP_INDEX_PATH, dtype=str, keep_default_na=False)
+    except Exception as exc:
+        logger.warning(f"Failed to load CLIP index: {exc}")
+        return None
+
+    if "id" not in index_df.columns:
+        logger.warning("CLIP index missing 'id' column; skipping CLIP signal.")
+        return None
+
+    id_to_index = {str(row_id).strip(): idx for idx, row_id in enumerate(index_df["id"].tolist())}
+
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    try:
+        processor = CLIPProcessor.from_pretrained(model_name)
+        model = CLIPModel.from_pretrained(model_name)
+        model.to(device)
+        model.eval()
+    except Exception as exc:
+        logger.warning(f"Failed to load CLIP model '{model_name}': {exc}")
+        return None
+
+    # Normalize embeddings once
+    norms = np.linalg.norm(image_embeddings, axis=1, keepdims=True)
+    norms[norms == 0] = 1.0
+    image_embeddings = image_embeddings / norms
+
+    return {
+        "model": model,
+        "processor": processor,
+        "device": device,
+        "image_embeddings": image_embeddings.astype(np.float32),
+        "id_to_index": id_to_index,
+        "model_name": model_name,
+    }
 
 
-def compute_text_similarity(text1: str, text2: str, model: SentenceTransformer) -> float:
-    """Compute cosine similarity between two texts."""
-    if not text1 or not text2:
+# ============================================================================
+# EMBEDDING HELPERS
+# ============================================================================
+
+
+def _cosine_similarity(vec_a: Optional[np.ndarray], vec_b: Optional[np.ndarray]) -> float:
+    if vec_a is None or vec_b is None:
         return 0.0
-    
-    emb1 = embed_text(text1, model)
-    emb2 = embed_text(text2, model)
-    
-    if emb1.shape[0] == 0 or emb2.shape[0] == 0:
+    denom = (np.linalg.norm(vec_a) * np.linalg.norm(vec_b))
+    if denom == 0:
         return 0.0
-    
-    sim = cosine_similarity(emb1, emb2)[0][0]
-    return float(sim)
+    score = float(np.dot(vec_a, vec_b) / denom)
+    return max(0.0, min(1.0, score))
+
+
+def encode_sbert_texts(
+    texts: List[str],
+    model: SentenceTransformer,
+    cache: Dict[str, np.ndarray],
+) -> None:
+    unique_texts = [text for text in texts if text and text not in cache]
+    if not unique_texts:
+        return
+    embeddings = model.encode(unique_texts, convert_to_numpy=True)
+    for text, embedding in zip(unique_texts, embeddings):
+        cache[text] = embedding
+
+
+def encode_clip_texts(
+    texts: List[str],
+    clip_resources: Optional[Dict[str, Any]],
+    cache: Dict[str, np.ndarray],
+    batch_size: int = 32,
+) -> None:
+    if clip_resources is None:
+        return
+
+    unique_texts = [text for text in texts if text and text not in cache]
+    if not unique_texts:
+        return
+
+    processor = clip_resources["processor"]
+    model = clip_resources["model"]
+    device = clip_resources["device"]
+
+    for i in range(0, len(unique_texts), batch_size):
+        batch = unique_texts[i:i + batch_size]
+        inputs = processor(text=batch, return_tensors="pt", padding=True, truncation=True)
+        inputs = {key: value.to(device) for key, value in inputs.items()}
+        with torch.no_grad():
+            text_features = model.get_text_features(**inputs)
+        if hasattr(text_features, "pooler_output"):
+            text_features = text_features.pooler_output
+        elif isinstance(text_features, (tuple, list)) and text_features:
+            text_features = text_features[0]
+
+        if not torch.is_tensor(text_features):
+            try:
+                text_features = torch.tensor(text_features)
+            except Exception as exc:
+                logger.warning(f"CLIP text features not tensor; skipping batch: {exc}")
+                continue
+
+        if text_features.ndim == 1:
+            text_features = text_features.unsqueeze(0)
+
+        text_features = F.normalize(text_features, p=2, dim=-1)
+        batch_embeddings = text_features.detach().cpu().numpy().astype(np.float32)
+        for text, embedding in zip(batch, batch_embeddings):
+            cache[text] = embedding
+
+
+def compute_clip_similarity(
+    text: str,
+    image_id: str,
+    clip_resources: Optional[Dict[str, Any]],
+    clip_cache: Dict[str, np.ndarray],
+    missing_clip_ids: set,
+) -> Optional[float]:
+    if clip_resources is None:
+        return None
+
+    image_index = clip_resources["id_to_index"].get(image_id)
+    if image_index is None:
+        if image_id not in missing_clip_ids:
+            missing_clip_ids.add(image_id)
+            logger.warning(f"Missing CLIP embedding for image_id={image_id}")
+        return None
+
+    text_embedding = clip_cache.get(text)
+    if text_embedding is None:
+        encode_clip_texts([text], clip_resources, clip_cache)
+        text_embedding = clip_cache.get(text)
+
+    if text_embedding is None:
+        return None
+
+    image_embedding = clip_resources["image_embeddings"][image_index]
+    denom = (np.linalg.norm(text_embedding) * np.linalg.norm(image_embedding))
+    if denom == 0:
+        return None
+
+    score = float(np.dot(text_embedding, image_embedding) / denom)
+    score = (score + 1.0) / 2.0
+    return max(0.0, min(1.0, score))
 
 
 # ============================================================================
 # DATA LOADING
 # ============================================================================
 
-def load_human_data() -> Dict[str, Dict]:
-    """
-    Load annotated.csv and extract all relevant fields.
-    
-    Returns:
-        Dict: {image_id: {metadata fields + premises + conclusions}}
-    """
+
+def _parse_json_list(value: Any) -> List[str]:
+    if isinstance(value, list):
+        return value
+    if isinstance(value, str) and value.strip():
+        try:
+            parsed = json.loads(value)
+            if isinstance(parsed, list):
+                return parsed
+        except json.JSONDecodeError:
+            return []
+    return []
+
+
+def _safe_text(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, float) and np.isnan(value):
+        return ""
+    return str(value)
+
+
+def load_human_data() -> Dict[str, Dict[str, Any]]:
     logger.info(f"Loading human annotations from {ANNOTATED_CSV}")
-    
+
     try:
         df = pd.read_csv(ANNOTATED_CSV)
     except FileNotFoundError:
         logger.error(f"File not found: {ANNOTATED_CSV}")
         return {}
-    
-    human_data = {}
+
+    human_data: Dict[str, Dict[str, Any]] = {}
     for _, row in df.iterrows():
-        image_id = str(row['id'])
-        
-        # Parse JSON arrays
-        try:
-            premises = json.loads(row['premises']) if isinstance(row['premises'], str) else []
-            conclusions = json.loads(row['conclusions']) if isinstance(row['conclusions'], str) else []
-        except json.JSONDecodeError as e:
-            logger.warning(f"Failed to parse JSON for image_id {image_id}: {e}")
-            premises = []
-            conclusions = []
-        
-        # Extract metadata
+        image_id = str(row.get("id", "")).strip()
+        if not image_id:
+            continue
+
+        premises = _parse_json_list(row.get("premises"))
+        conclusions = _parse_json_list(row.get("conclusions"))
+
         metadata = {
-            'animals': row.get('animals', ''),
-            'consequences': row.get('consequences', ''),
-            'climateaction': row.get('climateaction', ''),
-            'setting': row.get('setting', ''),
-            'type': row.get('type', ''),
-            'blip2_caption': row.get('blip2_caption', ''),
+            "animals": _safe_text(row.get("animals", "")),
+            "consequences": _safe_text(row.get("consequences", "")),
+            "climateaction": _safe_text(row.get("climateaction", "")),
+            "setting": _safe_text(row.get("setting", "")),
+            "blip2_caption": _safe_text(row.get("blip2_caption", "")),
         }
-        
+
         human_data[image_id] = {
-            'metadata': metadata,
-            'premises': premises,
-            'conclusions': conclusions,
+            "metadata": metadata,
+            "premises": premises,
+            "conclusions": conclusions,
         }
-    
+
     logger.info(f"Loaded human data for {len(human_data)} images")
     return human_data
 
 
-def load_model_outputs() -> Dict[str, Dict[str, Dict]]:
-    """
-    Load all model JSON files from output directory.
-    
-    Returns:
-        Dict: {model_name: {image_id: {"premises": [...], "conclusions": [...]}}}
-    """
+def _extract_text_from_item(item: Any) -> List[str]:
+    if item is None:
+        return []
+    if isinstance(item, list):
+        texts: List[str] = []
+        for entry in item:
+            texts.extend(_extract_text_from_item(entry))
+        return texts
+    if isinstance(item, dict):
+        for key in ["text", "observation", "inference", "premise", "conclusion"]:
+            if key in item and isinstance(item[key], str):
+                return [item[key]]
+        for value in item.values():
+            if isinstance(value, str):
+                return [value]
+        return []
+    if isinstance(item, str):
+        return [item]
+    return []
+
+
+LABEL_REGEX = re.compile(r"(premise\s*\d*\s*:|conclusion\s*\d*\s*:)", re.IGNORECASE)
+
+
+def _clean_sentence_text(text: str, sentence_type: str) -> str:
+    if not isinstance(text, str):
+        return ""
+    cleaned = re.sub(r"\s+", " ", text.replace("\n", " ").replace("\r", " ")).strip()
+    lowered = cleaned.lower()
+
+    if sentence_type == "premise":
+        idx = lowered.find("conclusion:")
+        if idx != -1:
+            cleaned = cleaned[:idx]
+    elif sentence_type == "conclusion":
+        idx = lowered.rfind("conclusion:")
+        if idx != -1:
+            cleaned = cleaned[idx + len("conclusion:"):]
+
+    cleaned = re.sub(
+        r"^\s*(premise|conclusion)\s*\d*\s*:\s*",
+        "",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    cleaned = re.sub(r"^\s*[\-\*\d]+\.\s*", "", cleaned)
+    return cleaned.strip()
+
+
+def _split_labeled_sections(text: str, sentence_type: str) -> List[str]:
+    matches = list(LABEL_REGEX.finditer(text))
+    if not matches:
+        cleaned = _clean_sentence_text(text, sentence_type)
+        return [cleaned] if cleaned else []
+
+    sections: List[str] = []
+    for idx, match in enumerate(matches):
+        label = match.group(0).lower()
+        start = match.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(text)
+        segment = text[start:end]
+        if label.startswith(sentence_type):
+            cleaned = _clean_sentence_text(segment, sentence_type)
+            if cleaned:
+                sections.append(cleaned)
+
+    if sections:
+        return sections
+
+    cleaned = _clean_sentence_text(text, sentence_type)
+    return [cleaned] if cleaned else []
+
+
+def normalize_sentences(value: Any, sentence_type: str) -> List[str]:
+    texts = _extract_text_from_item(value)
+    normalized: List[str] = []
+    for text in texts:
+        normalized.extend(_split_labeled_sections(text, sentence_type))
+    return [text for text in normalized if text]
+
+
+def _parse_raw_output(raw_output: Any) -> Dict[str, Any]:
+    if not isinstance(raw_output, str) or not raw_output.strip():
+        return {}
+
+    match = re.search(r"\{.*\}", raw_output, re.DOTALL)
+    if not match:
+        return {}
+
+    try:
+        parsed = json.loads(match.group(0))
+    except json.JSONDecodeError as exc:
+        logger.warning(f"Malformed JSON in raw_output: {exc}")
+        return {}
+
+    return parsed if isinstance(parsed, dict) else {}
+
+
+def load_model_outputs() -> Dict[str, Dict[str, Dict[str, Any]]]:
     logger.info(f"Loading model outputs from {MODELS_OUTPUT_DIR}")
-    
-    model_data = {}
-    
-    # Find all JSON files matching *_outputs.json pattern
-    json_files = list(MODELS_OUTPUT_DIR.glob("*_outputs.json"))
-    
+
+    model_data: Dict[str, Dict[str, Dict[str, Any]]] = {}
+    json_files = list(MODELS_OUTPUT_DIR.glob("*.json"))
+
     if not json_files:
         logger.warning(f"No JSON files found in {MODELS_OUTPUT_DIR}")
         return {}
-    
+
     for json_file in json_files:
-        # Extract model name from filename
         model_name = json_file.stem.replace("_outputs", "")
-        
         logger.info(f"Loading {model_name} from {json_file.name}")
-        
+
         try:
-            with open(json_file, 'r') as f:
-                records = json.load(f)
-        except (json.JSONDecodeError, FileNotFoundError) as e:
-            logger.error(f"Failed to load {json_file}: {e}")
+            with open(json_file, "r") as handle:
+                records = json.load(handle)
+        except (json.JSONDecodeError, FileNotFoundError) as exc:
+            logger.error(f"Failed to load {json_file}: {exc}")
             continue
-        
-        # Handle case where JSON is a single dict or a list
+
         if isinstance(records, dict):
             records = [records]
-        
-        model_images = {}
+        if not isinstance(records, list):
+            logger.warning(f"Unexpected JSON structure in {json_file.name}")
+            continue
+
+        model_images: Dict[str, Dict[str, Any]] = {}
         for record in records:
-            image_id = str(record.get('image_id', ''))
-            parsed_output = record.get('parsed_output', {})
-            
-            premises = parsed_output.get('premises', [])
-            conclusions = parsed_output.get('conclusions', [])
-            
-            # Ensure they are lists
-            if not isinstance(premises, list):
-                premises = [premises] if premises else []
-            if not isinstance(conclusions, list):
-                conclusions = [conclusions] if conclusions else []
-            
+            if not isinstance(record, dict):
+                continue
+            image_id = str(record.get("image_id") or record.get("id") or "").strip()
+            if not image_id:
+                continue
+
+            parsed_output = record.get("parsed_output") or {}
+            if not parsed_output:
+                parsed_output = _parse_raw_output(record.get("raw_output"))
+
+            premises_value = parsed_output.get("premises", record.get("premises", []))
+            conclusions_value = parsed_output.get("conclusions", record.get("conclusions", []))
+
+            premises = normalize_sentences(premises_value, "premise")
+            conclusions = normalize_sentences(conclusions_value, "conclusion")
+
             model_images[image_id] = {
-                'premises': premises,
-                'conclusions': conclusions,
+                "premises": premises,
+                "conclusions": conclusions,
+                "raw_output": record.get("raw_output", ""),
             }
-        
+
+        if not model_images:
+            logger.warning(f"No valid image records found for {model_name}")
+            continue
+
         model_data[model_name] = model_images
         logger.info(f"Loaded {len(model_images)} image records for {model_name}")
-    
+
     return model_data
 
 
 # ============================================================================
-# HALLUCINATION DETECTION
+# SCORING
 # ============================================================================
 
-def build_support_text(metadata: Dict[str, str]) -> str:
-    """Build combined metadata support text."""
-    parts = [
-        metadata.get('animals', ''),
-        metadata.get('consequences', ''),
-        metadata.get('climateaction', ''),
-        metadata.get('setting', ''),
-        metadata.get('type', ''),
-        metadata.get('blip2_caption', ''),
-    ]
-    support_text = " ".join([p for p in parts if p])
-    return support_text if support_text else "image"
+
+def score_to_label(score: float) -> str:
+    if score <= GROUNDED_MAX:
+        return "grounded"
+    if score <= WEAKLY_GROUNDED_MAX:
+        return "weakly grounded"
+    return "hallucinated"
 
 
-def compute_hallucination_score(sentence: str,
-                               support_text: str,
-                               metadata_entities: Dict,
-                               sbert_model: SentenceTransformer,
-                               sentence_type: str = 'conclusion') -> Dict[str, float]:
-    """
-    Compute hallucination score for a single sentence.
-    
-    Args:
-        sentence: Model-generated text
-        support_text: Metadata support context
-        metadata_entities: Extracted metadata entities
-        sbert_model: SBERT model instance
-        sentence_type: 'premise' or 'conclusion'
-    
-    Returns:
-        Dict with scores: similarity, entity_penalty, hallucination_score, is_hallucination
-    """
-    if not sentence or not support_text:
-        return {
-            'similarity': 0.0,
-            'entity_penalty': 0.0,
-            'hallucination_score': 1.0,
-            'is_hallucination': True,
+def build_support_cache(
+    human_data: Dict[str, Dict[str, Any]],
+    sbert_model: SentenceTransformer,
+) -> Dict[str, Dict[str, Any]]:
+    image_ids = sorted(human_data.keys())
+    metadata_texts: List[str] = []
+    blip_texts: List[str] = []
+    contexts: Dict[str, Dict[str, Any]] = {}
+
+    for image_id in image_ids:
+        metadata = human_data[image_id]["metadata"]
+        metadata_text, blip_text, support_text = build_support_context(metadata)
+        metadata_texts.append(metadata_text)
+        blip_texts.append(blip_text)
+        contexts[image_id] = {
+            "metadata_text": metadata_text,
+            "blip_text": blip_text,
+            "support_text": support_text,
+            "metadata": metadata,
         }
-    
-    # Signal 1: Embedding similarity
-    similarity = compute_text_similarity(sentence, support_text, sbert_model)
-    
-    # Signal 2: Entity matching penalty
-    text_entities = extract_text_entities(sentence)
-    entity_penalty = compute_entity_mismatch_penalty(text_entities, metadata_entities)
-    
-    # Combine signals: 60% embedding + 40% entity penalty
-    hallucination_score = 0.6 * (1.0 - similarity) + 0.4 * entity_penalty
-    
-    # Apply threshold based on sentence type
-    threshold = PREMISE_THRESHOLD if sentence_type == 'premise' else CONCLUSION_THRESHOLD
-    is_hallucination = similarity < threshold or hallucination_score > 0.5
-    
+
+    if metadata_texts:
+        metadata_embeddings = sbert_model.encode(
+            [text if text else " " for text in metadata_texts], convert_to_numpy=True
+        )
+    else:
+        metadata_embeddings = []
+
+    if blip_texts:
+        blip_embeddings = sbert_model.encode(
+            [text if text else " " for text in blip_texts], convert_to_numpy=True
+        )
+    else:
+        blip_embeddings = []
+
+    for idx, image_id in enumerate(image_ids):
+        metadata_text = contexts[image_id]["metadata_text"]
+        blip_text = contexts[image_id]["blip_text"]
+        support_text = contexts[image_id]["support_text"]
+
+        contexts[image_id]["metadata_embedding"] = (
+            metadata_embeddings[idx] if metadata_text else None
+        )
+        contexts[image_id]["blip_embedding"] = (
+            blip_embeddings[idx] if blip_text else None
+        )
+        contexts[image_id]["support_entities"] = extract_entities(support_text)
+
+    return contexts
+
+
+def score_sentence(
+    sentence: str,
+    sentence_type: str,
+    context: Dict[str, Any],
+    sbert_cache: Dict[str, np.ndarray],
+    sbert_model: SentenceTransformer,
+    clip_resources: Optional[Dict[str, Any]],
+    clip_cache: Dict[str, np.ndarray],
+    missing_clip_ids: set,
+    image_id: str,
+) -> Dict[str, Any]:
+    cleaned = _clean_sentence_text(sentence, sentence_type)
+    if not cleaned:
+        return {
+            "text": sentence,
+            "cleaned_text": "",
+            "metadata_similarity": 0.0,
+            "blip_similarity": 0.0,
+            "clip_similarity": None,
+            "entity_penalty": 1.0,
+            "hallucination_score": 1.0,
+            "label": "hallucinated",
+        }
+
+    encode_sbert_texts([cleaned], sbert_model, sbert_cache)
+    sentence_embedding = sbert_cache.get(cleaned)
+
+    metadata_similarity = _cosine_similarity(sentence_embedding, context["metadata_embedding"])
+    blip_similarity = _cosine_similarity(sentence_embedding, context["blip_embedding"])
+    clip_similarity = compute_clip_similarity(
+        cleaned, image_id, clip_resources, clip_cache, missing_clip_ids
+    )
+
+    signal_values = [blip_similarity]
+    if clip_similarity is not None:
+        signal_values.append(clip_similarity)
+    signal_b = sum(signal_values) / max(len(signal_values), 1)
+
+    text_entities = extract_entities(cleaned)
+    entity_penalty = compute_entity_penalty(
+        text_entities, context["support_entities"], context["support_text"]
+    )
+
+    hallucination_score = (
+        WEIGHT_METADATA * (1.0 - metadata_similarity)
+        + WEIGHT_SIGNAL_B * (1.0 - signal_b)
+        + WEIGHT_ENTITY * entity_penalty
+    )
+    hallucination_score = max(0.0, min(1.0, hallucination_score))
+
     return {
-        'similarity': float(similarity),
-        'entity_penalty': float(entity_penalty),
-        'hallucination_score': float(hallucination_score),
-        'is_hallucination': is_hallucination,
+        "text": sentence,
+        "cleaned_text": cleaned,
+        "metadata_similarity": float(metadata_similarity),
+        "blip_similarity": float(blip_similarity),
+        "clip_similarity": None if clip_similarity is None else float(clip_similarity),
+        "entity_penalty": float(entity_penalty),
+        "hallucination_score": float(hallucination_score),
+        "label": score_to_label(hallucination_score),
     }
 
 
-def evaluate_image_pair(image_id: str,
-                       model_output: Dict,
-                       metadata: Dict,
-                       sbert_model: SentenceTransformer) -> Dict[str, float]:
-    """
-    Evaluate hallucination for one image-model pair.
-    
-    Returns:
-        Dict with per-image metrics
-    """
-    # Build support text and extract metadata entities
-    support_text = build_support_text(metadata)
-    metadata_entities = extract_metadata_entities(metadata)
-    
-    # Evaluate premises
-    premise_scores = []
-    premise_hallucinations = []
-    for premise in model_output.get('premises', []):
-        score_dict = compute_hallucination_score(
-            premise, support_text, metadata_entities, sbert_model, 'premise'
+def _compute_sentence_stats(score_details: List[Dict[str, Any]]) -> Tuple[float, float]:
+    if not score_details:
+        return 1.0, 1.0
+    scores = [entry["hallucination_score"] for entry in score_details]
+    hallucinated = [entry for entry in score_details if entry["label"] == "hallucinated"]
+    return float(np.mean(scores)), float(len(hallucinated) / len(score_details))
+
+
+def evaluate_record(
+    record: Dict[str, Any],
+    context: Dict[str, Any],
+    sbert_cache: Dict[str, np.ndarray],
+    sbert_model: SentenceTransformer,
+    clip_resources: Optional[Dict[str, Any]],
+    clip_cache: Dict[str, np.ndarray],
+    missing_clip_ids: set,
+) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    image_id = record["image_id"]
+    premises = record.get("premises", [])
+    conclusions = record.get("conclusions", [])
+
+    if not premises:
+        logger.warning(f"Empty premises for image_id={image_id}")
+    if not conclusions:
+        logger.warning(f"Empty conclusions for image_id={image_id}")
+
+    premise_details = [
+        score_sentence(
+            sentence,
+            "premise",
+            context,
+            sbert_cache,
+            sbert_model,
+            clip_resources,
+            clip_cache,
+            missing_clip_ids,
+            image_id,
         )
-        premise_scores.append(score_dict['similarity'])
-        premise_hallucinations.append(score_dict['is_hallucination'])
-    
-    # Evaluate conclusions
-    conclusion_scores = []
-    conclusion_hallucinations = []
-    for conclusion in model_output.get('conclusions', []):
-        score_dict = compute_hallucination_score(
-            conclusion, support_text, metadata_entities, sbert_model, 'conclusion'
+        for sentence in premises
+    ]
+    conclusion_details = [
+        score_sentence(
+            sentence,
+            "conclusion",
+            context,
+            sbert_cache,
+            sbert_model,
+            clip_resources,
+            clip_cache,
+            missing_clip_ids,
+            image_id,
         )
-        conclusion_scores.append(score_dict['similarity'])
-        conclusion_hallucinations.append(score_dict['is_hallucination'])
-    
-    # Compute metrics
-    premise_halluc_rate = (sum(premise_hallucinations) / len(premise_hallucinations)
-                          if premise_hallucinations else 0.0)
-    conclusion_halluc_rate = (sum(conclusion_hallucinations) / len(conclusion_hallucinations)
-                             if conclusion_hallucinations else 0.0)
-    
-    premise_avg_severity = (1.0 - np.mean(premise_scores)) if premise_scores else 0.0
-    conclusion_avg_severity = (1.0 - np.mean(conclusion_scores)) if conclusion_scores else 0.0
-    
-    # Metadata mismatch rate
-    all_entities = extract_text_entities(" ".join(model_output.get('premises', []) + 
-                                                  model_output.get('conclusions', [])))
-    entity_mismatch = compute_entity_mismatch_penalty(all_entities, metadata_entities)
-    
-    return {
-        'image_id': image_id,
-        'premise_hallucination_rate': float(premise_halluc_rate),
-        'premise_avg_severity': float(premise_avg_severity),
-        'conclusion_hallucination_rate': float(conclusion_halluc_rate),
-        'conclusion_avg_severity': float(conclusion_avg_severity),
-        'metadata_mismatch_rate': float(entity_mismatch),
+        for sentence in conclusions
+    ]
+
+    premise_score, premise_halluc_rate = _compute_sentence_stats(premise_details)
+    conclusion_score, conclusion_halluc_rate = _compute_sentence_stats(conclusion_details)
+    overall_score = 0.7 * premise_score + 0.3 * conclusion_score
+    overall_label = score_to_label(overall_score)
+
+    if overall_score > 0.9 or overall_score < 0.1:
+        logger.info(f"Extreme overall score for image_id={image_id}: {overall_score:.4f}")
+
+    summary = {
+        "image_id": image_id,
+        "premise_score": float(premise_score),
+        "conclusion_score": float(conclusion_score),
+        "overall_score": float(overall_score),
+        "label": overall_label,
+        "premise_hallucination_rate": float(premise_halluc_rate),
+        "conclusion_hallucination_rate": float(conclusion_halluc_rate),
     }
 
+    details = {
+        "image_id": image_id,
+        "premises": premises,
+        "conclusions": conclusions,
+        "premise_details": premise_details,
+        "conclusion_details": conclusion_details,
+        "premise_score": float(premise_score),
+        "conclusion_score": float(conclusion_score),
+        "overall_score": float(overall_score),
+        "label": overall_label,
+        "metadata": context["metadata"],
+        "blip2_caption": context["metadata"].get("blip2_caption", ""),
+    }
 
-def evaluate_all_images(model_name: str,
-                       model_output: Dict,
-                       human_data: Dict,
-                       sbert_model: SentenceTransformer) -> Tuple[List[Dict], Dict]:
-    """
-    Evaluate all images for a single model.
-    
-    Returns:
-        - List of per-image dicts
-        - Dict with aggregate statistics
-    """
-    per_image_results = []
-    
+    return summary, details
+
+
+def evaluate_model(
+    model_name: str,
+    model_outputs: Dict[str, Dict[str, Any]],
+    human_data: Dict[str, Dict[str, Any]],
+    contexts: Dict[str, Dict[str, Any]],
+    sbert_model: SentenceTransformer,
+    clip_resources: Optional[Dict[str, Any]],
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], Dict[str, Any]]:
+    summary_results: List[Dict[str, Any]] = []
+    detail_results: List[Dict[str, Any]] = []
+
+    sbert_cache: Dict[str, np.ndarray] = {}
+    clip_cache: Dict[str, np.ndarray] = {}
+    missing_clip_ids: set = set()
+
+    all_sentences: List[str] = []
+    for image_id in human_data.keys():
+        model_record = model_outputs.get(image_id, {})
+        all_sentences.extend(
+            [_clean_sentence_text(text, "premise") for text in model_record.get("premises", [])]
+        )
+        all_sentences.extend(
+            [_clean_sentence_text(text, "conclusion") for text in model_record.get("conclusions", [])]
+        )
+
+    all_sentences = [text for text in all_sentences if text]
+    encode_sbert_texts(all_sentences, sbert_model, sbert_cache)
+    encode_clip_texts(all_sentences, clip_resources, clip_cache)
+
     for image_id in sorted(human_data.keys()):
-        # Get data
-        human = human_data.get(image_id, {'metadata': {}, 'premises': [], 'conclusions': []})
-        model = model_output.get(image_id, {'premises': [], 'conclusions': []})
-        
-        metrics = evaluate_image_pair(image_id, model, human['metadata'], sbert_model)
-        per_image_results.append(metrics)
-    
-    # Compute aggregate statistics
-    df_results = pd.DataFrame(per_image_results)
-    
+        model_record = model_outputs.get(image_id, {"premises": [], "conclusions": []})
+        record = {
+            "image_id": image_id,
+            "model_name": model_name,
+            "premises": model_record.get("premises", []),
+            "conclusions": model_record.get("conclusions", []),
+        }
+        summary, details = evaluate_record(
+            record,
+            contexts[image_id],
+            sbert_cache,
+            sbert_model,
+            clip_resources,
+            clip_cache,
+            missing_clip_ids,
+        )
+        summary_results.append(summary)
+        detail_results.append(details)
+
+    df = pd.DataFrame(summary_results)
+    hallucinated_rate = float((df["label"] == "hallucinated").mean())
+
     aggregate_stats = {
-        'n_images': len(per_image_results),
-        'premise_hallucination_rate_mean': float(df_results['premise_hallucination_rate'].mean()),
-        'premise_hallucination_rate_std': float(df_results['premise_hallucination_rate'].std()),
-        'premise_avg_severity_mean': float(df_results['premise_avg_severity'].mean()),
-        'premise_avg_severity_std': float(df_results['premise_avg_severity'].std()),
-        'conclusion_hallucination_rate_mean': float(df_results['conclusion_hallucination_rate'].mean()),
-        'conclusion_hallucination_rate_std': float(df_results['conclusion_hallucination_rate'].std()),
-        'conclusion_avg_severity_mean': float(df_results['conclusion_avg_severity'].mean()),
-        'conclusion_avg_severity_std': float(df_results['conclusion_avg_severity'].std()),
-        'metadata_mismatch_rate_mean': float(df_results['metadata_mismatch_rate'].mean()),
-        'metadata_mismatch_rate_std': float(df_results['metadata_mismatch_rate'].std()),
+        "model": model_name,
+        "n_images": len(summary_results),
+        "premise_score_mean": float(df["premise_score"].mean()),
+        "premise_score_std": float(df["premise_score"].std()),
+        "conclusion_score_mean": float(df["conclusion_score"].mean()),
+        "conclusion_score_std": float(df["conclusion_score"].std()),
+        "overall_score_mean": float(df["overall_score"].mean()),
+        "overall_score_std": float(df["overall_score"].std()),
+        "hallucination_rate": hallucinated_rate,
     }
-    
-    return per_image_results, aggregate_stats
+
+    return summary_results, detail_results, aggregate_stats
 
 
 # ============================================================================
 # OUTPUT GENERATION
 # ============================================================================
 
-def save_per_model_csv(results: List[Dict], model_name: str, output_dir: Path) -> Path:
-    """Save per-image hallucination results CSV for one model."""
+
+def save_per_model_csv(results: List[Dict[str, Any]], model_name: str, output_dir: Path) -> Path:
     df = pd.DataFrame(results)
-    
-    # Round to 4 decimal places
+    df = df[["image_id", "premise_score", "conclusion_score", "overall_score", "label"]]
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     df[numeric_cols] = df[numeric_cols].round(4)
-    
-    output_path = output_dir / f"{model_name}_hallucination.csv"
+
+    output_path = output_dir / f"{model_name}_{PER_MODEL_SUFFIX}"
     df.to_csv(output_path, index=False)
-    logger.info(f"Saved per-model hallucination results: {output_path}")
-    
+    logger.info(f"Saved per-model deep hallucination results: {output_path}")
     return output_path
 
 
-def save_summary_csv(all_stats: Dict[str, Dict], output_dir: Path) -> Path:
-    """Save summary hallucination comparison CSV across all models."""
-    summary_data = []
-    
+def save_summary_csv(all_stats: Dict[str, Dict[str, Any]], output_dir: Path) -> Path:
+    summary_rows = []
     for model_name, stats in all_stats.items():
-        summary_data.append({
-            'Model': model_name,
-            'N_Images': stats['n_images'],
-            'Premise_Halluc_Rate_Mean': round(stats['premise_hallucination_rate_mean'], 4),
-            'Premise_Halluc_Rate_Std': round(stats['premise_hallucination_rate_std'], 4),
-            'Premise_Severity_Mean': round(stats['premise_avg_severity_mean'], 4),
-            'Premise_Severity_Std': round(stats['premise_avg_severity_std'], 4),
-            'Conclusion_Halluc_Rate_Mean': round(stats['conclusion_hallucination_rate_mean'], 4),
-            'Conclusion_Halluc_Rate_Std': round(stats['conclusion_hallucination_rate_std'], 4),
-            'Conclusion_Severity_Mean': round(stats['conclusion_avg_severity_mean'], 4),
-            'Conclusion_Severity_Std': round(stats['conclusion_avg_severity_std'], 4),
-            'Metadata_Mismatch_Mean': round(stats['metadata_mismatch_rate_mean'], 4),
+        summary_rows.append({
+            "Model": model_name,
+            "N_Images": stats["n_images"],
+            "Premise_Mean": round(stats["premise_score_mean"], 4),
+            "Premise_Std": round(stats["premise_score_std"], 4),
+            "Conclusion_Mean": round(stats["conclusion_score_mean"], 4),
+            "Conclusion_Std": round(stats["conclusion_score_std"], 4),
+            "Overall_Mean": round(stats["overall_score_mean"], 4),
+            "Overall_Std": round(stats["overall_score_std"], 4),
+            "Hallucination_Rate": round(stats["hallucination_rate"], 4),
         })
-    
-    df_summary = pd.DataFrame(summary_data)
-    output_path = output_dir / "summary_hallucination.csv"
+
+    df_summary = pd.DataFrame(summary_rows)
+    output_path = output_dir / SUMMARY_FILE
     df_summary.to_csv(output_path, index=False)
-    logger.info(f"Saved summary hallucination comparison: {output_path}")
-    
+    logger.info(f"Saved deep hallucination summary: {output_path}")
     return output_path
 
 
-def save_details_json(all_results: Dict[str, List[Dict]], output_dir: Path) -> Path:
-    """Save detailed hallucination information as JSON."""
+def save_details_json(all_details: Dict[str, List[Dict[str, Any]]], output_dir: Path) -> Path:
     details = {}
-    
-    for model_name, results in all_results.items():
-        # Sort by hallucination severity
-        sorted_results = sorted(
-            results,
-            key=lambda x: (x['premise_hallucination_rate'] + x['conclusion_hallucination_rate']) / 2,
-            reverse=True
-        )
-        
-        # Keep top 10 most problematic images
+    for model_name, results in all_details.items():
+        sorted_results = sorted(results, key=lambda x: x["overall_score"], reverse=True)
         details[model_name] = sorted_results[:10]
-    
-    output_path = output_dir / "hallucination_details.json"
-    with open(output_path, 'w') as f:
-        json.dump(details, f, indent=2)
-    logger.info(f"Saved hallucination details: {output_path}")
-    
+
+    output_path = output_dir / DETAILS_FILE
+    with open(output_path, "w") as handle:
+        json.dump(details, handle, indent=2)
+    logger.info(f"Saved deep hallucination details: {output_path}")
     return output_path
 
 
@@ -603,26 +954,18 @@ def save_details_json(all_results: Dict[str, List[Dict]], output_dir: Path) -> P
 # VALIDATION
 # ============================================================================
 
-def validate_results(results: List[Dict], model_name: str) -> bool:
-    """Validate hallucination scores are in valid range."""
+
+def validate_results(results: List[Dict[str, Any]], model_name: str) -> bool:
     df = pd.DataFrame(results)
-    
-    # Check for NaN values
     if df.isnull().any().any():
         logger.error(f"NaN values found in {model_name} results")
         return False
-    
-    # Check scores in [0, 1]
-    score_cols = [
-        'premise_hallucination_rate', 'premise_avg_severity',
-        'conclusion_hallucination_rate', 'conclusion_avg_severity',
-        'metadata_mismatch_rate'
-    ]
-    for col in score_cols:
+
+    for col in ["premise_score", "conclusion_score", "overall_score"]:
         if (df[col] < 0).any() or (df[col] > 1).any():
             logger.error(f"Invalid scores in {model_name}: {col}")
             return False
-    
+
     logger.info(f"Validation passed for {model_name}: {len(results)} images")
     return True
 
@@ -631,107 +974,89 @@ def validate_results(results: List[Dict], model_name: str) -> bool:
 # MAIN EXECUTION
 # ============================================================================
 
-def main():
-    """Main hallucination detection pipeline."""
+
+def main() -> bool:
     logger.info("=" * 70)
-    logger.info("Hallucination Detection Pipeline")
+    logger.info("Deep Hallucination Detection Pipeline")
     logger.info("=" * 70)
-    
-    # Ensure output directory exists
+
     EVAL_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    
-    # Phase 1: Load data
+
     logger.info("\n[Phase 1] Loading data...")
     human_data = load_human_data()
     model_data = load_model_outputs()
-    
+
     if not human_data:
         logger.error("No human data loaded. Exiting.")
         return False
-    
     if not model_data:
         logger.error("No model data loaded. Exiting.")
-        logger.error(f"Searched in: {MODELS_OUTPUT_DIR}")
-        logger.error(f"Directory exists: {MODELS_OUTPUT_DIR.exists()}")
-        if MODELS_OUTPUT_DIR.exists():
-            logger.error(f"Files found: {list(MODELS_OUTPUT_DIR.glob('*.json'))}")
         return False
-    
-    # Phase 2: Load SBERT model
-    logger.info("\n[Phase 2] Loading SBERT model...")
+
+    logger.info("\n[Phase 2] Loading models...")
     sbert_model = load_sbert_model()
-    logger.info(f"SBERT model loaded successfully")
-    
-    # Phase 3: Evaluate all models
-    logger.info("\n[Phase 3] Computing hallucination scores...")
-    all_model_results = {}
-    all_model_stats = {}
-    
+    clip_resources = load_clip_resources()
+    if clip_resources:
+        logger.info(f"CLIP enabled: {clip_resources['model_name']}")
+    else:
+        logger.info("CLIP disabled; proceeding with metadata + BLIP signals only")
+
+    logger.info("\n[Phase 3] Precomputing support embeddings...")
+    contexts = build_support_cache(human_data, sbert_model)
+
+    logger.info("\n[Phase 4] Computing hallucination scores...")
+    all_model_results: Dict[str, List[Dict[str, Any]]] = {}
+    all_model_details: Dict[str, List[Dict[str, Any]]] = {}
+    all_model_stats: Dict[str, Dict[str, Any]] = {}
+
     for model_name in sorted(model_data.keys()):
         logger.info(f"\nEvaluating {model_name}...")
-        model_imgs = model_data[model_name]
-        
-        per_image_results, aggregate_stats = evaluate_all_images(
-            model_name, model_imgs, human_data, sbert_model
+        summary_results, detail_results, stats = evaluate_model(
+            model_name,
+            model_data[model_name],
+            human_data,
+            contexts,
+            sbert_model,
+            clip_resources,
         )
-        
-        # Validate
-        if not validate_results(per_image_results, model_name):
+
+        if not validate_results(summary_results, model_name):
             logger.warning(f"Validation failed for {model_name}, skipping output")
             continue
-        
-        all_model_results[model_name] = per_image_results
-        all_model_stats[model_name] = aggregate_stats
-        
-        logger.info(f"{model_name} - Premise Halluc Rate: {aggregate_stats['premise_hallucination_rate_mean']:.4f} "
-                   f"± {aggregate_stats['premise_hallucination_rate_std']:.4f}")
-        logger.info(f"{model_name} - Conclusion Halluc Rate: {aggregate_stats['conclusion_hallucination_rate_mean']:.4f} "
-                   f"± {aggregate_stats['conclusion_hallucination_rate_std']:.4f}")
-    
-    # Phase 4: Save outputs
-    logger.info("\n[Phase 4] Saving outputs...")
+
+        all_model_results[model_name] = summary_results
+        all_model_details[model_name] = detail_results
+        all_model_stats[model_name] = stats
+
+        logger.info(
+            f"{model_name} - Overall Mean: {stats['overall_score_mean']:.4f} "
+            f"± {stats['overall_score_std']:.4f}"
+        )
+
+    logger.info("\n[Phase 5] Saving outputs...")
     saved_files = []
-    
+
     for model_name, results in all_model_results.items():
-        csv_path = save_per_model_csv(results, model_name, EVAL_OUTPUT_DIR)
-        saved_files.append(csv_path)
-    
-    summary_path = save_summary_csv(all_model_stats, EVAL_OUTPUT_DIR)
-    saved_files.append(summary_path)
-    
-    details_path = save_details_json(all_model_results, EVAL_OUTPUT_DIR)
-    saved_files.append(details_path)
-    
-    # Final summary
+        saved_files.append(save_per_model_csv(results, model_name, EVAL_OUTPUT_DIR))
+
+    saved_files.append(save_summary_csv(all_model_stats, EVAL_OUTPUT_DIR))
+    saved_files.append(save_details_json(all_model_details, EVAL_OUTPUT_DIR))
+
     logger.info("\n" + "=" * 70)
-    logger.info("Hallucination Detection Complete!")
+    logger.info("Deep Hallucination Detection Complete!")
     logger.info("=" * 70)
     logger.info(f"Models evaluated: {len(all_model_stats)}")
-    logger.info(f"Images per model: {all_model_stats[list(all_model_stats.keys())[0]]['n_images']}")
-    logger.info(f"\nOutput files saved:")
+    if all_model_stats:
+        first_model = next(iter(all_model_stats.values()))
+        logger.info(f"Images per model: {first_model['n_images']}")
+
+    logger.info("\nOutput files saved:")
     for file_path in saved_files:
         logger.info(f"  - {file_path}")
-    
-    # Print summary table
-    logger.info("\nHallucination Summary Statistics:")
-    logger.info("-" * 70)
-    for model_name, stats in all_model_stats.items():
-        logger.info(f"\n{model_name}:")
-        logger.info(f"  Premise Hallucination Rate:    {stats['premise_hallucination_rate_mean']:.4f} "
-                   f"± {stats['premise_hallucination_rate_std']:.4f}")
-        logger.info(f"  Premise Avg Severity:          {stats['premise_avg_severity_mean']:.4f} "
-                   f"± {stats['premise_avg_severity_std']:.4f}")
-        logger.info(f"  Conclusion Hallucination Rate: {stats['conclusion_hallucination_rate_mean']:.4f} "
-                   f"± {stats['conclusion_hallucination_rate_std']:.4f}")
-        logger.info(f"  Conclusion Avg Severity:       {stats['conclusion_avg_severity_mean']:.4f} "
-                   f"± {stats['conclusion_avg_severity_std']:.4f}")
-        logger.info(f"  Metadata Mismatch Rate:        {stats['metadata_mismatch_rate_mean']:.4f} "
-                   f"± {stats['metadata_mismatch_rate_std']:.4f}")
-    
-    logger.info("\n" + "=" * 70)
+
     return True
 
 
 if __name__ == "__main__":
     success = main()
-    exit(0 if success else 1)
+    raise SystemExit(0 if success else 1)

@@ -1,0 +1,59 @@
+image_id,premise_score,conclusion_score,overall_score,label
+0,0.3793,0.4553,0.4021,weakly grounded
+1,0.5595,0.4955,0.5403,weakly grounded
+10,0.4866,0.4581,0.478,weakly grounded
+11,0.4371,0.3199,0.4019,weakly grounded
+12,0.5397,0.3243,0.4751,weakly grounded
+13,0.411,0.3501,0.3927,weakly grounded
+14,0.3696,0.2326,0.3285,weakly grounded
+16,0.6046,0.4224,0.5499,weakly grounded
+2,0.4683,0.4295,0.4567,weakly grounded
+21,0.4731,0.397,0.4503,weakly grounded
+23,0.2444,0.3556,0.2778,grounded
+24,0.4655,0.4703,0.4669,weakly grounded
+25,0.5462,0.5044,0.5336,weakly grounded
+28,0.4654,0.3901,0.4428,weakly grounded
+29,0.5833,0.5758,0.581,weakly grounded
+30,0.549,0.516,0.5391,weakly grounded
+31,0.4417,0.3557,0.4159,weakly grounded
+32,0.5776,0.5198,0.5603,weakly grounded
+34,0.4474,0.4032,0.4341,weakly grounded
+36,1.0,0.5501,0.865,hallucinated
+39,0.6123,0.6243,0.6159,hallucinated
+40,0.6673,0.5548,0.6336,hallucinated
+41,0.4265,0.4027,0.4194,weakly grounded
+43,1.0,0.507,0.8521,hallucinated
+45,0.4922,0.4441,0.4778,weakly grounded
+48,0.4197,0.3307,0.393,weakly grounded
+49,0.4755,0.3808,0.4471,weakly grounded
+5,0.5831,0.5662,0.578,weakly grounded
+51,0.4993,0.5703,0.5206,weakly grounded
+52,0.48,0.4096,0.4589,weakly grounded
+54,0.5022,0.4987,0.5011,weakly grounded
+55,0.4746,0.2937,0.4204,weakly grounded
+58,0.3973,0.3743,0.3904,weakly grounded
+64,0.5168,0.4975,0.511,weakly grounded
+65,0.4939,0.5744,0.518,weakly grounded
+66,1.0,0.5601,0.868,hallucinated
+67,0.6538,0.5804,0.6318,hallucinated
+68,0.4257,0.3431,0.4009,weakly grounded
+69,0.4481,0.4891,0.4604,weakly grounded
+70,0.432,0.474,0.4446,weakly grounded
+71,0.579,0.6382,0.5968,weakly grounded
+72,0.4392,0.4678,0.4478,weakly grounded
+73,0.5049,0.4078,0.4757,weakly grounded
+75,0.3903,0.4146,0.3976,weakly grounded
+76,0.5165,0.4567,0.4986,weakly grounded
+77,0.5237,0.4955,0.5153,weakly grounded
+78,0.4906,0.4979,0.4928,weakly grounded
+79,0.5325,0.4657,0.5125,weakly grounded
+8,0.572,0.4964,0.5493,weakly grounded
+80,0.5289,0.4137,0.4943,weakly grounded
+81,0.4523,0.4657,0.4563,weakly grounded
+84,0.5707,0.5506,0.5647,weakly grounded
+85,0.4339,0.4394,0.4356,weakly grounded
+86,0.4165,0.3315,0.391,weakly grounded
+89,1.0,0.4796,0.8439,hallucinated
+9,0.446,0.3358,0.4129,weakly grounded
+90,0.4658,0.5006,0.4762,weakly grounded
+91,0.5319,0.5324,0.5321,weakly grounded
