@@ -25,17 +25,18 @@ Based on your plan, generate premises and conclusions following these rules:
 - Premises = ONLY what is directly visible
 - Conclusions = logical interpretations derived from the premises
 
-OUTPUT FORMAT (STRICT JSON):
-{
-  "plan": "Your reasoning about the image and argument approach",
-  "premises": [
-    "premise 1 (directly visible observation)",
-    "premise 2 (directly visible observation)"
-  ],
-  "conclusions": [
-    {"text": "conclusion 1", "based_on": [1]},
-    {"text": "conclusion 2", "based_on": [1, 2]}
-  ]
-}
+OUTPUT FORMAT:
+First write your plan, then write the premises and conclusions exactly like this:
 
-The "based_on" field lists the premise numbers (1-indexed) that support each conclusion.
+Plan:
+[Your reasoning about the image and argument approach]
+
+Premises:
+1. [first premise - directly visible observation]
+2. [second premise - directly visible observation]
+
+Conclusions:
+1. [conclusion] (based on premise 1)
+2. [conclusion] (based on premise 1, 2)
+
+The "(based on premise N)" part is REQUIRED and tells which premises support each conclusion.

@@ -98,71 +98,91 @@ def normalize_conclusions_with_structure(items):
 
 def parse_text_format(text):
     """
-    Parser for plain text format.
-    Handles multiple formats:
-    1. "Premise N: ... Conclusion N: ..." (interleaved)
-    2. "Premises: 1. ... Conclusions: 1. ..." (grouped sections)
-    3. Plain numbered lists
+    Parser for plain text format with Plan, Premises, and Conclusions.
+    Handles:
+    1. Plan section
+    2. Premises section with numbered items
+    3. Conclusions section with numbered items and (based on premise N) linking
     """
+    plan = ""
     premises = []
     conclusions = []
     
-    # Try to extract "Premise N: ..." and "Conclusion N: ..." patterns
-    premise_pattern = r'Premise\s+\d+:\s*(.+?)(?=(?:Premise|Conclusion)\s+\d+:|$)'
-    conclusion_pattern = r'Conclusion\s+\d+:\s*(.+?)(?=(?:Premise|Conclusion)\s+\d+:|$)'
+    text_lower = text.lower()
     
-    premise_matches = re.findall(premise_pattern, text, re.IGNORECASE | re.DOTALL)
-    conclusion_matches = re.findall(conclusion_pattern, text, re.IGNORECASE | re.DOTALL)
-    
-    if premise_matches:
-        premises = [m.strip() for m in premise_matches if m.strip()]
-    
-    if conclusion_matches:
-        conclusions = [m.strip() for m in conclusion_matches if m.strip()]
-    
-    # If no matches with numbered format, try section-based format
-    if not premises or not conclusions:
-        text_lower = text.lower()
+    # Extract Plan section
+    plan_idx = text_lower.find('plan:')
+    if plan_idx >= 0:
+        plan_start = plan_idx + len('plan:')
+        # Find next section (premises or conclusions)
+        prem_idx = text_lower.find('premise', plan_start)
+        conc_idx = text_lower.find('conclusion', plan_start)
         
-        # Find Premises section
-        prem_idx = text_lower.find('premise')
         if prem_idx >= 0:
-            conc_idx = text_lower.find('conclusion', prem_idx)
-            if conc_idx < 0:
-                conc_idx = len(text)
-            
-            premises_text = text[prem_idx:conc_idx]
-            
-            # Extract numbered items: "1. Text", "2. Text"
-            prem_lines = re.findall(r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)', premises_text, re.MULTILINE | re.DOTALL)
-            if prem_lines:
-                premises = [line.strip() for line in prem_lines if line.strip()]
+            plan = text[plan_start:prem_idx].strip()
+        elif conc_idx >= 0:
+            plan = text[plan_start:conc_idx].strip()
+        else:
+            plan = text[plan_start:].strip()
+    
+    # Extract Premises section
+    prem_idx = text_lower.find('premise')
+    if prem_idx >= 0:
+        # Find the end of premises section (start of conclusions or end of text)
+        conc_idx = text_lower.find('conclusion', prem_idx)
+        if conc_idx < 0:
+            conc_idx = len(text)
         
-        # Find Conclusions section
-        conc_idx = text_lower.find('conclusion')
-        if conc_idx >= 0:
-            conclusions_text = text[conc_idx:]
-            conclusions_text = re.sub(r'^\s*conclusions?:\s*', '', conclusions_text, flags=re.IGNORECASE).strip()
+        premises_text = text[prem_idx:conc_idx]
+        
+        # Extract numbered items: "1. Text", "2. Text"
+        prem_lines = re.findall(r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)', premises_text, re.MULTILINE | re.DOTALL)
+        if prem_lines:
+            premises = [line.strip() for line in prem_lines if line.strip()]
+        else:
+            premises = []
+    
+    # Extract Conclusions section
+    conc_idx = text_lower.find('conclusion')
+    if conc_idx >= 0:
+        conclusions_text = text[conc_idx:]
+        conclusions_text = re.sub(r'^\s*conclusions?:\s*', '', conclusions_text, flags=re.IGNORECASE).strip()
+        
+        # Try numbered conclusions with "based on" pattern
+        # Pattern: "1. conclusion text (based on premise 1, 2)"
+        concl_pattern = r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)'
+        concl_matches = re.findall(concl_pattern, conclusions_text, re.MULTILINE | re.DOTALL)
+        
+        conclusions = []
+        for match in concl_matches:
+            match = match.strip()
+            if not match:
+                continue
             
-            # Try numbered conclusions first
-            conc_lines = re.findall(r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)', conclusions_text, re.MULTILINE | re.DOTALL)
-            if conc_lines:
-                conclusions = [line.strip() for line in conc_lines if line.strip()]
-            else:
-                # Fallback: take whole section as one conclusion
-                if conclusions_text.strip():
-                    conclusions = [conclusions_text.strip()]
+            # Extract "based on premise N, M" part
+            based_on = []
+            based_on_match = re.search(r'\(?\s*based\s+on\s+premise\s+([\d,\s]+)\s*\)?', match, re.IGNORECASE)
+            if based_on_match:
+                nums_str = based_on_match.group(1)
+                based_on = [int(n.strip()) for n in nums_str.split(',') if n.strip().isdigit()]
+            
+            # Extract conclusion text (without the based_on part)
+            concl_text = re.sub(r'\(?\s*based\s+on\s+premise\s+[\d,\s]+\s*\)?', '', match, flags=re.IGNORECASE).strip()
+            
+            if concl_text:
+                conclusions.append({"text": concl_text, "based_on": based_on})
     
     return {
-        "premises": premises,
-        "conclusions": conclusions
+        "plan": plan if 'plan' in dir() else "",
+        "premises": premises if 'premises' in dir() else [],
+        "conclusions": conclusions if 'conclusions' in dir() else []
     }
 
 
 def build_nemotron_entry(image_id, raw_output_text):
     """
     Build a structured entry matching nemotron format.
-    Tries JSON parsing first (new format), falls back to text parsing (old format).
+    Parses text output and extracts plan, premises, and conclusions with based_on.
     """
     entry = {
         "image_id": image_id,
@@ -170,37 +190,21 @@ def build_nemotron_entry(image_id, raw_output_text):
         "timestamp": datetime.now().isoformat(),
     }
     
-    # Try JSON parsing first (new format with plan, premises, conclusions with based_on)
-    parsed_json = None
-    try:
-        # Try to extract JSON from markdown code blocks
-        json_match = re.search(r'```(?:json)?\s*([\s\S]*?)```', raw_output_text)
-        if json_match:
-            parsed_json = json.loads(json_match.group(1).strip())
-        else:
-            # Try direct JSON parsing
-            parsed_json = json.loads(raw_output_text.strip())
-    except (json.JSONDecodeError, AttributeError):
-        pass
+    # Parse text format
+    parsed = parse_text_format(raw_output_text)
     
-    if parsed_json and isinstance(parsed_json, dict) and "premises" in parsed_json:
-        # New JSON format
-        premises = parsed_json.get("premises", [])
-        conclusions = parsed_json.get("conclusions", [])
-        plan = parsed_json.get("plan", "")
-        
-        entry["parsed_output"] = {
-            "plan": plan,
-            "premises": normalize_items(premises) if isinstance(premises, list) else [],
-            "conclusions": normalize_conclusions_with_structure(conclusions) if isinstance(conclusions, list) else [],
-        }
-    else:
-        # Fall back to text parsing (old format)
-        parsed_text_dict = parse_text_format(raw_output_text)
-        entry["parsed_output"] = {
-            "premises": normalize_items(parsed_text_dict.get("premises", [])),
-            "conclusions": normalize_items(parsed_text_dict.get("conclusions", []))
-        }
+    # Normalize premises
+    premises = normalize_items(parsed.get("premises", []))
+    
+    # Normalize conclusions - preserve based_on structure
+    conclusions_raw = parsed.get("conclusions", [])
+    conclusions = normalize_conclusions_with_structure(conclusions_raw)
+    
+    entry["parsed_output"] = {
+        "plan": parsed.get("plan", ""),
+        "premises": premises,
+        "conclusions": conclusions
+    }
     
     # Store raw output for debugging
     entry["raw_output"] = raw_output_text
