@@ -121,9 +121,92 @@ def is_token_limit_error(error):
 # HELPER FUNCTIONS FOR PROCESSING
 # =========================================================
 
+def parse_text_format(text):
+    """
+    Parser for plain text format with Plan, Premises, and Conclusions.
+    Handles:
+    1. Plan section
+    2. Premises section with numbered items
+    3. Conclusions section with numbered items and (based on premise N) linking
+    """
+    plan = ""
+    premises = []
+    conclusions = []
+    
+    text_lower = text.lower()
+    
+    # Extract Plan section
+    plan_idx = text_lower.find('plan:')
+    if plan_idx >= 0:
+        plan_start = plan_idx + len('plan:')
+        # Find next section (premises or conclusions)
+        prem_idx = text_lower.find('premise', plan_start)
+        conc_idx = text_lower.find('conclusion', plan_start)
+        
+        if prem_idx >= 0:
+            plan = text[plan_start:prem_idx].strip()
+        elif conc_idx >= 0:
+            plan = text[plan_start:conc_idx].strip()
+        else:
+            plan = text[plan_start:].strip()
+    
+    # Extract Premises section
+    prem_idx = text_lower.find('premise')
+    if prem_idx >= 0:
+        # Find the end of premises section (start of conclusions or end of text)
+        conc_idx = text_lower.find('conclusion', prem_idx)
+        if conc_idx < 0:
+            conc_idx = len(text)
+        
+        premises_text = text[prem_idx:conc_idx]
+        
+        # Extract numbered items: "1. Text", "2. Text"
+        prem_lines = re.findall(r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)', premises_text, re.MULTILINE | re.DOTALL)
+        if prem_lines:
+            premises = [line.strip() for line in prem_lines if line.strip()]
+        else:
+            premises = []
+    
+    # Extract Conclusions section
+    conc_idx = text_lower.find('conclusion')
+    if conc_idx >= 0:
+        conclusions_text = text[conc_idx:]
+        conclusions_text = re.sub(r'^\s*conclusions?:\s*', '', conclusions_text, flags=re.IGNORECASE).strip()
+        
+        # Try numbered conclusions with "based on" pattern
+        # Pattern: "1. conclusion text (based on premise 1, 2)"
+        concl_pattern = r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)'
+        concl_matches = re.findall(concl_pattern, conclusions_text, re.MULTILINE | re.DOTALL)
+        
+        conclusions = []
+        for match in concl_matches:
+            match = match.strip()
+            if not match:
+                continue
+            
+            # Extract "based on premise N, M" part
+            based_on = []
+            based_on_match = re.search(r'\(?\s*based\s+on\s+premise\s+([\d,\s]+)\s*\)?', match, re.IGNORECASE)
+            if based_on_match:
+                nums_str = based_on_match.group(1)
+                based_on = [int(n.strip()) for n in nums_str.split(',') if n.strip().isdigit()]
+            
+            # Extract conclusion text (without the based_on part)
+            concl_text = re.sub(r'\(?\s*based\s+on\s+premise\s+[\d,\s]+\s*\)?', '', match, flags=re.IGNORECASE).strip()
+            
+            if concl_text:
+                conclusions.append({"text": concl_text, "based_on": based_on})
+    
+    return {
+        "plan": plan,
+        "premises": premises,
+        "conclusions": conclusions
+    }
+
+
 def parse_json_output(output_text):
     """
-    Parse JSON from model output.
+    Parse JSON from model output (fallback for old format).
     Handles cases where JSON is wrapped in markdown code blocks.
     """
     try:
@@ -148,6 +231,85 @@ def parse_json_output(output_text):
     
     # If parsing fails, return None
     return None
+
+
+def normalize_items(items):
+    """Normalize premises/conclusions to plain string arrays."""
+    if not isinstance(items, list):
+        return []
+    
+    normalized = []
+    for item in items:
+        if isinstance(item, str):
+            normalized.append(item)
+        elif isinstance(item, dict):
+            if "text" in item and item["text"]:
+                normalized.append(item["text"])
+            else:
+                for key in ['observation', 'inference', 'description']:
+                    if key in item and item[key]:
+                        normalized.append(item[key])
+                        break
+    
+    return normalized
+
+
+def normalize_conclusions_with_structure(items):
+    """Normalize conclusions preserving structure (text + based_on)."""
+    if not isinstance(items, list):
+        return []
+    
+    normalized = []
+    for item in items:
+        entry = {"text": "", "based_on": []}
+        
+        if isinstance(item, str):
+            entry["text"] = item
+        elif isinstance(item, dict):
+            if "text" in item and item["text"]:
+                entry["text"] = str(item["text"])
+            else:
+                for key in ['observation', 'inference', 'description']:
+                    if key in item and item[key]:
+                        entry["text"] = str(item[key])
+                        break
+            
+            if "based_on" in item:
+                entry["based_on"] = item["based_on"]
+        
+        if entry["text"]:
+            normalized.append(entry)
+    
+    return normalized
+
+
+def normalize_conclusions_with_structure(items):
+    """Normalize conclusions preserving structure (text + based_on)."""
+    if not isinstance(items, list):
+        return []
+    
+    normalized = []
+    for item in items:
+        entry = {"text": "", "based_on": []}
+        
+        if isinstance(item, str):
+            entry["text"] = item
+        elif isinstance(item, dict):
+            if "text" in item and item["text"]:
+                entry["text"] = str(item["text"])
+            else:
+                for key in ['observation', 'inference', 'description']:
+                    if key in item and item[key]:
+                        entry["text"] = str(item[key"])
+                        break
+            
+            if "based_on" in item:
+                entry["based_on"] = item["based_on"]
+        
+        if entry["text"]:
+            normalized.append(entry)
+    
+    return normalized
 
 def save_result_immediately(image_id, result_data):
     """Save result immediately after processing"""
@@ -243,38 +405,41 @@ def encode_image(image_path):
 
 
 def build_image_only_prompt():
-    return """
-You are an AI system for climate-related visual reasoning.
+    """Read prompt from prompts.txt file (same prompt used by all models)"""
+    prompt_file = Path(__file__).parent / "prompts.txt"
+    if prompt_file.exists():
+        return prompt_file.read_text().strip()
+    else:
+        # Fallback prompt if file not found
+        return """You are an AI system for climate-related visual reasoning.
 
 You will be given an image.
 
 TASK:
-Generate:
-1. 2 to 4 PREMISES (observations from the image)
-2. 1 to 2 CONCLUSIONS (reasoned inferences based only on the premises)
+Analyze the image and generate a structured climate argument.
 
-DEFINITIONS:
-- Premises = ONLY what is directly visible in the image
-- Conclusions = logical interpretations derived ONLY from the premises
+STEP 1: PLAN
+Before generating premises and conclusions, reason about:
+- What is the main climate message visible in this image?
+- What is the best argument approach based ONLY on visual evidence?
 
-RULES:
-- Do NOT use external knowledge not supported by the image
-- Do NOT assume unseen events or hidden context
-- Keep reasoning strictly grounded in visual evidence
-- Focus on environmental or climate-related interpretation ONLY if visually relevant
+STEP 2: GENERATE
+Based on your plan, generate premises and conclusions following these rules:
+- Each conclusion MUST be logically supported by at least one premise
+- Conclusions MUST go beyond simple visual observation
+- Arguments MUST be highly specific to what is visible in THIS image
 
-OUTPUT FORMAT (STRICT JSON):
-{
-  "premises": [
-    "...",
-    "..."
-  ],
-  "conclusions": [
-    "...",
-    "..."
-  ]
-}
-"""
+OUTPUT FORMAT:
+Plan:
+[Your reasoning about the image and argument approach]
+
+Premises:
+1. [first premise - directly visible observation]
+2. [second premise - directly visible observation]
+
+Conclusions:
+1. [conclusion] (based on premise 1)
+2. [conclusion] (based on premise 1, 2)"""
 
 # =========================================================
 # GENERATION LOOP - IMAGE ONLY
@@ -345,7 +510,7 @@ for idx, image_id in enumerate(images_to_process):
                             "role": "system",
                             "content": (
                                 "You generate structured argumentative reasoning "
-                                "from climate and environmental images. Return ONLY valid JSON."
+                                "from climate and environmental images."
                             ),
                         },
                         {
@@ -365,10 +530,38 @@ for idx, image_id in enumerate(images_to_process):
                 
                 output_text = response.choices[0].message.content
                 
-                # Parse JSON immediately
-                parsed_output = parse_json_output(output_text)
+                # Parse text format first (new format with Plan, Premises, Conclusions)
+                parsed = parse_text_format(output_text)
                 
-                # Create result object (NO metadata)
+                # Check if we got valid data from text parsing
+                if parsed.get("premises") or parsed.get("conclusions"):
+                    # Successfully parsed text format
+                    premises = normalize_items(parsed.get("premises", []))
+                    conclusions_raw = parsed.get("conclusions", [])
+                    conclusions = normalize_conclusions_with_structure(conclusions_raw)
+                    
+                    parsed_output = {
+                        "plan": parsed.get("plan", ""),
+                        "premises": premises,
+                        "conclusions": conclusions
+                    }
+                else:
+                    # Fall back to JSON parsing (old format)
+                    parsed_json = parse_json_output(output_text)
+                    if parsed_json and isinstance(parsed_json, dict):
+                        premises = normalize_items(parsed_json.get("premises", []))
+                        conclusions_raw = parsed_json.get("conclusions", [])
+                        conclusions = normalize_conclusions_with_structure(conclusions_raw)
+                        
+                        parsed_output = {
+                            "plan": parsed_json.get("plan", ""),
+                            "premises": premises,
+                            "conclusions": conclusions
+                        }
+                    else:
+                        parsed_output = {"plan": "", "premises": [], "conclusions": []}
+                
+                # Create result object
                 result_data = {
                     "image_id": image_id,
                     "model": MODEL_NAME,
