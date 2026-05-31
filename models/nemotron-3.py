@@ -123,85 +123,36 @@ def is_token_limit_error(error):
 
 def parse_text_format(text):
     """
-    Parser for plain text format with Plan, Premises, and Conclusions.
-    Handles:
-    1. Plan section
-    2. Premises section with numbered items
-    3. Conclusions section with numbered items and (based on premise N) linking
+    Robust parser for Plan/Premises/Conclusions text format.
+    Returns {"plan": str, "premises": [str], "conclusions": [str]}
     """
-    plan = ""
-    premises = []
-    conclusions = []
-    
-    text_lower = text.lower()
-    
-    # Extract Plan section
-    plan_idx = text_lower.find('plan:')
-    if plan_idx >= 0:
-        plan_start = plan_idx + len('plan:')
-        # Find next section (premises or conclusions)
-        prem_idx = text_lower.find('premise', plan_start)
-        conc_idx = text_lower.find('conclusion', plan_start)
-        
-        if prem_idx >= 0:
-            plan = text[plan_start:prem_idx].strip()
-        elif conc_idx >= 0:
-            plan = text[plan_start:conc_idx].strip()
-        else:
-            plan = text[plan_start:].strip()
-    
-    # Extract Premises section
-    prem_idx = text_lower.find('premise')
-    if prem_idx >= 0:
-        # Find the end of premises section (start of conclusions or end of text)
-        conc_idx = text_lower.find('conclusion', prem_idx)
-        if conc_idx < 0:
-            conc_idx = len(text)
-        
-        premises_text = text[prem_idx:conc_idx]
-        
-        # Extract numbered items: "1. Text", "2. Text"
-        prem_lines = re.findall(r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)', premises_text, re.MULTILINE | re.DOTALL)
-        if prem_lines:
-            premises = [line.strip() for line in prem_lines if line.strip()]
-        else:
-            premises = []
-    
-    # Extract Conclusions section
-    conc_idx = text_lower.find('conclusion')
-    if conc_idx >= 0:
-        conclusions_text = text[conc_idx:]
-        conclusions_text = re.sub(r'^\s*conclusions?:\s*', '', conclusions_text, flags=re.IGNORECASE).strip()
-        
-        # Try numbered conclusions with "based on" pattern
-        # Pattern: "1. conclusion text (based on premise 1, 2)"
-        concl_pattern = r'^\s*\d+\.\s*(.+?)(?=^\s*\d+\.|$)'
-        concl_matches = re.findall(concl_pattern, conclusions_text, re.MULTILINE | re.DOTALL)
-        
-        conclusions = []
-        for match in concl_matches:
-            match = match.strip()
-            if not match:
+    result = {"plan": "", "premises": [], "conclusions": []}
+
+    # Extract Plan
+    plan_match = re.search(r'Plan:\s*(.*?)(?=Premises:|$)', text, re.DOTALL | re.IGNORECASE)
+    if plan_match:
+        result["plan"] = plan_match.group(1).strip()
+
+    # Extract Premises
+    premises_match = re.search(r'Premises:\s*(.*?)(?=Conclusions:|$)', text, re.DOTALL | re.IGNORECASE)
+    if premises_match:
+        for line in premises_match.group(1).strip().split('\n'):
+            clean_line = re.sub(r'^\d+\.\s*', '', line.strip())
+            if clean_line and re.match(r'^\d+\.', line.strip()):
+                result["premises"].append(clean_line)
+
+    # Extract Conclusions
+    conclusions_match = re.search(r'Conclusions:\s*(.*)', text, re.DOTALL | re.IGNORECASE)
+    if conclusions_match:
+        for line in conclusions_match.group(1).strip().split('\n'):
+            line = line.strip()
+            if not line or not re.match(r'^\d+\.', line):
                 continue
-            
-            # Extract "based on premise N, M" part
-            based_on = []
-            based_on_match = re.search(r'\(?\s*based\s+on\s+premise\s+([\d,\s]+)\s*\)?', match, re.IGNORECASE)
-            if based_on_match:
-                nums_str = based_on_match.group(1)
-                based_on = [int(n.strip()) for n in nums_str.split(',') if n.strip().isdigit()]
-            
-            # Extract conclusion text (without the based_on part)
-            concl_text = re.sub(r'\(?\s*based\s+on\s+premise\s+[\d,\s]+\s*\)?', '', match, flags=re.IGNORECASE).strip()
-            
-            if concl_text:
-                conclusions.append({"text": concl_text, "based_on": based_on})
-    
-    return {
-        "plan": plan,
-        "premises": premises,
-        "conclusions": conclusions
-    }
+            clean_line = re.sub(r'^\d+\.\s*', '', line)
+            if clean_line:
+                result["conclusions"].append(clean_line)
+
+    return result
 
 
 def parse_json_output(output_text):
@@ -210,15 +161,13 @@ def parse_json_output(output_text):
     Handles cases where JSON is wrapped in markdown code blocks.
     """
     try:
-        # Try direct parsing first
         return json.loads(output_text)
     except json.JSONDecodeError:
         pass
     
-    # Try to extract JSON from markdown code blocks
     patterns = [
-        r'```(?:json)?\s*(\{.*?\})\s*```',  # markdown code blocks
-        r'({.*})',  # raw JSON object
+        r'```(?:json)?\s*(\{.*?\})\s*```',
+        r'({.*})',
     ]
     
     for pattern in patterns:
@@ -229,7 +178,6 @@ def parse_json_output(output_text):
             except json.JSONDecodeError:
                 continue
     
-    # If parsing fails, return None
     return None
 
 
@@ -253,63 +201,6 @@ def normalize_items(items):
     
     return normalized
 
-
-def normalize_conclusions_with_structure(items):
-    """Normalize conclusions preserving structure (text + based_on)."""
-    if not isinstance(items, list):
-        return []
-    
-    normalized = []
-    for item in items:
-        entry = {"text": "", "based_on": []}
-        
-        if isinstance(item, str):
-            entry["text"] = item
-        elif isinstance(item, dict):
-            if "text" in item and item["text"]:
-                entry["text"] = str(item["text"])
-            else:
-                for key in ['observation', 'inference', 'description']:
-                    if key in item and item[key]:
-                        entry["text"] = str(item[key])
-                        break
-            
-            if "based_on" in item:
-                entry["based_on"] = item["based_on"]
-        
-        if entry["text"]:
-            normalized.append(entry)
-    
-    return normalized
-
-
-def normalize_conclusions_with_structure(items):
-    """Normalize conclusions preserving structure (text + based_on)."""
-    if not isinstance(items, list):
-        return []
-    
-    normalized = []
-    for item in items:
-        entry = {"text": "", "based_on": []}
-        
-        if isinstance(item, str):
-            entry["text"] = item
-        elif isinstance(item, dict):
-            if "text" in item and item["text"]:
-                entry["text"] = str(item["text"])
-            else:
-                for key in ['observation', 'inference', 'description']:
-                    if key in item and item[key]:
-                        entry["text"] = str(item[key"])
-                        break
-            
-            if "based_on" in item:
-                entry["based_on"] = item["based_on"]
-        
-        if entry["text"]:
-            normalized.append(entry)
-    
-    return normalized
 
 def save_result_immediately(image_id, result_data):
     """Save result immediately after processing"""
@@ -537,8 +428,7 @@ for idx, image_id in enumerate(images_to_process):
                 if parsed.get("premises") or parsed.get("conclusions"):
                     # Successfully parsed text format
                     premises = normalize_items(parsed.get("premises", []))
-                    conclusions_raw = parsed.get("conclusions", [])
-                    conclusions = normalize_conclusions_with_structure(conclusions_raw)
+                    conclusions = normalize_items(parsed.get("conclusions", []))
                     
                     parsed_output = {
                         "plan": parsed.get("plan", ""),
@@ -550,8 +440,7 @@ for idx, image_id in enumerate(images_to_process):
                     parsed_json = parse_json_output(output_text)
                     if parsed_json and isinstance(parsed_json, dict):
                         premises = normalize_items(parsed_json.get("premises", []))
-                        conclusions_raw = parsed_json.get("conclusions", [])
-                        conclusions = normalize_conclusions_with_structure(conclusions_raw)
+                        conclusions = normalize_items(parsed_json.get("conclusions", []))
                         
                         parsed_output = {
                             "plan": parsed_json.get("plan", ""),

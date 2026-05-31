@@ -17,8 +17,8 @@ Before generating premises and conclusions, reason about:
 - What logical connection exists between what you observe and what it implies?
 
 STEP 2: GENERATE
-Based on your plan, generate premises and conclusions following these rules:
-- Each conclusion MUST be logically supported by at least one premise
+Based on your plan, generate 2-4 premises and 1-2 conclusions following these rules:
+- Conclusions MUST be logically supported by the premises you generate
 - Conclusions MUST go beyond simple visual observation (infer, interpret, predict)
 - Avoid generic statements (e.g., "climate change is bad", "we need action")
 - Arguments MUST be highly specific to what is visible in THIS image
@@ -36,7 +36,5 @@ Premises:
 2. [second premise - directly visible observation]
 
 Conclusions:
-1. [conclusion] (based on premise 1)
-2. [conclusion] (based on premise 1, 2)
-
-The "(based on premise N)" part is REQUIRED and tells which premises support each conclusion.
+1. [first conclusion]
+2. [second conclusion]
