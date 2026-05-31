@@ -48,6 +48,7 @@ def normalize_items(items):
     Handles both formats:
     - ["string1", "string2"] → ["string1", "string2"]
     - [{"text": "string1"}, {"observation": "string1"}] → ["string1", "string2"]
+    - [{"text": "...", "based_on": [1, 2]}] → ["..."] (new format)
     """
     if not isinstance(items, list):
         return []
@@ -58,11 +59,48 @@ def normalize_items(items):
             # Already a string
             normalized.append(item)
         elif isinstance(item, dict):
-            # Extract text from common keys: text, observation, inference, description, type, etc.
-            for key in ['text', 'observation', 'inference', 'description']:
-                if key in item and item[key]:
-                    normalized.append(item[key])
-                    break
+            # Handle new format: {"text": "...", "based_on": [1, 2]}
+            if "text" in item and item["text"]:
+                normalized.append(item["text"])
+            else:
+                # Extract text from common keys: observation, inference, description
+                for key in ['observation', 'inference', 'description']:
+                    if key in item and item[key]:
+                        normalized.append(item[key])
+                        break
+    
+    return normalized
+
+
+def normalize_conclusions_with_structure(items):
+    """
+    Normalize conclusions preserving structure (text + based_on).
+    Returns list of dicts with 'text' and 'based_on' keys.
+    """
+    if not isinstance(items, list):
+        return []
+    
+    normalized = []
+    for item in items:
+        entry = {"text": "", "based_on": []}
+        
+        if isinstance(item, str):
+            entry["text"] = item
+        elif isinstance(item, dict):
+            # Handle new format: {"text": "...", "based_on": [1, 2]}
+            if "text" in item and item["text"]:
+                entry["text"] = str(item["text"])
+            else:
+                for key in ['observation', 'inference', 'description']:
+                    if key in item and item[key]:
+                        entry["text"] = str(item[key])
+                        break
+            
+            if "based_on" in item:
+                entry["based_on"] = item["based_on"]
+        
+        if entry["text"]:
+            normalized.append(entry)
     
     return normalized
 
@@ -87,16 +125,29 @@ def build_nemotron_entry(image_id, raw_output_text, parsed_output=None):
     
     # Ensure parsed_output has premises and conclusions
     if parsed_output and isinstance(parsed_output, dict):
-        # Normalize to plain string arrays
+        # Check for new format (with plan)
+        plan = parsed_output.get("plan", "")
+        
+        # Normalize premises
         premises = normalize_items(parsed_output.get("premises", []))
-        conclusions = normalize_items(parsed_output.get("conclusions", []))
+        
+        # Normalize conclusions - preserve structure if new format
+        conclusions_raw = parsed_output.get("conclusions", [])
+        if conclusions_raw and isinstance(conclusions_raw[0], dict) and "text" in conclusions_raw[0]:
+            # New format with based_on
+            conclusions = normalize_conclusions_with_structure(conclusions_raw)
+        else:
+            # Old format - plain strings
+            conclusions = normalize_items(conclusions_raw)
         
         entry["parsed_output"] = {
+            "plan": plan,
             "premises": premises,
             "conclusions": conclusions
         }
     else:
         entry["parsed_output"] = {
+            "plan": "",
             "premises": [],
             "conclusions": []
         }

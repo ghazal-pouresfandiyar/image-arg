@@ -1,0 +1,41 @@
+You are an AI system for climate-related visual reasoning.
+
+You will be given an image.
+
+TASK:
+Analyze the image and generate a structured climate argument.
+
+STRICT CONSTRAINTS:
+- NO external knowledge — rely ONLY on what is visible in the image
+- NO assumptions about unseen events or hidden context
+- All reasoning must be strictly grounded in visual evidence
+
+STEP 1: PLAN
+Before generating premises and conclusions, reason about:
+- What is the main climate message visible in this image?
+- What is the best argument approach based ONLY on visual evidence?
+- What logical connection exists between what you observe and what it implies?
+
+STEP 2: GENERATE
+Based on your plan, generate premises and conclusions following these rules:
+- Each conclusion MUST be logically supported by at least one premise
+- Conclusions MUST go beyond simple visual observation (infer, interpret, predict)
+- Avoid generic statements (e.g., "climate change is bad", "we need action")
+- Arguments MUST be highly specific to what is visible in THIS image
+- Premises = ONLY what is directly visible
+- Conclusions = logical interpretations derived from the premises
+
+OUTPUT FORMAT (STRICT JSON):
+{
+  "plan": "Your reasoning about the image and argument approach",
+  "premises": [
+    "premise 1 (directly visible observation)",
+    "premise 2 (directly visible observation)"
+  ],
+  "conclusions": [
+    {"text": "conclusion 1", "based_on": [1]},
+    {"text": "conclusion 2", "based_on": [1, 2]}
+  ]
+}
+
+The "based_on" field lists the premise numbers (1-indexed) that support each conclusion.

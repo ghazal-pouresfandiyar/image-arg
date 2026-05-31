@@ -24,36 +24,11 @@ MODEL_NAME = "minicpm-v"
 # HELPER FUNCTIONS
 # =========================
 
-def extract_json_from_response(response_text):
-    """
-    Extract JSON from model response with better fallback handling.
-    Handles markdown code blocks and raw JSON objects/arrays anywhere in text.
-    Returns (parsed_dict, raw_json_string) or (None, raw_text) if parsing fails.
-    """
-    # Try 1: Extract from markdown code blocks
-    json_match = re.search(r'```(?:json)?\s*([\s\S]*?)```', response_text)
-    if json_match:
-        json_str = json_match.group(1).strip()
-    else:
-        # Try 2: Find JSON object/array in response (greedy search)
-        json_match = re.search(r'\{[\s\S]*\}|\[[\s\S]*\]', response_text)
-        if json_match:
-            json_str = json_match.group(0)
-        else:
-            json_str = response_text.strip()
-    
-    try:
-        parsed = json.loads(json_str)
-        return parsed, json_str
-    except json.JSONDecodeError as e:
-        print(f"  Warning: Failed to parse JSON: {e}")
-        return None, response_text
-
-
 def normalize_items(items):
     """
     Normalize premises/conclusions to plain string arrays.
     Handles: strings, objects with any key, nested structures, numbered keys.
+    Also handles new format with 'text' and 'based_on' fields.
     """
     if not isinstance(items, list):
         return []
@@ -63,20 +38,21 @@ def normalize_items(items):
         text = None
         
         if isinstance(item, str):
-            # Already a string
             text = item
         elif isinstance(item, dict):
-            # Try to find text in common keys first
-            for key in ['text', 'observation', 'inference', 'description']:
-                if key in item and item[key]:
-                    text = str(item[key])
-                    break
+            # Handle new format: {"text": "...", "based_on": [1, 2]}
+            if "text" in item and item["text"]:
+                text = str(item["text"])
+            else:
+                for key in ['observation', 'inference', 'description']:
+                    if key in item and item[key]:
+                        text = str(item[key])
+                        break
             
-            # If no common key found, try any key (handles Observation_1, Observation_2, etc.)
             if not text:
                 for key in sorted(item.keys()):
                     value = item[key]
-                    if value:
+                    if value and key != "based_on":  # Skip based_on field
                         text = str(value)
                         break
         
@@ -86,21 +62,52 @@ def normalize_items(items):
     return normalized
 
 
+def normalize_conclusions_with_structure(items):
+    """
+    Normalize conclusions preserving structure (text + based_on).
+    Returns list of dicts with 'text' and 'based_on' keys.
+    """
+    if not isinstance(items, list):
+        return []
+    
+    normalized = []
+    for item in items:
+        entry = {"text": "", "based_on": []}
+        
+        if isinstance(item, str):
+            entry["text"] = item
+        elif isinstance(item, dict):
+            # Handle new format
+            if "text" in item and item["text"]:
+                entry["text"] = str(item["text"])
+            else:
+                for key in ['observation', 'inference', 'description']:
+                    if key in item and item[key]:
+                        entry["text"] = str(item[key])
+                        break
+                        break
+            
+            if "based_on" in item:
+                entry["based_on"] = item["based_on"]
+        
+        if entry["text"]:
+            normalized.append(entry)
+    
+    return normalized
+
+
 def parse_text_format(text):
     """
-    Fallback parser for plain text format when model doesn't return JSON.
+    Parser for plain text format.
     Handles multiple formats:
     1. "Premise N: ... Conclusion N: ..." (interleaved)
     2. "Premises: 1. ... Conclusions: 1. ..." (grouped sections)
     3. Plain numbered lists
-    
-    Returns dict with 'premises' and 'conclusions' keys.
     """
     premises = []
     conclusions = []
     
     # Try to extract "Premise N: ..." and "Conclusion N: ..." patterns
-    # This handles interleaved format
     premise_pattern = r'Premise\s+\d+:\s*(.+?)(?=(?:Premise|Conclusion)\s+\d+:|$)'
     conclusion_pattern = r'Conclusion\s+\d+:\s*(.+?)(?=(?:Premise|Conclusion)\s+\d+:|$)'
     
@@ -152,17 +159,10 @@ def parse_text_format(text):
     }
 
 
-def build_nemotron_entry(image_id, raw_output_text, parsed_output=None):
+def build_nemotron_entry(image_id, raw_output_text):
     """
     Build a structured entry matching nemotron format.
-    
-    Args:
-        image_id: Image identifier
-        raw_output_text: Raw model response (string)
-        parsed_output: Parsed JSON dict with 'premises' and 'conclusions' keys
-    
-    Returns:
-        Dict with image_id, model, timestamp, parsed_output, raw_output
+    Tries JSON parsing first (new format), falls back to text parsing (old format).
     """
     entry = {
         "image_id": image_id,
@@ -170,25 +170,39 @@ def build_nemotron_entry(image_id, raw_output_text, parsed_output=None):
         "timestamp": datetime.now().isoformat(),
     }
     
-    # Ensure parsed_output has premises and conclusions
-    if parsed_output and isinstance(parsed_output, dict):
-        # Normalize to plain string arrays
-        premises = normalize_items(parsed_output.get("premises", []))
-        conclusions = normalize_items(parsed_output.get("conclusions", []))
+    # Try JSON parsing first (new format with plan, premises, conclusions with based_on)
+    parsed_json = None
+    try:
+        # Try to extract JSON from markdown code blocks
+        json_match = re.search(r'```(?:json)?\s*([\s\S]*?)```', raw_output_text)
+        if json_match:
+            parsed_json = json.loads(json_match.group(1).strip())
+        else:
+            # Try direct JSON parsing
+            parsed_json = json.loads(raw_output_text.strip())
+    except (json.JSONDecodeError, AttributeError):
+        pass
+    
+    if parsed_json and isinstance(parsed_json, dict) and "premises" in parsed_json:
+        # New JSON format
+        premises = parsed_json.get("premises", [])
+        conclusions = parsed_json.get("conclusions", [])
+        plan = parsed_json.get("plan", "")
         
         entry["parsed_output"] = {
-            "premises": premises,
-            "conclusions": conclusions
+            "plan": plan,
+            "premises": normalize_items(premises) if isinstance(premises, list) else [],
+            "conclusions": normalize_conclusions_with_structure(conclusions) if isinstance(conclusions, list) else [],
         }
     else:
-        # Fallback: try to parse plain text format
-        parsed_text = parse_text_format(raw_output_text)
+        # Fall back to text parsing (old format)
+        parsed_text_dict = parse_text_format(raw_output_text)
         entry["parsed_output"] = {
-            "premises": parsed_text.get("premises", []),
-            "conclusions": parsed_text.get("conclusions", [])
+            "premises": normalize_items(parsed_text_dict.get("premises", [])),
+            "conclusions": normalize_items(parsed_text_dict.get("conclusions", []))
         }
     
-    # Store raw output as string
+    # Store raw output for debugging
     entry["raw_output"] = raw_output_text
     
     return entry
@@ -209,6 +223,9 @@ def build_image_only_prompt():
     """Get prompt for this model from centralized prompts.json"""
     return PROMPTS.get(MODEL_NAME, "")
 
+
+# Ensure the output directory exists
+OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 images = sorted(list(IMAGE_DIR.glob("*.jpg")))
 
@@ -246,11 +263,8 @@ for i, img_path in enumerate(images):
         r = requests.post(OLLAMA_URL, json=payload)
         raw_output = r.json()["response"]
 
-        # Parse JSON from response
-        parsed_json, _ = extract_json_from_response(raw_output)
-
-        # Build entry in nemotron format
-        entry = build_nemotron_entry(image_id, raw_output, parsed_json)
+        # Build entry directly from the text output
+        entry = build_nemotron_entry(image_id, raw_output)
 
         results.append(entry)
 
