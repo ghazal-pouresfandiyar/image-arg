@@ -1,0 +1,59 @@
+id,animals,consequences,climateaction,type,setting
+0,Fish,Biodiversity loss,No climate action,Collage,"Ocean, coastal"
+1,Fish,Drought,No climate action,Photo,Desert
+9,Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
+2,No animals,Economic consequences,No climate action,Posters/Event invitations,Industrial
+5,No animals,Wildfires,No climate action,Photo,Residential/commercial
+8,Farm animals,Drought,No climate action,Photo,Desert
+10,Polar bear,Biodiversity loss,Other,Illustration,"Arctic, Antarctic"
+11,Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
+12,Polar bear,Biodiversity loss,No climate action,Illustration,"Arctic, Antarctic"
+13,Polar bear,Rising temperature,No climate action,Illustration,"Arctic, Antarctic"
+14,Polar bear,Melting Ice,No climate action,Photo,"Arctic, Antarctic"
+16,No animals,Economic consequences,No climate action,Posters/Event invitations,"Arctic, Antarctic"
+21,No animals,Drought,No climate action,Photo,Desert
+23,Polar bear,Biodiversity loss,No climate action,Data Visualization,"Arctic, Antarctic"
+24,No animals,Rising temperature,Other,Photo,Residential/commercial
+25,No animals,Sea level rise,No climate action,Photo,Residential/commercial
+28,Land mammal,Drought,No climate action,Photo,Desert
+29,No animals,Wildfires,No climate action,Photo,Residential/commercial
+30,No animals,Floods,No climate action,Photo,"Ocean, coastal"
+31,No animals,Sea level rise,No climate action,Collage,"Ocean, coastal"
+32,No animals,Drought,No climate action,Photo,Industrial
+34,No animals,Sea level rise,No climate action,Photo,Residential/commercial
+36,No animals,Sea level rise,No climate action,Photo,"Ocean, coastal"
+39,No animals,Human rights,No climate action,Posters/Event invitations,"Forest, jungle"
+40,No animals,Human rights,Politics,Posters/Event invitations,Desert
+41,No animals,Human rights,Protests,Posters/Event invitations,Residential/commercial
+43,No animals,Drought,No climate action,Photo,Desert
+45,No animals,Rising temperature,Other,Collage,Residential/commercial
+48,No animals,Floods,Other,Photo,Residential/commercial
+49,No animals,Floods,Other,Photo,Residential/commercial
+51,No animals,Floods,No climate action,Photo,"Ocean, coastal"
+52,No animals,Wildfires,Other,Photo,"Forest, jungle"
+54,No animals,Rising temperature,No climate action,Infographic,Desert
+55,No animals,Wildfires,No climate action,Photo,"Forest, jungle"
+58,No animals,Floods,No climate action,Photo,Residential/commercial
+64,No animals,Drought,Other,Photo,Desert
+65,No animals,Sea level rise,No climate action,Screenshot,"Ocean, coastal"
+66,No animals,Human rights,No climate action,Screenshot,"Arctic, Antarctic"
+67,No animals,Wildfires,Other,Photo,Residential/commercial
+68,No animals,Floods,No climate action,Photo,Industrial
+69,No animals,Rising temperature,No climate action,Data Visualization,Outer space
+70,No animals,Wildfires,Other,Photo,"Forest, jungle"
+71,No animals,Human rights,No climate action,Photo,Desert
+72,No animals,Wildfires,No climate action,Photo,"Forest, jungle"
+73,Land mammal,Wildfires,Other,Screenshot,"Forest, jungle"
+75,No animals,Floods,No climate action,Photo,Residential/commercial
+76,Land mammal,Floods,No climate action,Photo,"Ocean, coastal"
+77,No animals,Floods,No climate action,Photo,Residential/commercial
+78,No animals,Wildfires,No climate action,Screenshot,"Forest, jungle"
+79,No animals,Melting Ice,Other,Collage,"Arctic, Antarctic"
+80,Land mammal,Biodiversity loss,No climate action,Posters/Event invitations,"Forest, jungle"
+81,No animals,Melting Ice,Other,Posters/Event invitations,"Arctic, Antarctic"
+84,No animals,Sea level rise,Other,Photo,Residential/commercial
+85,No animals,Floods,No climate action,Photo,"Ocean, coastal"
+86,Polar bear,Biodiversity loss,No climate action,Photo,"Arctic, Antarctic"
+89,Insects,Biodiversity loss,No climate action,Illustration,Residential/commercial
+90,No animals,Sea level rise,No climate action,Screenshot,"Ocean, coastal"
+91,No animals,Human rights,No climate action,Photo,"Ocean, coastal"

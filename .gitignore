@@ -3,3 +3,4 @@ yolo8l.pt
 *.DS_Store
 *.DS_Store/
 models/access
+*__pycache__/

@@ -1,5 +1,0 @@
-{
-  "model": "rule-based + CLIP ensemble",
-  "output_format": "single factual sentence",
-  "strategy": "priority-based: fire > smoke > flood > ice > deforestation > greenery > dry_land > water > urbanization > generic"
-}

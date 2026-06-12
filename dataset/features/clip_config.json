@@ -1,6 +1,0 @@
-{
-  "model": "openai/clip-vit-base-patch32",
-  "image_embedding_dim": 512,
-  "total_samples": 58,
-  "note": "CLIP embeddings only. Metadata features handled separately in 1_one_hot_encoding.py"
-}

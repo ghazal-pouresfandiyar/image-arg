@@ -1,9 +1,0 @@
-{
-  "model": "resnet50_imagenet",
-  "categories": [
-    "urban",
-    "rural",
-    "industrial",
-    "natural"
-  ]
-}

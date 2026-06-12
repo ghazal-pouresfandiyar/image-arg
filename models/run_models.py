@@ -1,3 +1,5 @@
+# ollama run llava
+# python3 models/run_models.py --model llava
 import argparse
 import json
 import re
