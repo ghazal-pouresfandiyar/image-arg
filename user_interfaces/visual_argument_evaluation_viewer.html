@@ -144,10 +144,9 @@
 // 0. GLOBAL CONFIGURATION FOR LOCAL FILE PATHS
 // ============================================================================
 const LOCAL_FILE_PATHS = [
-    "../dataset/annotated.csv",
     "../models/output_model/llava_outputs.json",
     "../models/output_model/minicpm-v_outputs.json",
-    "../models/output_model/nemotron-3-nano-omni-30b-a3b-reasoning-image-only.json",
+    "../models/output_model/nemotron-3-nano-omni-30b-a3b-reasoning_outputs.json",
     "../evaluation/hallucination/llava_hallucination_deep.csv",
     "../evaluation/hallucination/minicpm-v_hallucination_deep.csv",
     "../evaluation/hallucination/nemotron-3-nano-omni-30b-a3b-reasoning-image-only_hallucination_deep.csv",
@@ -159,99 +158,30 @@ const LOCAL_FILE_PATHS = [
 ];
 
 // ============================================================================
-// 1. EMBEDDED DATA & NOTES
+// 1. DYNAMIC DATA LOADING
 // ============================================================================
-const imageUrls = {
-    "0": "https://pbs.twimg.com/media/ECvfjt_WwAINY01.jpg", "1": "https://pbs.twimg.com/media/Fi_DE_bX0AEEKpP.jpg", "2": "https://pbs.twimg.com/media/E4F-DcwVkA8KljQ.jpg", "5": "https://pbs.twimg.com/media/EhhUS_JVoAElufJ.jpg",
-    "8": "https://pbs.twimg.com/media/FfGqsH-XoAE_pei.jpg", "9": "https://pbs.twimg.com/media/D6kHT2uXsAAUQ1Z.jpg", "10": "https://pbs.twimg.com/media/FjrvSItXgAEj_6Z.jpg", "11": "https://pbs.twimg.com/media/E10GywNXsAIdGJ8.png",
-    "12": "https://pbs.twimg.com/media/FlFPJGGWIAMtdkL.png", "13": "https://pbs.twimg.com/media/EvONFZtXUAEAxrp.jpg", "14": "https://pbs.twimg.com/media/EphjPdIWMAE1A2V.jpg", "16": "https://pbs.twimg.com/media/EiYphRXX0AA-91g.jpg",
-    "21": "https://pbs.twimg.com/media/EcQzZh7U4AA2D6h.jpg", "23": "https://pbs.twimg.com/media/FYJ1YSVaIAArbZU.jpg", "24": "https://pbs.twimg.com/media/EjM3127UYAAHgje.jpg", "25": "https://pbs.twimg.com/media/EMhv5qAWwAAJroN?format=jpg&name=small",
-    "28": "https://pbs.twimg.com/media/FRksVbEXMAEYlMg.jpg", "29": "https://pbs.twimg.com/media/EhjkCa6WoAE-VDe.jpg", "30": "https://pbs.twimg.com/media/EEFUos2U8AA9bqL.jpg", "31": "https://pbs.twimg.com/media/E2ZN2fUXIAMGGuy.jpg",
-    "32": "https://pbs.twimg.com/media/Fi_DFPpXkAYWVUT.jpg", "34": "https://pbs.twimg.com/media/D8OT0mGV4AAcIUb?format=jpg&name=small", "36": "https://pbs.twimg.com/media/EE28LCKWkAA_K1t.jpg", "39": "https://pbs.twimg.com/media/FQTlPbbXIAQonSR.jpg",
-    "40": "https://pbs.twimg.com/media/FfPpFgEVQAAfQia.jpg", "41": "https://pbs.twimg.com/media/FUqH1e4XEAEHNmO.jpg", "43": "https://pbs.twimg.com/media/FOyRT4nWYAY68HX.jpg", "45": "https://pbs.twimg.com/media/E5VaYkCVIAAysI8.jpg",
-    "48": "https://pbs.twimg.com/media/FMo8ciRVUAQqqn8.jpg", "49": "https://pbs.twimg.com/media/E5zazAEX0AMN4Nv.jpg", "51": "https://pbs.twimg.com/media/Dwyc00SWwAAwZdJ.jpg", "52": "https://pbs.twimg.com/media/EhjkCXuWAAYF5tO.jpg",
-    "54": "https://pbs.twimg.com/media/FD52IglXMAY9jIy.jpg", "55": "https://pbs.twimg.com/media/EhkM_b3XcAEEzJn.jpg", "58": "https://pbs.twimg.com/media/E40rBSyXMAQM970.jpg", "64": "https://pbs.twimg.com/media/FRksVa1XIAIwanw.jpg",
-    "65": "https://pbs.twimg.com/media/FdWRDqlXgAMnnzV.jpg", "66": "https://pbs.twimg.com/media/EcccmLMWkAUWuYF.jpg", "67": "https://pbs.twimg.com/media/EhhUS_PUcAAn2Uy.jpg", "68": "https://pbs.twimg.com/media/FZffoBlWIAQRt0E.jpg",
-    "69": "https://pbs.twimg.com/media/Evn5E29WYAAhgu6.jpg", "70": "https://pbs.twimg.com/media/EMRqGHkU0AEjTFD.jpg", "71": "https://pbs.twimg.com/media/FhHh_6uagAIGc-b.jpg", "72": "https://pbs.twimg.com/media/EgEqHvUU4AAJGLU.jpg",
-    "73": "https://pbs.twimg.com/media/ExUoRnTU4AIJdtG.jpg", "75": "https://pbs.twimg.com/media/Fd6NOxtX0AA4Pm-.jpg", "76": "https://pbs.twimg.com/media/ExKEtbYXIAEm6-C.jpg", "77": "https://pbs.twimg.com/media/E40rBSrWUAA4pa4.jpg",
-    "78": "https://pbs.twimg.com/media/Eh6sAMsUYAISGwi.jpg", "79": "https://pbs.twimg.com/media/FJKfuNMXIAIhyJJ.jpg", "80": "https://pbs.twimg.com/media/FpvKOolXEAMz9oa?format=jpg&name=small", "81": "https://pbs.twimg.com/media/FC7GBGiVgAMnxaU.jpg",
-    "84": "https://pbs.twimg.com/media/EI_uhMrW4AAg3-O.jpg", "85": "https://pbs.twimg.com/media/Dw-qG_xUcAEk5KD.jpg", "86": "https://pbs.twimg.com/media/EWOFf_FU0AEKM2N.jpg", "89": "https://pbs.twimg.com/media/D6Ovn07XoAEBuN2.jpg",
-    "90": "https://pbs.twimg.com/media/FXgyKb-XwAAw53o.jpg", "91": "https://pbs.twimg.com/media/ErgS88qVcAEaOhx.jpg"
-};
-
-const analysisNotes = {
-  "0": "Human relies on external knowledge ('Gran Barrera'). LLaVA shows good visual grounding. MiniCPM-V failed the strict knowledge rule by hallucinating 'Gran Barrera'. Nemotron had excellent strict adherence to visual-only premises.",
-  "1": "Human connects dead fish directly to global warming. LLaVA accurately observes bleached fish with minor speculation. MiniCPM-V has solid premises. Nemotron is highly descriptive ('desiccated shells') and perfectly logical.",
-  "2": "Human pulls in external context. LLaVA extracts text well but misses the visual background. MiniCPM-V combines text and visual successfully. Nemotron shows excellent synthesis of the shipping port and text.",
-  "5": "Human assumes wildfire smoke. LLaVA misses the climate argument, assuming a normal sunset. MiniCPM-V concludes high emissions. Nemotron correctly identifies the 'intense orange/amber coloration' as smoke/haze.",
-  "8": "Human focuses on drought/wind. LLaVA observes the donkey's blanket. MiniCPM-V concludes hot/dry conditions based on clothing. Nemotron details dust and clothing, inferring high temperatures.",
-  "9": "Human states melting ice. LLaVA observes melting ice around the bear. MiniCPM-V over-analyzes the bears' ages but makes a solid conclusion. Nemotron identifies fragmented ice cover.",
-  "10": "Human connects human waste to malnutrition. LLaVA excellently breaks down the comic's symbolic media critique. MiniCPM-V misses the media critique. Nemotron provides a literal, accurate translation of the panels.",
-  "11": "Human uses standard melting ice argument. LLaVA is very brief. MiniCPM-V observes distant landmasses. Nemotron is highly precise ('not connected to a larger ice mass').",
-  "12": "Human notes extinction. LLaVA extracts text well. MiniCPM-V completely missed the text and the scarf. Nemotron noticed the unnatural orange scarf, identifying it as a symbol for human intervention.",
-  "13": "Human focuses on suffering. LLaVA identifies the sarcasm in the bear's gesture. MiniCPM-V observes the warm gradient. Nemotron noticed the 'heat lines', making a fantastic visual premise.",
-  "14": "Human infers isolation/mental issues. LLaVA notes cracking ice. MiniCPM-V has a good structural premise. Nemotron shows superb strict visual logic regarding the reduction of sea ice.",
-  "16": "Human notes economic threat. LLaVA completely hallucinates the text (arguing it's a 'safe range'). Critical failure. MiniCPM-V accurately connects text. Nemotron treats the iceberg as a 'contextual symbol'.",
-  "21": "Human notes drought destroying plants. LLaVA notes the contrast between dead soil and the green plant. MiniCPM-V concludes resilience. Nemotron is highly descriptive and strict.",
-  "23": "Human says melting ice hurts populations. LLaVA is generic. MiniCPM-V accurately reads the map. Nemotron flawlessly extracts the color-coding legend.",
-  "24": "Human notes people suffering from heat. LLaVA reads 90°F. MiniCPM-V fails to read the number. Nemotron accurately reads 40°C.",
-  "25": "Human notes sea level rise. LLaVA identifies festive theme. MiniCPM-V uses external knowledge ('Venice', 'acqua alta'). Nemotron has highly detailed premises (rubber boots) and stays grounded.",
-  "28": "Human notes animals dying. LLaVA notes the village. MiniCPM-V spots people. Nemotron focuses heavily on the livestock death toll.",
-  "29": "Human notes air pollution threat. LLaVA is confused, assuming light reflection. MiniCPM-V deduces air pollution/wildfire. Nemotron perfectly deduces high concentration of atmospheric particles.",
-  "30": "Human notes migration. LLaVA thinks it's a dismantled building. MiniCPM-V assumes structural failure. Nemotron accurately observes erosion and small boats.",
-  "31": "Human notes storm causing sea level rise. LLaVA misses the before/after, thinking it's a summer day (Critical failure). MiniCPM-V reads the text. Nemotron flawlessly compares the top and bottom images.",
-  "32": "Human notes loss of beauty/trash. LLaVA notes murky water. MiniCPM-V observes urban neglect. Nemotron is highly accurate ('stagnant water').",
-  "34": "Human notes submerged buildings. LLaVA has good aerial observation. MiniCPM-V notes boats. Nemotron identifies flooding reaching lower floors.",
-  "36": "Human notes losing houses. LLaVA had a parsing failure in raw JSON and missed the climate aspect. MiniCPM-V is generic. Nemotron spotted green algae on concrete, proving seawater exposure.",
-  "39": "Human notes right to life. LLaVA extracts text. MiniCPM-V connects habitat destruction to health. Nemotron has strict, clean visual premises.",
-  "40": "Human notes drought threatens rights. LLaVA had a JSON parsing failure but extracted text. MiniCPM-V notes the person carrying an object. Nemotron focuses on human activity in water scarcity.",
-  "41": "Human links migration/trafficking. LLaVA extracts text. MiniCPM-V extracts text. Nemotron observes the visual design (silhouette enclosing the protest). Impressive reasoning.",
-  "43": "Human notes carrying water. LLaVA is generic. MiniCPM-V is brief. Nemotron accurately captures the human element over dry terrain.",
-  "45": "Human notes removing trees increases heat. LLaVA missed the trees. MiniCPM-V caught the text. Nemotron perfectly synthesizes the visual (trees vs. no trees) and temperatures.",
-  "48": "Human notes habitat loss. LLaVA has good basic observations. MiniCPM-V notes life jackets. Nemotron captures muddy water and rain.",
-  "49": "Human notes asset loss. LLaVA notes the truck. MiniCPM-V mentions responders. Nemotron reads the 'NYPD' text and observes emergency lights.",
-  "51": "Human uses drowning metaphor. LLaVA missed the second hand. MiniCPM-V notes wet wood. Nemotron accurately observes ripples and the second hand.",
-  "52": "Human notes firefighters can't stop flames. LLaVA hallucinates a fire extinguisher. MiniCPM-V notes red gear. Nemotron observes scattered embers.",
-  "54": "Human notes health effects. LLaVA reads 30 degrees. MiniCPM-V extracts specific diseases. Nemotron accurately describes the UI of the infographic.",
-  "55": "Human notes damaged jungles. LLaVA has simple premises. MiniCPM-V notes haze. Nemotron identifies glowing points.",
-  "58": "Human notes asset loss. LLaVA notes overpass. MiniCPM-V notes brown water. Nemotron had an empty parsed output (failed to generate valid conclusions).",
-  "64": "Human notes struggling for water. LLaVA hallucinates a humanitarian crisis. MiniCPM-V identifies jerrycans. Nemotron connects the tanker to the lack of natural water.",
-  "65": "Human notes immediate danger. LLaVA focuses on the tree. MiniCPM-V hallucinates 'East Coast'. Nemotron flawlessly extracts the headline and caption.",
-  "66": "Human links racism/climate. LLaVA has good text extraction. MiniCPM-V connects racial trauma to the visual. Nemotron extracts author, date, and visual metaphor perfectly.",
-  "67": "Human notes masks for pollution. LLaVA hallucinates a pier/clock and misses the mask. MiniCPM-V misses the mask. Nemotron is the only model to correctly identify the protective mask.",
-  "68": "Human notes infrastructure ruin. LLaVA notes washed away roads. MiniCPM-V notes industrial buildings. Nemotron identifies submerged roadside markers.",
-  "69": "Human notes poles warming. LLaVA is confused about the map type. MiniCPM-V reads anomalies. Nemotron is highly precise regarding the dark orange/red polar region.",
-  "70": "Human notes danger. LLaVA incorrectly states no people are visible. MiniCPM-V notes the person. Nemotron identifies the metal guardrail and protective gear.",
-  "71": "Human notes suffering children. LLaVA calls it an informal settlement. MiniCPM-V identifies the hose. Nemotron notes bamboo framing.",
-  "72": "Human notes air pollution. LLaVA misses the aerial aspect. MiniCPM-V notes vegetation stages. Nemotron excellently describes the massive smoke plume.",
-  "73": "Human notes homeland suffering. LLaVA thinks it's a 'Real Kids' screenshot. MiniCPM-V misidentifies animals. Nemotron correctly identifies firefighter, koala, and kangaroo.",
-  "75": "Human notes asset harm. LLaVA notes the tree trunk. MiniCPM-V has detailed premises. Nemotron notes fast-moving water.",
-  "76": "Human notes animal transport. LLaVA is generic. MiniCPM-V suggests conservation relocation. Nemotron observes wet fur and choppy water.",
-  "77": "Human notes short-circuits. LLaVA missed the burnt aspect entirely. MiniCPM-V notes the burnt car but hallucinates a dry surrounding (Failure). Nemotron synthesizes the charred sedan in water.",
-  "78": "Human notes death toll. LLaVA is brief. MiniCPM-V notes emergency lights. Nemotron notes the sun visible through the haze.",
-  "79": "Human notes disappearing ice. LLaVA misses the temporal comparison. MiniCPM-V notices sepia tones. Nemotron excels in spatial comparison of glacial coverage.",
-  "80": "Human notes biodiversity. LLaVA extracts text. MiniCPM-V extracts text/credits. Nemotron flawlessly describes black tree trunks.",
-  "81": "Human notes urgent action. LLaVA has good text extraction. MiniCPM-V extracts 'Cryosphere'. Nemotron connects text to separate ice pieces.",
-  "84": "Human notes urban submersion. LLaVA thinks it's just rain (misses severe flooding). MiniCPM-V identifies Venice (external knowledge). Nemotron notes water reaching walkway.",
-  "85": "Human notes natural disasters. LLaVA notes coastal erosion. MiniCPM-V notes the lighthouse. Nemotron focuses on widespread debris.",
-  "86": "Human notes extinction. LLaVA observes emaciation. MiniCPM-V notes melting snow. Nemotron focuses on the physical condition.",
-  "89": "Human notes pollution killing species. LLaVA hallucinates a 'human-like figure' (Failure). MiniCPM-V notes urban expansion. Nemotron has clean visual premises.",
-  "90": "Human notes fluctuating rates. LLaVA missed the lower half. MiniCPM-V extracted texts well. Nemotron accurately tracked conflicting dates and the sinking structure.",
-  "91": "Human notes climate migration. LLaVA assumes it's a cruise vacation (misses context completely). MiniCPM-V deduces migration. Nemotron connects the crowded boat to habitat loss."
-};
+// Data will be loaded dynamically from files instead of being hardcoded
 
 let optimalPrompt = "Loading prompt from file...";
 
-function loadPromptFile(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        optimalPrompt = e.target.result;
-        renderApp();
-        alert("Prompt loaded successfully!");
-    };
-    reader.readAsText(file);
+async function loadPromptFromConfig() {
+    try {
+        const response = await fetch("../models/prompts.txt");
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const text = await response.text();
+        
+        // Extract user prompt from the new format
+        if (text.includes("[USER]")) {
+            optimalPrompt = text.split("[USER]")[1].trim();
+        } else {
+            optimalPrompt = text.trim();
+        }
+        
+        console.log("Prompt loaded from prompts.txt");
+    } catch (e) {
+        console.error("Failed to load prompt:", e);
+        optimalPrompt = "Failed to load prompt from file.";
+    }
 }
 
 // ============================================================================
@@ -267,17 +197,13 @@ const modelColors = {
     llava: { bg: 'bg-orange-50', header: 'bg-orange-100', border: 'border-orange-200', text: 'text-orange-800' }
 };
 
-function initData() {
-    const ids = Object.keys(analysisNotes).sort((a,b) => parseInt(a) - parseInt(b));
-    dataset = ids.map(id => ({
-        id: id,
-        url: imageUrls[id] || '',
-        note: analysisNotes[id],
-        human: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
-        llava: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
-        minicpm: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
-        nemotron: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} }
-    }));
+async function initData() {
+    // Start with empty dataset - will be populated from files
+    dataset = [];
+    
+    // Load prompt from config
+    await loadPromptFromConfig();
+    
     renderApp();
 }
 
@@ -290,24 +216,7 @@ function processFileContent(fileName, text) {
     console.log("Processing file:", fileName);
     
     try {
-        if (name.includes('annotated.csv')) {
-            console.log("  → Matched: annotated.csv");
-            parseCSV(text).forEach(row => {
-                const id = row[0], url = row[2], premises = row[9], conclusions = row[10];
-                if (id !== 'id') {
-                    const dataRow = dataset.find(d => d.id === id);
-                    if (dataRow) {
-                        console.log("    Found matching row for id:", id);
-                        if (url) dataRow.url = url;
-                        try { dataRow.human.premises = JSON.parse(premises.replace(/""/g, '"')); } catch(e){ console.log("    Failed to parse premises for id:", id); }
-                        try { dataRow.human.conclusions = JSON.parse(conclusions.replace(/""/g, '"')); } catch(e){ console.log("    Failed to parse conclusions for id:", id); }
-                    } else {
-                        console.log("    No matching row for id:", id);
-                    }
-                }
-            });
-        } 
-        else if (name.endsWith('.json')) {
+        if (name.endsWith('.json')) {
             let targetModel = '';
             if (name.includes('llava')) targetModel = 'llava';
             if (name.includes('minicpm')) targetModel = 'minicpm';
@@ -387,30 +296,6 @@ function processFileContent(fileName, text) {
     }
 }
 
-function handleFileUpload(event) {
-    const files = Array.from(event.target.files);
-    console.log("Files selected:", files.map(f => f.name));
-    let loadedCount = 0;
-
-    files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const text = e.target.result;
-            processFileContent(file.name, text);
-            
-            loadedCount++;
-            if (loadedCount === files.length) {
-                console.log("All files processed, rendering app...");
-                console.log("Dataset sample:", dataset.slice(0, 2));
-                renderApp(); 
-                if(!document.getElementById('stats-modal').classList.contains('hidden')) generateStatsDashboard(); // refresh if open
-                alert("Data successfully loaded and injected!");
-            }
-        };
-        reader.readAsText(file);
-    });
-}
-
 async function loadDataFromConfigPaths() {
     if (LOCAL_FILE_PATHS.length === 0) {
         alert("Please add your file paths to the LOCAL_FILE_PATHS array in the HTML code first.");
@@ -418,6 +303,68 @@ async function loadDataFromConfigPaths() {
     }
 
     let loadedCount = 0;
+    
+    // First, load annotated.csv to create dataset entries
+    const csvPath = "../dataset/annotated.csv";
+    try {
+        const response = await fetch(csvPath);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const text = await response.text();
+        
+        // Parse CSV and create dataset entries
+        const rows = parseCSV(text);
+        const header = rows[0];
+        
+        // Find column indices
+        const idIdx = header.indexOf('id');
+        const urlIdx = header.indexOf('url');
+        const premisesIdx = header.indexOf('premises');
+        const conclusionsIdx = header.indexOf('conclusions');
+        
+        // Create dataset entries from CSV
+        dataset = [];
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const id = row[idIdx];
+            const url = row[urlIdx];
+            
+            if (id) {
+                // Use local image path instead of URL
+                const localImagePath = `../dataset/images_for_annotation/${id}.jpg`;
+                
+                dataset.push({
+                    id: id,
+                    url: localImagePath,
+                    note: "(Analysis notes will be loaded from file if available)",
+                    human: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
+                    llava: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
+                    minicpm: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
+                    nemotron: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} }
+                });
+                
+                // Parse human premises and conclusions if available
+                if (premisesIdx !== -1 && row[premisesIdx]) {
+                    try {
+                        dataset[dataset.length - 1].human.premises = JSON.parse(row[premisesIdx].replace(/""/g, '"'));
+                    } catch(e) { /* Keep default */ }
+                }
+                if (conclusionsIdx !== -1 && row[conclusionsIdx]) {
+                    try {
+                        dataset[dataset.length - 1].human.conclusions = JSON.parse(row[conclusionsIdx].replace(/""/g, '"'));
+                    } catch(e) { /* Keep default */ }
+                }
+            }
+        }
+        
+        console.log(`Created ${dataset.length} dataset entries from annotated.csv`);
+        loadedCount++;
+    } catch (e) {
+        console.error("Failed to load annotated.csv:", e);
+        alert(`Failed to load ${csvPath}. Ensure you are running a local web server.`);
+        return;
+    }
+    
+    // Then load other files
     for (const path of LOCAL_FILE_PATHS) {
         try {
             const response = await fetch(path);
@@ -427,15 +374,14 @@ async function loadDataFromConfigPaths() {
             loadedCount++;
         } catch (e) {
             console.error("Failed to load path:", path, e);
-            alert(`Failed to load ${path}. Ensure you are running a local web server (python3 -m http.server from the root directory) and viewing this via http://localhost:8000/...`);
-            return;
+            // Continue with other files
         }
     }
     
     if (loadedCount > 0) {
         renderApp();
-        if(!document.getElementById('stats-modal').classList.contains('hidden')) generateStatsDashboard(); // refresh if open
-        alert(`Successfully auto-loaded ${loadedCount} files!`);
+        if(!document.getElementById('stats-modal').classList.contains('hidden')) generateStatsDashboard();
+        alert(`Successfully loaded data for ${dataset.length} images!`);
     }
 }
 
@@ -614,7 +560,7 @@ function renderApp() {
     <div class="slide bg-gray-50 flex-col items-center p-8" style="overflow-y: auto; justify-content: flex-start; padding-top: 40px;">
         <div class="max-w-4xl w-full text-center">
             <h1 class="text-5xl font-bold text-gray-800 mb-6">Visual Argument Evaluation Viewer</h1>
-            <p class="text-xl text-gray-600 mb-10">A deep analysis of LLaVA, MiniCPM-V, and Nemotron on stance-aware visual reasoning across 58 images.</p>
+            <p class="text-xl text-gray-600 mb-10">A deep analysis of LLaVA, MiniCPM-V, and Nemotron on stance-aware visual reasoning across climate images.</p>
             
             <div class="bg-white p-8 rounded-2xl shadow-xl text-left border border-gray-200 mb-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
@@ -628,24 +574,10 @@ function renderApp() {
             <div class="flex flex-col items-center">
                 
                 <div class="flex flex-row justify-center gap-4 mb-3">
-                    <label class="cursor-pointer bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full flex items-center transition-all shadow-lg text-lg">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                        Select Data Files
-                        <input type="file" multiple accept=".json,.csv" class="hidden" onchange="handleFileUpload(event)" />
-                    </label>
-                    
-                    <button onclick="loadDataFromConfigPaths()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full flex items-center transition-all shadow-lg text-lg">
+                    <button onclick="loadDataFromConfigPaths()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-full flex items-center transition-all shadow-lg text-lg font-bold">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        Auto-Load from Config Paths
+                        Load All Data
                     </button>
-                </div>
-
-                <div class="flex flex-row justify-center gap-4 mb-3">
-                    <label class="cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-full flex items-center transition-all shadow-lg text-lg">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        Load Prompt File
-                        <input type="file" accept=".txt" class="hidden" onchange="loadPromptFile(event)" />
-                    </label>
                 </div>
                 
                 <div class="flex gap-4 mt-8">
@@ -708,7 +640,7 @@ function renderApp() {
                 </div>
                 <div class="flex-1 overflow-y-auto p-6 flex flex-col items-center">
                     <div class="w-full rounded-xl overflow-hidden shadow-2xl mb-8 bg-black flex items-center justify-center min-h-[300px]">
-                        ${data.url ? `<img src="${data.url}" class="object-contain max-h-[50vh] w-full" alt="Image ${data.id}" />` : '<p class="text-gray-500">No Image URL</p>'}
+                        ${data.url ? `<img src="${data.url}" class="object-contain max-h-[50vh] w-full" alt="Image ${data.id}" onerror="this.parentElement.innerHTML='<p class=\\'text-gray-500\\'>Image not found: ${data.id}.jpg</p>'" />` : '<p class="text-gray-500">No Image URL</p>'}
                     </div>
                     <div class="w-full bg-blue-900/30 border border-blue-800/50 rounded-xl p-6 shadow-inner">
                         <h3 class="text-blue-300 font-bold mb-3 flex items-center text-lg">

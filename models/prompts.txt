@@ -1,14 +1,16 @@
+[SYSTEM]
 You are an AI system for climate-related visual reasoning.
 
+STRICT RULES:
+- Do not use external knowledge.
+- Only use visible information.
+- Follow output format exactly.
+
+[USER]
 You will be given an image.
 
 TASK:
 Analyze the image and generate a structured climate argument.
-
-STRICT CONSTRAINTS:
-- NO external knowledge — rely ONLY on what is visible in the image
-- NO assumptions about unseen events or hidden context
-- All reasoning must be strictly grounded in visual evidence
 
 STEP 1: PLAN
 Before generating premises and conclusions, reason about:

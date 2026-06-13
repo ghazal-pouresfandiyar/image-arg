@@ -296,15 +296,33 @@ def encode_image(image_path):
 
 
 def build_image_only_prompt():
-    """Read prompt from prompts.txt file (same prompt used by all models)"""
+    """Read system and user prompts from prompts.txt file (same prompts used by all models)"""
     prompt_file = Path(__file__).parent / "prompts.txt"
     if prompt_file.exists():
-        return prompt_file.read_text().strip()
+        text = prompt_file.read_text(encoding="utf-8")
+        
+        # Parse [SYSTEM] and [USER] sections
+        system_prompt = ""
+        user_prompt = ""
+        
+        if "[SYSTEM]" in text and "[USER]" in text:
+            system_prompt = text.split("[SYSTEM]")[1].split("[USER]")[0].strip()
+            user_prompt = text.split("[USER]")[1].strip()
+        else:
+            # Fallback: entire content is user prompt
+            user_prompt = text.strip()
+        
+        return system_prompt, user_prompt
     else:
-        # Fallback prompt if file not found
-        return """You are an AI system for climate-related visual reasoning.
+        # Fallback prompts if file not found
+        system_prompt = """You are an AI system for climate-related visual reasoning.
 
-You will be given an image.
+STRICT RULES:
+- Do not use external knowledge.
+- Only use visible information.
+- Follow output format exactly."""
+        
+        user_prompt = """You will be given an image.
 
 TASK:
 Analyze the image and generate a structured climate argument.
@@ -331,6 +349,8 @@ Premises:
 Conclusions:
 1. [conclusion] (based on premise 1)
 2. [conclusion] (based on premise 1, 2)"""
+        
+        return system_prompt, user_prompt
 
 # =========================================================
 # GENERATION LOOP - IMAGE ONLY
@@ -381,7 +401,7 @@ for idx, image_id in enumerate(images_to_process):
             failed_count += 1
             continue
         
-        prompt = build_image_only_prompt()
+        system_prompt, user_prompt = build_image_only_prompt()
         
         log_message(f"[{idx+1}/{len(images_to_process)}] Processing image {image_id}")
         
@@ -399,15 +419,12 @@ for idx, image_id in enumerate(images_to_process):
                     messages=[
                         {
                             "role": "system",
-                            "content": (
-                                "You generate structured argumentative reasoning "
-                                "from climate and environmental images."
-                            ),
+                            "content": system_prompt if system_prompt else "You generate structured argumentative reasoning from climate and environmental images.",
                         },
                         {
                             "role": "user",
                             "content": [
-                                {"type": "text", "text": prompt},
+                                {"type": "text", "text": user_prompt},
                                 {
                                     "type": "image_url",
                                     "image_url": {

@@ -23,6 +23,26 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 PROMPT_FILE = MODELS_DIR / "prompts.txt"
 
+def load_prompts(path=PROMPT_FILE):
+    """Load system and user prompts from prompts.txt file."""
+    if not path.exists():
+        return None, None
+    
+    text = path.read_text(encoding="utf-8")
+    
+    # Parse [SYSTEM] and [USER] sections
+    system_prompt = ""
+    user_prompt = ""
+    
+    if "[SYSTEM]" in text and "[USER]" in text:
+        system_prompt = text.split("[SYSTEM]")[1].split("[USER]")[0].strip()
+        user_prompt = text.split("[USER]")[1].strip()
+    else:
+        # Fallback: entire content is user prompt
+        user_prompt = text.strip()
+    
+    return system_prompt, user_prompt
+
 # =========================
 # PARSING HELPERS
 # =========================
@@ -149,7 +169,7 @@ def build_entry(image_id, raw_output):
 # OLLAMA RUNNER
 # =========================
 
-def run_ollama(model_name, prompt, images):
+def run_ollama(model_name, system_prompt, user_prompt, images):
     import requests
 
     OLLAMA_URL = "http://localhost:11434/api/generate"
@@ -175,10 +195,14 @@ def run_ollama(model_name, prompt, images):
 
         payload = {
             "model": model_name,
-            "prompt": prompt,
+            "prompt": user_prompt,
             "images": [img_b64],
             "stream": False,
         }
+        
+        # Add system prompt if provided
+        if system_prompt:
+            payload["system"] = system_prompt
 
         try:
             r = requests.post(OLLAMA_URL, json=payload)
@@ -197,7 +221,7 @@ def run_ollama(model_name, prompt, images):
 # OPENROUTER RUNNER
 # =========================
 
-def run_openrouter(model_name, model_id, prompt, images):
+def run_openrouter(model_name, model_id, system_prompt, user_prompt, images):
     from openai import OpenAI
 
     ACCESS_FILE = MODELS_DIR / "access"
@@ -248,12 +272,12 @@ def run_openrouter(model_name, model_id, prompt, images):
                     messages=[
                         {
                             "role": "system",
-                            "content": "You generate structured argumentative reasoning from climate and environmental images. Return ONLY valid JSON.",
+                            "content": system_prompt if system_prompt else "You generate structured argumentative reasoning from climate and environmental images. Return ONLY valid JSON.",
                         },
                         {
                             "role": "user",
                             "content": [
-                                {"type": "text", "text": prompt},
+                                {"type": "text", "text": user_prompt},
                                 {
                                     "type": "image_url",
                                     "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"},
@@ -302,11 +326,9 @@ def main():
 
     model_name = args.model
 
-    prompt = ""
-    if PROMPT_FILE.exists():
-        prompt = PROMPT_FILE.read_text().strip()
+    system_prompt, user_prompt = load_prompts()
 
-    if not prompt:
+    if not user_prompt:
         print(f"No prompt found in {PROMPT_FILE}")
         return
 
@@ -320,9 +342,9 @@ def main():
 
     if model_name == "nemotron":
         model_id = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free"
-        run_openrouter(model_name, model_id, prompt, images)
+        run_openrouter(model_name, model_id, system_prompt, user_prompt, images)
     else:
-        run_ollama(model_name, prompt, images)
+        run_ollama(model_name, system_prompt, user_prompt, images)
 
 
 if __name__ == "__main__":
