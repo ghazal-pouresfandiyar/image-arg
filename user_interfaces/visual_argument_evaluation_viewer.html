@@ -74,22 +74,6 @@
             color: #475569;
         }
 
-        /* Modal Styles */
-        #stats-modal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-        #stats-modal.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        #stats-modal:not(.hidden) {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-        
         .stat-card {
             background: #f8fafc;
             border-radius: 0.75rem;
@@ -98,6 +82,47 @@
         }
         .stat-val { font-size: 1.5rem; font-weight: 700; color: #1e293b; line-height: 1.2; }
         .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600; margin-bottom: 0.25rem;}
+        
+        /* Search Bar */
+        .search-container {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .search-input {
+            width: 150px;
+            padding: 12px 16px;
+            border-radius: 9999px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .search-btn {
+            background: #1e293b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+        .search-btn:hover { background: #334155; transform: scale(1.05); }
     </style>
 </head>
 <body>
@@ -105,12 +130,6 @@
     <div id="slider-container">
         <!-- Slides will be injected here by JS -->
     </div>
-
-    <!-- Persistent Floating Stats Button -->
-    <button onclick="openStatsModal()" class="floating-stats-btn bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-full font-bold flex items-center transition-all shadow-lg text-sm">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-        View Aggregate Stats
-    </button>
 
     <!-- Navigation Buttons -->
     <button id="prev-btn" class="nav-button" onclick="scrollSlider(-1)">
@@ -120,67 +139,52 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
     </button>
 
-    <!-- FULL SCREEN STATS MODAL -->
-    <div id="stats-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/80 hidden">
-        <div class="bg-white rounded-2xl shadow-2xl w-[90vw] max-w-6xl max-h-[90vh] flex flex-col overflow-hidden">
-            <div class="px-8 py-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                <h2 class="text-3xl font-bold text-gray-800 flex items-center">
-                    <svg class="w-8 h-8 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                    Evaluation Statistics Dashboard
-                </h2>
-                <button onclick="closeStatsModal()" class="text-gray-400 hover:text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-full p-2 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            
-            <div class="flex-1 overflow-y-auto p-8 bg-white" id="stats-modal-content">
-                <!-- Auto-calculated stats injected here -->
-            </div>
-        </div>
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="search-input" class="search-input" placeholder="Search ID..." onkeypress="if(event.key==='Enter') searchAndGoToSlide()">
+        <button onclick="searchAndGoToSlide()" class="search-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </button>
     </div>
 
 <script>
 // ============================================================================
-// 0. GLOBAL CONFIGURATION FOR LOCAL FILE PATHS
+// 0. GLOBAL CONFIGURATION
 // ============================================================================
-const LOCAL_FILE_PATHS = [
-    "../models/output_model/llava_outputs.json",
-    "../models/output_model/minicpm-v_outputs.json",
-    "../models/output_model/nemotron-3-nano-omni-30b-a3b-reasoning_outputs.json",
-    "../evaluation/hallucination/llava_hallucination_deep.csv",
-    "../evaluation/hallucination/minicpm-v_hallucination_deep.csv",
-    "../evaluation/hallucination/nemotron-3-nano-omni-30b-a3b-reasoning-image-only_hallucination_deep.csv",
-    "../evaluation/similarity/llava_similarity.csv",
-    "../evaluation/similarity/minicpm-v_similarity.csv",
-    "../evaluation/nli/llava_outputs_with_nli.csv",
-    "../evaluation/nli/minicpm-v_outputs_with_nli.csv",
-    "../evaluation/nli/nemotron-3-nano-omni-30b-a3b-reasoning-image-only_outputs_with_nli.csv"
-];
+const API_BASE = '';
 
 // ============================================================================
-// 1. DYNAMIC DATA LOADING
+// 1. DYNAMIC DATA LOADING FROM SERVER
 // ============================================================================
-// Data will be loaded dynamically from files instead of being hardcoded
+// Data will be loaded dynamically from server
 
 let optimalPrompt = "Loading prompt from file...";
+let systemPrompt = "";
+let userPrompt = "";
 
 async function loadPromptFromConfig() {
     try {
-        const response = await fetch("../models/prompts.txt");
+        const response = await fetch(`${API_BASE}/api/prompts`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const text = await response.text();
+        const data = await response.json();
+        const text = data.content;
         
-        // Extract user prompt from the new format
-        if (text.includes("[USER]")) {
-            optimalPrompt = text.split("[USER]")[1].trim();
+        if (text.includes("[SYSTEM]") && text.includes("[USER]")) {
+            systemPrompt = text.split("[SYSTEM]")[1].split("[USER]")[0].trim();
+            userPrompt = text.split("[USER]")[1].trim();
+            optimalPrompt = userPrompt;
         } else {
-            optimalPrompt = text.trim();
+            userPrompt = text.trim();
+            optimalPrompt = userPrompt;
+            systemPrompt = "No system prompt defined.";
         }
         
-        console.log("Prompt loaded from prompts.txt");
+        console.log("Prompts loaded from server");
     } catch (e) {
-        console.error("Failed to load prompt:", e);
+        console.error("Failed to load prompts:", e);
         optimalPrompt = "Failed to load prompt from file.";
+        systemPrompt = "Failed to load.";
+        userPrompt = "Failed to load.";
     }
 }
 
@@ -188,7 +192,7 @@ async function loadPromptFromConfig() {
 // 2. STATE & INITIALIZATION
 // ============================================================================
 let dataset = [];
-const modelKeys = ['nemotron', 'minicpm', 'llava']; // Ordered for the dashboard
+const modelKeys = ['nemotron', 'minicpm', 'llava'];
 const modelNames = { human: 'Human Annotator', nemotron: 'Nemotron-3', minicpm: 'MiniCPM-V', llava: 'LLaVA' };
 const modelColors = { 
     human: { bg: 'bg-green-50', header: 'bg-green-100', border: 'border-green-200', text: 'text-green-800' },
@@ -197,192 +201,131 @@ const modelColors = {
     llava: { bg: 'bg-orange-50', header: 'bg-orange-100', border: 'border-orange-200', text: 'text-orange-800' }
 };
 
-async function initData() {
-    // Start with empty dataset - will be populated from files
-    dataset = [];
-    
-    // Load prompt from config
+async function loadAllDataFromServer() {
+    // Load prompts
     await loadPromptFromConfig();
     
-    renderApp();
-}
-
-// ============================================================================
-// 3. FILE PARSING LOGIC
-// ============================================================================
-
-function processFileContent(fileName, text) {
-    const name = fileName.toLowerCase();
-    console.log("Processing file:", fileName);
+    // Load reviewer data
+    await loadReviewerData();
     
+    // Load dataset from CSV via server
     try {
-        if (name.endsWith('.json')) {
-            let targetModel = '';
-            if (name.includes('llava')) targetModel = 'llava';
-            if (name.includes('minicpm')) targetModel = 'minicpm';
-            if (name.includes('nemotron')) targetModel = 'nemotron';
-            
-            console.log("  → JSON file, matched model:", targetModel || "none");
-            if (targetModel) {
-                const json = JSON.parse(text);
-                console.log("  → Loaded", json.length, "items for model:", targetModel);
-                json.forEach(item => {
-                    const dataRow = dataset.find(d => d.id === item.image_id);
-                    if (dataRow && item.parsed_output) {
-                        dataRow[targetModel].premises = item.parsed_output.premises || [];
-                        dataRow[targetModel].conclusions = item.parsed_output.conclusions || [];
-                    } else {
-                        console.log("    No match for image_id:", item.image_id);
-                    }
-                });
-            }
-        }
-        else if (name.includes('hallucination')) {
-            let targetModel = '';
-            if (name.includes('llava')) targetModel = 'llava';
-            if (name.includes('minicpm')) targetModel = 'minicpm';
-            if (name.includes('nemotron')) targetModel = 'nemotron';
-
-            if (targetModel) {
-                 parseCSV(text).forEach(row => {
-                    if(row[0] && row[0] !== 'image_id') {
-                        const dataRow = dataset.find(d => d.id === row[0]);
-                        if (dataRow) {
-                            dataRow[targetModel].metrics.hallucination_label = row[4];
-                            dataRow[targetModel].metrics.hallucination_score = row[3];
-                        }
-                    }
-                 });
-            }
-        }
-        else if (name.includes('similarity')) {
-            let targetModel = '';
-            if (name.includes('llava')) targetModel = 'llava';
-            if (name.includes('minicpm')) targetModel = 'minicpm';
-            if (name.includes('nemotron')) targetModel = 'nemotron';
-
-            if (targetModel) {
-                 parseCSV(text).forEach(row => {
-                    if(row[0] && row[0] !== 'image_id') {
-                        const dataRow = dataset.find(d => d.id === row[0]);
-                        if (dataRow) {
-                            dataRow[targetModel].metrics.premise_sim = row[1];
-                            dataRow[targetModel].metrics.conclusion_sim = row[5];
-                        }
-                    }
-                 });
-            }
-        }
-        else if (name.includes('nli')) {
-            let targetModel = '';
-            if (name.includes('llava')) targetModel = 'llava';
-            if (name.includes('minicpm')) targetModel = 'minicpm';
-            if (name.includes('nemotron')) targetModel = 'nemotron';
-
-            if (targetModel) {
-                 parseCSV(text).forEach(row => {
-                    if(row[0] && row[0] !== 'image_id') {
-                        const dataRow = dataset.find(d => d.id === row[0]);
-                        if (dataRow) {
-                            dataRow[targetModel].metrics.nli_label = row[10];
-                            dataRow[targetModel].metrics.nli_conf = row[11];
-                        }
-                    }
-                 });
-            }
-        }
-    } catch (err) {
-        console.error("Error parsing file content for", fileName, err);
-    }
-}
-
-async function loadDataFromConfigPaths() {
-    if (LOCAL_FILE_PATHS.length === 0) {
-        alert("Please add your file paths to the LOCAL_FILE_PATHS array in the HTML code first.");
-        return;
-    }
-
-    let loadedCount = 0;
-    
-    // First, load annotated.csv to create dataset entries
-    const csvPath = "../dataset/annotated.csv";
-    try {
-        const response = await fetch(csvPath);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const text = await response.text();
+        const resp = await fetch(`${API_BASE}/api/dataset`);
+        if (!resp.ok) throw new Error('Failed to load dataset');
+        const csvData = await resp.json();
         
-        // Parse CSV and create dataset entries
-        const rows = parseCSV(text);
-        const header = rows[0];
+        dataset = csvData.map(item => ({
+            id: item.id,
+            url: `${API_BASE}/api/images/${item.id}.jpg`,
+            note: "",
+            human: { premises: item.premises || [], conclusions: item.conclusions || [], metrics: {} },
+            llava: { premises: [], conclusions: [], metrics: {} },
+            minicpm: { premises: [], conclusions: [], metrics: {} },
+            nemotron: { premises: [], conclusions: [], metrics: {} }
+        }));
         
-        // Find column indices
-        const idIdx = header.indexOf('id');
-        const urlIdx = header.indexOf('url');
-        const premisesIdx = header.indexOf('premises');
-        const conclusionsIdx = header.indexOf('conclusions');
-        
-        // Create dataset entries from CSV
-        dataset = [];
-        for (let i = 1; i < rows.length; i++) {
-            const row = rows[i];
-            const id = row[idIdx];
-            const url = row[urlIdx];
-            
-            if (id) {
-                // Use local image path instead of URL
-                const localImagePath = `../dataset/images_for_annotation/${id}.jpg`;
-                
-                dataset.push({
-                    id: id,
-                    url: localImagePath,
-                    note: "(Analysis notes will be loaded from file if available)",
-                    human: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
-                    llava: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
-                    minicpm: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
-                    nemotron: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} }
-                });
-                
-                // Parse human premises and conclusions if available
-                if (premisesIdx !== -1 && row[premisesIdx]) {
-                    try {
-                        dataset[dataset.length - 1].human.premises = JSON.parse(row[premisesIdx].replace(/""/g, '"'));
-                    } catch(e) { /* Keep default */ }
-                }
-                if (conclusionsIdx !== -1 && row[conclusionsIdx]) {
-                    try {
-                        dataset[dataset.length - 1].human.conclusions = JSON.parse(row[conclusionsIdx].replace(/""/g, '"'));
-                    } catch(e) { /* Keep default */ }
-                }
-            }
-        }
-        
-        console.log(`Created ${dataset.length} dataset entries from annotated.csv`);
-        loadedCount++;
+        console.log(`Loaded ${dataset.length} images from server`);
     } catch (e) {
-        console.error("Failed to load annotated.csv:", e);
-        alert(`Failed to load ${csvPath}. Ensure you are running a local web server.`);
+        console.error("Failed to load dataset:", e);
         return;
     }
     
-    // Then load other files
-    for (const path of LOCAL_FILE_PATHS) {
-        try {
-            const response = await fetch(path);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            const text = await response.text();
-            processFileContent(path, text);
-            loadedCount++;
-        } catch (e) {
-            console.error("Failed to load path:", path, e);
-            // Continue with other files
+    // Load model outputs
+    try {
+        const resp = await fetch(`${API_BASE}/api/outputs`);
+        if (!resp.ok) throw new Error('Failed to list outputs');
+        const outputFiles = await resp.json();
+        
+        for (const file of outputFiles) {
+            try {
+                const resp = await fetch(`${API_BASE}/api/outputs/${file}`);
+                if (!resp.ok) continue;
+                const data = await resp.json();
+                
+                let targetModel = '';
+                if (file.includes('llava')) targetModel = 'llava';
+                if (file.includes('minicpm')) targetModel = 'minicpm';
+                if (file.includes('nemotron')) targetModel = 'nemotron';
+                
+                if (targetModel && Array.isArray(data)) {
+                    data.forEach(item => {
+                        const dataRow = dataset.find(d => d.id === item.image_id);
+                        if (dataRow && item.parsed_output) {
+                            dataRow[targetModel].premises = item.parsed_output.premises || [];
+                            dataRow[targetModel].conclusions = item.parsed_output.conclusions || [];
+                        }
+                    });
+                    console.log(`Loaded ${data.length} items from ${file}`);
+                }
+            } catch (e) {
+                console.error(`Failed to load output file ${file}:`, e);
+            }
         }
+    } catch (e) {
+        console.error("Failed to load outputs:", e);
     }
     
-    if (loadedCount > 0) {
-        renderApp();
-        if(!document.getElementById('stats-modal').classList.contains('hidden')) generateStatsDashboard();
-        alert(`Successfully loaded data for ${dataset.length} images!`);
+    // Load evaluation metrics (CSV files)
+    await loadMetricsFromServer();
+    
+    // Render and populate UI
+    renderApp();
+    setTimeout(() => loadReviewerDataToUI(), 100);
+}
+
+async function loadMetricsFromServer() {
+    const metricsFiles = [
+        { pattern: 'hallucination', key: 'hallucination', fields: ['hallucination_label', 'hallucination_score'] },
+        { pattern: 'similarity', key: 'similarity', fields: ['premise_sim', 'conclusion_sim'] },
+        { pattern: 'nli', key: 'nli', fields: ['nli_label', 'nli_conf'] }
+    ];
+    
+    const modelPatterns = ['llava', 'minicpm', 'nemotron'];
+    
+    // Try to load metrics - these might be in OUTPUT_DIR or DATASET_DIR
+    for (const model of modelPatterns) {
+        for (const metric of metricsFiles) {
+            const filename = `${model}_${metric.pattern}.csv`;
+            try {
+                // Try loading from output dir first, then dataset dir
+                let resp = await fetch(`${API_BASE}/api/outputs/${filename}`);
+                if (!resp.ok) {
+                    // Could also try dataset dir if needed
+                    continue;
+                }
+                const text = await resp.text();
+                const rows = parseCSV(text);
+                const header = rows[0];
+                
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    if (row[0] && row[0] !== 'image_id') {
+                        const dataRow = dataset.find(d => d.id === row[0]);
+                        if (dataRow) {
+                            if (metric.key === 'hallucination') {
+                                dataRow[model].metrics.hallucination_label = row[4];
+                                dataRow[model].metrics.hallucination_score = row[3];
+                            } else if (metric.key === 'similarity') {
+                                dataRow[model].metrics.premise_sim = row[1];
+                                dataRow[model].metrics.conclusion_sim = row[5];
+                            } else if (metric.key === 'nli') {
+                                dataRow[model].metrics.nli_label = row[10];
+                                dataRow[model].metrics.nli_conf = row[11];
+                            }
+                        }
+                    }
+                }
+                console.log(`Loaded ${metric.key} metrics for ${model}`);
+            } catch (e) {
+                // Skip missing metric files
+            }
+        }
     }
+}
+
+async function initData() {
+    dataset = [];
+    await loadAllDataFromServer();
 }
 
 function parseCSV(str) {
@@ -403,155 +346,33 @@ function parseCSV(str) {
     return arr;
 }
 
-// ============================================================================
-// 4. ANALYTICS DASHBOARD (AUTO-CALCULATED)
-// ============================================================================
-
-function openStatsModal() {
-    generateStatsDashboard();
-    document.getElementById('stats-modal').classList.remove('hidden');
-}
-
-function closeStatsModal() {
-    document.getElementById('stats-modal').classList.add('hidden');
-}
-
-function calculateStatsData() {
-    const statsData = {};
-    modelKeys.forEach(model => {
-        let hallCount = 0, hallTotal = 0;
-        let entCount = 0, contCount = 0, nliTotal = 0;
-        let pSimSum = 0, pSimCount = 0;
-        let cSimSum = 0, cSimCount = 0;
-
-        dataset.forEach(d => {
-            const m = d[model].metrics;
-            if (m) {
-                if (m.hallucination_label) {
-                    hallTotal++;
-                    if (m.hallucination_label.toLowerCase() === 'hallucinated') hallCount++;
-                }
-                if (m.nli_label) {
-                    nliTotal++;
-                    if (m.nli_label.toLowerCase() === 'entailment') entCount++;
-                    if (m.nli_label.toLowerCase() === 'contradiction') contCount++;
-                }
-                if (m.premise_sim !== undefined) {
-                    pSimSum += parseFloat(m.premise_sim);
-                    pSimCount++;
-                }
-                if (m.conclusion_sim !== undefined) {
-                    cSimSum += parseFloat(m.conclusion_sim);
-                    cSimCount++;
-                }
-            }
-        });
-
-        statsData[model] = {
-            loaded: hallTotal > 0 || nliTotal > 0 || pSimCount > 0,
-            hallucinationRate: hallTotal > 0 ? ((hallCount / hallTotal) * 100).toFixed(1) + '%' : 'N/A',
-            entailmentRate: nliTotal > 0 ? ((entCount / nliTotal) * 100).toFixed(1) + '%' : 'N/A',
-            contradictionRate: nliTotal > 0 ? ((contCount / nliTotal) * 100).toFixed(1) + '%' : 'N/A',
-            pSimAvg: pSimCount > 0 ? (pSimSum / pSimCount).toFixed(3) : 'N/A',
-            cSimAvg: cSimCount > 0 ? (cSimSum / cSimCount).toFixed(3) : 'N/A',
-            count: Math.max(hallTotal, nliTotal, pSimCount)
+function switchModelTab(imageId, modelKey) {
+    document.querySelectorAll('.model-tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll(`[id^="tab-"][id$="-${imageId}"]`).forEach(btn => {
+        btn.className = 'tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100';
+    });
+    const content = document.getElementById(`tabcontent-${modelKey}-${imageId}`);
+    if (content) content.classList.remove('hidden');
+    const tab = document.getElementById(`tab-${modelKey}-${imageId}`);
+    if (tab) {
+        const colorMap = {
+            human: 'border-green-500 text-green-700 bg-green-50',
+            llava: 'border-orange-500 text-orange-700 bg-orange-50',
+            minicpm: 'border-purple-500 text-purple-700 bg-purple-50',
+            nemotron: 'border-blue-500 text-blue-700 bg-blue-50'
         };
-    });
-    return statsData;
+        tab.className = `tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 ${colorMap[modelKey] || 'border-gray-500 text-gray-700 bg-gray-50'}`;
+    }
 }
 
-
-function generateStatsDashboard() {
-    const container = document.getElementById('stats-modal-content');
-    const statsData = calculateStatsData();
-    let html = `<div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">`;
-    
-    modelKeys.forEach(model => {
-        const stats = statsData[model];
-        const color = modelColors[model];
-        const title = modelNames[model];
-        html += generateStatsCardHTML(title, stats, color);
-    });
-    
-    html += `</div>`;
-    container.innerHTML = html;
-}
-
-function generateStatsCardHTML(title, stats, color) {
-    return `
-        <div class="rounded-2xl border ${color.border} flex flex-col overflow-hidden shadow-sm h-full min-h-[350px]">
-            <div class="px-6 py-4 font-bold text-lg flex items-center justify-between ${color.header} ${color.text} border-b ${color.border}">
-                ${title}
-                <span class="text-xs font-normal opacity-70 bg-white/50 px-2 py-1 rounded-full border border-white/50">
-                    N = ${stats.count}
-                </span>
-            </div>
-            
-            <div class="p-6 space-y-6 flex-1 bg-white">
-                ${!stats.loaded ? `
-                    <div class="flex flex-col items-center justify-center h-full text-gray-400 opacity-60">
-                        <svg class="w-12 h-12 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
-                        <p>No evaluation data loaded</p>
-                    </div>
-                ` : `
-                    <!-- Hallucination Block -->
-                    <div class="stat-card">
-                        <div class="stat-label">Hallucination Rate (Deep Eval)</div>
-                        <div class="flex items-end justify-between">
-                            <div class="stat-val ${parseFloat(stats.hallucinationRate) > 15 ? 'text-red-500' : 'text-green-600'}">
-                                ${stats.hallucinationRate}
-                            </div>
-                            <div class="text-xs text-gray-400 mb-1">Lower is better</div>
-                        </div>
-                    </div>
-
-                    <!-- NLI Block -->
-                    <div class="stat-card">
-                        <div class="stat-label flex justify-between">
-                            <span>NLI Entailment</span>
-                            <span>Contradiction</span>
-                        </div>
-                        <div class="flex items-center justify-between mt-1">
-                            <div class="stat-val text-blue-600">${stats.entailmentRate}</div>
-                            <div class="h-6 w-px bg-gray-300"></div>
-                            <div class="stat-val text-orange-500">${stats.contradictionRate}</div>
-                        </div>
-                    </div>
-
-                    <!-- Similarity Block -->
-                    <div class="stat-card">
-                        <div class="stat-label mb-3">BERT Similarity (Vs. Human)</div>
-                        
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm text-gray-600">Premises:</span>
-                            <span class="font-bold text-gray-800">${stats.pSimAvg}</span>
-                        </div>
-                        
-                        <div class="w-full bg-gray-200 rounded-full h-1.5 mb-4">
-                            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${stats.pSimAvg !== 'N/A' ? (parseFloat(stats.pSimAvg) * 100) : 0}%"></div>
-                        </div>
-
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm text-gray-600">Conclusions:</span>
-                            <span class="font-bold text-gray-800">${stats.cSimAvg}</span>
-                        </div>
-                        
-                        <div class="w-full bg-gray-200 rounded-full h-1.5">
-                            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${stats.cSimAvg !== 'N/A' ? (parseFloat(stats.cSimAvg) * 100) : 0}%"></div>
-                        </div>
-                    </div>
-                `}
-            </div>
-        </div>`;
-}
-
+// ============================================================================
+// 5. RENDERING LOGIC (SLIDES)
 // ============================================================================
 // 5. RENDERING LOGIC (SLIDES)
 // ============================================================================
 function renderApp() {
     const container = document.getElementById('slider-container');
     let html = '';
-    const statsData = calculateStatsData();
 
     // --------------------------------------------------
     // Slide 0: Intro Slide
@@ -565,24 +386,62 @@ function renderApp() {
             <div class="bg-white p-8 rounded-2xl shadow-xl text-left border border-gray-200 mb-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                     <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-                    The Optimized Prompt Strategy
+                    Prompt Configuration
                 </h2>
-                <p class="text-gray-600 mb-4">To solve the gap between literal visual grounding and human abductive reasoning, the prompt must explicitly divide the task: strict visuals for premises, and permitted world-knowledge for conclusions.</p>
-                <pre class="bg-gray-900 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm shadow-inner whitespace-pre-wrap">${optimalPrompt}</pre>
+                <p class="text-gray-600 mb-6">The prompt strategy uses a two-part structure with separate system and user prompts to guide the AI models in climate-related visual reasoning.</p>
+                
+                <!-- System Prompt Section -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold text-blue-700 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        System Prompt
+                    </h3>
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                        <p class="text-sm text-gray-600 mb-2"><strong>Used by:</strong> All models (LLaVA, MiniCPM-V, Nemotron-3) as the system message to set the AI's role and constraints</p>
+                        <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm shadow-inner whitespace-pre-wrap max-h-40 overflow-y-auto">${systemPrompt}</pre>
+                    </div>
+                </div>
+                
+                <!-- User Prompt Section -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold text-green-700 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                        User Prompt
+                    </h3>
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+                        <p class="text-sm text-gray-600 mb-2"><strong>Used by:</strong> All models (LLaVA, MiniCPM-V, Nemotron-3) as the main task instruction</p>
+                        <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm shadow-inner whitespace-pre-wrap max-h-60 overflow-y-auto">${userPrompt}</pre>
+                    </div>
+                </div>
+                
+                <!-- Model Usage Summary -->
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                    <h3 class="text-lg font-bold text-gray-700 mb-3">Model Prompt Usage</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <p class="font-bold text-orange-600">LLaVA</p>
+                            <p class="text-gray-600">System: Custom system prompt</p>
+                            <p class="text-gray-600">User: Full task prompt</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <p class="font-bold text-purple-600">MiniCPM-V</p>
+                            <p class="text-gray-600">System: Custom system prompt</p>
+                            <p class="text-gray-600">User: Full task prompt</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <p class="font-bold text-blue-600">Nemotron-3</p>
+                            <p class="text-gray-600">System: Custom system prompt</p>
+                            <p class="text-gray-600">User: Full task prompt</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="flex flex-col items-center">
                 
-                <div class="flex flex-row justify-center gap-4 mb-3">
-                    <button onclick="loadDataFromConfigPaths()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-full flex items-center transition-all shadow-lg text-lg font-bold">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        Load All Data
-                    </button>
-                </div>
-                
                 <div class="flex gap-4 mt-8">
                     <button onclick="scrollSlider(1)" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center transition-all shadow-xl">
-                        View Overall Results
+                        Start Review
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
@@ -591,71 +450,67 @@ function renderApp() {
     </div>
     `;
 
-    // --------------------------------------------------
-    // Slide 1: Overall Results Dashboard (New Academic Summary Slide)
-    // --------------------------------------------------
-    html += `
-    <div class="slide bg-white flex-col items-center justify-center p-8 overflow-y-auto">
-        <div class="max-w-7xl w-full text-center mb-10 mt-10">
-            <h2 class="text-4xl font-bold text-gray-800 flex justify-center items-center">
-                <svg class="w-10 h-10 mr-3 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                Overall Academic Performance
-            </h2>
-            <p class="text-xl text-gray-500 mt-2">Aggregated evaluation across Hallucination (Deep Eval), Natural Language Inference (NLI), and BERT Similarity vs. Human Baseline</p>
-        </div>
-        <div class="max-w-7xl w-full grid grid-cols-1 md:grid-cols-3 gap-8">
-    `;
-    
-    // Inject the exact same card style logic for the slides using our stats helper
-    modelKeys.forEach(model => {
-        const stats = statsData[model];
-        const color = modelColors[model];
-        const title = modelNames[model];
-        html += generateStatsCardHTML(title, stats, color);
-    });
-
-    html += `
-        </div>
-        <div class="max-w-7xl w-full text-center mt-10 mb-10">
-            <button onclick="scrollSlider(1)" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center mx-auto transition-all shadow-xl">
-                Start Image Analysis
-                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
-        </div>
-    </div>
-    `;
-
 
     // --------------------------------------------------
-    // Slide 2 to N: Data Slides
+    // Slide 1 to N: Data Slides
     // --------------------------------------------------
     dataset.forEach((data, index) => {
         html += `
-        <div class="slide bg-gray-100 overflow-hidden">
+        <div class="slide bg-gray-100 overflow-hidden flex">
             <!-- LEFT PANEL -->
             <div class="w-1/3 bg-gray-900 text-white flex flex-col h-full shadow-2xl z-10 border-r border-gray-800">
                 <div class="p-6 border-b border-gray-800 flex justify-between items-center bg-gray-900">
                     <span class="font-bold text-xl text-blue-400">Image ID: ${data.id}</span>
-                    <span class="text-sm bg-gray-800 px-3 py-1 rounded-full text-gray-400">Image ${index + 1} of ${dataset.length}</span>
+                    <span class="text-sm bg-gray-800 px-3 py-1 rounded-full text-gray-400">${index + 1} / ${dataset.length}</span>
                 </div>
                 <div class="flex-1 overflow-y-auto p-6 flex flex-col items-center">
-                    <div class="w-full rounded-xl overflow-hidden shadow-2xl mb-8 bg-black flex items-center justify-center min-h-[300px]">
-                        ${data.url ? `<img src="${data.url}" class="object-contain max-h-[50vh] w-full" alt="Image ${data.id}" onerror="this.parentElement.innerHTML='<p class=\\'text-gray-500\\'>Image not found: ${data.id}.jpg</p>'" />` : '<p class="text-gray-500">No Image URL</p>'}
+                    <div class="w-full rounded-xl overflow-hidden shadow-2xl mb-6 bg-black flex items-center justify-center min-h-[250px]">
+                        ${data.url ? `<img src="${data.url}" class="object-contain max-h-[45vh] w-full" alt="Image ${data.id}" onerror="this.parentElement.innerHTML='<p class=\\'text-gray-500\\'>Image not found: ${data.id}.jpg</p>'" />` : '<p class="text-gray-500">No Image URL</p>'}
                     </div>
-                    <div class="w-full bg-blue-900/30 border border-blue-800/50 rounded-xl p-6 shadow-inner">
-                        <h3 class="text-blue-300 font-bold mb-3 flex items-center text-lg">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            AI Deep Analysis
+                    
+                    <!-- Reviewer Comments Section -->
+                    <div class="w-full bg-green-900/30 border border-green-800/50 rounded-xl p-4 shadow-inner">
+                        <h3 class="text-green-300 font-bold mb-2 flex items-center text-sm">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            Reviewer Comments
                         </h3>
-                        <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">${data.note}</p>
+                        <textarea id="comment-${data.id}" class="w-full bg-gray-800 text-gray-200 rounded-lg p-3 text-sm border border-gray-700 focus:border-green-500 focus:outline-none resize-none" rows="5" placeholder="Add your comments here..." onchange="saveComment('${data.id}')">${data.reviewerComment || ''}</textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT PANEL -->
-            <div class="w-2/3 h-full overflow-y-auto p-8 bg-gray-50">
-                <div class="grid grid-cols-2 gap-6 pb-24">
-                    ${['human', ...modelKeys].map(key => renderModelCard(key, data[key])).join('')}
+            <!-- RIGHT PANEL WITH TABS -->
+            <div class="w-2/3 h-full flex flex-col bg-gray-50">
+                <!-- Tab Header -->
+                <div class="flex border-b border-gray-200 bg-white shrink-0">
+                    <button onclick="switchModelTab('${data.id}', 'human')" id="tab-human-${data.id}" class="tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-green-500 text-green-700 bg-green-50">
+                        Human
+                    </button>
+                    <button onclick="switchModelTab('${data.id}', 'llava')" id="tab-llava-${data.id}" class="tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-transparent text-gray-500 hover:text-orange-600 hover:bg-orange-50">
+                        LLaVA
+                    </button>
+                    <button onclick="switchModelTab('${data.id}', 'minicpm')" id="tab-minicpm-${data.id}" class="tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-transparent text-gray-500 hover:text-purple-600 hover:bg-purple-50">
+                        MiniCPM-V
+                    </button>
+                    <button onclick="switchModelTab('${data.id}', 'nemotron')" id="tab-nemotron-${data.id}" class="tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-transparent text-gray-500 hover:text-blue-600 hover:bg-blue-50">
+                        Nemotron-3
+                    </button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div class="flex-1 overflow-y-auto p-6">
+                    <div id="tabcontent-human-${data.id}" class="model-tab-content">
+                        ${renderModelCardContent('human', data.human, data.id)}
+                    </div>
+                    <div id="tabcontent-llava-${data.id}" class="model-tab-content hidden">
+                        ${renderModelCardContent('llava', data.llava, data.id)}
+                    </div>
+                    <div id="tabcontent-minicpm-${data.id}" class="model-tab-content hidden">
+                        ${renderModelCardContent('minicpm', data.minicpm, data.id)}
+                    </div>
+                    <div id="tabcontent-nemotron-${data.id}" class="model-tab-content hidden">
+                        ${renderModelCardContent('nemotron', data.nemotron, data.id)}
+                    </div>
                 </div>
             </div>
         </div>
@@ -665,26 +520,91 @@ function renderApp() {
     container.innerHTML = html;
 }
 
-function renderModelCard(modelKey, modelData) {
+function renderModelCardContent(modelKey, modelData, imageId) {
     const title = modelNames[modelKey];
-    const colors = modelColors[modelKey];
     
     const premises = Array.isArray(modelData.premises) ? modelData.premises : [];
     const conclusions = Array.isArray(modelData.conclusions) ? modelData.conclusions : [];
     
     let premiseHtml = premises.length > 0 
-        ? `<ul class="space-y-2">` + premises.map(p => {
+        ? `<ul class="space-y-2">` + premises.map((p, i) => {
             const text = typeof p === 'string' ? p : p.text || p.observation || p.description || JSON.stringify(p);
-            return `<li class="text-sm bg-white/70 p-3 rounded-lg border border-white shadow-sm text-gray-800">${text}</li>`;
+            return `<li class="text-sm bg-white p-3 rounded-lg border border-gray-200 shadow-sm text-gray-800"><span class="font-bold text-gray-500 mr-2">${i+1}.</span>${text}</li>`;
           }).join('') + `</ul>`
         : `<p class="text-sm italic opacity-60 text-gray-500">No premises extracted / Data pending load.</p>`;
         
     let conclusionHtml = conclusions.length > 0 
-        ? `<ul class="space-y-2">` + conclusions.map(c => {
+        ? `<ul class="space-y-2">` + conclusions.map((c, i) => {
             const text = typeof c === 'string' ? c : c.text || c.inference || c.description || JSON.stringify(c);
-            return `<li class="text-sm bg-white/70 p-3 rounded-lg border border-white shadow-sm font-medium text-gray-900">${text}</li>`;
+            return `<li class="text-sm bg-white p-3 rounded-lg border border-gray-200 shadow-sm font-medium text-gray-900"><span class="font-bold text-gray-500 mr-2">${i+1}.</span>${text}</li>`;
           }).join('') + `</ul>`
         : `<p class="text-sm italic opacity-60 text-gray-500">No conclusions extracted / Data pending load.</p>`;
+
+    // Evaluation checklist HTML with radio buttons
+    const evaluationHtml = modelKey !== 'human' ? `
+    <div class="mt-6 p-5 bg-white rounded-xl border border-gray-200 shadow-sm">
+        <h4 class="text-sm font-bold text-gray-700 mb-4 flex items-center">
+            <svg class="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+            Evaluation Checklist
+        </h4>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Format Adherence</span> <span class="text-xs text-gray-600">: Did the model use the right structure?</span></label>
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="format-${modelKey}-${imageId}" value="Perfect" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Perfect</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="format-${modelKey}-${imageId}" value="Minor Errors" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Minor Errors</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="format-${modelKey}-${imageId}" value="Complete Failure" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Complete Failure</span></label>
+                </div>
+            </div>
+            
+            <div>
+                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Visual-Only Rule</span> <span class="text-xs text-gray-600">: Did the model use only what it sees in the image?</span></label>
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="visual-${modelKey}-${imageId}" value="Strictly Visual" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Strictly Visual</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="visual-${modelKey}-${imageId}" value="Slightly Hallucinated" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Slightly Hallucinated</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="visual-${modelKey}-${imageId}" value="External Science" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">External Science</span></label>
+                </div>
+            </div>
+            
+            <div>
+                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Premise Accuracy</span> <span class="text-xs text-gray-600">: Are the reasons visible in the image?</span></label>
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="premise-${modelKey}-${imageId}" value="All Visible" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">All Visible</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="premise-${modelKey}-${imageId}" value="Mixed" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Mixed</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="premise-${modelKey}-${imageId}" value="Contains Assumptions" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Contains Assumptions</span></label>
+                </div>
+            </div>
+            
+            <div>
+                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Conclusion Logic</span> <span class="text-xs text-gray-600">: Does the result follow from the reasons?</span></label>
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="conclusion-${modelKey}-${imageId}" value="Strong Connection" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Strong Connection</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="conclusion-${modelKey}-${imageId}" value="Weak Connection" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Weak Connection</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="conclusion-${modelKey}-${imageId}" value="Disconnected" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Disconnected</span></label>
+                </div>
+            </div>
+            
+            <div>
+                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Inference Depth</span> <span class="text-xs text-gray-600">: Is the answer specific or just generic?</span></label>
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="inference-${modelKey}-${imageId}" value="Specific & Insightful" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Specific & Insightful</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="inference-${modelKey}-${imageId}" value="Generic Slogans" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Generic Slogans</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="inference-${modelKey}-${imageId}" value="Purely Descriptive" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Purely Descriptive</span></label>
+                </div>
+            </div>
+            
+            <div>
+                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Human Alignment</span> <span class="text-xs text-gray-600">: Is it similar to the human answer?</span></label>
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="alignment-${modelKey}-${imageId}" value="Close Match" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Close Match</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="alignment-${modelKey}-${imageId}" value="Too Verbose" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Too Verbose</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="radio" name="alignment-${modelKey}-${imageId}" value="Unrelated" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Unrelated</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    ` : '';
 
     let metricsHtml = '';
     if (modelData.metrics && Object.keys(modelData.metrics).length > 0) {
@@ -696,32 +616,163 @@ function renderModelCard(modelKey, modelData) {
     }
 
     return `
-    <div class="rounded-2xl border shadow-sm flex flex-col h-[420px] ${colors.bg} ${colors.border}">
-        <div class="px-5 py-4 border-b rounded-t-2xl font-bold flex items-center justify-between ${colors.header} ${colors.text} border-opacity-50">
-            <span>${title}</span>
+    <div class="space-y-5">
+        <div>
+            <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Premises (Visual Grounding)</h4>
+            ${premiseHtml}
         </div>
-        <div class="flex-1 overflow-y-auto p-5 space-y-5">
-            <div>
-                <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Premises (Visual Grounding)</h4>
-                ${premiseHtml}
-            </div>
-            <div>
-                <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Conclusions (Inference)</h4>
-                ${conclusionHtml}
-            </div>
+        <div>
+            <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Conclusions (Inference)</h4>
+            ${conclusionHtml}
         </div>
-        ${metricsHtml ? `<div class="p-3 border-t bg-white/40 border-opacity-20 rounded-b-2xl">${metricsHtml}</div>` : ''}
+        ${evaluationHtml}
+        ${metricsHtml ? `<div class="flex flex-wrap gap-2">${metricsHtml}</div>` : ''}
     </div>
     `;
 }
 
 // ============================================================================
-// 6. SLIDER LOGIC
+// 6. REVIEWER COMMENTS & EVALUATION FUNCTIONS
+// ============================================================================
+
+// Store for all reviews
+let reviewerData = {};
+const API_URL = '/api/reviewer';
+
+async function saveToServer() {
+    try {
+        await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reviewerData)
+        });
+    } catch (e) {
+        console.warn('Server save failed, using localStorage fallback');
+        localStorage.setItem('reviewerData', JSON.stringify(reviewerData));
+    }
+}
+
+function saveComment(imageId) {
+    const textarea = document.getElementById(`comment-${imageId}`);
+    if (!textarea) return;
+    
+    if (!reviewerData[imageId]) {
+        reviewerData[imageId] = { comment: '', evaluations: {} };
+    }
+    reviewerData[imageId].comment = textarea.value;
+    
+    saveToServer();
+    console.log(`Comment saved for image ${imageId}`);
+}
+
+function saveEvaluation(imageId, modelKey) {
+    if (!reviewerData[imageId]) {
+        reviewerData[imageId] = { comment: '', evaluations: {} };
+    }
+    
+    if (!reviewerData[imageId].evaluations[modelKey]) {
+        reviewerData[imageId].evaluations[modelKey] = {};
+    }
+    
+    // Get all evaluation values from radio buttons by name
+    const metrics = ['format', 'visual', 'premise', 'conclusion', 'inference', 'alignment'];
+    const keys = ['format_adherence', 'visual_only_rule', 'premise_accuracy', 'conclusion_logic', 'inference_depth', 'human_alignment'];
+    
+    metrics.forEach((metric, i) => {
+        const selected = document.querySelector(`input[name="${metric}-${modelKey}-${imageId}"]:checked`);
+        reviewerData[imageId].evaluations[modelKey][keys[i]] = selected ? selected.value : '';
+    });
+    
+    saveToServer();
+    console.log(`Evaluation saved for image ${imageId}, model ${modelKey}`);
+}
+
+async function loadReviewerData() {
+    try {
+        const resp = await fetch(API_URL);
+        if (resp.ok) {
+            reviewerData = await resp.json();
+            console.log('Loaded reviewer data from server');
+            return;
+        }
+    } catch (e) {
+        console.warn('Server load failed, trying localStorage');
+    }
+    const saved = localStorage.getItem('reviewerData');
+    if (saved) {
+        reviewerData = JSON.parse(saved);
+        console.log('Loaded reviewer data from localStorage');
+    }
+}
+
+function loadReviewerDataToUI() {
+    // Load comments
+    dataset.forEach(data => {
+        const textarea = document.getElementById(`comment-${data.id}`);
+        if (textarea && reviewerData[data.id]) {
+            textarea.value = reviewerData[data.id].comment || '';
+        }
+        
+        // Load evaluations for each model
+        modelKeys.forEach(modelKey => {
+            if (reviewerData[data.id] && reviewerData[data.id].evaluations[modelKey]) {
+                const evalData = reviewerData[data.id].evaluations[modelKey];
+                
+                const metrics = ['format', 'visual', 'premise', 'conclusion', 'inference', 'alignment'];
+                const keys = ['format_adherence', 'visual_only_rule', 'premise_accuracy', 'conclusion_logic', 'inference_depth', 'human_alignment'];
+                
+                metrics.forEach((metric, i) => {
+                    const value = evalData[keys[i]];
+                    if (value) {
+                        const radio = document.querySelector(`input[name="${metric}-${modelKey}-${data.id}"][value="${value}"]`);
+                        if (radio) radio.checked = true;
+                    }
+                });
+            }
+        });
+    });
+}
+
+// ============================================================================
+// 7. SLIDER LOGIC
 // ============================================================================
 function scrollSlider(direction) {
     const container = document.getElementById('slider-container');
     const slideWidth = window.innerWidth;
     container.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
+}
+
+function searchAndGoToSlide() {
+    const searchInput = document.getElementById('search-input');
+    const searchId = searchInput.value.trim();
+    
+    if (!searchId) {
+        alert('Please enter an image ID');
+        return;
+    }
+    
+    if (dataset.length === 0) {
+        alert('No data loaded. Please wait for data to load automatically.');
+        return;
+    }
+    
+    // Find the index of the image with the given ID
+    const index = dataset.findIndex(d => d.id === searchId);
+    
+    if (index === -1) {
+        alert(`Image with ID "${searchId}" not found in dataset`);
+        return;
+    }
+    
+    // Navigate to the slide (index + 1 because slide 0 is intro)
+    const container = document.getElementById('slider-container');
+    const slideWidth = window.innerWidth;
+    const targetScroll = (index + 1) * slideWidth;
+    
+    container.scrollTo({ left: targetScroll, behavior: 'smooth' });
+    
+    // Clear search input
+    searchInput.value = '';
 }
 
 // Initialize on load
