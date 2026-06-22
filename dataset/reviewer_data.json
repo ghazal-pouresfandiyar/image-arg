@@ -45,7 +45,7 @@
         "human_alignment": "Close Match",
         "inference_depth": "Generic Slogans",
         "premise_accuracy": "All Visible",
-        "visual_only_rule": ""
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
         "conclusion_logic": "Strong Connection",
@@ -124,7 +124,7 @@
         "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
         "premise_accuracy": "Mixed",
-        "visual_only_rule": ""
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
         "conclusion_logic": "Strong Connection",
@@ -273,7 +273,7 @@
       },
       "minicpm": {
         "conclusion_logic": "Weak Connection",
-        "format_adherence": "Perfect",
+        "format_adherence": "Minor Errors",
         "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
         "premise_accuracy": "All Visible",
@@ -380,28 +380,28 @@
     "comment": "minicpm-v second conclusion seems generic",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -409,57 +409,57 @@
     "comment": "Note: similar image with id 5.\n\nllava refers to eclipse because of the orange and the conclusion is based on if, else.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
   "30": {
-    "comment": "conclusion is more than 2.",
+    "comment": "conclusion of llava is more than 2.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Minor Errors",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -467,28 +467,28 @@
     "comment": "llava has more than 2 conclusions.\nllava saw boat whilw i can't see.\nllava refered to economic impact!\n\nminicpm and nemotron refered to storm!\n",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "External Science",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Minor Errors",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "External Science"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "External Science",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "External Science"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -496,28 +496,28 @@
     "comment": "",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -525,28 +525,28 @@
     "comment": "nemotron refered to boats while i cant see.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -554,28 +554,28 @@
     "comment": "minicpm refered to algae which was interesting.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -583,28 +583,28 @@
     "comment": "",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -612,28 +612,28 @@
     "comment": "",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -641,28 +641,28 @@
     "comment": "nemotron-3 saw the boat model! interesting. it also saw deoplets on camera lens which human cant see!\n",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -670,28 +670,28 @@
     "comment": "llava generated more than 4 premises, and more than 2 conclusions.\nnemotron saw many details that human missed!",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Minor Errors",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -699,28 +699,28 @@
     "comment": "me a human saw the statue as symbol of a people who needs help but the models saw it as statue and refered to impacts on culture stuff. only nemotron saw it.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -728,28 +728,28 @@
     "comment": "",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "External Science",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "External Science"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -757,28 +757,28 @@
     "comment": "",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -786,28 +786,28 @@
     "comment": "fun fact :human didnt recognise lack of sth but the models did.\n\nhuman is not strong here.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -815,28 +815,28 @@
     "comment": "minicpm recognized the car's model.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "External Science",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "External Science"
       }
     }
   },
@@ -844,28 +844,28 @@
     "comment": "llava has more than 2 conclusions",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Minor Errors",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -873,28 +873,28 @@
     "comment": "llava saw book while there is no book.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "External Science",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "External Science"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -902,28 +902,28 @@
     "comment": "nemotron saw the bird while human didnt.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -931,28 +931,28 @@
     "comment": "llava generated more than 6 premises.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Minor Errors",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Minor Errors",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -960,28 +960,28 @@
     "comment": "llava saw 2 maps while we have only 1.\n",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "External Science",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "External Science"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -989,28 +989,28 @@
     "comment": "only human and nemotron saw firefighters.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1018,28 +1018,28 @@
     "comment": "llava saw a family and a home.\n",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1047,28 +1047,28 @@
     "comment": "human is weak here.\n",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Disconnected",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1076,28 +1076,28 @@
     "comment": "llava has also another generic conclusion.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1105,28 +1105,28 @@
     "comment": "llava saw animals dead while they are alive. and changed the topic based on this.\n\n",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1134,28 +1134,28 @@
     "comment": "llava didnt see the burnt.\n",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -1163,28 +1163,28 @@
     "comment": "on of minicpm\u00c4s conclusion is unrelated.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1192,28 +1192,28 @@
     "comment": "",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1221,28 +1221,28 @@
     "comment": "minicpm saw the religious structure while human didn't.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1250,28 +1250,28 @@
     "comment": "llava has more than 4 premises.\nllava generated caption or phrases insterad of sentences.\n\nminicpm couldnt recognize that the bear is thin.",
     "evaluations": {
       "llava": {
-        "format_adherence": "Minor Errors",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Minor Errors",
+        "human_alignment": "Unrelated",
         "inference_depth": "Generic Slogans",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Contains Assumptions",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "Contains Assumptions",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   },
@@ -1279,28 +1279,28 @@
     "comment": "",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "nemotron": {
-        "format_adherence": "Complete Failure",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Complete Failure",
+        "human_alignment": "Too Verbose",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Too Verbose"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       }
     }
   },
@@ -1308,28 +1308,28 @@
     "comment": "",
     "evaluations": {
       "llava": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Slightly Hallucinated",
-        "premise_accuracy": "Mixed",
         "conclusion_logic": "Weak Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Unrelated",
         "inference_depth": "Purely Descriptive",
-        "human_alignment": "Unrelated"
+        "premise_accuracy": "Mixed",
+        "visual_only_rule": "Slightly Hallucinated"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "visual_only_rule": "Strictly Visual",
-        "premise_accuracy": "All Visible",
         "conclusion_logic": "Strong Connection",
+        "format_adherence": "Perfect",
+        "human_alignment": "Close Match",
         "inference_depth": "Specific & Insightful",
-        "human_alignment": "Close Match"
+        "premise_accuracy": "All Visible",
+        "visual_only_rule": "Strictly Visual"
       }
     }
   }
