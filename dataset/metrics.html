@@ -6,34 +6,51 @@
     <title>Image-Argument Evaluation Metrics & References</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Georgia', serif; line-height: 1.7; color: #1a1a1a; background: #f8f7f4; padding: 2rem; max-width: 1100px; margin: 0 auto; }
-        h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #2c3e50; border-bottom: 3px solid #34495e; padding-bottom: 0.5rem; }
-        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; color: #2c3e50; }
-        h3 { font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #34495e; }
-        .subtitle { color: #666; font-style: italic; margin-bottom: 2rem; }
-        .metric-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .metric-card h3 { color: #2c3e50; font-size: 1.3rem; margin-top: 0; border-bottom: 2px solid #ecf0f1; padding-bottom: 0.5rem; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-        th, td { padding: 0.7rem 1rem; text-align: left; border-bottom: 1px solid #ecf0f1; }
-        th { background: #2c3e50; color: #fff; font-weight: 600; }
+        body { font-family: 'Georgia', serif; line-height: 1.5; color: #1a1a1a; background: #f8f7f4; padding: 1.5rem; max-width: 1200px; margin: 0 auto; font-size: 0.85rem; }
+        h1 { font-size: 1.6rem; margin-bottom: 0.3rem; color: #2c3e50; border-bottom: 3px solid #34495e; padding-bottom: 0.4rem; }
+        h2 { font-size: 1.2rem; margin: 1.5rem 0 0.8rem 0; color: #2c3e50; }
+        .subtitle { color: #666; font-style: italic; margin-bottom: 1.5rem; font-size: 0.85rem; }
+        hr { border: none; border-top: 2px solid #ecf0f1; margin: 2rem 0; }
+
+        .category-title { font-size: 1rem; font-weight: bold; padding: 0.5rem 1rem; border-radius: 6px; margin-bottom: 1rem; color: white; }
+        .cat-format .category-title { background: #d4a5a5; }
+        .cat-premise .category-title { background: #9bb8d3; }
+        .cat-conclusion .category-title { background: #a8c99e; }
+
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        @media (max-width: 900px) { .metrics-grid { grid-template-columns: 1fr; } }
+
+        .metric-card { background: #fff; border-radius: 6px; padding: 0.8rem 1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08); font-size: 0.8rem; }
+        .metric-card h3 { font-size: 0.9rem; margin: 0 0 0.4rem 0; color: #2c3e50; border-bottom: 1px solid #ecf0f1; padding-bottom: 0.3rem; }
+        .metric-card p { margin: 0 0 0.5rem 0; color: #555; font-size: 0.78rem; }
+        .metric-card p strong { color: #333; }
+
+        table { width: 100%; border-collapse: collapse; margin: 0; font-size: 0.75rem; }
+        th, td { padding: 0.35rem 0.5rem; text-align: left; border-bottom: 1px solid #ecf0f1; }
+        th { color: #fff; font-weight: 600; font-size: 0.72rem; }
         tr:nth-child(even) { background: #f9f9f9; }
         tr:hover { background: #eef3f7; }
-        hr { border: none; border-top: 2px solid #ecf0f1; margin: 3rem 0; }
+
+        /* Category-specific table header colors */
+        .cat-format th { background: #d4a5a5; }
+        .cat-premise th { background: #9bb8d3; }
+        .cat-conclusion th { background: #a8c99e; }
 
         /* Collapsible details styling */
-        details { margin: 1rem 0; }
-        details summary { cursor: pointer; padding: 0.6rem 1rem; background: #f0f4f8; border: 1px solid #d5dde5; border-radius: 6px; font-weight: 600; color: #2c3e50; user-select: none; list-style: none; display: flex; align-items: center; gap: 0.5rem; }
+        details { margin: 0.4rem 0 0 0; }
+        details summary { cursor: pointer; padding: 0.3rem 0.6rem; background: #f0f4f8; border: 1px solid #d5dde5; border-radius: 4px; font-weight: 600; color: #2c3e50; user-select: none; list-style: none; font-size: 0.72rem; }
         details summary::-webkit-details-marker { display: none; }
-        details summary::before { content: "▶"; font-size: 0.7rem; transition: transform 0.2s; display: inline-block; }
+        details summary::before { content: "▶"; font-size: 0.55rem; transition: transform 0.2s; display: inline-block; margin-right: 0.3rem; }
         details[open] summary::before { transform: rotate(90deg); }
         details summary:hover { background: #e2e8f0; }
-        details .details-content { padding: 1rem 1.5rem; background: #fafbfc; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 6px 6px; }
+        details .details-content { padding: 0.6rem 0.8rem; background: #fafbfc; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 4px 4px; font-size: 0.72rem; }
 
-        .reference { background: #fdf6e3; border: 1px solid #f0e0b0; border-radius: 6px; padding: 1.2rem 1.5rem; margin: 0.8rem 0; }
-        .reference .paper-title { font-weight: bold; color: #2c3e50; }
-        .reference .paper-meta { font-size: 0.9rem; color: #7f8c8d; margin-bottom: 0.5rem; }
-        .reference .quote { font-style: italic; border-left: 3px solid #f39c12; padding-left: 1rem; margin: 0.8rem 0; color: #555; }
-        .reference .section { font-size: 0.9rem; color: #8e44ad; font-weight: 600; }
+        .reference { background: #fdf6e3; border: 1px solid #f0e0b0; border-radius: 4px; padding: 0.5rem 0.7rem; margin: 0.4rem 0; }
+        .reference .paper-title { font-weight: bold; color: #2c3e50; font-size: 0.73rem; }
+        .reference .paper-meta { font-size: 0.68rem; color: #7f8c8d; margin-bottom: 0.3rem; }
+        .reference .quote { font-style: italic; border-left: 2px solid #f39c12; padding-left: 0.6rem; margin: 0.4rem 0; color: #555; font-size: 0.7rem; }
+        .reference .section { font-size: 0.68rem; color: #8e44ad; font-weight: 600; }
+        .reference p adaptation { font-size: 0.68rem; color: #555; margin-top: 0.3rem; }
     </style>
 </head>
 <body>
@@ -42,377 +59,286 @@
 <p class="subtitle">8 Metrics with 4-Point Scales — Based on Argument Quality Literature</p>
 
 <!-- ============================================================ -->
-<!-- METRIC 1: Premise Accuracy -->
+<!-- CATEGORY 1: OUTPUT FORMAT -->
 <!-- ============================================================ -->
 
-<div class="metric-card" id="metric1">
-    <h3>1. Premise Accuracy</h3>
-    <p><strong>What it measures:</strong> Are the described premises actually visible in the image?</p>
-    <table>
-        <tr><th>Label</th><th>Meaning</th></tr>
-        <tr><td><strong>All correct</strong></td><td>Every premise describes something clearly visible in the image</td></tr>
-        <tr><td><strong>Mostly correct</strong></td><td>Most premises are visible; 1-2 minor errors</td></tr>
-        <tr><td><strong>Partially correct</strong></td><td>Some premises are visible, but several describe things not in the image</td></tr>
-        <tr><td><strong>Mostly wrong</strong></td><td>Most premises describe things not visible in the image</td></tr>
-    </table>
-
-    <details>
-        <summary>References</summary>
-        <div class="details-content">
-            <div class="reference">
-                <div class="paper-title">Reference: Wachsmuth et al. (2017) — Local Acceptability</div>
-                <div class="paper-meta">Wachsmuth, H., Naderi, N., Hou, Y., et al. "Computational Argumentation Quality Assessment in Natural Language." EACL 2017, pp. 176-187. <a href="https://aclanthology.org/E17-1017/">https://aclanthology.org/E17-1017/</a></div>
-                <div class="section">Section 3.1 — Taxonomy: Cogency → Local Acceptability</div>
-                <div class="quote">
-                    "An argument is <em>cogent</em> if it has <em>acceptable</em> premises that are relevant to its conclusion and that are sufficient to draw the conclusion. <strong>Local acceptability:</strong> The premises are worthy being believed as true."
+<div class="cat-format">
+    <div class="category-title">Output Format</div>
+    <div class="metrics-grid">
+        <!-- Format Adherence -->
+        <div class="metric-card">
+            <h3>Format Adherence</h3>
+            <p><strong>What it measures:</strong> Did the model follow the required output format?</p>
+            <table>
+                <tr><th>Label</th><th>Meaning</th></tr>
+                <tr><td><strong>Perfect</strong></td><td>Output exactly matches all format requirements</td></tr>
+                <tr><td><strong>Minor errors</strong></td><td>Mostly correct format with 1-2 small deviations</td></tr>
+                <tr><td><strong>Partial failure</strong></td><td>Format is partially correct but has notable violations</td></tr>
+                <tr><td><strong>Complete failure</strong></td><td>Output ignores format rules entirely</td></tr>
+            </table>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">ArgGenBench (2026) — Instruction Following</div>
+                        <div class="paper-meta">Jin, B., et al. ACL 2026.</div>
+                        <div class="section">Instruction Following (IF)</div>
+                        <div class="quote">"win/tie/lose rate against reference based on topic, stance, and each control signal (length, style, strategy, audience, key points)."</div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Measures whether the model follows structural output rules independent of content quality.</p>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Wachsmuth et al. (2017) — Clarity</div>
+                        <div class="paper-meta">EACL 2017.</div>
+                        <div class="section">Effectiveness → Clarity</div>
+                        <div class="quote">"The argument is linguistically clear and as simple as possible without losing content."</div>
+                    </div>
                 </div>
-                <div class="quote">
-                    "Local acceptability requires that the premises are acceptable to the target audience, i.e., that they are worthy of being believed as true (Walton, 1996). This does not mean that they must be true, but that the audience has no reason to reject them."
-                </div>
-                <div class="quote">
-                    "For assessing the acceptability of single premises, we consider whether they are generally believable. An argumentative text may contain premises that are clearly false or unsubstantiated, which leads to low local acceptability."
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> We map "premises worthy of being believed as true" to "premises describing things actually visible in the image." In the visual domain, the equivalent of "believable premises" is "premises that correspond to visible elements."</p>
-            </div>
+            </details>
         </div>
-    </details>
+
+        <!-- Quantity Compliance -->
+        <div class="metric-card">
+            <h3>Quantity Compliance</h3>
+            <p><strong>What it measures:</strong> Did the model generate the correct number of premises/conclusions?</p>
+            <table>
+                <tr><th>Label</th><th>Meaning</th></tr>
+                <tr><td><strong>All counts correct</strong></td><td>Both counts fall within the specified range</td></tr>
+                <tr><td><strong>~2 off</strong></td><td>At least one count outside range, deviation is small</td></tr>
+                <tr><td><strong>&gt;2 off</strong></td><td>Counts deviate significantly from the range</td></tr>
+                <tr><td><strong>Ignores limits</strong></td><td>No attempt to follow quantity rules</td></tr>
+            </table>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">ArgGenBench (2026) — Length Fidelity</div>
+                        <div class="paper-meta">Jin, B., et al. ACL 2026.</div>
+                        <div class="section">Length Fidelity</div>
+                        <div class="quote">"correct length adherence."</div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Measures whether the model generates the correct NUMBER of premises and conclusions.</p>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Wildfeuer & Coffie (2022) — Annotation Scheme</div>
+                        <div class="paper-meta">Frontiers in Communication.</div>
+                        <div class="section">Structural constraints</div>
+                        <div class="quote">"annotation scheme for the description and annotation of both technical details..."</div>
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
 </div>
 
 <!-- ============================================================ -->
-<!-- METRIC 2: Premise Completeness -->
+<!-- CATEGORY 2: PREMISES -->
 <!-- ============================================================ -->
 
-<div class="metric-card" id="metric2">
-    <h3>2. Premise Completeness</h3>
-    <p><strong>What it measures:</strong> Did the model identify the main visible elements?</p>
-    <table>
-        <tr><th>Label</th><th>Meaning</th></tr>
-        <tr><td><strong>Captures all main elements</strong></td><td>Premises cover all or almost all important visible elements</td></tr>
-        <tr><td><strong>Captures most elements</strong></td><td>Premises cover the main elements with 1-2 notable omissions</td></tr>
-        <tr><td><strong>Captures some elements</strong></td><td>Premises cover some elements but miss several important ones</td></tr>
-        <tr><td><strong>Misses most elements</strong></td><td>Premises fail to capture the main visible content</td></tr>
-    </table>
-
-    <details>
-        <summary>References</summary>
-        <div class="details-content">
-            <div class="reference">
-                <div class="paper-title">Reference: Wildfeuer (2017) — Structural Completeness of Argument Reconstruction</div>
-                <div class="paper-meta">Wildfeuer, J. & Pollaroli, C. "Seeing the Untold: Multimodal Argumentation in Movie Trailers." In: Multimodal Argumentation and Rhetoric in Media Genres. John Benjamins, pp. 189-216.</div>
-                <div class="section">Key concept: Reconstruction of logical units from multimodal content</div>
-                <div class="quote">
-                    "By applying a formal-logical as well as an argumentative perspective combining Pragma-Dialectics and the Argumentum Model of Topics, it aims at a <strong>reconstruction of the logical units</strong> that guide the viewer's imagination and hypothesis-making about the story."
+<div class="cat-premise">
+    <div class="category-title">Premises</div>
+    <div class="metrics-grid">
+        <!-- Premise Accuracy -->
+        <div class="metric-card">
+            <h3>Premise Accuracy</h3>
+            <p><strong>What it measures:</strong> Are the described premises actually visible in the image?</p>
+            <table>
+                <tr><th>Label</th><th>Meaning</th></tr>
+                <tr><td><strong>All correct</strong></td><td>Every premise describes something clearly visible</td></tr>
+                <tr><td><strong>Mostly correct</strong></td><td>Most premises are visible; 1-2 minor errors</td></tr>
+                <tr><td><strong>Partially correct</strong></td><td>Some visible, but several describe things not in image</td></tr>
+                <tr><td><strong>Mostly wrong</strong></td><td>Most premises describe things not visible</td></tr>
+            </table>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">Wachsmuth et al. (2017) — Local Acceptability</div>
+                        <div class="paper-meta">EACL 2017. <a href="https://aclanthology.org/E17-1017/">ACL</a></div>
+                        <div class="section">Cogency → Local Acceptability</div>
+                        <div class="quote">"The premises are worthy being believed as true."</div>
+                        <div class="quote">"This does not mean that they must be true, but that the audience has no reason to reject them."</div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Maps "premises worthy of being believed" to "premises describing things visible in the image."</p>
+                    </div>
                 </div>
-                <div class="quote">
-                    "The combined approach makes it possible to <strong>reconstruct the standpoint and multimodal arguments</strong> of the example movie trailer."
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> Wildfeuer's framework emphasizes reconstructing ALL argument components from multimodal content. Premise Completeness measures whether the model captured all important visual elements needed for the argument — analogous to completeness of argument reconstruction.</p>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Wildfeuer (2018) — Rhetorical Structure</div>
-                <div class="paper-meta">Wildfeuer, J. "It's all about logics?! Analyzing the rhetorical structure of multimodal filmic text." Semiotica 220, pp. 95-121. DOI: 10.1515/sem-2015-0139</div>
-                <div class="section">Key concept: Making premises available in multimodal context</div>
-                <div class="quote">
-                    "The aim is to show how multimodal film leads its spectators to acknowledge the argumentative reconstruction of its content by relating the diegetic world to its reality and proving its validity."
-                </div>
-                <div class="quote">
-                    "The aim is thus to gain a detailed look at <strong>how premises and arguments for the interpretation are made available</strong> in multimodal context and how they are operated by the recipient."
-                </div>
-            </div>
+            </details>
         </div>
-    </details>
+
+        <!-- Premise Completeness -->
+        <div class="metric-card">
+            <h3>Premise Completeness</h3>
+            <p><strong>What it measures:</strong> Did the model identify the main visible elements?</p>
+            <table>
+                <tr><th>Label</th><th>Meaning</th></tr>
+                <tr><td><strong>Captures all</strong></td><td>Premises cover all or almost all important visible elements</td></tr>
+                <tr><td><strong>Captures most</strong></td><td>Covers main elements with 1-2 notable omissions</td></tr>
+                <tr><td><strong>Captures some</strong></td><td>Covers some but misses several important ones</td></tr>
+                <tr><td><strong>Misses most</strong></td><td>Fails to capture the main visible content</td></tr>
+            </table>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">Wildfeuer & Pollaroli (2017) — Argument Reconstruction</div>
+                        <div class="paper-meta">John Benjamins, pp. 189-216.</div>
+                        <div class="section">Reconstruction of logical units</div>
+                        <div class="quote">"aims at a reconstruction of the logical units that guide the viewer's imagination"</div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Measures whether model captured all important visual elements needed for the argument.</p>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Wildfeuer (2018) — Rhetorical Structure</div>
+                        <div class="paper-meta">Semiotica 220, pp. 95-121.</div>
+                        <div class="section">Making premises available</div>
+                        <div class="quote">"how premises and arguments for the interpretation are made available in multimodal context"</div>
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
 </div>
 
 <!-- ============================================================ -->
-<!-- METRIC 3: Conclusion Validity -->
+<!-- CATEGORY 3: CONCLUSION -->
 <!-- ============================================================ -->
 
-<div class="metric-card" id="metric3">
-    <h3>3. Conclusion Validity</h3>
-    <p><strong>What it measures:</strong> Does the conclusion logically follow from the premises?</p>
-    <table>
-        <tr><th>Label</th><th>Meaning</th></tr>
-        <tr><td><strong>Clearly follows</strong></td><td>The conclusion is a direct and logical inference from the premises</td></tr>
-        <tr><td><strong>Mostly follows</strong></td><td>The conclusion follows with minor logical gaps or assumptions</td></tr>
-        <tr><td><strong>Weakly follows</strong></td><td>The conclusion barely follows; requires significant assumptions</td></tr>
-        <tr><td><strong>Does not follow</strong></td><td>The conclusion is unrelated to or contradicts the premises</td></tr>
-    </table>
-
-    <details>
-        <summary>References</summary>
-        <div class="details-content">
-            <div class="reference">
-                <div class="paper-title">Reference: Alshomary & Stahl (2022) — Validity of Conclusions</div>
-                <div class="paper-meta">Alshomary, M. & Stahl, M. "Argument Novelty and Validity Assessment via Multitask and Transfer Learning." ArgMining 2022.</div>
-                <div class="section">Section 2 — Task Definition: Validity</div>
-                <div class="quote">
-                    "<strong>Validity:</strong> Whether a given conclusion can be logically inferred from its premises (valid/invalid)."
+<div class="cat-conclusion">
+    <div class="category-title">Conclusion</div>
+    <div class="metrics-grid">
+        <!-- Conclusion Validity -->
+        <div class="metric-card">
+            <h3>Conclusion Validity</h3>
+            <p><strong>What it measures:</strong> Does the conclusion logically follow from the premises?</p>
+            <table>
+                <tr><th>Label</th><th>Meaning</th></tr>
+                <tr><td><strong>Clearly follows</strong></td><td>Direct and logical inference from the premises</td></tr>
+                <tr><td><strong>Mostly follows</strong></td><td>Follows with minor logical gaps or assumptions</td></tr>
+                <tr><td><strong>Weakly follows</strong></td><td>Barely follows; requires significant assumptions</td></tr>
+                <tr><td><strong>Does not follow</strong></td><td>Unrelated to or contradicts the premises</td></tr>
+            </table>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">Alshomary & Stahl (2022) — Validity</div>
+                        <div class="paper-meta">ArgMining 2022.</div>
+                        <div class="section">Task Definition: Validity</div>
+                        <div class="quote">"Whether a given conclusion can be logically inferred from its premises (valid/invalid)."</div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Uses 4-point scale instead of binary to capture degrees of logical connection.</p>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Wachsmuth et al. (2017) — Local Sufficiency</div>
+                        <div class="paper-meta">EACL 2017.</div>
+                        <div class="section">Cogency → Local Sufficiency</div>
+                        <div class="quote">"The premises are sufficient to draw the conclusion."</div>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Gurcke et al. (2021) — Sufficiency Assessment</div>
+                        <div class="paper-meta">ArgMining 2021.</div>
+                        <div class="section">Human Evaluation Protocol</div>
+                        <div class="quote">"Are the premises sufficient to draw the conclusion? Scale: 1-5"</div>
+                    </div>
                 </div>
-                <div class="quote">
-                    "A valid conclusion is one that follows logically from the given premises. An invalid conclusion is one that cannot be inferred from the premises, or one that contradicts them."
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> We use a 4-point scale instead of binary (valid/invalid) to capture degrees of logical connection, following the supervisor's feedback that 4 options reduce bias.</p>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Wachsmuth et al. (2017) — Local Sufficiency</div>
-                <div class="paper-meta">Wachsmuth, H., et al. "Computational Argumentation Quality Assessment in Natural Language." EACL 2017.</div>
-                <div class="section">Section 3.1 — Taxonomy: Cogency → Local Sufficiency</div>
-                <div class="quote">
-                    "<strong>Local sufficiency:</strong> The premises are sufficient to draw the conclusion. If the premises provide enough support for the conclusion, local sufficiency is high."
-                </div>
-                <div class="quote">
-                    "An argument with high local acceptability and relevance but low local sufficiency may still fail to be cogent, as the premises may not provide enough support for the conclusion."
-                </div>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Gurcke et al. (2021) — Sufficiency Assessment via Conclusion Generation</div>
-                <div class="paper-meta">Gurcke, T., Alshomary, M., & Wachsmuth, H. "Assessing the Sufficiency of Arguments through Conclusion Generation." ArgMining 2021.</div>
-                <div class="section">Section 4 — Human Evaluation Protocol</div>
-                <div class="quote">
-                    "<strong>Q1: Sufficiency</strong> — 'Are the premises sufficient to draw the conclusion?' Scale: 1 = not sufficient ... 5 = sufficient"
-                </div>
-                <div class="quote">
-                    "<strong>Q2: Likelihood</strong> — 'How likely is it that the conclusion will be inferred from the context?' Scale: 1 = very unlikely ... 5 = very likely"
-                </div>
-            </div>
+            </details>
         </div>
-    </details>
-</div>
 
-<!-- ============================================================ -->
-<!-- METRIC 4: Conclusion Novelty -->
-<!-- ============================================================ -->
-
-<div class="metric-card" id="metric4">
-    <h3>4. Conclusion Novelty</h3>
-    <p><strong>What it measures:</strong> Does the conclusion add new insight beyond restating the premises?</p>
-    <table>
-        <tr><th>Label</th><th>Meaning</th></tr>
-        <tr><td><strong>Insightful</strong></td><td>Conclusion provides genuinely new understanding or interpretation</td></tr>
-        <tr><td><strong>Moderate</strong></td><td>Conclusion adds some interpretation beyond what premises explicitly state</td></tr>
-        <tr><td><strong>Paraphrase</strong></td><td>Conclusion mostly restates or rephrases the premises</td></tr>
-        <tr><td><strong>Copy</strong></td><td>Conclusion is nearly identical to the premises</td></tr>
-    </table>
-
-    <details>
-        <summary>References</summary>
-        <div class="details-content">
-            <div class="reference">
-                <div class="paper-title">Reference: Alshomary & Stahl (2022) — Novelty of Conclusions</div>
-                <div class="paper-meta">Alshomary, M. & Stahl, M. "Argument Novelty and Validity Assessment via Multitask and Transfer Learning." ArgMining 2022.</div>
-                <div class="section">Section 2 — Task Definition: Novelty</div>
-                <div class="quote">
-                    "<strong>Novelty:</strong> Whether the conclusion goes beyond what is mentioned in the premises (novel/not novel)."
+        <!-- Conclusion Novelty -->
+        <div class="metric-card">
+            <h3>Conclusion Novelty</h3>
+            <p><strong>What it measures:</strong> Does the conclusion add new insight beyond restating the premises?</p>
+            <table>
+                <tr><th>Label</th><th>Meaning</th></tr>
+                <tr><td><strong>Insightful</strong></td><td>Provides genuinely new understanding or interpretation</td></tr>
+                <tr><td><strong>Moderate</strong></td><td>Adds some interpretation beyond what premises state</td></tr>
+                <tr><td><strong>Paraphrase</strong></td><td>Mostly restates or rephrases the premises</td></tr>
+                <tr><td><strong>Copy</strong></td><td>Nearly identical to the premises</td></tr>
+            </table>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">Alshomary & Stahl (2022) — Novelty</div>
+                        <div class="paper-meta">ArgMining 2022.</div>
+                        <div class="section">Task Definition: Novelty</div>
+                        <div class="quote">"A valid but NOT novel conclusion = repetition, paraphrase, or summary of the premise."</div>
+                        <div class="quote">"A valid AND novel conclusion = offers new information extending what is covered by the premise."</div>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Gurcke et al. (2021) — Composition</div>
+                        <div class="paper-meta">ArgMining 2021.</div>
+                        <div class="section">Novelty/Composition</div>
+                        <div class="quote">"Scale: 1 = verbatim copying, 2 = synonymous copying, 3 = copying + fusion, 4 = inference, 5 = cannot be composed"</div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Collapses 5-point scale into 4 novelty levels.</p>
+                    </div>
                 </div>
-                <div class="quote">
-                    "A valid but NOT novel conclusion = <strong>repetition, paraphrase, or summary</strong> of the premise."
-                </div>
-                <div class="quote">
-                    "A valid AND novel conclusion = <strong>offers new information</strong> extending what is covered by the premise."
-                </div>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Gurcke et al. (2021) — Composition of Conclusions</div>
-                <div class="paper-meta">Gurcke, T., Alshomary, M., & Wachsmuth, H. "Assessing the Sufficiency of Arguments through Conclusion Generation." ArgMining 2021.</div>
-                <div class="section">Section 4 — Human Evaluation Protocol</div>
-                <div class="quote">
-                    "<strong>Q3: Novelty/Composition</strong> — 'How can the conclusion be composed from the context?' Scale: 1 = verbatim copying, 2 = synonymous copying, 3 = copying + fusion, 4 = inference, 5 = cannot be composed"
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> We collapse Gurcke's 5-point composition scale into 4 novelty levels: Copy (= verbatim), Paraphrase (= synonymous + fusion), Moderate (= light inference), Insightful (= strong inference beyond premises).</p>
-            </div>
+            </details>
         </div>
-    </details>
-</div>
 
-<!-- ============================================================ -->
-<!-- METRIC 5: Visual Grounding -->
-<!-- ============================================================ -->
-
-<div class="metric-card" id="metric5">
-    <h3>5. Visual Grounding</h3>
-    <p><strong>What it measures:</strong> Does the conclusion stay grounded in the visual evidence, or does it introduce external knowledge not supported by the image?</p>
-    <table>
-        <tr><th>Label</th><th>Meaning</th></tr>
-        <tr><td><strong>Strictly visual</strong></td><td>Conclusion follows directly from what is visible in the image and premises</td></tr>
-        <tr><td><strong>Minor external</strong></td><td>Conclusion is mostly visual with small, reasonable inferences (e.g., "rescue" from context)</td></tr>
-        <tr><td><strong>Some external</strong></td><td>Conclusion mixes visual evidence with external knowledge not implied by the image</td></tr>
-        <tr><td><strong>Heavy external</strong></td><td>Conclusion relies mostly on external knowledge; barely connects to the image</td></tr>
-    </table>
-
-    <details>
-        <summary>References</summary>
-        <div class="details-content">
-            <div class="reference">
-                <div class="paper-title">Reference: Tseronis et al. (2024) — Rationale-to-Image Groundedness</div>
-                <div class="paper-meta">Tseronis, A., Younis, R., & Uzelgun, M.A. "A proposal for the evaluation of multimodal argumentation." Journal of Argumentation in Context, 2024.</div>
-                <div class="section">Key concept: Cognitive dimension of multimodal argument evaluation</div>
-                <div class="quote">
-                    "Three-dimensional evaluation framework: (1) <strong>Internal cogency / Reasonableness</strong> — critical questions pertaining to the argument scheme; (2) <strong>Cognitive dimension</strong> — how effectively the semiotic design helps the addressee process the argument; (3) <strong>Rhetorical dimension</strong> — how effectively the argument is adjusted to the audience and context."
+        <!-- Visual Grounding -->
+        <div class="metric-card">
+            <h3>Visual Grounding</h3>
+            <p><strong>What it measures:</strong> Does the conclusion stay grounded in the visual evidence?</p>
+            <table>
+                <tr><th>Label</th><th>Meaning</th></tr>
+                <tr><td><strong>Strictly visual</strong></td><td>Conclusion follows directly from visible content</td></tr>
+                <tr><td><strong>Minor external</strong></td><td>Mostly visual with small, reasonable inferences</td></tr>
+                <tr><td><strong>Some external</strong></td><td>Mix of visual evidence and external knowledge</td></tr>
+                <tr><td><strong>Heavy external</strong></td><td>Relies mostly on external knowledge; barely connects to image</td></tr>
+            </table>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">Tseronis et al. (2024) — Cognitive Dimension</div>
+                        <div class="paper-meta">Journal of Argumentation in Context.</div>
+                        <div class="section">Cognitive dimension</div>
+                        <div class="quote">"how effectively the semiotic design helps the addressee process the argument."</div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Measures whether conclusion stays grounded in visual evidence.</p>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Wildfeuer & Pollaroli (2018) — Dynamic Context</div>
+                        <div class="paper-meta">International Review of Pragmatics 10(2).</div>
+                        <div class="section">Context-dependent interpretation</div>
+                        <div class="quote">"multimodal arguments depend on visual context"</div>
+                    </div>
                 </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> The cognitive dimension focuses on how well the semiotic design (visual arguments) supports the argument. Visual Grounding measures whether the conclusion stays grounded in the visual evidence provided by the image and premises, rather than importing external knowledge not supported by the visual content.</p>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Wildfeuer (2018) — Dynamic Context in Multimodal Argumentation</div>
-                <div class="paper-meta">Wildfeuer, J. & Pollaroli, C. "When Context Changes: The Need for a Dynamic Notion of Context in Multimodal Argumentation." International Review of Pragmatics 10(2), pp. 179-197. DOI: 10.1163/18773109-01002003</div>
-                <div class="section">Key concept: Context-dependent interpretation of multimodal arguments</div>
-                <div class="quote">
-                    "Multimodal argumentative genres such as commercials and movie trailers often work with a <strong>dynamically changing interpretation</strong>, which, at the end, reveals their persuasive patterns and final claims."
-                </div>
-                <div class="quote">
-                    "It demonstrates that it is absolutely necessary for a detailed analysis of the argumentation in these multimodal genres to <strong>include the contextual influence</strong> and dynamic change potential."
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> Wildfeuer emphasizes that multimodal arguments depend on visual context. Visual Grounding ensures the conclusion stays within what the visual context actually provides, rather than introducing external claims that the image doesn't support.</p>
-            </div>
+            </details>
         </div>
-    </details>
-</div>
 
-<!-- ============================================================ -->
-<!-- METRIC 6: Format Adherence -->
-<!-- ============================================================ -->
-
-<div class="metric-card" id="metric6">
-    <h3>6. Format Adherence</h3>
-    <p><strong>What it measures:</strong> Did the model follow the required output format (e.g., sentence structure, labels, sections)?</p>
-    <table>
-        <tr><th>Label</th><th>Meaning</th></tr>
-        <tr><td><strong>Perfect</strong></td><td>Output exactly matches all format requirements</td></tr>
-        <tr><td><strong>Minor errors</strong></td><td>Mostly correct format with 1-2 small deviations</td></tr>
-        <tr><td><strong>Partial failure</strong></td><td>Format is partially correct but has notable violations</td></tr>
-        <tr><td><strong>Complete failure</strong></td><td>Output ignores format rules entirely</td></tr>
-    </table>
-
-    <details>
-        <summary>References</summary>
-        <div class="details-content">
-            <div class="reference">
-                <div class="paper-title">Reference: ArgGenBench (2026) — Instruction Following</div>
-                <div class="paper-meta">Jin, B., Bao, J., Sun, Y., Zhang, Y., & Xu, R. "ArgGenBench: Benchmarking the Complex Controlled Argument Generation Capability of Large Language Models." ACL 2026.</div>
-                <div class="section">Evaluation Dimension: Instruction Following (IF)</div>
-                <div class="quote">
-                    "<strong>Instruction Following (IF)</strong> — win/tie/lose rate against reference based on topic, stance, and each <strong>control signal</strong> (length, style, strategy, audience, key points)."
+        <!-- Human Alignment -->
+        <div class="metric-card">
+            <h3>Human Alignment</h3>
+            <p><strong>What it measures:</strong> How closely does the model's reasoning match human interpretation?</p>
+            <table>
+                <tr><th>Label</th><th>Meaning</th></tr>
+                <tr><td><strong>Strong match</strong></td><td>Both reasoning and conclusion align with human interpretation</td></tr>
+                <tr><td><strong>Conclusion only</strong></td><td>Similar conclusion but through different reasoning</td></tr>
+                <tr><td><strong>Different focus</strong></td><td>Focuses on different aspects than a human would</td></tr>
+                <tr><td><strong>Unrelated</strong></td><td>Nothing in common with human interpretation</td></tr>
+            </table>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">Tseronis et al. (2024) — Cognitive Dimension</div>
+                        <div class="paper-meta">Journal of Argumentation in Context.</div>
+                        <div class="section">Cognitive dimension</div>
+                        <div class="quote">"how effectively the semiotic design helps the addressee process the argument."</div>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Lauscher et al. (2020) — Effectiveness</div>
+                        <div class="paper-meta">COLING 2020.</div>
+                        <div class="section">Annotation Protocol: Effectiveness</div>
+                        <div class="quote">"Is the argument stated in a way that would be persuasive to the target audience?"</div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Narrows "persuasive to target audience" to "similar to how a human would reason."</p>
+                    </div>
+                    <div class="reference">
+                        <div class="paper-title">Wildfeuer (2018) — Inference Process</div>
+                        <div class="paper-meta">Semiotica 220, pp. 95-121.</div>
+                        <div class="section">Retracing inference process</div>
+                        <div class="quote">"retraces the inference process of the recipient in detail"</div>
+                    </div>
                 </div>
-                <div class="quote">
-                    "<strong>Argument Quality</strong> — win/tie/lose rate based on <strong>logical coherence, persuasiveness, clarity</strong>."
-                </div>
-                <div class="quote">
-                    "<strong>Length Fidelity (LF)</strong> — correct length adherence."
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> ArgGenBench evaluates instruction following as a separate dimension from argument quality. Format Adherence measures whether the model follows the structural output rules (labels, sections, sentence style) independent of content quality.</p>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Wachsmuth et al. (2017) — Clarity</div>
-                <div class="paper-meta">Wachsmuth, H., et al. "Computational Argumentation Quality Assessment in Natural Language." EACL 2017.</div>
-                <div class="section">Section 3.1 — Taxonomy: Effectiveness → Clarity</div>
-                <div class="quote">
-                    "<strong>Clarity:</strong> The argument is linguistically clear and as simple as possible without losing content. If the argument is hard to understand or ambiguous, clarity is low."
-                </div>
-            </div>
+            </details>
         </div>
-    </details>
-</div>
-
-<!-- ============================================================ -->
-<!-- METRIC 7: Quantity Compliance -->
-<!-- ============================================================ -->
-
-<div class="metric-card" id="metric7">
-    <h3>7. Quantity Compliance</h3>
-    <p><strong>What it measures:</strong> Did the model generate the correct number of premises and conclusions as specified in the rules?</p>
-    <table>
-        <tr><th>Label</th><th>Meaning</th></tr>
-        <tr><td><strong>All counts correct</strong></td><td>Premise count and conclusion count both fall within the specified range</td></tr>
-        <tr><td><strong>2 or less than 2 counts off</strong></td><td>At least one count is outside the range, but the deviation is small</td></tr>
-        <tr><td><strong>More than 2 counts off</strong></td><td>Counts deviate significantly from the range</td></tr>
-        <tr><td><strong>Ignores all limits</strong></td><td>No attempt to follow quantity rules; generates arbitrarily many or few</td></tr>
-    </table>
-
-    <details>
-        <summary>References</summary>
-        <div class="details-content">
-            <div class="reference">
-                <div class="paper-title">Reference: ArgGenBench (2026) — Length Fidelity</div>
-                <div class="paper-meta">Jin, B., et al. "ArgGenBench: Benchmarking the Complex Controlled Argument Generation Capability of Large Language Models." ACL 2026.</div>
-                <div class="section">Evaluation Dimension: Length Fidelity</div>
-                <div class="quote">
-                    "<strong>Length Fidelity (LF)</strong> — correct length adherence."
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> ArgGenBench evaluates length fidelity as a separate dimension. Quantity Compliance specifically measures whether the model generates the correct NUMBER of premises and conclusions (e.g., 2-4 premises, 1-2 conclusions), which is a specific form of instruction following.</p>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Wildfeuer (2018) — Format Errors Noted in Evaluation</div>
-                <div class="paper-meta">Wildfeuer, J. & Coffie, J.A. "#socialiseresponsibly. Analyzing the Rhetorical Structure of Heineken TV Commercials During the Pandemic." Frontiers in Communication 7: 887706, 2022.</div>
-                <div class="section">Key concept: Multi-level annotation scheme with structural constraints</div>
-                <div class="quote">
-                    "We develop an <strong>annotation scheme for the description and annotation</strong> of both technical details such as camera perspective, for example, as well as the discourse analytical details of finding rhetorical relations between audio-visual units."
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> Annotation schemes in multimodal analysis require adherence to specific structural constraints. Quantity Compliance ensures the generated argument follows the structural rules of the task (correct number of premises/conclusions).</p>
-            </div>
-        </div>
-    </details>
-</div>
-
-<!-- ============================================================ -->
-<!-- METRIC 8: Human Alignment -->
-<!-- ============================================================ -->
-
-<div class="metric-card" id="metric8">
-    <h3>8. Human Alignment</h3>
-    <p><strong>What it measures:</strong> How closely does the model's reasoning and conclusion match how a human would reason about the same image?</p>
-    <table>
-        <tr><th>Label</th><th>Meaning</th></tr>
-        <tr><td><strong>Strong match</strong></td><td>Both the reasoning process and conclusion align with how a human would interpret the image</td></tr>
-        <tr><td><strong>Conclusion only</strong></td><td>Model reaches a similar conclusion but through different reasoning or emphasis</td></tr>
-        <tr><td><strong>Different focus</strong></td><td>Model focuses on different aspects of the image than a human would</td></tr>
-        <tr><td><strong>Unrelated</strong></td><td>Model's reasoning has nothing in common with how a human would interpret the image</td></tr>
-    </table>
-
-    <details>
-        <summary>References</summary>
-        <div class="details-content">
-            <div class="reference">
-                <div class="paper-title">Reference: Tseronis et al. (2024) — Cognitive Dimension</div>
-                <div class="paper-meta">Tseronis, A., Younis, R., & Uzelgun, M.A. "A proposal for the evaluation of multimodal argumentation." Journal of Argumentation in Context, 2024.</div>
-                <div class="section">Key concept: Cognitive dimension of multimodal argument evaluation</div>
-                <div class="quote">
-                    "<strong>Cognitive dimension</strong> — how effectively the semiotic design helps the addressee process the argument."
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> The cognitive dimension measures how well the argument's design helps the audience process it. Human Alignment measures whether the model's reasoning processes align with how humans actually interpret the visual content — a prerequisite for effective cognitive processing.</p>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Lauscher et al. (2020) — Effectiveness as Persuasive Power</div>
-                <div class="paper-meta">Lauscher, A., Ng, L., Napoles, C., & Tetreault, J. "Rhetoric, Logic, and Dialectic: Advancing Theory-based Argument Quality Assessment in Natural Language Processing." COLING 2020.</div>
-                <div class="section">Section 3 — Annotation Protocol: Effectiveness</div>
-                <div class="quote">
-                    "<strong>Effectiveness</strong> reflects the persuasive power of how an argument is stated. Important aspects of an effective argument include its arrangement, clarity, appropriateness in a given context, credibility, and emotional appeal."
-                </div>
-                <div class="quote">
-                    "Guiding question for Effectiveness: <strong>'Is the argument stated in a way that would be persuasive to the target audience?'</strong>"
-                </div>
-                <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;"><strong>Our adaptation:</strong> We narrow "persuasive to target audience" to "similar to how a human would reason" — measuring alignment with human interpretive patterns rather than general persuasiveness.</p>
-            </div>
-
-            <div class="reference">
-                <div class="paper-title">Reference: Wildfeuer (2018) — Inference Process of the Recipient</div>
-                <div class="paper-meta">Wildfeuer, J. "It's all about logics?! Analyzing the rhetorical structure of multimodal filmic text." Semiotica 220, pp. 95-121.</div>
-                <div class="section">Key concept: Retracing the inference process</div>
-                <div class="quote">
-                    "The paper presents an analytical approach based on recent advancements in contemporary discourse semantics and multimodal discourse analysis which outlines the discursive and rhetorical structure of filmic text and <strong>retraces the inference process of the recipient in detail</strong>."
-                </div>
-                <div class="quote">
-                    "The aim is thus to gain a detailed look at how premises and arguments for the interpretation are made available in multimodal context and <strong>how they are operated by the recipient</strong>."
-                </div>
-            </div>
-        </div>
-    </details>
+    </div>
 </div>
 
 <hr>
@@ -421,37 +347,18 @@
 <!-- FULL REFERENCES -->
 <!-- ============================================================ -->
 
-<h2 id="full-references">Full References</h2>
+<h2>Full References</h2>
 
 <details open>
     <summary>Primary Sources</summary>
     <div class="details-content">
-        <ol style="padding-left: 1.5rem;">
-            <li style="margin-bottom: 1rem;">
-                <strong>Wachsmuth, H., Naderi, N., Hou, Y., Bilu, Y., Prabhakaran, V., Thijm, T.A., Hirst, G., & Stein, B.</strong> (2017). Computational Argumentation Quality Assessment in Natural Language. <em>EACL 2017</em>, pp. 176-187.<br>
-                <a href="https://aclanthology.org/E17-1017/">https://aclanthology.org/E17-1017/</a><br>
-                <em>Defines the 15-dimension taxonomy: Cogency (Local Acceptability, Local Relevance, Local Sufficiency), Effectiveness (Clarity, Credibility, Appropriateness, Emotional Appeal, Arrangement), Reasonableness (Global Acceptability, Global Relevance, Global Sufficiency), and Overall Quality.</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Alshomary, M. & Stahl, M.</strong> (2022). Argument Novelty and Validity Assessment via Multitask and Transfer Learning. <em>ArgMining 2022</em>.<br>
-                <em>Defines Validity (whether conclusion logically follows from premises) and Novelty (whether conclusion goes beyond premises). Binary classification: valid/invalid, novel/not novel.</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Gurcke, T., Alshomary, M., & Wachsmuth, H.</strong> (2021). Assessing the Sufficiency of Arguments through Conclusion Generation. <em>ArgMining 2021</em>.<br>
-                <em>5-point Likert scales for Sufficiency ("Are premises sufficient to draw conclusion?"), Likelihood ("How likely will conclusion be inferred?"), and Composition (verbatim copying → inference).</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Lauscher, A., Ng, L., Napoles, C., & Tetreault, J.</strong> (2020). Rhetoric, Logic, and Dialectic: Advancing Theory-based Argument Quality Assessment in Natural Language Processing. <em>COLING 2020</em>.<br>
-                <em>Simplified 4-dimension scheme with 5-point Likert: Cogency, Effectiveness, Reasonableness, Overall Quality. Guiding questions per dimension.</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Tseronis, A., Younis, R., & Uzelgun, M.A.</strong> (2024). A proposal for the evaluation of multimodal argumentation. <em>Journal of Argumentation in Context</em>.<br>
-                <em>Three-dimensional framework: Internal cogency/reasonableness, Cognitive dimension (how effectively semiotic design helps addressee process argument), Rhetorical dimension.</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Jin, B., Bao, J., Sun, Y., Zhang, Y., & Xu, R.</strong> (2026). ArgGenBench: Benchmarking the Complex Controlled Argument Generation Capability of Large Language Models. <em>ACL 2026</em>.<br>
-                <em>Evaluates Instruction Following, Argument Quality (coherence, persuasiveness, clarity), Length Fidelity, and Overall. Uses LLM-as-judge + human evaluation.</em>
-            </li>
+        <ol style="padding-left: 1.2rem; font-size: 0.72rem;">
+            <li style="margin-bottom: 0.5rem;"><strong>Wachsmuth, H., et al.</strong> (2017). Computational Argumentation Quality Assessment in Natural Language. <em>EACL 2017</em>. <a href="https://aclanthology.org/E17-1017/">ACL</a></li>
+            <li style="margin-bottom: 0.5rem;"><strong>Alshomary, M. & Stahl, M.</strong> (2022). Argument Novelty and Validity Assessment via Multitask and Transfer Learning. <em>ArgMining 2022</em>.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Gurcke, T., et al.</strong> (2021). Assessing the Sufficiency of Arguments through Conclusion Generation. <em>ArgMining 2021</em>.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Lauscher, A., et al.</strong> (2020). Rhetoric, Logic, and Dialectic: Advancing Theory-based Argument Quality Assessment. <em>COLING 2020</em>.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Tseronis, A., et al.</strong> (2024). A proposal for the evaluation of multimodal argumentation. <em>Journal of Argumentation in Context</em>.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Jin, B., et al.</strong> (2026). ArgGenBench: Benchmarking the Complex Controlled Argument Generation Capability of LLMs. <em>ACL 2026</em>.</li>
         </ol>
     </div>
 </details>
@@ -459,23 +366,11 @@
 <details>
     <summary>Wildfeuer Papers</summary>
     <div class="details-content">
-        <ol start="7" style="padding-left: 1.5rem;">
-            <li style="margin-bottom: 1rem;">
-                <strong>Wildfeuer, J. & Pollaroli, C.</strong> (2017). Seeing the Untold: Multimodal Argumentation in Movie Trailers. In: <em>Multimodal Argumentation and Rhetoric in Media Genres</em>. John Benjamins, pp. 189-216.<br>
-                <em>Reconstructs logical units from multimodal content using Pragma-Dialectics + Argumentum Model of Topics.</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Wildfeuer, J.</strong> (2018). It's all about logics?! Analyzing the rhetorical structure of multimodal filmic text. <em>Semiotica</em> 220, pp. 95-121.<br>
-                <em>Traces inference process of recipient; shows how premises and arguments are made available in multimodal context.</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Wildfeuer, J. & Pollaroli, C.</strong> (2018). When Context Changes: The Need for a Dynamic Notion of Context in Multimodal Argumentation. <em>International Review of Pragmatics</em> 10(2), pp. 179-197.<br>
-                <em>Dynamic context as indispensable for multimodal argumentation; context change potential.</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Wildfeuer, J. & Coffie, J.A.</strong> (2022). #socialiseresponsibly. Analyzing the Rhetorical Structure of Heineken TV Commercials During the Pandemic. <em>Frontiers in Communication</em> 7: 887706.<br>
-                <em>Multi-level annotation scheme for rhetorical structure; corpus-analytical approach to multimodal argumentation.</em>
-            </li>
+        <ol start="7" style="padding-left: 1.2rem; font-size: 0.72rem;">
+            <li style="margin-bottom: 0.5rem;"><strong>Wildfeuer, J. & Pollaroli, C.</strong> (2017). Seeing the Untold: Multimodal Argumentation in Movie Trailers. <em>John Benjamins</em>, pp. 189-216.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Wildfeuer, J.</strong> (2018). It's all about logics?! <em>Semiotica</em> 220, pp. 95-121.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Wildfeuer, J. & Pollaroli, C.</strong> (2018). When Context Changes. <em>International Review of Pragmatics</em> 10(2), pp. 179-197.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Wildfeuer, J. & Coffie, J.A.</strong> (2022). #socialiseresponsibly. <em>Frontiers in Communication</em> 7: 887706.</li>
         </ol>
     </div>
 </details>
@@ -483,19 +378,10 @@
 <details>
     <summary>Supplementary Sources</summary>
     <div class="details-content">
-        <ol start="11" style="padding-left: 1.5rem;">
-            <li style="margin-bottom: 1rem;">
-                <strong>Romberg, J. et al.</strong> (2024). Let's discuss! Quality Dimensions and Annotated Datasets for Computational Argument Quality Assessment. <em>EMNLP 2024</em>.<br>
-                <em>Comprehensive survey of 32 AQ datasets; found 48% use point scales (1-3, 1-5, 1-6, etc.).</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Gienapp, L., Stein, B., Hagen, M., & Potthast, M.</strong> (2020). Efficient Pairwise Annotation of Argument Quality. <em>ACL 2020</em>, pp. 5626-5639.<br>
-                <em>Pairwise comparison for Logical, Rhetorical, Dialectical quality. Webis-ArgQuality-20 corpus.</em>
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Ocampo, N.B., Nyiranziza, A.P., & Ceolin, D.</strong> (2025). Argument Quality Assessment with Large Language Models: A Pairwise Bradley-Terry Approach.<br>
-                <em>Evaluates LLM-based argument quality across Logic, Rhetoric, Dialectic dimensions.</em>
-            </li>
+        <ol start="11" style="padding-left: 1.2rem; font-size: 0.72rem;">
+            <li style="margin-bottom: 0.5rem;"><strong>Romberg, J. et al.</strong> (2024). Let's discuss! Quality Dimensions and Annotated Datasets. <em>EMNLP 2024</em>.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Gienapp, L., et al.</strong> (2020). Efficient Pairwise Annotation of Argument Quality. <em>ACL 2020</em>.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Ocampo, N.B., et al.</strong> (2025). Argument Quality Assessment with LLMs: A Pairwise Bradley-Terry Approach.</li>
         </ol>
     </div>
 </details>
