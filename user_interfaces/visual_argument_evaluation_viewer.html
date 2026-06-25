@@ -123,6 +123,11 @@
             transition: all 0.2s;
         }
         .search-btn:hover { background: #334155; transform: scale(1.05); }
+        
+        /* Details/Summary styling */
+        details summary { list-style: none; }
+        details summary::-webkit-details-marker { display: none; }
+        details[open] summary .details-arrow { transform: rotate(90deg); }
     </style>
 </head>
 <body>
@@ -200,6 +205,12 @@ const modelColors = {
     minicpm: { bg: 'bg-purple-50', header: 'bg-purple-100', border: 'border-purple-200', text: 'text-purple-800' },
     llava: { bg: 'bg-orange-50', header: 'bg-orange-100', border: 'border-orange-200', text: 'text-orange-800' }
 };
+const modelTabColors = {
+    human: 'border-green-500 text-green-700 bg-green-50',
+    llava: 'border-orange-500 text-orange-700 bg-orange-50',
+    minicpm: 'border-purple-500 text-purple-700 bg-purple-50',
+    nemotron: 'border-blue-500 text-blue-700 bg-blue-50'
+};
 
 async function loadAllDataFromServer() {
     // Load prompts
@@ -218,10 +229,10 @@ async function loadAllDataFromServer() {
             id: item.id,
             url: `${API_BASE}/api/images/${item.id}.jpg`,
             note: "",
-            human: { premises: item.premises || [], conclusions: item.conclusions || [], metrics: {} },
-            llava: { premises: [], conclusions: [], metrics: {} },
-            minicpm: { premises: [], conclusions: [], metrics: {} },
-            nemotron: { premises: [], conclusions: [], metrics: {} }
+            human: { premises: item.premises || [], conclusions: item.conclusions || [], plan: "", metrics: {} },
+            llava: { premises: [], conclusions: [], plan: "", metrics: {} },
+            minicpm: { premises: [], conclusions: [], plan: "", metrics: {} },
+            nemotron: { premises: [], conclusions: [], plan: "", metrics: {} }
         }));
         
         console.log(`Loaded ${dataset.length} images from server`);
@@ -253,6 +264,7 @@ async function loadAllDataFromServer() {
                         if (dataRow && item.parsed_output) {
                             dataRow[targetModel].premises = item.parsed_output.premises || [];
                             dataRow[targetModel].conclusions = item.parsed_output.conclusions || [];
+                            dataRow[targetModel].plan = item.parsed_output.plan || "";
                         }
                     });
                     console.log(`Loaded ${data.length} items from ${file}`);
@@ -355,13 +367,7 @@ function switchModelTab(imageId, modelKey) {
     if (content) content.classList.remove('hidden');
     const tab = document.getElementById(`tab-${modelKey}-${imageId}`);
     if (tab) {
-        const colorMap = {
-            human: 'border-green-500 text-green-700 bg-green-50',
-            llava: 'border-orange-500 text-orange-700 bg-orange-50',
-            minicpm: 'border-purple-500 text-purple-700 bg-purple-50',
-            nemotron: 'border-blue-500 text-blue-700 bg-blue-50'
-        };
-        tab.className = `tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 ${colorMap[modelKey] || 'border-gray-500 text-gray-700 bg-gray-50'}`;
+        tab.className = `tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 ${modelTabColors[modelKey] || 'border-gray-500 text-gray-700 bg-gray-50'}`;
     }
 }
 
@@ -525,6 +531,7 @@ function renderModelCardContent(modelKey, modelData, imageId) {
     
     const premises = Array.isArray(modelData.premises) ? modelData.premises : [];
     const conclusions = Array.isArray(modelData.conclusions) ? modelData.conclusions : [];
+    const plan = modelData.plan || "";
     
     let premiseHtml = premises.length > 0 
         ? `<ul class="space-y-2">` + premises.map((p, i) => {
@@ -539,6 +546,17 @@ function renderModelCardContent(modelKey, modelData, imageId) {
             return `<li class="text-sm bg-white p-3 rounded-lg border border-gray-200 shadow-sm font-medium text-gray-900"><span class="font-bold text-gray-500 mr-2">${i+1}.</span>${text}</li>`;
           }).join('') + `</ul>`
         : `<p class="text-sm italic opacity-60 text-gray-500">No conclusions extracted / Data pending load.</p>`;
+
+    let planHtml = plan 
+        ? `<details class="mt-4">
+            <summary class="cursor-pointer text-sm font-bold text-gray-700 flex items-center hover:text-gray-900">
+                <svg class="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                Model Plan
+                <svg class="w-3 h-3 ml-2 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </summary>
+            <div class="mt-2 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-sm text-gray-700 whitespace-pre-wrap">${plan}</div>
+           </details>`
+        : '';
 
     // Evaluation checklist HTML with radio buttons
     const evaluationHtml = modelKey !== 'human' ? `
@@ -625,6 +643,7 @@ function renderModelCardContent(modelKey, modelData, imageId) {
             <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Conclusions (Inference)</h4>
             ${conclusionHtml}
         </div>
+        ${planHtml}
         ${evaluationHtml}
         ${metricsHtml ? `<div class="flex flex-wrap gap-2">${metricsHtml}</div>` : ''}
     </div>
