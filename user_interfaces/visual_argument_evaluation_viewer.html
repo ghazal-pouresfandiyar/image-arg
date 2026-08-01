@@ -74,6 +74,22 @@
             color: #475569;
         }
 
+        /* Modal Styles */
+        #stats-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        #stats-modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #stats-modal:not(.hidden) {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        
         .stat-card {
             background: #f8fafc;
             border-radius: 0.75rem;
@@ -82,52 +98,6 @@
         }
         .stat-val { font-size: 1.5rem; font-weight: 700; color: #1e293b; line-height: 1.2; }
         .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600; margin-bottom: 0.25rem;}
-        
-        /* Search Bar */
-        .search-container {
-            position: fixed;
-            bottom: 24px;
-            left: 24px;
-            z-index: 40;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .search-input {
-            width: 150px;
-            padding: 12px 16px;
-            border-radius: 9999px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        .search-input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-        .search-btn {
-            background: #1e293b;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s;
-        }
-        .search-btn:hover { background: #334155; transform: scale(1.05); }
-        
-        /* Details/Summary styling */
-        details summary { list-style: none; }
-        details summary::-webkit-details-marker { display: none; }
-        details[open] summary .details-arrow { transform: rotate(90deg); }
     </style>
 </head>
 <body>
@@ -135,6 +105,12 @@
     <div id="slider-container">
         <!-- Slides will be injected here by JS -->
     </div>
+
+    <!-- Persistent Floating Stats Button -->
+    <button onclick="openStatsModal()" class="floating-stats-btn bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-full font-bold flex items-center transition-all shadow-lg text-sm">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+        View Aggregate Stats
+    </button>
 
     <!-- Navigation Buttons -->
     <button id="prev-btn" class="nav-button" onclick="scrollSlider(-1)">
@@ -144,60 +120,150 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
     </button>
 
-    <!-- Search Bar -->
-    <div class="search-container">
-        <input type="text" id="search-input" class="search-input" placeholder="Search ID..." onkeypress="if(event.key==='Enter') searchAndGoToSlide()">
-        <button onclick="searchAndGoToSlide()" class="search-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        </button>
+    <!-- FULL SCREEN STATS MODAL -->
+    <div id="stats-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/80 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl w-[90vw] max-w-6xl max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="px-8 py-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                <h2 class="text-3xl font-bold text-gray-800 flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    Evaluation Statistics Dashboard
+                </h2>
+                <button onclick="closeStatsModal()" class="text-gray-400 hover:text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-full p-2 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-8 bg-white" id="stats-modal-content">
+                <!-- Auto-calculated stats injected here -->
+            </div>
+        </div>
     </div>
 
 <script>
 // ============================================================================
-// 0. GLOBAL CONFIGURATION
+// 0. GLOBAL CONFIGURATION FOR LOCAL FILE PATHS
 // ============================================================================
-const API_BASE = '';
+// These paths are relative to the user_interfaces/ folder
+const LOCAL_FILE_PATHS = [
+    "../dataset/annotated.csv",
+    "../models/output_model/llava_outputs.json",
+    "../models/output_model/minicpm-v_outputs.json",
+    "../models/output_model/nemotron-3-nano-omni-30b-a3b-reasoning-image-only.json",
+    "../evaluation/hallucination/llava_hallucination_deep.csv",
+    "../evaluation/hallucination/minicpm-v_hallucination_deep.csv",
+    "../evaluation/hallucination/nemotron-3-nano-omni-30b-a3b-reasoning-image-only_hallucination_deep.csv",
+    "../evaluation/similarity/llava_similarity.csv",
+    "../evaluation/similarity/minicpm-v_similarity.csv",
+    "../evaluation/nli/llava_outputs_with_nli.csv",
+    "../evaluation/nli/minicpm-v_outputs_with_nli.csv",
+    "../evaluation/nli/nemotron-3-nano-omni-30b-a3b-reasoning-image-only_outputs_with_nli.csv"
+];
 
 // ============================================================================
-// 1. DYNAMIC DATA LOADING FROM SERVER
+// 1. EMBEDDED DATA & NOTES
 // ============================================================================
-// Data will be loaded dynamically from server
+const imageUrls = {
+    "0": "https://pbs.twimg.com/media/ECvfjt_WwAINY01.jpg", "1": "https://pbs.twimg.com/media/Fi_DE_bX0AEEKpP.jpg", "2": "https://pbs.twimg.com/media/E4F-DcwVkA8KljQ.jpg", "5": "https://pbs.twimg.com/media/EhhUS_JVoAElufJ.jpg",
+    "8": "https://pbs.twimg.com/media/FfGqsH-XoAE_pei.jpg", "9": "https://pbs.twimg.com/media/D6kHT2uXsAAUQ1Z.jpg", "10": "https://pbs.twimg.com/media/FjrvSItXgAEj_6Z.jpg", "11": "https://pbs.twimg.com/media/E10GywNXsAIdGJ8.png",
+    "12": "https://pbs.twimg.com/media/FlFPJGGWIAMtdkL.png", "13": "https://pbs.twimg.com/media/EvONFZtXUAEAxrp.jpg", "14": "https://pbs.twimg.com/media/EphjPdIWMAE1A2V.jpg", "16": "https://pbs.twimg.com/media/EiYphRXX0AA-91g.jpg",
+    "21": "https://pbs.twimg.com/media/EcQzZh7U4AA2D6h.jpg", "23": "https://pbs.twimg.com/media/FYJ1YSVaIAArbZU.jpg", "24": "https://pbs.twimg.com/media/EjM3127UYAAHgje.jpg", "25": "https://pbs.twimg.com/media/EMhv5qAWwAAJroN?format=jpg&name=small",
+    "28": "https://pbs.twimg.com/media/FRksVbEXMAEYlMg.jpg", "29": "https://pbs.twimg.com/media/EhjkCa6WoAE-VDe.jpg", "30": "https://pbs.twimg.com/media/EEFUos2U8AA9bqL.jpg", "31": "https://pbs.twimg.com/media/E2ZN2fUXIAMGGuy.jpg",
+    "32": "https://pbs.twimg.com/media/Fi_DFPpXkAYWVUT.jpg", "34": "https://pbs.twimg.com/media/D8OT0mGV4AAcIUb?format=jpg&name=small", "36": "https://pbs.twimg.com/media/EE28LCKWkAA_K1t.jpg", "39": "https://pbs.twimg.com/media/FQTlPbbXIAQonSR.jpg",
+    "40": "https://pbs.twimg.com/media/FfPpFgEVQAAfQia.jpg", "41": "https://pbs.twimg.com/media/FUqH1e4XEAEHNmO.jpg", "43": "https://pbs.twimg.com/media/FOyRT4nWYAY68HX.jpg", "45": "https://pbs.twimg.com/media/E5VaYkCVIAAysI8.jpg",
+    "48": "https://pbs.twimg.com/media/FMo8ciRVUAQqqn8.jpg", "49": "https://pbs.twimg.com/media/E5zazAEX0AMN4Nv.jpg", "51": "https://pbs.twimg.com/media/Dwyc00SWwAAwZdJ.jpg", "52": "https://pbs.twimg.com/media/EhjkCXuWAAYF5tO.jpg",
+    "54": "https://pbs.twimg.com/media/FD52IglXMAY9jIy.jpg", "55": "https://pbs.twimg.com/media/EhkM_b3XcAEEzJn.jpg", "58": "https://pbs.twimg.com/media/E40rBSyXMAQM970.jpg", "64": "https://pbs.twimg.com/media/FRksVa1XIAIwanw.jpg",
+    "65": "https://pbs.twimg.com/media/FdWRDqlXgAMnnzV.jpg", "66": "https://pbs.twimg.com/media/EcccmLMWkAUWuYF.jpg", "67": "https://pbs.twimg.com/media/EhhUS_PUcAAn2Uy.jpg", "68": "https://pbs.twimg.com/media/FZffoBlWIAQRt0E.jpg",
+    "69": "https://pbs.twimg.com/media/Evn5E29WYAAhgu6.jpg", "70": "https://pbs.twimg.com/media/EMRqGHkU0AEjTFD.jpg", "71": "https://pbs.twimg.com/media/FhHh_6uagAIGc-b.jpg", "72": "https://pbs.twimg.com/media/EgEqHvUU4AAJGLU.jpg",
+    "73": "https://pbs.twimg.com/media/ExUoRnTU4AIJdtG.jpg", "75": "https://pbs.twimg.com/media/Fd6NOxtX0AA4Pm-.jpg", "76": "https://pbs.twimg.com/media/ExKEtbYXIAEm6-C.jpg", "77": "https://pbs.twimg.com/media/E40rBSrWUAA4pa4.jpg",
+    "78": "https://pbs.twimg.com/media/Eh6sAMsUYAISGwi.jpg", "79": "https://pbs.twimg.com/media/FJKfuNMXIAIhyJJ.jpg", "80": "https://pbs.twimg.com/media/FpvKOolXEAMz9oa?format=jpg&name=small", "81": "https://pbs.twimg.com/media/FC7GBGiVgAMnxaU.jpg",
+    "84": "https://pbs.twimg.com/media/EI_uhMrW4AAg3-O.jpg", "85": "https://pbs.twimg.com/media/Dw-qG_xUcAEk5KD.jpg", "86": "https://pbs.twimg.com/media/EWOFf_FU0AEKM2N.jpg", "89": "https://pbs.twimg.com/media/D6Ovn07XoAEBuN2.jpg",
+    "90": "https://pbs.twimg.com/media/FXgyKb-XwAAw53o.jpg", "91": "https://pbs.twimg.com/media/ErgS88qVcAEaOhx.jpg"
+};
 
-let optimalPrompt = "Loading prompt from file...";
-let systemPrompt = "";
-let userPrompt = "";
+const analysisNotes = {
+  "0": "Human relies on external knowledge ('Gran Barrera'). LLaVA shows good visual grounding. MiniCPM-V failed the strict knowledge rule by hallucinating 'Gran Barrera'. Nemotron had excellent strict adherence to visual-only premises.",
+  "1": "Human connects dead fish directly to global warming. LLaVA accurately observes bleached fish with minor speculation. MiniCPM-V has solid premises. Nemotron is highly descriptive ('desiccated shells') and perfectly logical.",
+  "2": "Human pulls in external context. LLaVA extracts text well but misses the visual background. MiniCPM-V combines text and visual successfully. Nemotron shows excellent synthesis of the shipping port and text.",
+  "5": "Human assumes wildfire smoke. LLaVA misses the climate argument, assuming a normal sunset. MiniCPM-V concludes high emissions. Nemotron correctly identifies the 'intense orange/amber coloration' as smoke/haze.",
+  "8": "Human focuses on drought/wind. LLaVA observes the donkey's blanket. MiniCPM-V concludes hot/dry conditions based on clothing. Nemotron details dust and clothing, inferring high temperatures.",
+  "9": "Human states melting ice. LLaVA observes melting ice around the bear. MiniCPM-V over-analyzes the bears' ages but makes a solid conclusion. Nemotron identifies fragmented ice cover.",
+  "10": "Human connects human waste to malnutrition. LLaVA excellently breaks down the comic's symbolic media critique. MiniCPM-V misses the media critique. Nemotron provides a literal, accurate translation of the panels.",
+  "11": "Human uses standard melting ice argument. LLaVA is very brief. MiniCPM-V observes distant landmasses. Nemotron is highly precise ('not connected to a larger ice mass').",
+  "12": "Human notes extinction. LLaVA extracts text well. MiniCPM-V completely missed the text and the scarf. Nemotron noticed the unnatural orange scarf, identifying it as a symbol for human intervention.",
+  "13": "Human focuses on suffering. LLaVA identifies the sarcasm in the bear's gesture. MiniCPM-V observes the warm gradient. Nemotron noticed the 'heat lines', making a fantastic visual premise.",
+  "14": "Human infers isolation/mental issues. LLaVA notes cracking ice. MiniCPM-V has a good structural premise. Nemotron shows superb strict visual logic regarding the reduction of sea ice.",
+  "16": "Human notes economic threat. LLaVA completely hallucinates the text (arguing it's a 'safe range'). Critical failure. MiniCPM-V accurately connects text. Nemotron treats the iceberg as a 'contextual symbol'.",
+  "21": "Human notes drought destroying plants. LLaVA notes the contrast between dead soil and the green plant. MiniCPM-V concludes resilience. Nemotron is highly descriptive and strict.",
+  "23": "Human says melting ice hurts populations. LLaVA is generic. MiniCPM-V accurately reads the map. Nemotron flawlessly extracts the color-coding legend.",
+  "24": "Human notes people suffering from heat. LLaVA reads 90°F. MiniCPM-V fails to read the number. Nemotron accurately reads 40°C.",
+  "25": "Human notes sea level rise. LLaVA identifies festive theme. MiniCPM-V uses external knowledge ('Venice', 'acqua alta'). Nemotron has highly detailed premises (rubber boots) and stays grounded.",
+  "28": "Human notes animals dying. LLaVA notes the village. MiniCPM-V spots people. Nemotron focuses heavily on the livestock death toll.",
+  "29": "Human notes air pollution threat. LLaVA is confused, assuming light reflection. MiniCPM-V deduces air pollution/wildfire. Nemotron perfectly deduces high concentration of atmospheric particles.",
+  "30": "Human notes migration. LLaVA thinks it's a dismantled building. MiniCPM-V assumes structural failure. Nemotron accurately observes erosion and small boats.",
+  "31": "Human notes storm causing sea level rise. LLaVA misses the before/after, thinking it's a summer day (Critical failure). MiniCPM-V reads the text. Nemotron flawlessly compares the top and bottom images.",
+  "32": "Human notes loss of beauty/trash. LLaVA notes murky water. MiniCPM-V observes urban neglect. Nemotron is highly accurate ('stagnant water').",
+  "34": "Human notes submerged buildings. LLaVA has good aerial observation. MiniCPM-V notes boats. Nemotron identifies flooding reaching lower floors.",
+  "36": "Human notes losing houses. LLaVA had a parsing failure in raw JSON and missed the climate aspect. MiniCPM-V is generic. Nemotron spotted green algae on concrete, proving seawater exposure.",
+  "39": "Human notes right to life. LLaVA extracts text. MiniCPM-V connects habitat destruction to health. Nemotron has strict, clean visual premises.",
+  "40": "Human notes drought threatens rights. LLaVA had a JSON parsing failure but extracted text. MiniCPM-V notes the person carrying an object. Nemotron focuses on human activity in water scarcity.",
+  "41": "Human links migration/trafficking. LLaVA extracts text. MiniCPM-V extracts text. Nemotron observes the visual design (silhouette enclosing the protest). Impressive reasoning.",
+  "43": "Human notes carrying water. LLaVA is generic. MiniCPM-V is brief. Nemotron accurately captures the human element over dry terrain.",
+  "45": "Human notes removing trees increases heat. LLaVA missed the trees. MiniCPM-V caught the text. Nemotron perfectly synthesizes the visual (trees vs. no trees) and temperatures.",
+  "48": "Human notes habitat loss. LLaVA has good basic observations. MiniCPM-V notes life jackets. Nemotron captures muddy water and rain.",
+  "49": "Human notes asset loss. LLaVA notes the truck. MiniCPM-V mentions responders. Nemotron reads the 'NYPD' text and observes emergency lights.",
+  "51": "Human uses drowning metaphor. LLaVA missed the second hand. MiniCPM-V notes wet wood. Nemotron accurately observes ripples and the second hand.",
+  "52": "Human notes firefighters can't stop flames. LLaVA hallucinates a fire extinguisher. MiniCPM-V notes red gear. Nemotron observes scattered embers.",
+  "54": "Human notes health effects. LLaVA reads 30 degrees. MiniCPM-V extracts specific diseases. Nemotron accurately describes the UI of the infographic.",
+  "55": "Human notes damaged jungles. LLaVA has simple premises. MiniCPM-V notes haze. Nemotron identifies glowing points.",
+  "58": "Human notes asset loss. LLaVA notes overpass. MiniCPM-V notes brown water. Nemotron had an empty parsed output (failed to generate valid conclusions).",
+  "64": "Human notes struggling for water. LLaVA hallucinates a humanitarian crisis. MiniCPM-V identifies jerrycans. Nemotron connects the tanker to the lack of natural water.",
+  "65": "Human notes immediate danger. LLaVA focuses on the tree. MiniCPM-V hallucinates 'East Coast'. Nemotron flawlessly extracts the headline and caption.",
+  "66": "Human links racism/climate. LLaVA has good text extraction. MiniCPM-V connects racial trauma to the visual. Nemotron extracts author, date, and visual metaphor perfectly.",
+  "67": "Human notes masks for pollution. LLaVA hallucinates a pier/clock and misses the mask. MiniCPM-V misses the mask. Nemotron is the only model to correctly identify the protective mask.",
+  "68": "Human notes infrastructure ruin. LLaVA notes washed away roads. MiniCPM-V notes industrial buildings. Nemotron identifies submerged roadside markers.",
+  "69": "Human notes poles warming. LLaVA is confused about the map type. MiniCPM-V reads anomalies. Nemotron is highly precise regarding the dark orange/red polar region.",
+  "70": "Human notes danger. LLaVA incorrectly states no people are visible. MiniCPM-V notes the person. Nemotron identifies the metal guardrail and protective gear.",
+  "71": "Human notes suffering children. LLaVA calls it an informal settlement. MiniCPM-V identifies the hose. Nemotron notes bamboo framing.",
+  "72": "Human notes air pollution. LLaVA misses the aerial aspect. MiniCPM-V notes vegetation stages. Nemotron excellently describes the massive smoke plume.",
+  "73": "Human notes homeland suffering. LLaVA thinks it's a 'Real Kids' screenshot. MiniCPM-V misidentifies animals. Nemotron correctly identifies firefighter, koala, and kangaroo.",
+  "75": "Human notes asset harm. LLaVA notes the tree trunk. MiniCPM-V has detailed premises. Nemotron notes fast-moving water.",
+  "76": "Human notes animal transport. LLaVA is generic. MiniCPM-V suggests conservation relocation. Nemotron observes wet fur and choppy water.",
+  "77": "Human notes short-circuits. LLaVA missed the burnt aspect entirely. MiniCPM-V notes the burnt car but hallucinates a dry surrounding (Failure). Nemotron synthesizes the charred sedan in water.",
+  "78": "Human notes death toll. LLaVA is brief. MiniCPM-V notes emergency lights. Nemotron notes the sun visible through the haze.",
+  "79": "Human notes disappearing ice. LLaVA misses the temporal comparison. MiniCPM-V notices sepia tones. Nemotron excels in spatial comparison of glacial coverage.",
+  "80": "Human notes biodiversity. LLaVA extracts text. MiniCPM-V extracts text/credits. Nemotron flawlessly describes black tree trunks.",
+  "81": "Human notes urgent action. LLaVA has good text extraction. MiniCPM-V extracts 'Cryosphere'. Nemotron connects text to separate ice pieces.",
+  "84": "Human notes urban submersion. LLaVA thinks it's just rain (misses severe flooding). MiniCPM-V identifies Venice (external knowledge). Nemotron notes water reaching walkway.",
+  "85": "Human notes natural disasters. LLaVA notes coastal erosion. MiniCPM-V notes the lighthouse. Nemotron focuses on widespread debris.",
+  "86": "Human notes extinction. LLaVA observes emaciation. MiniCPM-V notes melting snow. Nemotron focuses on the physical condition.",
+  "89": "Human notes pollution killing species. LLaVA hallucinates a 'human-like figure' (Failure). MiniCPM-V notes urban expansion. Nemotron has clean visual premises.",
+  "90": "Human notes fluctuating rates. LLaVA missed the lower half. MiniCPM-V extracted texts well. Nemotron accurately tracked conflicting dates and the sinking structure.",
+  "91": "Human notes climate migration. LLaVA assumes it's a cruise vacation (misses context completely). MiniCPM-V deduces migration. Nemotron connects the crowded boat to habitat loss."
+};
 
-async function loadPromptFromConfig() {
-    try {
-        const response = await fetch(`${API_BASE}/api/prompts`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        const text = data.content;
-        
-        if (text.includes("[SYSTEM]") && text.includes("[USER]")) {
-            systemPrompt = text.split("[SYSTEM]")[1].split("[USER]")[0].trim();
-            userPrompt = text.split("[USER]")[1].trim();
-            optimalPrompt = userPrompt;
-        } else {
-            userPrompt = text.trim();
-            optimalPrompt = userPrompt;
-            systemPrompt = "No system prompt defined.";
-        }
-        
-        console.log("Prompts loaded from server");
-    } catch (e) {
-        console.error("Failed to load prompts:", e);
-        optimalPrompt = "Failed to load prompt from file.";
-        systemPrompt = "Failed to load.";
-        userPrompt = "Failed to load.";
-    }
-}
+const optimalPrompt = `You are an expert multimodal AI tasked with stance-aware visual argument extraction. 
+You will be provided with an image related to climate or environmental issues.
+
+TASK:
+1. Extract 2 to 4 PREMISES. These must be strictly visual, indisputable facts from the image (objects, text, state of environment, lighting, weather). 
+2. Extract 1 to 2 CONCLUSIONS. This is the overarching argument or stance the image's creator is trying to convey based ONLY on the visual premises. You may use your world knowledge to connect the visual premises to broader climate concepts.
+
+RULES:
+- ZERO EXTERNAL KNOWLEDGE IN PREMISES: Do not guess geographic locations (e.g., "Venice", "Great Barrier Reef") in your premises unless explicitly written in the image.
+- ZERO HALLUCINATION: If it is not in the pixels, do not write it in the premises. 
+- FORMAT COMPLIANCE: You must output ONLY raw JSON. Do not include markdown formatting, and do not include any conversational filler. 
+
+OUTPUT FORMAT:
+{
+  "premises": ["...", "..."],
+  "conclusions": ["...", "..."]
+}`;
 
 // ============================================================================
 // 2. STATE & INITIALIZATION
 // ============================================================================
 let dataset = [];
-const modelKeys = ['nemotron', 'minicpm', 'llava'];
+const modelKeys = ['nemotron', 'minicpm', 'llava']; // Ordered for the dashboard
 const modelNames = { human: 'Human Annotator', nemotron: 'Nemotron-3', minicpm: 'MiniCPM-V', llava: 'LLaVA' };
 const modelColors = { 
     human: { bg: 'bg-green-50', header: 'bg-green-100', border: 'border-green-200', text: 'text-green-800' },
@@ -205,139 +271,165 @@ const modelColors = {
     minicpm: { bg: 'bg-purple-50', header: 'bg-purple-100', border: 'border-purple-200', text: 'text-purple-800' },
     llava: { bg: 'bg-orange-50', header: 'bg-orange-100', border: 'border-orange-200', text: 'text-orange-800' }
 };
-const modelTabColors = {
-    human: 'border-green-500 text-green-700 bg-green-50',
-    llava: 'border-orange-500 text-orange-700 bg-orange-50',
-    minicpm: 'border-purple-500 text-purple-700 bg-purple-50',
-    nemotron: 'border-blue-500 text-blue-700 bg-blue-50'
-};
 
-async function loadAllDataFromServer() {
-    // Load prompts
-    await loadPromptFromConfig();
-    
-    // Load reviewer data
-    await loadReviewerData();
-    
-    // Load dataset from CSV via server
-    try {
-        const resp = await fetch(`${API_BASE}/api/dataset`);
-        if (!resp.ok) throw new Error('Failed to load dataset');
-        const csvData = await resp.json();
-        
-        dataset = csvData.map(item => ({
-            id: item.id,
-            url: `${API_BASE}/api/images/${item.id}.jpg`,
-            note: "",
-            human: { premises: item.premises || [], conclusions: item.conclusions || [], plan: "", metrics: {} },
-            llava: { premises: [], conclusions: [], plan: "", metrics: {} },
-            minicpm: { premises: [], conclusions: [], plan: "", metrics: {} },
-            nemotron: { premises: [], conclusions: [], plan: "", metrics: {} }
-        }));
-        
-        console.log(`Loaded ${dataset.length} images from server`);
-    } catch (e) {
-        console.error("Failed to load dataset:", e);
-        return;
-    }
-    
-    // Load model outputs
-    try {
-        const resp = await fetch(`${API_BASE}/api/outputs`);
-        if (!resp.ok) throw new Error('Failed to list outputs');
-        const outputFiles = await resp.json();
-        
-        for (const file of outputFiles) {
-            try {
-                const resp = await fetch(`${API_BASE}/api/outputs/${file}`);
-                if (!resp.ok) continue;
-                const data = await resp.json();
-                
-                let targetModel = '';
-                if (file.includes('llava')) targetModel = 'llava';
-                if (file.includes('minicpm')) targetModel = 'minicpm';
-                if (file.includes('nemotron')) targetModel = 'nemotron';
-                
-                if (targetModel && Array.isArray(data)) {
-                    data.forEach(item => {
-                        const dataRow = dataset.find(d => d.id === item.image_id);
-                        if (dataRow && item.parsed_output) {
-                            dataRow[targetModel].premises = item.parsed_output.premises || [];
-                            dataRow[targetModel].conclusions = item.parsed_output.conclusions || [];
-                            dataRow[targetModel].plan = item.parsed_output.plan || "";
-                        }
-                    });
-                    console.log(`Loaded ${data.length} items from ${file}`);
-                }
-            } catch (e) {
-                console.error(`Failed to load output file ${file}:`, e);
-            }
-        }
-    } catch (e) {
-        console.error("Failed to load outputs:", e);
-    }
-    
-    // Load evaluation metrics (CSV files)
-    await loadMetricsFromServer();
-    
-    // Render and populate UI
+function initData() {
+    const ids = Object.keys(analysisNotes).sort((a,b) => parseInt(a) - parseInt(b));
+    dataset = ids.map(id => ({
+        id: id,
+        url: imageUrls[id] || '',
+        note: analysisNotes[id],
+        human: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
+        llava: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
+        minicpm: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} },
+        nemotron: { premises: ["(Data pending load)"], conclusions: ["(Data pending load)"], metrics: {} }
+    }));
     renderApp();
-    setTimeout(() => loadReviewerDataToUI(), 100);
 }
 
-async function loadMetricsFromServer() {
-    const metricsFiles = [
-        { pattern: 'hallucination', key: 'hallucination', fields: ['hallucination_label', 'hallucination_score'] },
-        { pattern: 'similarity', key: 'similarity', fields: ['premise_sim', 'conclusion_sim'] },
-        { pattern: 'nli', key: 'nli', fields: ['nli_label', 'nli_conf'] }
-    ];
+// ============================================================================
+// 3. FILE PARSING LOGIC
+// ============================================================================
+
+function processFileContent(fileName, text) {
+    const name = fileName.toLowerCase();
     
-    const modelPatterns = ['llava', 'minicpm', 'nemotron'];
-    
-    // Try to load metrics - these might be in OUTPUT_DIR or DATASET_DIR
-    for (const model of modelPatterns) {
-        for (const metric of metricsFiles) {
-            const filename = `${model}_${metric.pattern}.csv`;
-            try {
-                // Try loading from output dir first, then dataset dir
-                let resp = await fetch(`${API_BASE}/api/outputs/${filename}`);
-                if (!resp.ok) {
-                    // Could also try dataset dir if needed
-                    continue;
-                }
-                const text = await resp.text();
-                const rows = parseCSV(text);
-                const header = rows[0];
-                
-                for (let i = 1; i < rows.length; i++) {
-                    const row = rows[i];
-                    if (row[0] && row[0] !== 'image_id') {
-                        const dataRow = dataset.find(d => d.id === row[0]);
-                        if (dataRow) {
-                            if (metric.key === 'hallucination') {
-                                dataRow[model].metrics.hallucination_label = row[4];
-                                dataRow[model].metrics.hallucination_score = row[3];
-                            } else if (metric.key === 'similarity') {
-                                dataRow[model].metrics.premise_sim = row[1];
-                                dataRow[model].metrics.conclusion_sim = row[5];
-                            } else if (metric.key === 'nli') {
-                                dataRow[model].metrics.nli_label = row[10];
-                                dataRow[model].metrics.nli_conf = row[11];
-                            }
-                        }
+    try {
+        if (name.includes('annotated.csv')) {
+            parseCSV(text).forEach(row => {
+                const id = row[0], url = row[2], premises = row[9], conclusions = row[10];
+                if (id !== 'id') {
+                    const dataRow = dataset.find(d => d.id === id);
+                    if (dataRow) {
+                        if (url) dataRow.url = url;
+                        try { dataRow.human.premises = JSON.parse(premises.replace(/""/g, '"')); } catch(e){}
+                        try { dataRow.human.conclusions = JSON.parse(conclusions.replace(/""/g, '"')); } catch(e){}
                     }
                 }
-                console.log(`Loaded ${metric.key} metrics for ${model}`);
-            } catch (e) {
-                // Skip missing metric files
+            });
+        } 
+        else if (name.endsWith('.json')) {
+            let targetModel = '';
+            if (name.includes('llava')) targetModel = 'llava';
+            if (name.includes('minicpm')) targetModel = 'minicpm';
+            if (name.includes('nemotron')) targetModel = 'nemotron';
+            
+            if (targetModel) {
+                const json = JSON.parse(text);
+                json.forEach(item => {
+                    const dataRow = dataset.find(d => d.id === item.image_id);
+                    if (dataRow && item.parsed_output) {
+                        dataRow[targetModel].premises = item.parsed_output.premises || [];
+                        dataRow[targetModel].conclusions = item.parsed_output.conclusions || [];
+                    }
+                });
             }
         }
+        else if (name.includes('hallucination')) {
+            let targetModel = '';
+            if (name.includes('llava')) targetModel = 'llava';
+            if (name.includes('minicpm')) targetModel = 'minicpm';
+            if (name.includes('nemotron')) targetModel = 'nemotron';
+
+            if (targetModel) {
+                 parseCSV(text).forEach(row => {
+                    if(row[0] && row[0] !== 'image_id') {
+                        const dataRow = dataset.find(d => d.id === row[0]);
+                        if (dataRow) {
+                            dataRow[targetModel].metrics.hallucination_label = row[4];
+                            dataRow[targetModel].metrics.hallucination_score = row[3];
+                        }
+                    }
+                 });
+            }
+        }
+        else if (name.includes('similarity')) {
+            let targetModel = '';
+            if (name.includes('llava')) targetModel = 'llava';
+            if (name.includes('minicpm')) targetModel = 'minicpm';
+            if (name.includes('nemotron')) targetModel = 'nemotron';
+
+            if (targetModel) {
+                 parseCSV(text).forEach(row => {
+                    if(row[0] && row[0] !== 'image_id') {
+                        const dataRow = dataset.find(d => d.id === row[0]);
+                        if (dataRow) {
+                            dataRow[targetModel].metrics.premise_sim = row[1];
+                            dataRow[targetModel].metrics.conclusion_sim = row[5];
+                        }
+                    }
+                 });
+            }
+        }
+        else if (name.includes('nli')) {
+            let targetModel = '';
+            if (name.includes('llava')) targetModel = 'llava';
+            if (name.includes('minicpm')) targetModel = 'minicpm';
+            if (name.includes('nemotron')) targetModel = 'nemotron';
+
+            if (targetModel) {
+                 parseCSV(text).forEach(row => {
+                    if(row[0] && row[0] !== 'image_id') {
+                        const dataRow = dataset.find(d => d.id === row[0]);
+                        if (dataRow) {
+                            dataRow[targetModel].metrics.nli_label = row[10];
+                            dataRow[targetModel].metrics.nli_conf = row[11];
+                        }
+                    }
+                 });
+            }
+        }
+    } catch (err) {
+        console.error("Error parsing file content for", fileName, err);
     }
 }
 
-async function initData() {
-    dataset = [];
-    await loadAllDataFromServer();
+function handleFileUpload(event) {
+    const files = Array.from(event.target.files);
+    let loadedCount = 0;
+
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const text = e.target.result;
+            processFileContent(file.name, text);
+            
+            loadedCount++;
+            if (loadedCount === files.length) {
+                renderApp(); 
+                if(!document.getElementById('stats-modal').classList.contains('hidden')) generateStatsDashboard(); // refresh if open
+                alert("Data successfully loaded and injected!");
+            }
+        };
+        reader.readAsText(file);
+    });
+}
+
+async function loadDataFromConfigPaths() {
+    if (LOCAL_FILE_PATHS.length === 0) {
+        alert("Please add your file paths to the LOCAL_FILE_PATHS array in the HTML code first.");
+        return;
+    }
+
+    let loadedCount = 0;
+    for (const path of LOCAL_FILE_PATHS) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const text = await response.text();
+            processFileContent(path, text);
+            loadedCount++;
+        } catch (e) {
+            console.error("Failed to load path:", path, e);
+            alert(`Failed to load ${path}. Ensure you are running a local web server (python3 -m http.server from the root directory) and viewing this via http://localhost:8000/...`);
+            return;
+        }
+    }
+    
+    if (loadedCount > 0) {
+        renderApp();
+        if(!document.getElementById('stats-modal').classList.contains('hidden')) generateStatsDashboard(); // refresh if open
+        alert(`Successfully auto-loaded ${loadedCount} files!`);
+    }
 }
 
 function parseCSV(str) {
@@ -358,21 +450,144 @@ function parseCSV(str) {
     return arr;
 }
 
-function switchModelTab(imageId, modelKey) {
-    document.querySelectorAll('.model-tab-content').forEach(el => el.classList.add('hidden'));
-    document.querySelectorAll(`[id^="tab-"][id$="-${imageId}"]`).forEach(btn => {
-        btn.className = 'tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100';
-    });
-    const content = document.getElementById(`tabcontent-${modelKey}-${imageId}`);
-    if (content) content.classList.remove('hidden');
-    const tab = document.getElementById(`tab-${modelKey}-${imageId}`);
-    if (tab) {
-        tab.className = `tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 ${modelTabColors[modelKey] || 'border-gray-500 text-gray-700 bg-gray-50'}`;
-    }
+// ============================================================================
+// 4. ANALYTICS DASHBOARD (AUTO-CALCULATED)
+// ============================================================================
+
+function openStatsModal() {
+    generateStatsDashboard();
+    document.getElementById('stats-modal').classList.remove('hidden');
 }
 
-// ============================================================================
-// 5. RENDERING LOGIC (SLIDES)
+function closeStatsModal() {
+    document.getElementById('stats-modal').classList.add('hidden');
+}
+
+function generateStatsDashboard() {
+    const container = document.getElementById('stats-modal-content');
+    
+    // Aggregation Logic
+    const statsData = {};
+    
+    modelKeys.forEach(model => {
+        let hallCount = 0, hallTotal = 0;
+        let entCount = 0, contCount = 0, nliTotal = 0;
+        let pSimSum = 0, pSimCount = 0;
+        let cSimSum = 0, cSimCount = 0;
+
+        dataset.forEach(d => {
+            const m = d[model].metrics;
+            if (m) {
+                if (m.hallucination_label) {
+                    hallTotal++;
+                    if (m.hallucination_label.toLowerCase() === 'hallucinated') hallCount++;
+                }
+                if (m.nli_label) {
+                    nliTotal++;
+                    if (m.nli_label.toLowerCase() === 'entailment') entCount++;
+                    if (m.nli_label.toLowerCase() === 'contradiction') contCount++;
+                }
+                if (m.premise_sim !== undefined) {
+                    pSimSum += parseFloat(m.premise_sim);
+                    pSimCount++;
+                }
+                if (m.conclusion_sim !== undefined) {
+                    cSimSum += parseFloat(m.conclusion_sim);
+                    cSimCount++;
+                }
+            }
+        });
+
+        statsData[model] = {
+            loaded: hallTotal > 0 || nliTotal > 0 || pSimCount > 0,
+            hallucinationRate: hallTotal > 0 ? ((hallCount / hallTotal) * 100).toFixed(1) + '%' : 'N/A',
+            entailmentRate: nliTotal > 0 ? ((entCount / nliTotal) * 100).toFixed(1) + '%' : 'N/A',
+            contradictionRate: nliTotal > 0 ? ((contCount / nliTotal) * 100).toFixed(1) + '%' : 'N/A',
+            pSimAvg: pSimCount > 0 ? (pSimSum / pSimCount).toFixed(3) : 'N/A',
+            cSimAvg: cSimCount > 0 ? (cSimSum / cSimCount).toFixed(3) : 'N/A',
+            count: Math.max(hallTotal, nliTotal, pSimCount)
+        };
+    });
+
+    // Render HTML
+    let html = `<div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">`;
+    
+    modelKeys.forEach(model => {
+        const stats = statsData[model];
+        const color = modelColors[model];
+        const title = modelNames[model];
+        
+        html += `
+        <div class="rounded-2xl border ${color.border} flex flex-col overflow-hidden shadow-sm">
+            <div class="px-6 py-4 font-bold text-lg flex items-center justify-between ${color.header} ${color.text} border-b ${color.border}">
+                ${title}
+                <span class="text-xs font-normal opacity-70 bg-white/50 px-2 py-1 rounded-full border border-white/50">
+                    N = ${stats.count}
+                </span>
+            </div>
+            
+            <div class="p-6 space-y-6 flex-1 bg-white">
+                ${!stats.loaded ? `
+                    <div class="flex flex-col items-center justify-center h-full text-gray-400 opacity-60">
+                        <svg class="w-12 h-12 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                        <p>No evaluation data loaded</p>
+                    </div>
+                ` : `
+                    <!-- Hallucination Block -->
+                    <div class="stat-card">
+                        <div class="stat-label">Hallucination Rate (Deep Eval)</div>
+                        <div class="flex items-end justify-between">
+                            <div class="stat-val ${parseFloat(stats.hallucinationRate) > 15 ? 'text-red-500' : 'text-green-600'}">
+                                ${stats.hallucinationRate}
+                            </div>
+                            <div class="text-xs text-gray-400 mb-1">Lower is better</div>
+                        </div>
+                    </div>
+
+                    <!-- NLI Block -->
+                    <div class="stat-card">
+                        <div class="stat-label flex justify-between">
+                            <span>NLI Entailment</span>
+                            <span>Contradiction</span>
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <div class="stat-val text-blue-600">${stats.entailmentRate}</div>
+                            <div class="h-6 w-px bg-gray-300"></div>
+                            <div class="stat-val text-orange-500">${stats.contradictionRate}</div>
+                        </div>
+                    </div>
+
+                    <!-- Similarity Block -->
+                    <div class="stat-card">
+                        <div class="stat-label mb-3">BERT Similarity (Vs. Human)</div>
+                        
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">Premises:</span>
+                            <span class="font-bold text-gray-800">${stats.pSimAvg}</span>
+                        </div>
+                        
+                        <div class="w-full bg-gray-200 rounded-full h-1.5 mb-4">
+                            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${stats.pSimAvg !== 'N/A' ? (parseFloat(stats.pSimAvg) * 100) : 0}%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">Conclusions:</span>
+                            <span class="font-bold text-gray-800">${stats.cSimAvg}</span>
+                        </div>
+                        
+                        <div class="w-full bg-gray-200 rounded-full h-1.5">
+                            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${stats.cSimAvg !== 'N/A' ? (parseFloat(stats.cSimAvg) * 100) : 0}%"></div>
+                        </div>
+                    </div>
+                `}
+            </div>
+        </div>`;
+    });
+    
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
 // ============================================================================
 // 5. RENDERING LOGIC (SLIDES)
 // ============================================================================
@@ -380,75 +595,45 @@ function renderApp() {
     const container = document.getElementById('slider-container');
     let html = '';
 
-    // --------------------------------------------------
-    // Slide 0: Intro Slide
-    // --------------------------------------------------
+    // Intro Slide (Slide 0)
     html += `
-    <div class="slide bg-gray-50 flex-col items-center p-8" style="overflow-y: auto; justify-content: flex-start; padding-top: 40px;">
+    <div class="slide bg-gray-50 flex-col items-center justify-center p-8">
         <div class="max-w-4xl w-full text-center">
             <h1 class="text-5xl font-bold text-gray-800 mb-6">Visual Argument Evaluation Viewer</h1>
-            <p class="text-xl text-gray-600 mb-10">A deep analysis of LLaVA, MiniCPM-V, and Nemotron on stance-aware visual reasoning across climate images.</p>
+            <p class="text-xl text-gray-600 mb-10">A deep analysis of LLaVA, MiniCPM-V, and Nemotron on stance-aware visual reasoning across 58 images.</p>
             
             <div class="bg-white p-8 rounded-2xl shadow-xl text-left border border-gray-200 mb-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                     <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-                    Prompt Configuration
+                    The Optimized Prompt Strategy
                 </h2>
-                <p class="text-gray-600 mb-6">The prompt strategy uses a two-part structure with separate system and user prompts to guide the AI models in climate-related visual reasoning.</p>
-                
-                <!-- System Prompt Section -->
-                <div class="mb-6">
-                    <h3 class="text-lg font-bold text-blue-700 mb-3 flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        System Prompt
-                    </h3>
-                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                        <p class="text-sm text-gray-600 mb-2"><strong>Used by:</strong> All models (LLaVA, MiniCPM-V, Nemotron-3) as the system message to set the AI's role and constraints</p>
-                        <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm shadow-inner whitespace-pre-wrap max-h-40 overflow-y-auto">${systemPrompt}</pre>
-                    </div>
-                </div>
-                
-                <!-- User Prompt Section -->
-                <div class="mb-6">
-                    <h3 class="text-lg font-bold text-green-700 mb-3 flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-                        User Prompt
-                    </h3>
-                    <div class="bg-green-50 border border-green-200 rounded-xl p-4">
-                        <p class="text-sm text-gray-600 mb-2"><strong>Used by:</strong> All models (LLaVA, MiniCPM-V, Nemotron-3) as the main task instruction</p>
-                        <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm shadow-inner whitespace-pre-wrap max-h-60 overflow-y-auto">${userPrompt}</pre>
-                    </div>
-                </div>
-                
-                <!-- Model Usage Summary -->
-                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
-                    <h3 class="text-lg font-bold text-gray-700 mb-3">Model Prompt Usage</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                        <div class="bg-white p-3 rounded-lg border border-gray-200">
-                            <p class="font-bold text-orange-600">LLaVA</p>
-                            <p class="text-gray-600">System: Custom system prompt</p>
-                            <p class="text-gray-600">User: Full task prompt</p>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg border border-gray-200">
-                            <p class="font-bold text-purple-600">MiniCPM-V</p>
-                            <p class="text-gray-600">System: Custom system prompt</p>
-                            <p class="text-gray-600">User: Full task prompt</p>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg border border-gray-200">
-                            <p class="font-bold text-blue-600">Nemotron-3</p>
-                            <p class="text-gray-600">System: Custom system prompt</p>
-                            <p class="text-gray-600">User: Full task prompt</p>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-gray-600 mb-4">To solve the gap between literal visual grounding and human abductive reasoning, the prompt must explicitly divide the task: strict visuals for premises, and permitted world-knowledge for conclusions.</p>
+                <pre class="bg-gray-900 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm shadow-inner whitespace-pre-wrap">${optimalPrompt}</pre>
             </div>
 
             <div class="flex flex-col items-center">
                 
+                <div class="flex flex-row justify-center gap-4 mb-3">
+                    <label class="cursor-pointer bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full flex items-center transition-all shadow-lg text-lg">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        Select Data Files
+                        <input type="file" multiple accept=".json,.csv" class="hidden" onchange="handleFileUpload(event)" />
+                    </label>
+                    
+                    <button onclick="loadDataFromConfigPaths()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full flex items-center transition-all shadow-lg text-lg">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        Auto-Load from Config Paths
+                    </button>
+                </div>
+                
                 <div class="flex gap-4 mt-8">
                     <button onclick="scrollSlider(1)" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center transition-all shadow-xl">
-                        Start Review
+                        Start Image Analysis
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                    <button onclick="openStatsModal()" class="bg-white border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-8 py-4 rounded-full font-bold text-lg flex items-center transition-all shadow-xl">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        View Dashboard
                     </button>
                 </div>
             </div>
@@ -456,67 +641,34 @@ function renderApp() {
     </div>
     `;
 
-
-    // --------------------------------------------------
-    // Slide 1 to N: Data Slides
-    // --------------------------------------------------
+    // Data Slides (1 to 58)
     dataset.forEach((data, index) => {
         html += `
-        <div class="slide bg-gray-100 overflow-hidden flex">
+        <div class="slide bg-gray-100 overflow-hidden">
             <!-- LEFT PANEL -->
             <div class="w-1/3 bg-gray-900 text-white flex flex-col h-full shadow-2xl z-10 border-r border-gray-800">
                 <div class="p-6 border-b border-gray-800 flex justify-between items-center bg-gray-900">
                     <span class="font-bold text-xl text-blue-400">Image ID: ${data.id}</span>
-                    <span class="text-sm bg-gray-800 px-3 py-1 rounded-full text-gray-400">${index + 1} / ${dataset.length}</span>
+                    <span class="text-sm bg-gray-800 px-3 py-1 rounded-full text-gray-400">Slide ${index + 1} / ${dataset.length}</span>
                 </div>
                 <div class="flex-1 overflow-y-auto p-6 flex flex-col items-center">
-                    <div class="w-full rounded-xl overflow-hidden shadow-2xl mb-6 bg-black flex items-center justify-center min-h-[250px]">
-                        ${data.url ? `<img src="${data.url}" class="object-contain max-h-[45vh] w-full" alt="Image ${data.id}" onerror="this.parentElement.innerHTML='<p class=\\'text-gray-500\\'>Image not found: ${data.id}.jpg</p>'" />` : '<p class="text-gray-500">No Image URL</p>'}
+                    <div class="w-full rounded-xl overflow-hidden shadow-2xl mb-8 bg-black flex items-center justify-center min-h-[300px]">
+                        ${data.url ? `<img src="${data.url}" class="object-contain max-h-[50vh] w-full" alt="Image ${data.id}" />` : '<p class="text-gray-500">No Image URL</p>'}
                     </div>
-                    
-                    <!-- Reviewer Comments Section -->
-                    <div class="w-full bg-green-900/30 border border-green-800/50 rounded-xl p-4 shadow-inner">
-                        <h3 class="text-green-300 font-bold mb-2 flex items-center text-sm">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                            Reviewer Comments
+                    <div class="w-full bg-blue-900/30 border border-blue-800/50 rounded-xl p-6 shadow-inner">
+                        <h3 class="text-blue-300 font-bold mb-3 flex items-center text-lg">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            AI Deep Analysis
                         </h3>
-                        <textarea id="comment-${data.id}" class="w-full bg-gray-800 text-gray-200 rounded-lg p-3 text-sm border border-gray-700 focus:border-green-500 focus:outline-none resize-none" rows="5" placeholder="Add your comments here..." onchange="saveComment('${data.id}')">${data.reviewerComment || ''}</textarea>
+                        <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">${data.note}</p>
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT PANEL WITH TABS -->
-            <div class="w-2/3 h-full flex flex-col bg-gray-50">
-                <!-- Tab Header -->
-                <div class="flex border-b border-gray-200 bg-white shrink-0">
-                    <button onclick="switchModelTab('${data.id}', 'human')" id="tab-human-${data.id}" class="tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-green-500 text-green-700 bg-green-50">
-                        Human
-                    </button>
-                    <button onclick="switchModelTab('${data.id}', 'llava')" id="tab-llava-${data.id}" class="tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-transparent text-gray-500 hover:text-orange-600 hover:bg-orange-50">
-                        LLaVA
-                    </button>
-                    <button onclick="switchModelTab('${data.id}', 'minicpm')" id="tab-minicpm-${data.id}" class="tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-transparent text-gray-500 hover:text-purple-600 hover:bg-purple-50">
-                        MiniCPM-V
-                    </button>
-                    <button onclick="switchModelTab('${data.id}', 'nemotron')" id="tab-nemotron-${data.id}" class="tab-btn flex-1 px-4 py-3 text-sm font-bold text-center transition-all border-b-2 border-transparent text-gray-500 hover:text-blue-600 hover:bg-blue-50">
-                        Nemotron-3
-                    </button>
-                </div>
-                
-                <!-- Tab Content -->
-                <div class="flex-1 overflow-y-auto p-6">
-                    <div id="tabcontent-human-${data.id}" class="model-tab-content">
-                        ${renderModelCardContent('human', data.human, data.id)}
-                    </div>
-                    <div id="tabcontent-llava-${data.id}" class="model-tab-content hidden">
-                        ${renderModelCardContent('llava', data.llava, data.id)}
-                    </div>
-                    <div id="tabcontent-minicpm-${data.id}" class="model-tab-content hidden">
-                        ${renderModelCardContent('minicpm', data.minicpm, data.id)}
-                    </div>
-                    <div id="tabcontent-nemotron-${data.id}" class="model-tab-content hidden">
-                        ${renderModelCardContent('nemotron', data.nemotron, data.id)}
-                    </div>
+            <!-- RIGHT PANEL -->
+            <div class="w-2/3 h-full overflow-y-auto p-8 bg-gray-50">
+                <div class="grid grid-cols-2 gap-6 pb-24">
+                    ${['human', ...modelKeys].map(key => renderModelCard(key, data[key])).join('')}
                 </div>
             </div>
         </div>
@@ -526,103 +678,26 @@ function renderApp() {
     container.innerHTML = html;
 }
 
-function renderModelCardContent(modelKey, modelData, imageId) {
+function renderModelCard(modelKey, modelData) {
     const title = modelNames[modelKey];
+    const colors = modelColors[modelKey];
     
     const premises = Array.isArray(modelData.premises) ? modelData.premises : [];
     const conclusions = Array.isArray(modelData.conclusions) ? modelData.conclusions : [];
-    const plan = modelData.plan || "";
     
     let premiseHtml = premises.length > 0 
-        ? `<ul class="space-y-2">` + premises.map((p, i) => {
+        ? `<ul class="space-y-2">` + premises.map(p => {
             const text = typeof p === 'string' ? p : p.text || p.observation || p.description || JSON.stringify(p);
-            return `<li class="text-sm bg-white p-3 rounded-lg border border-gray-200 shadow-sm text-gray-800"><span class="font-bold text-gray-500 mr-2">${i+1}.</span>${text}</li>`;
+            return `<li class="text-sm bg-white/70 p-3 rounded-lg border border-white shadow-sm text-gray-800">${text}</li>`;
           }).join('') + `</ul>`
         : `<p class="text-sm italic opacity-60 text-gray-500">No premises extracted / Data pending load.</p>`;
         
     let conclusionHtml = conclusions.length > 0 
-        ? `<ul class="space-y-2">` + conclusions.map((c, i) => {
+        ? `<ul class="space-y-2">` + conclusions.map(c => {
             const text = typeof c === 'string' ? c : c.text || c.inference || c.description || JSON.stringify(c);
-            return `<li class="text-sm bg-white p-3 rounded-lg border border-gray-200 shadow-sm font-medium text-gray-900"><span class="font-bold text-gray-500 mr-2">${i+1}.</span>${text}</li>`;
+            return `<li class="text-sm bg-white/70 p-3 rounded-lg border border-white shadow-sm font-medium text-gray-900">${text}</li>`;
           }).join('') + `</ul>`
         : `<p class="text-sm italic opacity-60 text-gray-500">No conclusions extracted / Data pending load.</p>`;
-
-    let planHtml = plan 
-        ? `<details class="mt-4">
-            <summary class="cursor-pointer text-sm font-bold text-gray-700 flex items-center hover:text-gray-900">
-                <svg class="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                Model Plan
-                <svg class="w-3 h-3 ml-2 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </summary>
-            <div class="mt-2 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-sm text-gray-700 whitespace-pre-wrap">${plan}</div>
-           </details>`
-        : '';
-
-    // Evaluation checklist HTML with radio buttons
-    const evaluationHtml = modelKey !== 'human' ? `
-    <div class="mt-6 p-5 bg-white rounded-xl border border-gray-200 shadow-sm">
-        <h4 class="text-sm font-bold text-gray-700 mb-4 flex items-center">
-            <svg class="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-            Evaluation Checklist
-        </h4>
-        
-        <div class="space-y-4">
-            <div>
-                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Format Adherence</span> <span class="text-xs text-gray-600">: Did the model use the right structure?</span></label>
-                <div class="flex flex-wrap gap-2">
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="format-${modelKey}-${imageId}" value="Perfect" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Perfect</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="format-${modelKey}-${imageId}" value="Minor Errors" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Minor Errors</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="format-${modelKey}-${imageId}" value="Complete Failure" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Complete Failure</span></label>
-                </div>
-            </div>
-            
-            <div>
-                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Visual-Only Rule</span> <span class="text-xs text-gray-600">: Did the model use only what it sees in the image?</span></label>
-                <div class="flex flex-wrap gap-2">
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="visual-${modelKey}-${imageId}" value="Strictly Visual" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Strictly Visual</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="visual-${modelKey}-${imageId}" value="Slightly Hallucinated" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Slightly Hallucinated</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="visual-${modelKey}-${imageId}" value="External Science" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">External Science</span></label>
-                </div>
-            </div>
-            
-            <div>
-                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Premise Accuracy</span> <span class="text-xs text-gray-600">: Are the reasons visible in the image?</span></label>
-                <div class="flex flex-wrap gap-2">
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="premise-${modelKey}-${imageId}" value="All Visible" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">All Visible</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="premise-${modelKey}-${imageId}" value="Mixed" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Mixed</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="premise-${modelKey}-${imageId}" value="Contains Assumptions" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Contains Assumptions</span></label>
-                </div>
-            </div>
-            
-            <div>
-                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Conclusion Logic</span> <span class="text-xs text-gray-600">: Does the result follow from the reasons?</span></label>
-                <div class="flex flex-wrap gap-2">
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="conclusion-${modelKey}-${imageId}" value="Strong Connection" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Strong Connection</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="conclusion-${modelKey}-${imageId}" value="Weak Connection" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Weak Connection</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="conclusion-${modelKey}-${imageId}" value="Disconnected" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Disconnected</span></label>
-                </div>
-            </div>
-            
-            <div>
-                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Inference Depth</span> <span class="text-xs text-gray-600">: Is the answer specific or just generic?</span></label>
-                <div class="flex flex-wrap gap-2">
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="inference-${modelKey}-${imageId}" value="Specific & Insightful" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Specific & Insightful</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="inference-${modelKey}-${imageId}" value="Generic Slogans" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Generic Slogans</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="inference-${modelKey}-${imageId}" value="Purely Descriptive" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Purely Descriptive</span></label>
-                </div>
-            </div>
-            
-            <div>
-                <label class="block mb-1"><span class="text-sm font-bold text-gray-800">Human Alignment</span> <span class="text-xs text-gray-600">: Is it similar to the human answer?</span></label>
-                <div class="flex flex-wrap gap-2">
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="alignment-${modelKey}-${imageId}" value="Close Match" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200">Close Match</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="alignment-${modelKey}-${imageId}" value="Too Verbose" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200">Too Verbose</span></label>
-                    <label class="flex items-center cursor-pointer"><input type="radio" name="alignment-${modelKey}-${imageId}" value="Unrelated" class="mr-1" onchange="saveEvaluation('${imageId}', '${modelKey}')"><span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full hover:bg-red-200">Unrelated</span></label>
-                </div>
-            </div>
-        </div>
-    </div>
-    ` : '';
 
     let metricsHtml = '';
     if (modelData.metrics && Object.keys(modelData.metrics).length > 0) {
@@ -634,164 +709,32 @@ function renderModelCardContent(modelKey, modelData, imageId) {
     }
 
     return `
-    <div class="space-y-5">
-        <div>
-            <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Premises (Visual Grounding)</h4>
-            ${premiseHtml}
+    <div class="rounded-2xl border shadow-sm flex flex-col h-[420px] ${colors.bg} ${colors.border}">
+        <div class="px-5 py-4 border-b rounded-t-2xl font-bold flex items-center justify-between ${colors.header} ${colors.text} border-opacity-50">
+            <span>${title}</span>
         </div>
-        <div>
-            <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Conclusions (Inference)</h4>
-            ${conclusionHtml}
+        <div class="flex-1 overflow-y-auto p-5 space-y-5">
+            <div>
+                <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Premises (Visual Grounding)</h4>
+                ${premiseHtml}
+            </div>
+            <div>
+                <h4 class="text-xs uppercase font-bold tracking-wider opacity-60 mb-3 text-gray-700">Conclusions (Inference)</h4>
+                ${conclusionHtml}
+            </div>
         </div>
-        ${planHtml}
-        ${evaluationHtml}
-        ${metricsHtml ? `<div class="flex flex-wrap gap-2">${metricsHtml}</div>` : ''}
+        ${metricsHtml ? `<div class="p-3 border-t bg-white/40 border-opacity-20 rounded-b-2xl">${metricsHtml}</div>` : ''}
     </div>
     `;
 }
 
 // ============================================================================
-// 6. REVIEWER COMMENTS & EVALUATION FUNCTIONS
-// ============================================================================
-
-// Store for all reviews
-let reviewerData = {};
-const API_URL = '/api/reviewer';
-
-async function saveToServer() {
-    try {
-        await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(reviewerData)
-        });
-    } catch (e) {
-        console.warn('Server save failed, using localStorage fallback');
-        localStorage.setItem('reviewerData', JSON.stringify(reviewerData));
-    }
-}
-
-function saveComment(imageId) {
-    const textarea = document.getElementById(`comment-${imageId}`);
-    if (!textarea) return;
-    
-    if (!reviewerData[imageId]) {
-        reviewerData[imageId] = { comment: '', evaluations: {} };
-    }
-    reviewerData[imageId].comment = textarea.value;
-    
-    saveToServer();
-    console.log(`Comment saved for image ${imageId}`);
-}
-
-function saveEvaluation(imageId, modelKey) {
-    if (!reviewerData[imageId]) {
-        reviewerData[imageId] = { comment: '', evaluations: {} };
-    }
-    
-    if (!reviewerData[imageId].evaluations[modelKey]) {
-        reviewerData[imageId].evaluations[modelKey] = {};
-    }
-    
-    // Get all evaluation values from radio buttons by name
-    const metrics = ['format', 'visual', 'premise', 'conclusion', 'inference', 'alignment'];
-    const keys = ['format_adherence', 'visual_only_rule', 'premise_accuracy', 'conclusion_logic', 'inference_depth', 'human_alignment'];
-    
-    metrics.forEach((metric, i) => {
-        const selected = document.querySelector(`input[name="${metric}-${modelKey}-${imageId}"]:checked`);
-        reviewerData[imageId].evaluations[modelKey][keys[i]] = selected ? selected.value : '';
-    });
-    
-    saveToServer();
-    console.log(`Evaluation saved for image ${imageId}, model ${modelKey}`);
-}
-
-async function loadReviewerData() {
-    try {
-        const resp = await fetch(API_URL);
-        if (resp.ok) {
-            reviewerData = await resp.json();
-            console.log('Loaded reviewer data from server');
-            return;
-        }
-    } catch (e) {
-        console.warn('Server load failed, trying localStorage');
-    }
-    const saved = localStorage.getItem('reviewerData');
-    if (saved) {
-        reviewerData = JSON.parse(saved);
-        console.log('Loaded reviewer data from localStorage');
-    }
-}
-
-function loadReviewerDataToUI() {
-    // Load comments
-    dataset.forEach(data => {
-        const textarea = document.getElementById(`comment-${data.id}`);
-        if (textarea && reviewerData[data.id]) {
-            textarea.value = reviewerData[data.id].comment || '';
-        }
-        
-        // Load evaluations for each model
-        modelKeys.forEach(modelKey => {
-            if (reviewerData[data.id] && reviewerData[data.id].evaluations[modelKey]) {
-                const evalData = reviewerData[data.id].evaluations[modelKey];
-                
-                const metrics = ['format', 'visual', 'premise', 'conclusion', 'inference', 'alignment'];
-                const keys = ['format_adherence', 'visual_only_rule', 'premise_accuracy', 'conclusion_logic', 'inference_depth', 'human_alignment'];
-                
-                metrics.forEach((metric, i) => {
-                    const value = evalData[keys[i]];
-                    if (value) {
-                        const radio = document.querySelector(`input[name="${metric}-${modelKey}-${data.id}"][value="${value}"]`);
-                        if (radio) radio.checked = true;
-                    }
-                });
-            }
-        });
-    });
-}
-
-// ============================================================================
-// 7. SLIDER LOGIC
+// 6. SLIDER LOGIC
 // ============================================================================
 function scrollSlider(direction) {
     const container = document.getElementById('slider-container');
     const slideWidth = window.innerWidth;
     container.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
-}
-
-function searchAndGoToSlide() {
-    const searchInput = document.getElementById('search-input');
-    const searchId = searchInput.value.trim();
-    
-    if (!searchId) {
-        alert('Please enter an image ID');
-        return;
-    }
-    
-    if (dataset.length === 0) {
-        alert('No data loaded. Please wait for data to load automatically.');
-        return;
-    }
-    
-    // Find the index of the image with the given ID
-    const index = dataset.findIndex(d => d.id === searchId);
-    
-    if (index === -1) {
-        alert(`Image with ID "${searchId}" not found in dataset`);
-        return;
-    }
-    
-    // Navigate to the slide (index + 1 because slide 0 is intro)
-    const container = document.getElementById('slider-container');
-    const slideWidth = window.innerWidth;
-    const targetScroll = (index + 1) * slideWidth;
-    
-    container.scrollTo({ left: targetScroll, behavior: 'smooth' });
-    
-    // Clear search input
-    searchInput.value = '';
 }
 
 // Initialize on load
