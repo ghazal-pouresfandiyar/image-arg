@@ -1,0 +1,131 @@
+============================================================
+ HOW TO RUN THE IMAGE-ARGUMENT EVALUATION INTERFACE
+============================================================
+
+Created for the Image-Argument evaluation task. The interface lets you
+rate 3 models (LLaVA, MiniCPM-V, Nemotron-3) against 2 human annotations
+across 46 images using the metrics defined in dataset/metrics.html.
+
+
+------------------------------------------------------------
+1. WHAT YOU NEED
+------------------------------------------------------------
+* Python 3 with Flask installed.
+  Check:   python3 -c "import flask; print(flask.__version__)"
+  If not installed:   pip install flask
+
+* The data files must exist (see section 5 "Files").
+
+
+------------------------------------------------------------
+2. HOW TO RUN
+------------------------------------------------------------
+Open a Terminal and run:
+
+    cd user_interfaces/evaluation
+    python3 eval_app.py
+
+Then open your browser at:
+
+    http://127.0.0.1:5001/
+
+You should see the evaluation interface with the image gallery.
+
+
+------------------------------------------------------------
+3. HOW TO STOP
+------------------------------------------------------------
+In the Terminal where the app is running, press:
+
+    Ctrl + C
+
+If you can't find that Terminal or the app is running in the background,
+kill it by process name:
+
+    pkill -f eval_app.py
+
+Or by port (macOS):
+
+    lsof -ti :5001 | xargs kill
+
+To verify it is stopped:
+
+    lsof -i :5001        (should show nothing)
+    curl -s http://127.0.0.1:5001/   (should fail / timeout)
+
+
+------------------------------------------------------------
+4. HOW TO USE THE INTERFACE
+------------------------------------------------------------
+* Top bar: shows progress (images rated, complete model-pairs),
+  plus Export / Import / Reset All buttons.
+* Thumbnail row: click a thumbnail to jump to that image
+  (green border = that image has at least one rated model).
+* Left panel: the image, its metadata, and the 2 human evaluations
+  (premises + conclusions) for comparison.
+* Right panel:
+    - Model tabs: pick which model you are evaluating (one at a time).
+    - Model output: the model's premises, conclusions, reasoning plan,
+      and raw output (collapsible).
+    - Metrics form: rate the model using all metrics from metrics.html:
+        Output Format     : Format Adherence, Quantity Compliance
+        Premises          : Premise Relevance Score (PRS), Premise Impact
+        Conclusion        : Conclusion Relevance Score (CRS), Validity,
+                            Novelty, Visual Grounding, Premise Coverage
+        Human Alignment   : vs Human Eval 1, vs Human Eval 2
+      Premise Coverage is a number per conclusion (percent is computed
+      automatically from the total number of premises).
+    - Comments box: optional free-text notes for that image-model pair.
+
+* Everything is saved automatically (a few seconds after each change) to
+  dataset/evaluations.json. It is restored automatically the next time
+  you open the interface.
+* Export  : downloads a backup JSON file.
+* Import  : loads a previously exported JSON backup.
+* Reset All: deletes all evaluation data (asks for confirmation).
+
+
+------------------------------------------------------------
+5. FILES: INPUT AND OUTPUT
+------------------------------------------------------------
+INPUT (read by the app, do not move):
+
+  user_interfaces/evaluation/eval_app.py   The Flask server.
+  user_interfaces/evaluation/evaluation_ui.html  The interface page (HTML).
+  user_interfaces/evaluation/evaluation_ui.js    The interface logic (JS).
+  dataset/images_for_annotation/*.jpg      The 46 images.
+  dataset/annotated.csv                    Human evaluation #1
+                                           (id, premises, conclusions, ...).
+  dataset/annotated_2.csv                  Human evaluation #2
+                                           (id, premises, conclusions, ...).
+  models/output_model/llava_outputs.json                LLaVA outputs.
+  models/output_model/minicpm-v_outputs.json            MiniCPM-V outputs.
+  models/output_model/nemotron-3-nano-omni-30b-...json  Nemotron-3 outputs.
+  dataset/metrics.html                     The metric reference document.
+
+OUTPUT (created/written by the app):
+
+  dataset/evaluations.json                 Your ratings, saved automatically.
+                                           Format:
+                                           { evaluations: {
+                                               "<image_id>": {
+                                                 "<model_key>": {
+                                                   "format_adherence":  "...",
+                                                   "quantity_compliance": "...",
+                                                   "premise_relevance_score": "...",
+                                                   "premise_impact": "...",
+                                                   "conclusion_relevance_score": "...",
+                                                   "conclusion_validity": "...",
+                                                   "conclusion_novelty": "...",
+                                                   "visual_grounding": "...",
+                                                   "human_alignment_1": "...",
+                                                   "human_alignment_2": "...",
+                                                   "premise_coverage_0": <int>,
+                                                   "premise_coverage_1": <int>,
+                                                   "comment": "..." } } } }
+
+  evaluations_export.json                  Backup you download via Export.
+
+NOTE: The app reads inputs fresh each time you load/reload the page, so you
+can re-run the pipeline and regenerate model outputs without changing the
+interface. Your saved evaluations persist in evaluations.json.

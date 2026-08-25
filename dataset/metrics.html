@@ -16,8 +16,6 @@
         .cat-format .category-title { background: #d4a5a5; }
         .cat-premise .category-title { background: #9bb8d3; }
         .cat-conclusion .category-title { background: #a8c99e; }
-        
-        .cat-relation .category-title { background: #b39ddb; }
         .cat-human .category-title { background: #e8a44c; }
 
         .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
@@ -39,7 +37,6 @@
         .cat-premise th { background: #9bb8d3; }
         .cat-conclusion th { background: #a8c99e; }
         
-        .cat-relation th { background: #b39ddb; }
         .cat-human th { background: #e8a44c; }
 
         /* Collapsible details styling */
@@ -155,15 +152,12 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- CATEGORY 2: PREMISES (MODIFIED) -->
+<!-- CATEGORY 2: PREMISES (MODIFIED — includes Premise Impact) -->
 <!-- ============================================================ -->
 
 <div class="cat-premise">
     <div class="category-title">Premises</div>
     <div class="metrics-grid">
-
-        <!-- PREMISE ACCURACY DELETED — replaced with Premise Relevance Score -->
-        
 
         <!-- NEW: Premise Relevance Score (PRS) — replaces Premise Accuracy -->
         
@@ -203,24 +197,9 @@
             </details>
         </div>
         
-
-        <!-- PREMISE COMPLETENESS DELETED -->
-        
-
-    </div>
-</div>
-
-<!-- ============================================================ -->
-<!-- CATEGORY 3: PREMISE ↔ CONCLUSION (NEW) -->
-<!-- ============================================================ -->
-
-<div class="cat-relation">
-    <div class="category-title">Argumentative Support</div>
-    <div class="metrics-grid">
-
-        <!-- Premise Support (orphan check) -->
+        <!-- Premise Impact (renamed from Premise Support) -->
         <div class="metric-card">
-            <h3>Premise Support</h3>
+            <h3>Premise Impact</h3>
             <p><strong>What it measures:</strong> Does every premise support at least one conclusion? Are there any orphan premises that do not connect to any conclusion?</p>
             <table>
                 <tr><th>Label</th><th>Meaning</th></tr>
@@ -239,7 +218,7 @@
                         <div class="quote">
                             "<strong>Local relevance:</strong> The premises are relevant to the conclusion. If the premises are unrelated or only tangentially related to the conclusion, local relevance is low."
                         </div>
-                        <p class="adaptation"><strong>Our adaptation:</strong> Premise Support checks whether premises are structurally linked to at least one conclusion. An orphan premise violates local relevance because it has no conclusion it supports.</p>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Premise Impact checks whether premises are structurally linked to at least one conclusion. An orphan premise violates local relevance because it has no conclusion it supports.</p>
                     </div>
 
                     <div class="reference">
@@ -249,43 +228,7 @@
                         <div class="quote">
                             "<strong>Q1: Sufficiency</strong> — 'Are the premises sufficient to draw the conclusion?' Scale: 1 = not sufficient ... 5 = sufficient"
                         </div>
-                        <p class="adaptation"><strong>Our adaptation:</strong> Before assessing sufficiency (coverage), we first verify that premises are structurally connected to conclusions at all. Premise Support is the minimum structural requirement: every premise must participate in at least one argument.</p>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <!-- Premise Coverage (numeric input + auto %) -->
-        <div class="metric-card">
-            <h3>Premise Coverage</h3>
-            <p><strong>What it measures:</strong> For each conclusion, how many premises support it?</p>
-            <table>
-                <tr><th>Field</th><th>Description</th></tr>
-                <tr><td><strong>Premises supporting this conclusion</strong></td><td>Rater enters the number of premises (e.g., 3)</td></tr>
-                <tr><td><strong>Computed coverage percentage</strong></td><td>System computes: (number entered ÷ total premises) × 100%</td></tr>
-            </table>
-            <p style="margin-top: 0.4rem;"><strong>Example:</strong> If the model generated 4 premises and the rater enters 2, coverage = 2 ÷ 4 = <strong>50%</strong></p>
-            <details>
-                <summary>References</summary>
-                <div class="details-content">
-                    <div class="reference">
-                        <div class="paper-title">Reference: Gurcke et al. (2021) — Sufficiency of Arguments</div>
-                        <div class="paper-meta">Gurcke, T., Alshomary, M., & Wachsmuth, H. "Assessing the Sufficiency of Arguments through Conclusion Generation." ArgMining 2021. <a href="https://aclanthology.org/2021.argmining-1.7/" target="_blank">https://aclanthology.org/2021.argmining-1.7/</a></div>
-                        <div class="section">Section 4 — Human Evaluation Protocol</div>
-                        <div class="quote">
-                            "<strong>Q1: Sufficiency</strong> — 'Are the premises sufficient to draw the conclusion?' Scale: 1 = not sufficient ... 5 = sufficient"
-                        </div>
-                        <p class="adaptation"><strong>Our adaptation:</strong> Gurcke et al. ask about sufficiency on a Likert scale. We operationalize sufficiency as a concrete count: how many of the total premises actually support each conclusion, expressed as a percentage for easy comparison across arguments.</p>
-                    </div>
-
-                    <div class="reference">
-                        <div class="paper-title">Reference: ArgGenBench (2026) — Argument Quality</div>
-                        <div class="paper-meta">Jin, B., et al. "ArgGenBench: Benchmarking the Complex Controlled Argument Generation Capability of Large Language Models." ACL 2026.</div>
-                        <div class="section">Evaluation Dimension: Argument Quality</div>
-                        <div class="quote">
-                            "<strong>Argument Quality</strong> — win/tie/lose rate based on <strong>logical coherence, persuasiveness, clarity</strong>."
-                        </div>
-                        <p class="adaptation"><strong>Our adaptation:</strong> Premise Coverage quantifies logical coherence by measuring how much of the available premise set is actually mobilized to support each conclusion. Higher coverage indicates a more coherent, well-grounded argument structure.</p>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Before assessing sufficiency (coverage), we first verify that premises are structurally connected to conclusions at all. Premise Impact is the minimum structural requirement: every premise must participate in at least one argument.</p>
                     </div>
                 </div>
             </details>
@@ -295,7 +238,7 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- CATEGORY 4: CONCLUSION (MODIFIED) -->
+<!-- CATEGORY 3: CONCLUSION (MODIFIED — includes Premise Coverage) -->
 <!-- ============================================================ -->
 
 <div class="cat-conclusion">
@@ -477,14 +420,47 @@
             </details>
         </div>
 
-        <!-- HUMAN ALIGNMENT DELETED FROM CONCLUSION CATEGORY -->
-        
+        <!-- Premise Coverage (moved from Argumentative Support) -->
+        <div class="metric-card">
+            <h3>Premise Coverage</h3>
+            <p><strong>What it measures:</strong> For each conclusion, how many premises support it?</p>
+            <table>
+                <tr><th>Field</th><th>Description</th></tr>
+                <tr><td><strong>Premises supporting this conclusion</strong></td><td>Rater enters the number of premises (e.g., 3)</td></tr>
+                <tr><td><strong>Computed coverage percentage</strong></td><td>System computes: (number entered ÷ total premises) × 100%</td></tr>
+            </table>
+            <p style="margin-top: 0.4rem;"><strong>Example:</strong> If the model generated 4 premises and the rater enters 2, coverage = 2 ÷ 4 = <strong>50%</strong></p>
+            <details>
+                <summary>References</summary>
+                <div class="details-content">
+                    <div class="reference">
+                        <div class="paper-title">Reference: Gurcke et al. (2021) — Sufficiency of Arguments</div>
+                        <div class="paper-meta">Gurcke, T., Alshomary, M., & Wachsmuth, H. "Assessing the Sufficiency of Arguments through Conclusion Generation." ArgMining 2021. <a href="https://aclanthology.org/2021.argmining-1.7/" target="_blank">https://aclanthology.org/2021.argmining-1.7/</a></div>
+                        <div class="section">Section 4 — Human Evaluation Protocol</div>
+                        <div class="quote">
+                            "<strong>Q1: Sufficiency</strong> — 'Are the premises sufficient to draw the conclusion?' Scale: 1 = not sufficient ... 5 = sufficient"
+                        </div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Gurcke et al. ask about sufficiency on a Likert scale. We operationalize sufficiency as a concrete count: how many of the total premises actually support each conclusion, expressed as a percentage for easy comparison across arguments.</p>
+                    </div>
+
+                    <div class="reference">
+                        <div class="paper-title">Reference: ArgGenBench (2026) — Argument Quality</div>
+                        <div class="paper-meta">Jin, B., et al. "ArgGenBench: Benchmarking the Complex Controlled Argument Generation Capability of Large Language Models." ACL 2026.</div>
+                        <div class="section">Evaluation Dimension: Argument Quality</div>
+                        <div class="quote">
+                            "<strong>Argument Quality</strong> — win/tie/lose rate based on <strong>logical coherence, persuasiveness, clarity</strong>."
+                        </div>
+                        <p class="adaptation"><strong>Our adaptation:</strong> Premise Coverage quantifies logical coherence by measuring how much of the available premise set is actually mobilized to support each conclusion. Higher coverage indicates a more coherent, well-grounded argument structure.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
 
     </div>
 </div>
 
 <!-- ============================================================ -->
-<!-- CATEGORY 5: HUMAN ALIGNMENT (NEW CATEGORY) -->
+<!-- CATEGORY 4: HUMAN ALIGNMENT (NEW CATEGORY) -->
 <!-- ============================================================ -->
 
 <div class="cat-human">

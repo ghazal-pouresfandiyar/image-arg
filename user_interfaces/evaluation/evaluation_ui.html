@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image-Argument Evaluation Interface</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    .metric-group-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; padding: 0.35rem 0.75rem; border-radius: 6px; }
+    .opt-btn { border: 1px solid #d1d5db; background: #fff; border-radius: 6px; padding: 0.35rem 0.6rem; font-size: 0.78rem; cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.3; }
+    .opt-btn:hover { border-color: #94a3b8; background: #f8fafc; }
+    .opt-btn.selected { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .thumb { border: 2px solid transparent; cursor: pointer; border-radius: 6px; overflow: hidden; background: #fff; }
+    .thumb.active { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.3); }
+    .thumb.rated { border-color: #059669; }
+    .thumb.rated.active { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.3); }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid #e5e7eb; }
+    .scrollbar-thin::-webkit-scrollbar { height: 8px; width: 8px; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+    .model-tab { padding: 0.4rem 0.9rem; border-radius: 8px 8px 0 0; font-weight: 600; font-size: 0.8rem; cursor: pointer; border: 1px solid transparent; border-bottom: none; }
+    .model-tab.active { background: #fff; border-color: #e5e7eb; color: #1f2937; border-top: 3px solid #2563eb; }
+    .group-btn { border: 1px solid #e5e7eb; border-radius: 9999px; padding: 0.15rem 0.6rem; font-size: 0.7rem; cursor: pointer; background: #fff; }
+    .group-btn.on { background: #e0e7ff; border-color: #6366f1; color: #4338ca; }
+    .coverage-input { width: 4rem; border: 1px solid #d1d5db; border-radius: 6px; padding: 0.2rem 0.4rem; font-size: 0.8rem; text-align: center; }
+</style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<!-- ============ TOP BAR ============ -->
+<div class="bg-gray-900 text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 shadow-lg">
+    <div class="flex items-center gap-3">
+        <h1 class="text-lg font-bold">Image-Argument Evaluation</h1>
+        <span class="text-xs text-gray-400" id="save-status"></span>
+    </div>
+    <div class="flex items-center gap-4 text-sm">
+        <span class="text-gray-300">Images rated: <b id="progress-full-text" class="text-green-400">0/46</b></span>
+        <span class="text-gray-300">Model-pairs: <b id="progress-model-text" class="text-green-400">0/0</b></span>
+        <button onclick="exportJSON()" class="bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded-lg text-xs" title="Download evaluations.json">Export</button>
+        <button onclick="importJSON()" class="bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded-lg text-xs" title="Restore from a JSON file">Import</button>
+        <button onclick="resetAll()" class="bg-red-700 hover:bg-red-600 px-3 py-1.5 rounded-lg text-xs" title="Delete all evaluations">Reset All</button>
+    </div>
+</div>
+
+<!-- ============ THUMBNAIL GALLERY ============ -->
+<div class="bg-white border-b border-gray-200 px-4 py-3">
+    <div class="flex items-center gap-2">
+        <button onclick="navImage(-1)" class="bg-gray-700 text-white w-8 h-8 rounded-lg hover:bg-gray-600 flex items-center justify-center shrink-0">&#8249;</button>
+        <div id="gallery" class="flex gap-2 overflow-x-auto scrollbar-thin flex-1 py-1" style="scroll-behavior:smooth;"></div>
+        <button onclick="navImage(1)" class="bg-gray-700 text-white w-8 h-8 rounded-lg hover:bg-gray-600 flex items-center justify-center shrink-0">&#8250;</button>
+    </div>
+</div>
+
+<!-- ============ MAIN ============ -->
+<div class="max-w-[1600px] mx-auto p-4 grid grid-cols-12 gap-4">
+
+    <!-- LEFT: IMAGE + HUMANS -->
+    <div class="col-span-12 lg:col-span-5 space-y-4">
+        <div class="card p-3">
+            <div class="flex items-center justify-between mb-2">
+                <h2 class="text-lg font-bold">Image <span id="cur-id"></span></h2>
+                <div class="flex gap-1.5" id="model-dots" title="Green = rated, gray = not rated"></div>
+            </div>
+            <div id="image-container" class="bg-black rounded-lg flex items-center justify-center min-h-[320px]">
+                <img id="main-image" src="" alt="" class="object-contain max-h-[55vh] w-full rounded-lg" />
+            </div>
+            <div id="metadata" class="flex flex-wrap gap-2 mt-3 text-xs"></div>
+        </div>
+
+        <!-- HUMAN EVALUATIONS -->
+        <div id="human-cards" class="space-y-3"></div>
+    </div>
+
+    <!-- RIGHT: MODEL + RATINGS -->
+    <div class="col-span-12 lg:col-span-7 space-y-4">
+        <div class="flex gap-1" id="model-tabs"></div>
+
+        <div class="card p-4" id="model-output"></div>
+
+        <div class="card p-4" id="rating-form"></div>
+
+        <div class="card p-4">
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Comments / Notes (optional)</label>
+            <textarea id="comment-box" rows="3" class="w-full border border-gray-300 rounded-lg p-2 text-sm" placeholder="Add any notes about this image-model pair..." oninput="onCommentChange(this.value)"></textarea>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center text-xs text-gray-500 py-6">Metrics based on <a class="underline" href="/api/metrics-doc" target="_blank">dataset/metrics.html</a> &mdash; Evaluation persisted to dataset/evaluations.json</footer>
+
+<script src="evaluation_ui.js"></script>
+</body>
+</html>
