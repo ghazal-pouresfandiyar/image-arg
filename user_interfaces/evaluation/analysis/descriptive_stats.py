@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(BASE_DIR, "..", "evaluations_export _final.json")
+DATA_PATH = os.path.join(BASE_DIR, "..", "evaluations_export_final.json")
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 OUTPUT_CSV = os.path.join(OUTPUT_DIR, "evaluations_flattened.csv")
 

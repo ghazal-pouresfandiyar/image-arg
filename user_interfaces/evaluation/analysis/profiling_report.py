@@ -4,7 +4,7 @@ import os
 from ydata_profiling import ProfileReport
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(BASE_DIR, "..", "evaluations_export _final.json")
+DATA_PATH = os.path.join(BASE_DIR, "..", "evaluations_export_final.json")
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)

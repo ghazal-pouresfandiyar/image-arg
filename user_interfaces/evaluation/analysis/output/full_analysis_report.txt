@@ -1,0 +1,206 @@
+======================================================================
+  COMPREHENSIVE EVALUATION REPORT — Image-Argument Analysis
+======================================================================
+
+Generated from: evaluations_export_final.json
+Total images evaluated: 46
+Total evaluations: 138
+Models: llava, minicpm, nemotron
+
+----------------------------------------------------------------------
+SECTION 1: DATASET OVERVIEW
+----------------------------------------------------------------------
+       image_id  model conclusion_novelty conclusion_relevance_score conclusion_validity format_adherence human_alignment_1 human_alignment_2  premise_coverage_0  premise_coverage_1       premise_impact premise_relevance_score quantity_compliance visual_grounding                                                                       comment  premise_coverage_2  premise_coverage_3
+count       138    138                138                        138                 138              138               138               138          138.000000          116.000000                  138                     138                 138              138                                                                             3            9.000000            2.000000
+unique       46      3                  3                          4                   2                2                 4                 4                 NaN                 NaN                    4                       4                   3                3                                                                             3                 NaN                 NaN
+top           0  llava           Moderate               All relevant     Clearly follows          Perfect      Strong match      Strong match                 NaN                 NaN  All premises linked            All relevant  All counts correct  Strictly visual  The second premise focuses on the lack of human activity, which is profound.                 NaN                 NaN
+freq          3     46                 66                        107                 113              116               114               115                 NaN                 NaN                  113                     100                 126               85                                                                             1                 NaN                 NaN
+mean        NaN    NaN                NaN                        NaN                 NaN              NaN               NaN               NaN            2.231884            2.301724                  NaN                     NaN                 NaN              NaN                                                                           NaN            1.888889            2.500000
+std         NaN    NaN                NaN                        NaN                 NaN              NaN               NaN               NaN            1.102683            1.105086                  NaN                     NaN                 NaN              NaN                                                                           NaN            0.781736            0.707107
+min         NaN    NaN                NaN                        NaN                 NaN              NaN               NaN               NaN            0.000000            0.000000                  NaN                     NaN                 NaN              NaN                                                                           NaN            1.000000            2.000000
+25%         NaN    NaN                NaN                        NaN                 NaN              NaN               NaN               NaN            1.000000            2.000000                  NaN                     NaN                 NaN              NaN                                                                           NaN            1.000000            2.250000
+50%         NaN    NaN                NaN                        NaN                 NaN              NaN               NaN               NaN            2.000000            2.000000                  NaN                     NaN                 NaN              NaN                                                                           NaN            2.000000            2.500000
+75%         NaN    NaN                NaN                        NaN                 NaN              NaN               NaN               NaN            3.000000            3.000000                  NaN                     NaN                 NaN              NaN                                                                           NaN            2.000000            2.750000
+max         NaN    NaN                NaN                        NaN                 NaN              NaN               NaN               NaN            7.000000            7.000000                  NaN                     NaN                 NaN              NaN                                                                           NaN            3.000000            3.000000
+
+----------------------------------------------------------------------
+SECTION 2: CATEGORICAL METRICS — Percentage Distribution per Model
+----------------------------------------------------------------------
+
+CONCLUSION_NOVELTY
+────────────────────────────────────────
+conclusion_novelty  Insightful  Moderate  Paraphrase
+model                                               
+llava                    39.13     47.83       13.04
+minicpm                  56.52     41.30        2.17
+nemotron                 34.78     54.35       10.87
+
+
+CONCLUSION_RELEVANCE_SCORE
+────────────────────────────────────────
+conclusion_relevance_score  All relevant  Mostly irrelevant  Mostly relevant  Partially relevant
+model                                                                                           
+llava                              71.74               2.17            23.91                2.17
+minicpm                            84.78               0.00            13.04                2.17
+nemotron                           76.09               2.17            19.57                2.17
+
+
+CONCLUSION_VALIDITY
+────────────────────────────────────────
+conclusion_validity  Clearly follows  Mostly follows
+model                                               
+llava                          80.43           19.57
+minicpm                        84.78           15.22
+nemotron                       80.43           19.57
+
+
+FORMAT_ADHERENCE
+────────────────────────────────────────
+format_adherence  Complete failure  Perfect
+model                                      
+llava                         0.00   100.00
+minicpm                       0.00   100.00
+nemotron                     47.83    52.17
+
+
+HUMAN_ALIGNMENT_1
+────────────────────────────────────────
+human_alignment_1  Conclusion only  Different focus  Strong match  Unrelated
+model                                                                       
+llava                         8.70             6.52         76.09       8.70
+minicpm                       2.17             4.35         91.30       2.17
+nemotron                     13.04             2.17         80.43       4.35
+
+
+HUMAN_ALIGNMENT_2
+────────────────────────────────────────
+human_alignment_2  Conclusion only  Different focus  Strong match  Unrelated
+model                                                                       
+llava                         8.70             8.70         76.09       6.52
+minicpm                       2.17             4.35         93.48       0.00
+nemotron                     15.22             0.00         80.43       4.35
+
+
+PREMISE_IMPACT
+────────────────────────────────────────
+premise_impact  All premises linked  Most premises linked  Most premises orphaned  Some premises orphaned
+model                                                                                                    
+llava                         80.43                 19.57                    0.00                    0.00
+minicpm                       86.96                 13.04                    0.00                    0.00
+nemotron                      78.26                 17.39                    2.17                    2.17
+
+
+PREMISE_RELEVANCE_SCORE
+────────────────────────────────────────
+premise_relevance_score  All relevant  Mostly irrelevant  Mostly relevant  Partially relevant
+model                                                                                        
+llava                           52.17               6.52            39.13                2.17
+minicpm                         91.30               0.00             4.35                4.35
+nemotron                        73.91               0.00            21.74                4.35
+
+
+QUANTITY_COMPLIANCE
+────────────────────────────────────────
+quantity_compliance  2 or less than 2 counts off  All counts correct  More than 2 counts off
+model                                                                                       
+llava                                      17.39               80.43                    2.17
+minicpm                                     4.35               95.65                    0.00
+nemotron                                    2.17               97.83                    0.00
+
+
+VISUAL_GROUNDING
+────────────────────────────────────────
+visual_grounding  Minor external  Some external  Strictly visual
+model                                                           
+llava                      23.91           8.70            67.39
+minicpm                    47.83           4.35            47.83
+nemotron                   28.26           2.17            69.57
+
+----------------------------------------------------------------------
+SECTION 3: NUMERICAL METRICS — Summary Statistics per Model
+----------------------------------------------------------------------
+
+PREMISE_COVERAGE_0
+────────────────────────────────────────
+          count  mean   std  min  25%  50%  75%  max
+model                                               
+llava      46.0  2.65  1.20  1.0  2.0  2.0  3.0  7.0
+minicpm    46.0  1.98  0.45  1.0  2.0  2.0  2.0  3.0
+nemotron   46.0  2.07  1.34  0.0  1.0  1.0  3.0  5.0
+
+
+PREMISE_COVERAGE_1
+────────────────────────────────────────
+          count  mean   std  min  25%  50%  75%  max
+model                                               
+llava      46.0  2.41  1.22  1.0  2.0  2.0  3.0  7.0
+minicpm    46.0  1.83  0.64  0.0  2.0  2.0  2.0  3.0
+nemotron   24.0  3.00  1.18  1.0  2.0  3.0  4.0  5.0
+
+----------------------------------------------------------------------
+SECTION 4: MODEL COMPARISON SUMMARY
+----------------------------------------------------------------------
+
+conclusion_novelty — Top performing model:
+  model
+llava           (llava, Moderate)
+minicpm     (minicpm, Insightful)
+nemotron     (nemotron, Moderate)
+
+conclusion_relevance_score — Top performing model:
+  model
+llava          (llava, All relevant)
+minicpm      (minicpm, All relevant)
+nemotron    (nemotron, All relevant)
+
+conclusion_validity — Top performing model:
+  model
+llava          (llava, Clearly follows)
+minicpm      (minicpm, Clearly follows)
+nemotron    (nemotron, Clearly follows)
+
+format_adherence — Top performing model:
+  model
+llava          (llava, Perfect)
+minicpm      (minicpm, Perfect)
+nemotron    (nemotron, Perfect)
+
+human_alignment_1 — Top performing model:
+  model
+llava          (llava, Strong match)
+minicpm      (minicpm, Strong match)
+nemotron    (nemotron, Strong match)
+
+human_alignment_2 — Top performing model:
+  model
+llava          (llava, Strong match)
+minicpm      (minicpm, Strong match)
+nemotron    (nemotron, Strong match)
+
+premise_impact — Top performing model:
+  model
+llava          (llava, All premises linked)
+minicpm      (minicpm, All premises linked)
+nemotron    (nemotron, All premises linked)
+
+premise_relevance_score — Top performing model:
+  model
+llava          (llava, All relevant)
+minicpm      (minicpm, All relevant)
+nemotron    (nemotron, All relevant)
+
+quantity_compliance — Top performing model:
+  model
+llava          (llava, All counts correct)
+minicpm      (minicpm, All counts correct)
+nemotron    (nemotron, All counts correct)
+
+visual_grounding — Top performing model:
+  model
+llava          (llava, Strictly visual)
+minicpm       (minicpm, Minor external)
+nemotron    (nemotron, Strictly visual)
+
+======================================================================
+  END OF REPORT
+======================================================================

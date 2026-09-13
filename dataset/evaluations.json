@@ -737,7 +737,17 @@
       },
       "nemotron": {
         "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct"
+        "quantity_compliance": "All counts correct",
+        "premise_relevance_score": "All relevant",
+        "premise_impact": "All premises linked",
+        "conclusion_validity": "Clearly follows",
+        "conclusion_relevance_score": "All relevant",
+        "conclusion_novelty": "Moderate",
+        "visual_grounding": "Strictly visual",
+        "human_alignment_1": "Strong match",
+        "human_alignment_2": "Strong match",
+        "premise_coverage_0": 3,
+        "premise_coverage_1": 3
       }
     },
     "32": {
@@ -902,18 +912,18 @@
         "visual_grounding": "Strictly visual"
       },
       "nemotron": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "All relevant",
-        "premise_impact": "All premises linked",
+        "conclusion_novelty": "Insightful",
         "conclusion_relevance_score": "All relevant",
         "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Insightful",
-        "visual_grounding": "Strictly visual",
+        "format_adherence": "Perfect",
         "human_alignment_1": "Strong match",
         "human_alignment_2": "Strong match",
         "premise_coverage_0": 3,
-        "premise_coverage_1": 3
+        "premise_coverage_1": 3,
+        "premise_impact": "All premises linked",
+        "premise_relevance_score": "All relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Strictly visual"
       }
     },
     "45": {
@@ -1833,179 +1843,179 @@
       }
     },
     "85": {
-      "nemotron": {
-        "format_adherence": "Complete failure",
-        "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "All relevant",
-        "premise_impact": "All premises linked",
-        "conclusion_relevance_score": "All relevant",
-        "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Moderate",
-        "visual_grounding": "Strictly visual",
-        "human_alignment_1": "Strong match",
-        "human_alignment_2": "Strong match",
-        "premise_coverage_0": 1
-      },
       "llava": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "All relevant",
-        "premise_impact": "All premises linked",
+        "conclusion_novelty": "Paraphrase",
         "conclusion_relevance_score": "All relevant",
         "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Paraphrase",
-        "visual_grounding": "Strictly visual",
+        "format_adherence": "Perfect",
         "human_alignment_1": "Strong match",
         "human_alignment_2": "Strong match",
         "premise_coverage_0": 4,
-        "premise_coverage_1": 4
-      },
-      "minicpm": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_coverage_0": 2,
-        "premise_coverage_1": 1,
-        "premise_relevance_score": "All relevant",
+        "premise_coverage_1": 4,
         "premise_impact": "All premises linked",
-        "conclusion_relevance_score": "All relevant",
-        "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Insightful",
-        "visual_grounding": "Minor external",
-        "human_alignment_1": "Strong match",
-        "human_alignment_2": "Strong match"
-      }
-    },
-    "86": {
-      "nemotron": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_coverage_1": 2,
-        "premise_coverage_0": 3,
         "premise_relevance_score": "All relevant",
-        "premise_impact": "All premises linked",
-        "conclusion_relevance_score": "All relevant",
-        "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Insightful",
-        "visual_grounding": "Strictly visual",
-        "human_alignment_1": "Strong match",
-        "human_alignment_2": "Strong match"
-      },
-      "minicpm": {
-        "premise_coverage_0": 2,
-        "premise_coverage_1": 2,
-        "human_alignment_1": "Strong match",
-        "human_alignment_2": "Strong match",
-        "format_adherence": "Perfect",
         "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "Mostly relevant",
-        "premise_impact": "Most premises linked",
-        "conclusion_relevance_score": "All relevant",
-        "conclusion_validity": "Mostly follows",
-        "conclusion_novelty": "Moderate",
         "visual_grounding": "Strictly visual"
       },
-      "llava": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "2 or less than 2 counts off",
-        "premise_relevance_score": "Mostly relevant",
-        "premise_impact": "All premises linked",
+      "minicpm": {
+        "conclusion_novelty": "Insightful",
         "conclusion_relevance_score": "All relevant",
-        "conclusion_validity": "Mostly follows",
-        "conclusion_novelty": "Moderate",
-        "visual_grounding": "Strictly visual",
+        "conclusion_validity": "Clearly follows",
+        "format_adherence": "Perfect",
         "human_alignment_1": "Strong match",
         "human_alignment_2": "Strong match",
-        "premise_coverage_0": 3,
-        "premise_coverage_1": 2
-      }
-    },
-    "89": {
-      "nemotron": {
-        "format_adherence": "Complete failure",
-        "quantity_compliance": "All counts correct",
+        "premise_coverage_0": 2,
+        "premise_coverage_1": 1,
+        "premise_impact": "All premises linked",
         "premise_relevance_score": "All relevant",
-        "premise_impact": "All premises linked",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Minor external"
+      },
+      "nemotron": {
+        "conclusion_novelty": "Moderate",
         "conclusion_relevance_score": "All relevant",
         "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Moderate",
-        "visual_grounding": "Some external",
-        "human_alignment_1": "Strong match",
-        "human_alignment_2": "Strong match",
-        "premise_coverage_0": 1
-      },
-      "llava": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "Mostly relevant",
-        "premise_impact": "All premises linked",
-        "conclusion_relevance_score": "Mostly relevant",
-        "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Paraphrase",
-        "visual_grounding": "Strictly visual",
+        "format_adherence": "Complete failure",
         "human_alignment_1": "Strong match",
         "human_alignment_2": "Strong match",
         "premise_coverage_0": 1,
-        "premise_coverage_1": 1
-      },
-      "minicpm": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "All relevant",
         "premise_impact": "All premises linked",
-        "conclusion_relevance_score": "All relevant",
-        "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Insightful",
-        "visual_grounding": "Strictly visual",
-        "human_alignment_1": "Strong match",
-        "human_alignment_2": "Strong match",
-        "premise_coverage_0": 2,
-        "premise_coverage_1": 2
+        "premise_relevance_score": "All relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Strictly visual"
       }
     },
-    "91": {
-      "nemotron": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "Mostly relevant",
-        "premise_impact": "All premises linked",
-        "conclusion_relevance_score": "Mostly relevant",
-        "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Moderate",
-        "visual_grounding": "Minor external",
-        "human_alignment_1": "Strong match",
-        "human_alignment_2": "Strong match",
-        "premise_coverage_0": 4,
-        "premise_coverage_1": 4
-      },
+    "86": {
       "llava": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "Mostly relevant",
-        "premise_impact": "Most premises linked",
-        "conclusion_relevance_score": "Mostly relevant",
-        "conclusion_validity": "Mostly follows",
         "conclusion_novelty": "Moderate",
-        "visual_grounding": "Minor external",
+        "conclusion_relevance_score": "All relevant",
+        "conclusion_validity": "Mostly follows",
+        "format_adherence": "Perfect",
         "human_alignment_1": "Strong match",
         "human_alignment_2": "Strong match",
         "premise_coverage_0": 3,
-        "premise_coverage_1": 3
+        "premise_coverage_1": 2,
+        "premise_impact": "All premises linked",
+        "premise_relevance_score": "Mostly relevant",
+        "quantity_compliance": "2 or less than 2 counts off",
+        "visual_grounding": "Strictly visual"
       },
       "minicpm": {
-        "format_adherence": "Perfect",
-        "quantity_compliance": "All counts correct",
-        "premise_relevance_score": "All relevant",
-        "premise_impact": "All premises linked",
+        "conclusion_novelty": "Moderate",
         "conclusion_relevance_score": "All relevant",
-        "conclusion_validity": "Clearly follows",
-        "conclusion_novelty": "Insightful",
-        "visual_grounding": "Minor external",
+        "conclusion_validity": "Mostly follows",
+        "format_adherence": "Perfect",
         "human_alignment_1": "Strong match",
         "human_alignment_2": "Strong match",
         "premise_coverage_0": 2,
-        "premise_coverage_1": 2
+        "premise_coverage_1": 2,
+        "premise_impact": "Most premises linked",
+        "premise_relevance_score": "Mostly relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Strictly visual"
+      },
+      "nemotron": {
+        "conclusion_novelty": "Insightful",
+        "conclusion_relevance_score": "All relevant",
+        "conclusion_validity": "Clearly follows",
+        "format_adherence": "Perfect",
+        "human_alignment_1": "Strong match",
+        "human_alignment_2": "Strong match",
+        "premise_coverage_0": 3,
+        "premise_coverage_1": 2,
+        "premise_impact": "All premises linked",
+        "premise_relevance_score": "All relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Strictly visual"
+      }
+    },
+    "89": {
+      "llava": {
+        "conclusion_novelty": "Paraphrase",
+        "conclusion_relevance_score": "Mostly relevant",
+        "conclusion_validity": "Clearly follows",
+        "format_adherence": "Perfect",
+        "human_alignment_1": "Strong match",
+        "human_alignment_2": "Strong match",
+        "premise_coverage_0": 1,
+        "premise_coverage_1": 1,
+        "premise_impact": "All premises linked",
+        "premise_relevance_score": "Mostly relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Strictly visual"
+      },
+      "minicpm": {
+        "conclusion_novelty": "Insightful",
+        "conclusion_relevance_score": "All relevant",
+        "conclusion_validity": "Clearly follows",
+        "format_adherence": "Perfect",
+        "human_alignment_1": "Strong match",
+        "human_alignment_2": "Strong match",
+        "premise_coverage_0": 2,
+        "premise_coverage_1": 2,
+        "premise_impact": "All premises linked",
+        "premise_relevance_score": "All relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Strictly visual"
+      },
+      "nemotron": {
+        "conclusion_novelty": "Moderate",
+        "conclusion_relevance_score": "All relevant",
+        "conclusion_validity": "Clearly follows",
+        "format_adherence": "Complete failure",
+        "human_alignment_1": "Strong match",
+        "human_alignment_2": "Strong match",
+        "premise_coverage_0": 1,
+        "premise_impact": "All premises linked",
+        "premise_relevance_score": "All relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Some external"
+      }
+    },
+    "91": {
+      "llava": {
+        "conclusion_novelty": "Moderate",
+        "conclusion_relevance_score": "Mostly relevant",
+        "conclusion_validity": "Mostly follows",
+        "format_adherence": "Perfect",
+        "human_alignment_1": "Strong match",
+        "human_alignment_2": "Strong match",
+        "premise_coverage_0": 3,
+        "premise_coverage_1": 3,
+        "premise_impact": "Most premises linked",
+        "premise_relevance_score": "Mostly relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Minor external"
+      },
+      "minicpm": {
+        "conclusion_novelty": "Insightful",
+        "conclusion_relevance_score": "All relevant",
+        "conclusion_validity": "Clearly follows",
+        "format_adherence": "Perfect",
+        "human_alignment_1": "Strong match",
+        "human_alignment_2": "Strong match",
+        "premise_coverage_0": 2,
+        "premise_coverage_1": 2,
+        "premise_impact": "All premises linked",
+        "premise_relevance_score": "All relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Minor external"
+      },
+      "nemotron": {
+        "conclusion_novelty": "Moderate",
+        "conclusion_relevance_score": "Mostly relevant",
+        "conclusion_validity": "Clearly follows",
+        "format_adherence": "Perfect",
+        "human_alignment_1": "Strong match",
+        "human_alignment_2": "Strong match",
+        "premise_coverage_0": 4,
+        "premise_coverage_1": 4,
+        "premise_impact": "All premises linked",
+        "premise_relevance_score": "Mostly relevant",
+        "quantity_compliance": "All counts correct",
+        "visual_grounding": "Minor external"
       }
     }
   },
-  "updated_at": "2026-09-08T17:44:59.468819"
+  "updated_at": "2026-09-13T15:10:50.090148"
 }

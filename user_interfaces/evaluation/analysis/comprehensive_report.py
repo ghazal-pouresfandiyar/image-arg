@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(BASE_DIR, "..", "evaluations_export _final.json")
+DATA_PATH = os.path.join(BASE_DIR, "..", "evaluations_export_final.json")
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -26,7 +26,7 @@ with open(report_path, "w") as f:
     f.write("=" * 70 + "\n")
     f.write("  COMPREHENSIVE EVALUATION REPORT — Image-Argument Analysis\n")
     f.write("=" * 70 + "\n\n")
-    f.write(f"Generated from: evaluations_export _final.json\n")
+    f.write(f"Generated from: evaluations_export_final.json\n")
     f.write(f"Total images evaluated: {df['image_id'].nunique()}\n")
     f.write(f"Total evaluations: {len(df)}\n")
     f.write(f"Models: {', '.join(df['model'].unique())}\n\n")
