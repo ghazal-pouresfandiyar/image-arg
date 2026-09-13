@@ -266,7 +266,7 @@ function renderRatingForm(img) {
             const current = ev[met.key];
             const optsHtml = met.options.map((opt, oi) => {
                 const sel = current === opt ? ' selected' : '';
-                return `<button class="opt-btn${sel}" onclick="setMetric('${met.key}', ${JSON.stringify(opt)})" data-v="${escapeHtml(opt)}">${escapeHtml(opt)}</button>`;
+                return `<button type="button" class="opt-btn${sel}" onclick="setMetric('${met.key}', this.dataset.v)" data-v="${escapeHtml(opt)}">${escapeHtml(opt)}</button>`;
             }).join('');
             html += `
             <div>
