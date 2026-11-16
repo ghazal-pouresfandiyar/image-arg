@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Update: Automated Semantic Alignment Evaluation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,600;1,400&display=swap');
+
+  :root {
+    --primary: #0f172a;
+    --indigo: #3730a3;
+    --indigo-light: #eef2ff;
+    --teal: #0d9488;
+    --teal-light: #f0fdfa;
+    --amber: #d97706;
+    --amber-light: #fffbeb;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-500: #64748b;
+    --slate-700: #334155;
+    --slate-900: #0f172a;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65;
+    color: var(--slate-700);
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+  }
+
+  .page {
+    max-width: 1020px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.04);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  /* Hero Header */
+  .hero {
+    background: linear-gradient(120deg, #0f172a 0%, #1e293b 55%, #312e81 100%);
+    color: #ffffff;
+    padding: 2.75rem 3.25rem;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #e0e7ff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.32rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 0.75rem 0;
+    color: #ffffff;
+  }
+
+  .hero-subtitle {
+    font-size: 1.02rem;
+    color: #cbd5e1;
+    max-width: 760px;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .meta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .meta-pill {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 0.4rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    color: #e2e8f0;
+  }
+
+  .meta-pill strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* Main Content Area */
+  .content {
+    padding: 2.5rem 3.25rem 3rem 3.25rem;
+  }
+
+  /* Executive KPI Strip */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .kpi-card {
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 1.15rem 1.2rem;
+    position: relative;
+    transition: transform 0.15s ease;
+  }
+
+  .kpi-card.highlight {
+    background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%);
+    border-color: #99f6e4;
+  }
+
+  .kpi-label {
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--slate-500);
+    margin-bottom: 0.35rem;
+  }
+
+  .kpi-value {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    line-height: 1.15;
+    margin-bottom: 0.3rem;
+  }
+
+  .kpi-card.highlight .kpi-value {
+    color: var(--teal);
+  }
+
+  .kpi-sub {
+    font-size: 0.8rem;
+    color: var(--slate-500);
+  }
+
+  /* Section Headings */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--slate-100);
+  }
+
+  .section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--indigo);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin: 0;
+  }
+
+  /* Visual Pipeline Diagram */
+  .pipeline {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 1.35rem 1.5rem;
+    margin: 1.25rem 0 1.75rem 0;
+  }
+
+  .pipe-step {
+    background: #ffffff;
+    border: 1px solid var(--slate-200);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.03);
+  }
+
+  .pipe-step-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--indigo);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+  }
+
+  .pipe-step-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin-bottom: 0.25rem;
+  }
+
+  .pipe-step-desc {
+    font-size: 0.82rem;
+    color: var(--slate-500);
+    line-height: 1.45;
+  }
+
+  .pipe-arrow {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--indigo);
+    text-align: center;
+  }
+
+  /* Method Cards */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.15rem;
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  .method-card {
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 1.2rem 1.35rem;
+    background: #ffffff;
+  }
+
+  .method-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .method-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin: 0;
+  }
+
+  .pill-tag {
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    background: var(--indigo-light);
+    color: var(--indigo);
+  }
+
+  .math-box {
+    display: inline-block;
+    font-family: "Times New Roman", Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    color: var(--slate-900);
+    margin: 0.35rem 0 0.5rem 0;
+  }
+
+  /* Visual Bar Charts */
+  .chart-panel {
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .chart-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin: 0 0 0.25rem 0;
+  }
+
+  .chart-sub {
+    font-size: 0.82rem;
+    color: var(--slate-500);
+    margin: 0 0 1.15rem 0;
+  }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 185px 1fr 68px;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .bar-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .bar-label {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--slate-700);
+  }
+
+  .bar-label span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--slate-500);
+  }
+
+  .bar-track {
+    height: 14px;
+    background: var(--slate-200);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 999px;
+  }
+
+  .bar-fill.human { background: #64748b; }
+  .bar-fill.minicpm { background: linear-gradient(90deg, #0d9488, #14b8a6); }
+  .bar-fill.llava { background: linear-gradient(90deg, #4f46e5, #6366f1); }
+  .bar-fill.nemotron { background: linear-gradient(90deg, #d97706, #f59e0b); }
+
+  .bar-val {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Data Table */
+  .table-wrapper {
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.25rem 0 0.65rem 0;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  thead th {
+    background: var(--slate-900);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.7rem 0.85rem;
+    text-align: center;
+    font-size: 0.83rem;
+    letter-spacing: 0.02em;
+  }
+
+  thead tr:nth-child(2) th {
+    background: #1e293b;
+    color: #e2e8f0;
+    font-weight: 500;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  th:first-child, td:first-child,
+  th:nth-child(2), td:nth-child(2) {
+    text-align: left;
+  }
+
+  td {
+    padding: 0.68rem 0.85rem;
+    border-bottom: 1px solid var(--slate-200);
+    text-align: center;
+    color: var(--slate-700);
+  }
+
+  tr.upper-bound td {
+    background: #f8fafc;
+    color: var(--slate-900);
+    font-weight: 500;
+  }
+
+  tr.model-start td {
+    border-top: 2px solid var(--slate-300);
+  }
+
+  tr.combined-row td {
+    background: #fafaf9;
+  }
+
+  .ref-badge {
+    display: inline-block;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 5px;
+    background: var(--slate-100);
+    color: var(--slate-700);
+  }
+
+  .ref-badge.comb {
+    background: var(--indigo-light);
+    color: var(--indigo);
+  }
+
+  .score-best {
+    display: inline-block;
+    background: var(--teal-light);
+    color: #0f766e;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 5px;
+    border: 1px solid #99f6e4;
+  }
+
+  .table-caption {
+    font-size: 0.84rem;
+    color: var(--slate-500);
+    margin-bottom: 1.75rem;
+  }
+
+  /* Finding Cards */
+  .findings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .finding-card {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 1rem;
+    padding: 1.15rem 1.35rem;
+    border-radius: 12px;
+    border: 1px solid var(--slate-200);
+    background: #ffffff;
+  }
+
+  .finding-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .finding-icon.teal { background: var(--teal-light); color: var(--teal); }
+  .finding-icon.amber { background: var(--amber-light); color: var(--amber); }
+  .finding-icon.indigo { background: var(--indigo-light); color: var(--indigo); }
+
+  .finding-card h4 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1rem;
+    color: var(--slate-900);
+  }
+
+  .finding-card p {
+    margin: 0;
+    font-size: 0.91rem;
+    color: var(--slate-700);
+  }
+
+  /* References */
+  .ref-box {
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .ref-box ol {
+    margin: 0;
+    padding-left: 1.25rem;
+    font-size: 0.87rem;
+    color: var(--slate-700);
+  }
+
+  .ref-box li {
+    margin-bottom: 0.55rem;
+  }
+
+  .ref-box li:last-child {
+    margin-bottom: 0;
+  }
+
+  .footer {
+    background: var(--slate-50);
+    border-top: 1px solid var(--slate-200);
+    padding: 1.1rem 3.25rem;
+    font-size: 0.83rem;
+    color: var(--slate-500);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 820px) {
+    .kpi-grid, .two-col { grid-template-columns: 1fr; }
+    .pipeline { grid-template-columns: 1fr; }
+    .pipe-arrow { transform: rotate(90deg); }
+    .hero, .content, .footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <!-- HERO HEADER -->
+  <div class="hero">
+    <div class="hero-badge">Research Progress Update &bull; New Evaluation Section</div>
+    <h1>Automated Semantic Alignment Evaluation</h1>
+    <p class="hero-subtitle">
+      Quantitative verification of model-generated visual arguments against human reference annotations using dense sentence embeddings and contextual token similarity.
+    </p>
+    <div class="meta-pills">
+      <div class="meta-pill"><strong>Paper:</strong> Argument Generation for Images</div>
+      <div class="meta-pill"><strong>Author:</strong> Ghazal Pouresfandiyar Borojeni</div>
+      <div class="meta-pill"><strong>Evaluation Set:</strong> <em>N</em> = 46 Images</div>
+      <div class="meta-pill"><strong>Models Tested:</strong> LLaVA-1.5, MiniCPM-V 2.6, Nemotron-3 Nano</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- TOP KPI SUMMARY -->
+    <div class="kpi-grid">
+      <div class="kpi-card highlight">
+        <div class="kpi-label">Top Model (Combined)</div>
+        <div class="kpi-value">MiniCPM-V</div>
+        <div class="kpi-sub">Best overall alignment across metrics</div>
+      </div>
+      <div class="kpi-card highlight">
+        <div class="kpi-label">Peak Cosine Max</div>
+        <div class="kpi-value">0.7325</div>
+        <div class="kpi-sub">MiniCPM-V vs. Combined Pool</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Peak BERTScore F1</div>
+        <div class="kpi-value">0.9062</div>
+        <div class="kpi-sub">vs. 0.9090 Human Upper Bound</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Highest Precision</div>
+        <div class="kpi-value">0.6587</div>
+        <div class="kpi-sub">Nemotron Cosine Mean-Max</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: METHODOLOGY -->
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2>Evaluation Methodology &amp; Aggregation Protocol</h2>
+    </div>
+    <p>
+      To complement and validate our manual <em>Human Alignment</em> ratings, we introduced an automated semantic similarity evaluation comparing model-generated conclusions against human-written conclusions across all <strong><em>N</em> = 46 images</strong>. Because both models and human annotators produce a variable number of conclusions per image (typically 1&ndash;3 claims), rigid one-to-one positional sentence matching is unsuitable.
+    </p>
+
+    <!-- VISUAL PIPELINE -->
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-step-tag">Step 1 &bull; Per Image</div>
+        <div class="pipe-step-title">Pairwise Similarity Matrix</div>
+        <div class="pipe-step-desc">Compare every generated conclusion <em>M</em> against every human conclusion <em>H</em> to form matrix <em>S</em> &isin; &#8477;<sup>|M|&times;|H|</sup>.</div>
+      </div>
+      <div class="pipe-arrow">&rarr;</div>
+      <div class="pipe-step">
+        <div class="pipe-step-tag">Step 2 &bull; Image-Level</div>
+        <div class="pipe-step-title">Two Aggregations</div>
+        <div class="pipe-step-desc">Extract <strong>Max</strong> (best single match) and <strong>Mean-Max</strong> (average best match across all model claims).</div>
+      </div>
+      <div class="pipe-arrow">&rarr;</div>
+      <div class="pipe-step">
+        <div class="pipe-step-tag">Step 3 &bull; Corpus-Level</div>
+        <div class="pipe-step-title">Dataset Summary (<em>N</em>=46)</div>
+        <div class="pipe-step-desc">Average image-level scores across all 46 images against Human 1, Human 2, and Combined references.</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="method-card">
+        <div class="method-card-header">
+          <h3>Max Similarity</h3>
+          <span class="pill-tag">Recall / Coverage</span>
+        </div>
+        <div class="math-box">Max(S) = max<sub>i,j</sub> S<sub>i,j</sub></div>
+        <p style="font-size: 0.88rem; margin: 0.4rem 0 0 0;">
+          Following the multi-reference maximum-score protocol (Zhang et al., 2020; Fabbri et al., 2021), takes the single highest pairwise score per image. Indicates whether the model generates <strong>at least one</strong> conclusion aligned with a human reference.
+        </p>
+      </div>
+
+      <div class="method-card">
+        <div class="method-card-header">
+          <h3>Mean-Max Similarity</h3>
+          <span class="pill-tag">Greedy Precision</span>
+        </div>
+        <div class="math-box">Mean-Max(S) = (1 / |M|) &Sigma;<sub>i=1..|M|</sub> max<sub>j</sub> S<sub>i,j</sub></div>
+        <p style="font-size: 0.88rem; margin: 0.4rem 0 0 0;">
+          Analogous to greedy precision matching (Zhang et al., 2020), identifies the best human reference match for <strong>each generated conclusion</strong> and averages them. Penalizes models that dilute strong claims with irrelevant conclusions.
+        </p>
+      </div>
+    </div>
+
+    <p style="font-size: 0.91rem; color: var(--slate-600);">
+      <strong>Embedding Backbones &amp; Baselines:</strong> Pairwise scores are computed using both <strong>Sentence-BERT Cosine Similarity</strong> (<code>all-mpnet-base-v2</code>; Reimers &amp; Gurevych, 2019) and <strong>BERTScore F1</strong> (<code>RoBERTa-large</code>; Zhang et al., 2020). Each model is evaluated against <strong>Human 1</strong>, <strong>Human 2</strong>, and a <strong>Combined</strong> reference pool (<em>H</em><sub>1</sub> &cup; <em>H</em><sub>2</sub>). We also evaluate <strong>Human 1 vs. Human 2</strong> to establish an empirical inter-annotator upper bound.
+    </p>
+
+    <!-- SECTION 2: VISUAL COMPARISON & TABLE -->
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2>Quantitative Results Across <em>N</em> = 46 Images</h2>
+    </div>
+
+    <!-- VISUAL BAR COMPARISON -->
+    <div class="chart-panel">
+      <div class="chart-title">Visual Comparison: Combined Human Reference Alignment (Cosine Similarity)</div>
+      <div class="chart-sub">Comparing peak claim alignment (Max) vs. average claim precision (Mean-Max) against the combined human reference pool (<em>H</em><sub>1</sub> &cup; <em>H</em><sub>2</sub>), alongside the Human 1 vs. Human 2 baseline.</div>
+
+      <div class="bar-row">
+        <div class="bar-label">MiniCPM-V 2.6 (7.6B)<span>Max / Mean-Max</span></div>
+        <div class="bar-track"><div class="bar-fill minicpm" style="width: 73.25%;"></div></div>
+        <div class="bar-val">0.7325</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">LLaVA-1.5 (7B)<span>Max / Mean-Max</span></div>
+        <div class="bar-track"><div class="bar-fill llava" style="width: 69.72%;"></div></div>
+        <div class="bar-val">0.6972</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Nemotron-3 Nano (30B)<span>Max (Mean-Max: 0.6587)</span></div>
+        <div class="bar-track"><div class="bar-fill nemotron" style="width: 68.73%;"></div></div>
+        <div class="bar-val">0.6873</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Human 1 vs. Human 2<span>Inter-Annotator Ceiling</span></div>
+        <div class="bar-track"><div class="bar-fill human" style="width: 66.44%;"></div></div>
+        <div class="bar-val">0.6644</div>
+      </div>
+    </div>
+
+    <!-- FULL RESULTS TABLE -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="2">Candidate</th>
+            <th rowspan="2">Reference</th>
+            <th colspan="2">Cosine Similarity (MPNet)</th>
+            <th colspan="2">BERTScore F1 (RoBERTa-Large)</th>
+          </tr>
+          <tr>
+            <th>Max (Mean &plusmn; SD)</th>
+            <th>Mean-Max</th>
+            <th>Max (Mean &plusmn; SD)</th>
+            <th>Mean-Max</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="upper-bound">
+            <td><strong>Human 1</strong> <em>(Upper Bound)</em></td>
+            <td><span class="ref-badge">Human 2</span></td>
+            <td>0.6644 &plusmn; 0.1375</td>
+            <td>0.6107</td>
+            <td>0.9090 &plusmn; 0.0163</td>
+            <td>0.9042</td>
+          </tr>
+          <tr class="model-start">
+            <td rowspan="3"><strong>LLaVA-1.5 (7B)</strong></td>
+            <td><span class="ref-badge">Human 1</span></td>
+            <td>0.6657 &plusmn; 0.1025</td>
+            <td>0.5963</td>
+            <td>0.8968 &plusmn; 0.0137</td>
+            <td>0.8888</td>
+          </tr>
+          <tr>
+            <td><span class="ref-badge">Human 2</span></td>
+            <td>0.6294 &plusmn; 0.1663</td>
+            <td>0.5582</td>
+            <td>0.8965 &plusmn; 0.0155</td>
+            <td>0.8878</td>
+          </tr>
+          <tr class="combined-row">
+            <td><span class="ref-badge comb">Combined</span></td>
+            <td>0.6972 &plusmn; 0.1031</td>
+            <td>0.6259</td>
+            <td>0.9031 &plusmn; 0.0130</td>
+            <td>0.8945</td>
+          </tr>
+          <tr class="model-start">
+            <td rowspan="3"><strong>MiniCPM-V 2.6 (7.6B)</strong></td>
+            <td><span class="ref-badge">Human 1</span></td>
+            <td><span class="score-best">0.6900 &plusmn; 0.1163</span></td>
+            <td><span class="score-best">0.6157</span></td>
+            <td><span class="score-best">0.9002 &plusmn; 0.0153</span></td>
+            <td><span class="score-best">0.8927</span></td>
+          </tr>
+          <tr>
+            <td><span class="ref-badge">Human 2</span></td>
+            <td><span class="score-best">0.6795 &plusmn; 0.1388</span></td>
+            <td>0.6023</td>
+            <td><span class="score-best">0.8995 &plusmn; 0.0181</span></td>
+            <td><span class="score-best">0.8912</span></td>
+          </tr>
+          <tr class="combined-row">
+            <td><span class="ref-badge comb">Combined</span></td>
+            <td><span class="score-best">0.7325 &plusmn; 0.1041</span></td>
+            <td>0.6579</td>
+            <td><span class="score-best">0.9062 &plusmn; 0.0163</span></td>
+            <td><span class="score-best">0.8981</span></td>
+          </tr>
+          <tr class="model-start">
+            <td rowspan="3"><strong>Nemotron-3 Nano (30B)</strong></td>
+            <td><span class="ref-badge">Human 1</span></td>
+            <td>0.6224 &plusmn; 0.1163</td>
+            <td>0.5952</td>
+            <td>0.8791 &plusmn; 0.0130</td>
+            <td>0.8765</td>
+          </tr>
+          <tr>
+            <td><span class="ref-badge">Human 2</span></td>
+            <td>0.6625 &plusmn; 0.1302</td>
+            <td><span class="score-best">0.6268</span></td>
+            <td>0.8884 &plusmn; 0.0156</td>
+            <td>0.8845</td>
+          </tr>
+          <tr class="combined-row">
+            <td><span class="ref-badge comb">Combined</span></td>
+            <td>0.6873 &plusmn; 0.1147</td>
+            <td><span class="score-best">0.6587</span></td>
+            <td>0.8908 &plusmn; 0.0144</td>
+            <td>0.8874</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-caption">
+      <strong>Table 1:</strong> Automated semantic similarity between model-generated conclusions and human reference conclusions, averaged across all <em>N</em> = 46 images. Highlighted badges indicate the highest-scoring model per reference category.
+    </div>
+
+    <!-- SECTION 3: ANALYTICAL TAKEAWAYS -->
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2>Key Takeaways for Discussion</h2>
+    </div>
+
+    <div class="findings-list">
+      <div class="finding-card">
+        <div class="finding-icon teal">01</div>
+        <div>
+          <h4>Strong Agreement with Manual Human Alignment</h4>
+          <p>
+            <strong>MiniCPM-V 2.6</strong> achieves the highest overall semantic alignment with human-authored conclusions, reaching a Cosine Max of <strong>0.7325</strong> and a BERTScore F1 of <strong>0.9062</strong> against the combined human references&mdash;nearly matching the inter-annotator human upper bound (<strong>0.9090</strong>). This independently corroborates our manual evaluation, where MiniCPM-V 2.6 also led on Human Alignment (91.3% and 93.5%).
+          </p>
+        </div>
+      </div>
+
+      <div class="finding-card">
+        <div class="finding-icon amber">02</div>
+        <div>
+          <h4>Format Adherence Explains Nemotron's High Mean-Max Score</h4>
+          <p>
+            While <strong>Nemotron-3 Nano</strong> records the lowest BERTScore F1 (0.8908 combined), it achieves the highest <em>Mean-Max</em> Cosine similarity against Human 2 (<strong>0.6268</strong>) and the Combined pool (<strong>0.6587</strong>). Because Nemotron frequently violated output formatting rules (52.2% adherence) and generated fewer conclusions per image, its precision per generated claim stayed high, whereas MiniCPM-V 2.6 generated fuller multi-conclusion sets that covered more human interpretations (higher <em>Max</em>) while occasionally introducing broader secondary claims.
+          </p>
+        </div>
+      </div>
+
+      <div class="finding-card">
+        <div class="finding-icon indigo">03</div>
+        <div>
+          <h4>Interpretive Plurality in Environmental Imagery</h4>
+          <p>
+            Inter-annotator cosine similarity between Human 1 and Human 2 is <strong>0.6644</strong>, whereas MiniCPM-V 2.6 reaches <strong>0.7325</strong> against the combined human pool. This demonstrates that environmental images support multiple valid argumentative angles rather than a single ground-truth conclusion, and strong VLMs successfully align with at least one human perspective.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: REFERENCES -->
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2>Academic References Cited</h2>
+    </div>
+    <div class="ref-box">
+      <ol>
+        <li>
+          <strong>Fabbri, A. R., Kry&#347;ci&#324;ski, W., McCann, B., Xiong, C., Socher, R., &amp; Radev, D. (2021).</strong> SummEval: Re-evaluating Summarization Evaluation. <em>Transactions of the Association for Computational Linguistics (TACL)</em>, 9, 391&ndash;409.
+        </li>
+        <li>
+          <strong>Reimers, N., &amp; Gurevych, I. (2019).</strong> Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. In <em>Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP-IJCNLP)</em>, pp. 3982&ndash;3992.
+        </li>
+        <li>
+          <strong>Zhang, T., Kishore, V., Wu, F., Weinberger, K. Q., &amp; Artzi, Y. (2020).</strong> BERTScore: Evaluating Text Generation with BERT. In <em>International Conference on Learning Representations (ICLR)</em>.
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Supervisory Review Summary &bull; Argument Generation for Images</span>
+    <span>Added Sections: Automated Semantic Similarity &amp; Human Alignment Results</span>
+  </div>
+</div>
+
+</body>
+</html>
