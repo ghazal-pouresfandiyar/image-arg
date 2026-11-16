@@ -75,12 +75,11 @@ def aggregate_matrix(mat: np.ndarray) -> dict[str, float | list[float]]:
     """
     Given a [|M|, |H|] similarity matrix:
     - Sorts all pairwise scores descending
-    - Returns max, top-3 mean, and mean-max (precision-oriented)
+    - Returns max and mean-max (precision-oriented)
     """
     sorted_scores = np.sort(mat.flatten())[::-1]
     return {
         "max": float(sorted_scores[0]),
-        "top3": float(np.mean(sorted_scores[:3])),  # Uses all pairs if < 3
         "mean_max": float(np.mean(np.max(mat, axis=1))),
         "all_sorted": [round(float(x), 4) for x in sorted_scores],
     }
@@ -140,10 +139,8 @@ def compute_all_comparisons(
                 "num_cand_concs": 0,
                 "num_ref_concs": 0,
                 "cos_max": np.nan,
-                "cos_top3": np.nan,
                 "cos_mean_max": np.nan,
                 "bert_max": np.nan,
-                "bert_top3": np.nan,
                 "bert_mean_max": np.nan,
                 "cos_sorted_pairs": "[]",
                 "bert_sorted_pairs": "[]",
@@ -171,10 +168,8 @@ def compute_all_comparisons(
             "num_cand_concs": n_m,
             "num_ref_concs": n_h,
             "cos_max": cos_agg["max"],
-            "cos_top3": cos_agg["top3"],
             "cos_mean_max": cos_agg["mean_max"],
             "bert_max": bert_agg["max"],
-            "bert_top3": bert_agg["top3"],
             "bert_mean_max": bert_agg["mean_max"],
             "cos_sorted_pairs": json.dumps(cos_agg["all_sorted"]),
             "bert_sorted_pairs": json.dumps(bert_agg["all_sorted"]),
@@ -262,11 +257,9 @@ def main():
             "Valid_N": valid_n,
             "Cos_Max_Mean": round(group["cos_max"].mean(), 4),
             "Cos_Max_SD": round(group["cos_max"].std(), 4),
-            "Cos_Top3_Mean": round(group["cos_top3"].mean(), 4),
             "Cos_MeanMax_Mean": round(group["cos_mean_max"].mean(), 4),
             "BERT_Max_Mean": round(group["bert_max"].mean(), 4),
             "BERT_Max_SD": round(group["bert_max"].std(), 4),
-            "BERT_Top3_Mean": round(group["bert_top3"].mean(), 4),
             "BERT_MeanMax_Mean": round(group["bert_mean_max"].mean(), 4),
         })
 
