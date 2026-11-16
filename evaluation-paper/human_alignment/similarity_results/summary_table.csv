@@ -1,0 +1,11 @@
+Candidate,Reference,Valid_N,Cos_Max_Mean,Cos_Max_SD,Cos_Top3_Mean,Cos_MeanMax_Mean,BERT_Max_Mean,BERT_Max_SD,BERT_Top3_Mean,BERT_MeanMax_Mean
+human1,human2,46,0.6644,0.1375,0.6107,0.6107,0.909,0.0163,0.9042,0.9042
+llava_outputs,human1,46,0.6657,0.1025,0.5921,0.5963,0.8968,0.0137,0.889,0.8888
+llava_outputs,human2,46,0.6294,0.1663,0.5589,0.5582,0.8965,0.0155,0.8879,0.8878
+llava_outputs,human_combined,46,0.6972,0.1031,0.6368,0.6259,0.9031,0.013,0.8951,0.8945
+minicpm-v_outputs,human1,46,0.69,0.1163,0.611,0.6157,0.9002,0.0153,0.8926,0.8927
+minicpm-v_outputs,human2,46,0.6795,0.1388,0.6029,0.6023,0.8995,0.0181,0.8913,0.8912
+minicpm-v_outputs,human_combined,46,0.7325,0.1041,0.6648,0.6579,0.9062,0.0163,0.8984,0.8981
+nemotron-3-nano-omni-30b-a3b-reasoning_outputs,human1,46,0.6224,0.1163,0.5665,0.5952,0.8791,0.013,0.8737,0.8765
+nemotron-3-nano-omni-30b-a3b-reasoning_outputs,human2,46,0.6625,0.1302,0.6268,0.6268,0.8884,0.0156,0.8845,0.8845
+nemotron-3-nano-omni-30b-a3b-reasoning_outputs,human_combined,46,0.6873,0.1147,0.6212,0.6587,0.8908,0.0144,0.8815,0.8874
