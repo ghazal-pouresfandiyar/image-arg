@@ -1,0 +1,6 @@
+Source,Valid_Images,Total_Conclusions,Entail_Prob_Mean,Entail_Prob_SD,Neutral_Prob_Mean,Contra_Prob_Mean,Entail_Label_%,Neutral_Label_%,Contra_Label_%
+human1,46,82,0.1662,0.3043,0.8312,0.0025,15.9,84.1,0.0
+human2,46,46,0.4553,0.4285,0.5442,0.0005,43.5,56.5,0.0
+llava_outputs,46,100,0.1725,0.275,0.8227,0.0048,17.0,83.0,0.0
+minicpm-v_outputs,46,95,0.1388,0.2273,0.8603,0.0008,13.7,86.3,0.0
+nemotron-3-nano-omni-30b-a3b-reasoning_outputs,46,70,0.5342,0.4206,0.4631,0.0026,45.7,54.3,0.0
