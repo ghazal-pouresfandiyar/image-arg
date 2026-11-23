@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paper Update — Section 6: Automated Evaluation Metrics</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --accent: #1d4ed8;
+      --accent-soft: #eff6ff;
+      --highlight: #ecfdf5;
+      --highlight-text: #065f46;
+      --warn-bg: #fffbeb;
+      --warn-border: #f59e0b;
+      --warn-text: #92400e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 2.25rem 2.5rem;
+      border-radius: 14px;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    }
+
+    header .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.16);
+      color: #e0e7ff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    header h1 {
+      margin: 0 0 0.4rem;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.98rem;
+    }
+
+    nav.toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    nav.toc a {
+      text-decoration: none;
+      background: var(--surface);
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    nav.toc a:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .summary-card .label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .summary-card .value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0.2rem 0;
+    }
+
+    .summary-card .sub {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    section.card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 2.25rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.38rem;
+      color: #0f172a;
+      border-bottom: 2px solid var(--accent-soft);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.06rem;
+      color: #1e3a8a;
+    }
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    .tech-pill {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .formula-box {
+      background: #f1f5f9;
+      border-left: 4px solid var(--accent);
+      padding: 0.9rem 1.25rem;
+      border-radius: 8px;
+      margin: 1rem 0 1.25rem;
+      font-family: "Cambria Math", "Times New Roman", serif;
+      font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .formula-box .eq-num {
+      color: var(--muted);
+      font-family: sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: #f1f5f9;
+    }
+
+    th, td {
+      padding: 0.65rem 0.85rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th:first-child, td:first-child {
+      text-align: left;
+      font-weight: 600;
+    }
+
+    tr.group-divider td {
+      border-top: 2px solid #cbd5e1;
+    }
+
+    tr.human-row {
+      background: #f8fafc;
+    }
+
+    .best {
+      background: var(--highlight);
+      color: var(--highlight-text);
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 0.15rem 0.4rem;
+    }
+
+    .caption {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: -0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .finding-list {
+      margin: 0.5rem 0 1rem 1.2rem;
+      padding: 0;
+    }
+
+    .finding-list li {
+      margin-bottom: 0.55rem;
+    }
+
+    .todo-box {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn-border);
+      color: var(--warn-text);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      margin-top: 1rem;
+    }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    .example-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      font-size: 0.88rem;
+    }
+
+    .example-card strong {
+      display: block;
+      color: #0f172a;
+      margin-bottom: 0.3rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 2.5rem;
+    }
+
+    @media print {
+      body { background: #fff; }
+      header { box-shadow: none; }
+      section.card { box-shadow: none; break-inside: avoid; }
+      nav.toc { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Paper Progress Update • N = 46 Climate Images</div>
+      <h1>Section 6: Automated Evaluation Metrics</h1>
+      <p>Multi-dimensional automated verification of premise–conclusion validity, visual grounding, semantic alignment, and absent-object hallucination across 2 human annotators and 3 VLMs.</p>
+    </header>
+
+    <nav class="toc">
+      <a href="#sec-6-1">6.1 Conclusion Validity (NLI)</a>
+      <a href="#sec-6-2">6.2 Visual Grounding (CLIPScore)</a>
+      <a href="#sec-6-3">6.3 Human Alignment (Semantic Similarity)</a>
+      <a href="#sec-6-4">6.4 Absent-Object Hallucination (CHAIR &amp; POPE)</a>
+    </nav>
+
+    <!-- High-Level Overview Cards -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">6.1 Logical Consistency</div>
+        <div class="value">~0.0% Contradiction</div>
+        <div class="sub">All models &amp; humans avoid premise–conclusion contradictions</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">6.2 Scene Grounding</div>
+        <div class="value">0.59 / 0.60 CLIPScore</div>
+        <div class="sub">Nemotron-3 Nano highest overall; MiniCPM-V closest to humans</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">6.3 Human Alignment</div>
+        <div class="value">0.9062 BERTScore F1</div>
+        <div class="sub">MiniCPM-V 2.6 nearly matches human-to-human upper bound (0.9090)</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">6.4 Object Hallucination</div>
+        <div class="value">29.6% vs. 20.1% CHAIR<sub>i</sub></div>
+        <div class="sub">MiniCPM-V lowest model hallucination; LLaVA highest negation (13.6%)</div>
+      </div>
+    </div>
+
+    <!-- SECTION 6.1 -->
+    <section class="card" id="sec-6-1">
+      <h2>6.1 Conclusion Validity via NLI</h2>
+      <p>
+        To complement manual evaluation of <em>Conclusion Validity</em>, we use a pre-trained Natural Language Inference (NLI) model—<span class="tech-pill">DeBERTa-v3-large-mnli-fever-anli-ling-wanli</span> (Laurer et al., 2024)—to test logical consistency between generated premises and conclusions. For each image and source (3 VLMs and 2 human annotators), all premises are concatenated as the NLI premise and evaluated against each generated conclusion to obtain softmax probabilities for <strong>Entailment</strong>, <strong>Neutral</strong>, and <strong>Contradiction</strong>.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">Source</th>
+              <th rowspan="2">Total Concl.</th>
+              <th colspan="3">Mean Softmax Probabilities</th>
+              <th colspan="3">Predicted Label Distribution (%)</th>
+            </tr>
+            <tr>
+              <th>Entailment (Mean ± SD)</th>
+              <th>Neutral</th>
+              <th>Contra.</th>
+              <th>Entailment</th>
+              <th>Neutral</th>
+              <th>Contra.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="human-row">
+              <td>Human 1</td>
+              <td>82</td>
+              <td>0.1662 ± 0.3043</td>
+              <td>0.8312</td>
+              <td>0.0025</td>
+              <td>15.9%</td>
+              <td>84.1%</td>
+              <td>0.0%</td>
+            </tr>
+            <tr class="human-row">
+              <td>Human 2</td>
+              <td>46</td>
+              <td>0.4553 ± 0.4285</td>
+              <td>0.5442</td>
+              <td>0.0005</td>
+              <td>43.5%</td>
+              <td>56.5%</td>
+              <td>0.0%</td>
+            </tr>
+            <tr class="group-divider">
+              <td>LLaVA-1.5 (7B)</td>
+              <td>100</td>
+              <td>0.1725 ± 0.2750</td>
+              <td>0.8227</td>
+              <td>0.0048</td>
+              <td>17.0%</td>
+              <td>83.0%</td>
+              <td>0.0%</td>
+            </tr>
+            <tr>
+              <td>MiniCPM-V 2.6 (7.6B)</td>
+              <td>95</td>
+              <td>0.1388 ± 0.2273</td>
+              <td>0.8603</td>
+              <td>0.0008</td>
+              <td>13.7%</td>
+              <td>86.3%</td>
+              <td>0.0%</td>
+            </tr>
+            <tr>
+              <td>Nemotron-3 Nano (30B)</td>
+              <td>70</td>
+              <td><span class="best">0.5342 ± 0.4206</span></td>
+              <td>0.4631</td>
+              <td>0.0026</td>
+              <td><span class="best">54.3%</span></td>
+              <td>45.7%</td>
+              <td>0.0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="caption"><strong>Table 2:</strong> Automated NLI self-consistency between generated premises and conclusions across all N = 46 images. Bold values indicate the highest-scoring model.</div>
+
+      <h3>6.1.1 Key Findings</h3>
+      <ul class="finding-list">
+        <li><strong>Zero Contradictions:</strong> Both human annotators and all three VLMs exhibit a <strong>0.0% predicted contradiction rate</strong> (mean contradiction probability &lt; 0.005), confirming internal logical consistency.</li>
+        <li><strong>Why "Neutral" Dominates:</strong> Because our task explicitly requires conclusions to <em>infer beyond</em> directly visible premises to articulate climate implications, valid novel inferences are typically labeled <em>Neutral</em> rather than deductive <em>Entailment</em> by standard NLI classifiers—making NLI effective for contradiction filtering, though still requiring human judgment for inductive validity.</li>
+        <li><strong>Novelty vs. Paraphrasing Trade-off:</strong> <strong>MiniCPM-V 2.6</strong> (13.7% entailment, mean 0.1388) and <strong>LLaVA-1.5</strong> (17.0% entailment, mean 0.1725) closely mirror Human 1 (15.9%), indicating conclusions that introduce genuine interpretive leaps rather than restating premises (consistent with MiniCPM-V's high manual <em>Conclusion Novelty</em>). Conversely, <strong>Nemotron-3 Nano</strong> shows high entailment (54.3%), reflecting more conservative, closely paraphrased conclusions.</li>
+      </ul>
+
+      <div class="todo-box">
+        <strong>Next Step (Pending Final Human Review):</strong> Cross-check automated NLI scores against final human <em>Conclusion Validity</em> ratings across both reviewers.
+      </div>
+    </section>
+
+    <!-- SECTION 6.2 -->
+    <section class="card" id="sec-6-2">
+      <h2>6.2 Visual Grounding via CLIPScore</h2>
+      <p>
+        To verify whether generated premises and conclusions stay anchored to visible image content, we compute reference-free <strong>CLIPScore</strong> (Hessel et al., 2021) using <span class="tech-pill">CLIP ViT-L-14</span> (Radford et al., 2021). We evaluate premise and conclusion similarity separately, track the <strong>minimum-scoring premise</strong> per image to catch isolated ungrounded claims, and compute the grounding shift (&Delta; = Prem. &minus; Conc.).
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Premises (Mean ± SD)</th>
+              <th>Min Premise</th>
+              <th>Conclusions (Mean)</th>
+              <th>&Delta; (Prem. &minus; Conc.)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="human-row">
+              <td>Human 1</td>
+              <td>0.56 ± 0.09</td>
+              <td>0.50</td>
+              <td>0.57</td>
+              <td>&minus;0.01</td>
+            </tr>
+            <tr class="human-row">
+              <td>Human 2</td>
+              <td>0.54 ± 0.08</td>
+              <td>0.49</td>
+              <td>0.56</td>
+              <td>&minus;0.02</td>
+            </tr>
+            <tr class="group-divider">
+              <td>LLaVA-1.5 (7B)</td>
+              <td>0.54 ± 0.07</td>
+              <td>0.46</td>
+              <td>0.59</td>
+              <td>&minus;0.05</td>
+            </tr>
+            <tr>
+              <td>MiniCPM-V 2.6</td>
+              <td>0.57 ± 0.07</td>
+              <td>0.51</td>
+              <td>0.56</td>
+              <td>+0.01</td>
+            </tr>
+            <tr>
+              <td>Nemotron-3 Nano</td>
+              <td><span class="best">0.59 ± 0.12</span></td>
+              <td><span class="best">0.54</span></td>
+              <td><span class="best">0.60</span></td>
+              <td>&minus;0.01</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="caption"><strong>Table 3:</strong> Reference-free visual grounding via CLIPScore (ViT-L-14) across N = 46 images.</div>
+
+      <h3>6.2.1 Key Findings</h3>
+      <ul class="finding-list">
+        <li><strong>Nemotron-3 Nano</strong> achieves the highest global image-text similarity (0.59 premises, 0.60 conclusions), though with higher variance across images (SD = 0.12).</li>
+        <li><strong>MiniCPM-V 2.6</strong> tracks human baselines most closely (0.57 premises, 0.56 conclusions) and is the only model with a slight positive grounding shift (&Delta; = +0.01), moving cleanly from concrete visual observations to abstract climate conclusions.</li>
+        <li><strong>LLaVA-1.5</strong> records the lowest minimum premise score (0.46) and largest negative shift (&Delta; = &minus;0.05), signaling isolated premises that drift away from visible scene elements.</li>
+      </ul>
+
+      <div class="todo-box">
+        <strong>Next Step (Pending Final Human Review):</strong> Compare CLIPScore rankings with manual <em>Visual Grounding</em> scores (note: holistic CLIPScore favors dense object listing, motivating the fine-grained detector audit in Section 6.4).
+      </div>
+    </section>
+
+    <!-- SECTION 6.3 -->
+    <section class="card" id="sec-6-3">
+      <h2>6.3 Human Alignment via Semantic Similarity</h2>
+      <p>
+        To quantify how closely model conclusions align with human interpretations, we compute sentence-level <strong>Cosine Similarity</strong> (<span class="tech-pill">all-mpnet-base-v2</span>) and token-level <strong>BERTScore F1</strong> (<span class="tech-pill">RoBERTa-large</span>) between all candidate–reference conclusion pairs per image. Following multi-reference evaluation protocols (Zhang et al., 2020; Fabbri et al., 2021), we aggregate per image using <strong>Max</strong> (best match to any human conclusion) and <strong>Mean-Max</strong> (average best human match across all generated conclusions) before averaging across all <em>N</em> = 46 images.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">Candidate</th>
+              <th rowspan="2">Reference</th>
+              <th colspan="2">Cosine Similarity (MPNet)</th>
+              <th colspan="2">BERTScore F1 (RoBERTa-Large)</th>
+            </tr>
+            <tr>
+              <th>Max (Mean ± SD)</th>
+              <th>Mean-Max</th>
+              <th>Max (Mean ± SD)</th>
+              <th>Mean-Max</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="human-row">
+              <td>Human 1</td>
+              <td>Human 2 (Upper Bound)</td>
+              <td>0.6644 ± 0.1375</td>
+              <td>0.6107</td>
+              <td>0.9090 ± 0.0163</td>
+              <td>0.9042</td>
+            </tr>
+            <tr class="group-divider">
+              <td rowspan="3">LLaVA-1.5 (7B)</td>
+              <td>Human 1</td>
+              <td>0.6657 ± 0.1025</td>
+              <td>0.5963</td>
+              <td>0.8968 ± 0.0137</td>
+              <td>0.8888</td>
+            </tr>
+            <tr>
+              <td>Human 2</td>
+              <td>0.6294 ± 0.1663</td>
+              <td>0.5582</td>
+              <td>0.8965 ± 0.0155</td>
+              <td>0.8878</td>
+            </tr>
+            <tr>
+              <td>Combined</td>
+              <td>0.6972 ± 0.1031</td>
+              <td>0.6259</td>
+              <td>0.9031 ± 0.0130</td>
+              <td>0.8945</td>
+            </tr>
+            <tr class="group-divider">
+              <td rowspan="3">MiniCPM-V 2.6 (7.6B)</td>
+              <td>Human 1</td>
+              <td><span class="best">0.6900 ± 0.1163</span></td>
+              <td><span class="best">0.6157</span></td>
+              <td><span class="best">0.9002 ± 0.0153</span></td>
+              <td><span class="best">0.8927</span></td>
+            </tr>
+            <tr>
+              <td>Human 2</td>
+              <td><span class="best">0.6795 ± 0.1388</span></td>
+              <td>0.6023</td>
+              <td><span class="best">0.8995 ± 0.0181</span></td>
+              <td><span class="best">0.8912</span></td>
+            </tr>
+            <tr>
+              <td>Combined</td>
+              <td><span class="best">0.7325 ± 0.1041</span></td>
+              <td>0.6579</td>
+              <td><span class="best">0.9062 ± 0.0163</span></td>
+              <td><span class="best">0.8981</span></td>
+            </tr>
+            <tr class="group-divider">
+              <td rowspan="3">Nemotron-3 Nano (30B)</td>
+              <td>Human 1</td>
+              <td>0.6224 ± 0.1163</td>
+              <td>0.5952</td>
+              <td>0.8791 ± 0.0130</td>
+              <td>0.8765</td>
+            </tr>
+            <tr>
+              <td>Human 2</td>
+              <td>0.6625 ± 0.1302</td>
+              <td><span class="best">0.6268</span></td>
+              <td>0.8884 ± 0.0156</td>
+              <td><span class="best">0.8845</span></td>
+            </tr>
+            <tr>
+              <td>Combined</td>
+              <td>0.6873 ± 0.1147</td>
+              <td><span class="best">0.6587</span></td>
+              <td>0.8908 ± 0.0144</td>
+              <td>0.8874</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="caption"><strong>Table 4:</strong> Automated semantic similarity between model-generated conclusions and human reference conclusions across N = 46 images.</div>
+
+      <h3>6.3.1 Key Findings</h3>
+      <ul class="finding-list">
+        <li><strong>MiniCPM-V 2.6 Leads Overall Alignment:</strong> Achieves the highest Max Cosine Similarity (<strong>0.7325</strong>) and Max BERTScore F1 (<strong>0.9062</strong>) against combined human references, nearly matching the inter-annotator upper bound (<strong>0.9090</strong>).</li>
+        <li><strong>Effect of Output Quantity on Mean-Max:</strong> <strong>Nemotron-3 Nano</strong> achieves slightly higher Mean-Max Cosine Similarity against Human 2 (0.6268) and Combined (0.6587) largely because lower format adherence (<strong>52.2%</strong>) led it to output fewer conclusions per image (70 vs. 95 for MiniCPM-V), avoiding secondary conclusions that diverge from human phrasing.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 6.4 -->
+    <section class="card" id="sec-6-4">
+      <h2>6.4 Absent-Object Hallucination (CHAIR &amp; POPE Audit)</h2>
+      <p>
+        During qualitative inspection, we observed that models occasionally assert non-existent visual elements or argue from the <em>absence</em> of objects at more than double the rate of human annotators—likely driven by top-down prior expectations rather than bottom-up visual evidence (Anderson et al., 2017; Wu et al., 2024). Because global CLIPScore can reward contextually plausible keywords even when specific objects are missing, we conducted a targeted two-stage verification audit combining the metric structure of <strong>CHAIR</strong> (Rohrbach et al., 2018) with the presence-probing paradigm of <strong>POPE</strong> (Li et al., 2023):
+      </p>
+      <ol class="finding-list">
+        <li><strong>Object &amp; Negation Parsing:</strong> Using <span class="tech-pill">spaCy (en_core_web_lg)</span>, we extract concrete physical nouns mentioned in each premise (filtering abstract nouns) and flag explicit absence/negation cues (e.g., <em>"no"</em>, <em>"without"</em>, <em>"absence of"</em>).</li>
+        <li><strong>Open-Vocabulary Visual Verification:</strong> Rather than restricting checks to closed-set COCO categories, we query <span class="tech-pill">Grounding DINO (grounding-dino-base)</span> (Liu et al., 2024b) at confidence threshold <strong>&tau; = 0.30</strong> to verify whether each extracted noun is visually localized in the image, computing the instance-level absent-object rate:</li>
+      </ol>
+
+      <div class="formula-box">
+        <span>CHAIR<sub>i</sub> = |{hallucinated objects}| / |{all mentioned objects}|</span>
+        <span class="eq-num">(Equation 1)</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Premises</th>
+              <th>Neg. (%)</th>
+              <th>Extracted Objs.</th>
+              <th>CHAIR<sub>i</sub> (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="human-row">
+              <td>Human 1</td>
+              <td>95</td>
+              <td>5.3%</td>
+              <td>284</td>
+              <td>20.1%</td>
+            </tr>
+            <tr class="human-row">
+              <td>Human 2</td>
+              <td>95</td>
+              <td>6.3%</td>
+              <td>220</td>
+              <td>20.9%</td>
+            </tr>
+            <tr class="group-divider">
+              <td>LLaVA-1.5 (7B)</td>
+              <td>147</td>
+              <td>13.6%</td>
+              <td>519</td>
+              <td>30.8%</td>
+            </tr>
+            <tr>
+              <td>MiniCPM-V 2.6</td>
+              <td>97</td>
+              <td><span class="best">8.2%</span></td>
+              <td>378</td>
+              <td><span class="best">29.6%</span></td>
+            </tr>
+            <tr>
+              <td>Nemotron-3 Nano</td>
+              <td>109</td>
+              <td>11.9%</td>
+              <td>734</td>
+              <td>35.6%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="caption"><strong>Table 5:</strong> Automated absent-object and negation audit across N = 46 images using Grounding DINO (&tau; = 0.30). Human rows establish the empirical detector baseline; bold indicates the lowest hallucination rate among models.</div>
+
+      <h3>6.4.1 Key Findings &amp; Qualitative Failure Examples</h3>
+      <ul class="finding-list">
+        <li><strong>Consistent Hallucination Gap:</strong> Human annotations establish a baseline of <strong>20.1%–20.9%</strong> detector-unverified nouns and <strong>5.3%–6.3%</strong> negation-based premises. All three VLMs exceed human absent-object rates by <strong>+9.5 to +15.5 percentage points</strong>.</li>
+        <li><strong>MiniCPM-V 2.6 is Most Grounded:</strong> Achieves the lowest model absent-object rate (<strong>29.6%</strong>) and stays closest to human negation frequency (<strong>8.2%</strong>).</li>
+        <li><strong>Nemotron-3 Nano Over-Specifies Objects:</strong> Despite topping holistic CLIPScore, Nemotron mentions nearly twice as many physical nouns (734 across 109 premises) and incurs the highest absent-object rate (<strong>35.6%</strong>).</li>
+        <li><strong>LLaVA-1.5 Relies Heavily on Absence Premises:</strong> Uses negation framing in <strong>13.6%</strong> of premises—more than double the human rate.</li>
+      </ul>
+
+      <div class="example-grid">
+        <div class="example-card">
+          <strong>Nemotron-3 Nano — Speculative Object Hallucinations</strong>
+          Asserts visible <em>"steam or heat waves"</em> rising from water in a polar-bear editorial cartoon, and invents unpictured litter items (<em>"bottles, bags, [and] a shoe"</em>).
+        </div>
+        <div class="example-card">
+          <strong>LLaVA-1.5 — Absence Reasoning &amp; Fabrications</strong>
+          Justifies claims by citing the absence of <em>"fishing equipment"</em>, <em>"hurricanes or tornadoes"</em>, or <em>"human-made infrastructure"</em>, alongside isolated object fabrications such as a <em>"honeycomb"</em> or <em>"book"</em>.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Prepared for Supervisor Review • Section 6 Automated Evaluation Update (N = 46 Climate Argument Dataset)
+    </footer>
+  </div>
+</body>
+</html>
