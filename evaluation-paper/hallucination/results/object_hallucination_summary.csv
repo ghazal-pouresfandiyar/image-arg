@@ -1,0 +1,6 @@
+Source,Total_Premises,Flagged_Premises (%),Negation_Cues (%),Total_Objects,Absent_Objects_CHAIRi (%)
+human1,95,40.0,5.3,284,20.1
+human2,95,40.0,6.3,220,20.9
+llava_outputs,147,62.6,13.6,519,30.8
+minicpm-v_outputs,97,60.8,8.2,378,29.6
+nemotron-3-nano-omni-30b-a3b-reasoning_outputs,109,79.8,11.9,734,35.6
